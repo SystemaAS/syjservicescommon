@@ -9,6 +9,7 @@ import org.apache.commons.csv.CSVRecord;
  * @date Nov 29, 2016
  *
  */
+@SuppressWarnings("serial")
 public class UnderEnhet extends Enhet {
 
 	private boolean hasOverordnetEnhet;

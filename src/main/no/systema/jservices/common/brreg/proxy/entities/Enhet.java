@@ -1,5 +1,6 @@
 package no.systema.jservices.common.brreg.proxy.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +37,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  * @date Sep 21, 2016
  *
  */
-public class Enhet {
+public class Enhet implements Serializable{
 
 	@JsonProperty("organisasjonsnummer")
 	private Integer organisasjonsnummer;
@@ -74,16 +75,15 @@ public class Enhet {
 	private String underTvangsavviklingEllerTvangsopplosning;
 	@JsonProperty("overordnetEnhet")
 	private Integer overordnetEnhet;
-	@JsonProperty("links")
+/*	@JsonProperty("links")
 	private List<Link> links = new ArrayList<Link>();
+*/	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
 	public Enhet() {
-		// TODO Auto-generated constructor stub
+		// for jackson
 	}
-	
-	
 	
 	/**
 	 * 
@@ -427,25 +427,25 @@ public class Enhet {
 		this.overordnetEnhet = overordnetEnhet;
 	}
 
-	/**
+/*	*//**
 	 * 
 	 * @return The links
-	 */
+	 *//*
 	@JsonProperty("links")
 	public List<Link> getLinks() {
 		return links;
 	}
 
-	/**
+	*//**
 	 * 
 	 * @param links
 	 *            The links
-	 */
+	 *//*
 	@JsonProperty("links")
 	public void setLinks(List<Link> links) {
 		this.links = links;
 	}
-
+*/
 	@JsonAnyGetter
 	public Map<String, Object> getAdditionalProperties() {
 		return this.additionalProperties;
