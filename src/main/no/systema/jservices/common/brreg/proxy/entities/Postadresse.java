@@ -1,5 +1,6 @@
 package no.systema.jservices.common.brreg.proxy.entities;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Generated;
@@ -13,7 +14,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 @Generated("org.jsonschema2pojo")
 @JsonPropertyOrder({ "adresse", "postnummer", "poststed", "kommunenummer", "kommune", "landkode", "land" })
-public class Postadresse {
+public class Postadresse implements Serializable{
 
 	@JsonProperty("adresse")
 	private String adresse;

@@ -42,4 +42,16 @@ public class JsonReader<T> {
 		return result;
 	}
 
+	/**
+	 * Convert an Object into wanted class type using Jackson.
+	 * 
+	 * @param fromValue
+	 * @param toValueType
+	 * @return a object
+	 */
+	public T convertValue(Object fromValue, Class<T> toValueType ) {
+		return mapper.convertValue(fromValue, toValueType);
+	}
+	
+	
 }

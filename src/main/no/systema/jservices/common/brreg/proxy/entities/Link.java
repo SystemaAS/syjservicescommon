@@ -1,5 +1,6 @@
 package no.systema.jservices.common.brreg.proxy.entities;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Generated;
@@ -13,7 +14,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 @Generated("org.jsonschema2pojo")
 @JsonPropertyOrder({ "rel", "href" })
-public class Link {
+public class Link implements Serializable{
 
 	@JsonProperty("rel")
 	private String rel;
