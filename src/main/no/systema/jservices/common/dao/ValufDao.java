@@ -1,11 +1,14 @@
 package no.systema.jservices.common.dao;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ValufDao implements IDao {
 
 	private String aktkod;
 	private String journr;
 	private String firma;
-	private String valkod;
+	private String valkod; //key
 	private String valtek;
 	private String valku1;
 	private String valku2;
@@ -22,6 +25,8 @@ public class ValufDao implements IDao {
 	private String euvevl;
 	private String andevl;
 
+	Map<String, Object> keys = new HashMap<String, Object>();
+	
 	public String getAktkod() {
 		return aktkod;
 	}
@@ -172,6 +177,12 @@ public class ValufDao implements IDao {
 
 	public void setAndevl(String andevl) {
 		this.andevl = andevl;
+	}
+
+	@Override
+	public Map<String, Object> getKeys() {
+		keys.put("valkod", valkod); 
+		return keys;
 	}
 
 }
