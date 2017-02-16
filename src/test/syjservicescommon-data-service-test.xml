@@ -21,7 +21,7 @@
 		destroy-method="close">
 		<property name="driverClassName" value="com.ibm.as400.access.AS400JDBCDriver" />
 		<!--  <property name="url" value="jdbc:as400://10.13.1.22;naming=system;socket timeout=15000;libraries=syendre,syendptf,syspedf,sysped" /> -->
-		<!-- For VALUF -->
+		<!-- For VALUF : l1dat-->
 		<property name="url" value="jdbc:as400://10.13.1.22;naming=system;socket timeout=15000;libraries=syendre,syendptf,syspedf,sysped,l1dat" />
 		<property name="username" value="systema" />
 		<property name="password" value="straffe12" />

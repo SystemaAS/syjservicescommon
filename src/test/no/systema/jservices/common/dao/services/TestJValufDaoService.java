@@ -1,11 +1,12 @@
 package no.systema.jservices.common.dao.services;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -21,7 +22,7 @@ public class TestJValufDaoService {
 	
 	@Before
 	public void setUp() throws Exception {
-			context = new ClassPathXmlApplicationContext("applicationContextTest.xml");
+			context = new ClassPathXmlApplicationContext("syjservicescommon-data-service-test.xml");
 			valufDaoService = (ValufDaoService) context.getBean("valufDaoService");
 	}
 
@@ -47,5 +48,32 @@ public class TestJValufDaoService {
 		assertNotNull(list);
 	}		
 	
+	@Test
+	public final void testFindAllInFirma() {
+		List<ValufDao> list =  valufDaoService.findAllInFirma(null);
+		assertNotNull(list);
+	}		
+	
+	@Test
+	public final void testFindAInFirma() {
+		ValufDao qDao = new ValufDao();
+		qDao.setValkod("EUR");
+		ValufDao resultDao=  valufDaoService.findInFirma(qDao);
+		System.out.println("dao="+ReflectionToStringBuilder.toString(resultDao));
+		assertNotNull(resultDao);
+	}	
+	
+	@Test
+	public final void testExistFirma() {
+		ValufDao qDao = new ValufDao();
+		qDao.setValkod("EUR");
+		boolean exist =  valufDaoService.existInFirma(qDao);
+		assertTrue("EUR should exist",exist);
+		
+		qDao.setValkod("KALLE");
+		exist =  valufDaoService.existInFirma(qDao);
+		assertTrue("KALLE should not exist",!exist);
+		
+	}		
 	
 }
