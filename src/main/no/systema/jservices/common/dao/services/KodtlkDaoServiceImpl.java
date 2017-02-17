@@ -11,6 +11,7 @@ public class KodtlkDaoServiceImpl extends GenericDaoServiceImpl<KodtlkDao> imple
 	@Override
 	public List<KodtlkDao> getLandKoder() {
 		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("klkuni", "LK");
 		return findAll(params);
 	}
 
