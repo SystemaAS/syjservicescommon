@@ -7,5 +7,9 @@
   <bean id="valufDaoService" class="no.systema.jservices.common.dao.services.ValufDaoServiceImpl">
       <property name="jdbcTemplate"><ref bean="jdbcTemplate"/></property>
   </bean>
+  <bean id="kodtlkDaoService" class="no.systema.jservices.common.dao.services.KodtlkDaoServiceImpl">
+      <property name="jdbcTemplate"><ref bean="jdbcTemplate"/></property>
+  </bean>  
+  
   
  </beans>

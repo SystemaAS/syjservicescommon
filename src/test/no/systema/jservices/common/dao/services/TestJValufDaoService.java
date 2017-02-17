@@ -23,7 +23,7 @@ public class TestJValufDaoService {
 	@Before
 	public void setUp() throws Exception {
 			context = new ClassPathXmlApplicationContext("syjservicescommon-data-service-test.xml");
-			valufDaoService = (ValufDaoService) context.getBean("valufDaoService");
+			valufDaoService = (ValufDaoService) context.getBean("kodtlkDaoService");
 	}
 
 	@Test

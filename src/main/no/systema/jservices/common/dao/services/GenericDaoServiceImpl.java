@@ -14,8 +14,8 @@ import no.systema.jservices.common.dao.GenericObjectMapper;
 import no.systema.jservices.common.dao.IDao;
 
 /**
- * This class is taking av {@link IDao} as argument. Delivering some convenience methods on Dao, just extend this class for your use case.
- * Dao must represent table and columnname as is in database.
+ * This class is taking a {@link IDao} as argument. Delivering some convenience methods on Dao, just extend this class for your use case.
+ * Dao must represent table and columnname as-is in database.
  * 
  * @author Fredrik Möller
  * @date Jan 18, 2017
@@ -76,7 +76,19 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		return null;
 	}
 	
-
+	@Override
+	public T find(Object id) {
+		IDao dao = (IDao )id;
+		Map<String, Object> params = dao.getKeys();
+		List<T> list =findAll( params) ;
+		if (list.size() ==1) {
+			return list.get(0);
+		}
+		return null;		
+		
+	}
+	
+	
 	@Override
 	public boolean existInFirma(Object id) {
 		T t = findInFirma(id);
@@ -86,6 +98,17 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 			return false;
 		}
 	}
+	
+	@Override
+	public boolean exist(Object id) {
+		T t = find(id);
+		if (t != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}	
+	
 		
 	@Override
 	public int countAll() {
@@ -191,11 +214,6 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 	}
 
 	@Override
-	public T find(Object id) {
-		throw new UnsupportedOperationException("Not implemented");
-	}
-
-	@Override
 	public T update(T t) {
 		throw new UnsupportedOperationException("Not implemented");
 	}
@@ -209,5 +227,6 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 	private JdbcTemplate jdbcTemplate = null;                                                            
 	public void setJdbcTemplate( JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}          
 	public JdbcTemplate getJdbcTemplate() {return this.jdbcTemplate;}
+
 
 }
