@@ -13,5 +13,7 @@
   <bean id="kodtotyDaoService" class="no.systema.jservices.common.dao.services.KodtotyDaoServiceImpl">
       <property name="jdbcTemplate"><ref bean="jdbcTemplate"/></property>
   </bean>  
-  
+ <bean id="kodtlikDaoService" class="no.systema.jservices.common.dao.services.KodtlikDaoServiceImpl">
+      <property name="jdbcTemplate"><ref bean="jdbcTemplate"/></property>
+  </bean>   
  </beans>

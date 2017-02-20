@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
-<!-- - data layer components -->
+
 <beans>
 
 	<bean id="valufDaoService"
@@ -11,6 +11,13 @@
 
 	<bean id="kodtlkDaoService"
 		class="no.systema.jservices.common.dao.services.KodtlkDaoServiceImpl">
+		<property name="jdbcTemplate">
+			<ref bean="jdbcTemplate" />
+		</property>
+	</bean>
+
+	<bean id="kodtlikDaoService"
+		class="no.systema.jservices.common.dao.services.KodtlikDaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
