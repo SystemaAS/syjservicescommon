@@ -58,16 +58,25 @@ public interface GenericDaoService<T> {
 	public int countAll();
 
 	/**
-	 * Check if T exist.
+	 * Check if T id exist.
 	 * 
 	 * Including a hardwired join on firma. Use this when table FIRM is needed.
 	 * 
 	 * NOTE: Assuming that your dao's firma id is namned <b>firma</b> !
 	 * 
-	 * @param id, Object is needs to be implmenting {@link IDao}
+	 * @param id, Object is needs to be implementing {@link IDao}
 	 * @return true, if exist, else return false.
 	 */
 	public boolean existInFirma(Object id);
+	
+	
+	/**
+	 * Check if T id exist.
+	 * 
+	 * @param id, Object must implemented {@link IDao}
+	 * @return true, if exist, else return false.
+	 */	
+	public boolean exist(Object id);
 
 	public T create(T t);
 
