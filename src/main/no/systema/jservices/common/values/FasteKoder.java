@@ -17,5 +17,6 @@ import java.io.Serializable;
  *
  */
 public enum FasteKoder implements Serializable {
-	FUNKSJON
+	FUNKSJON,
+	DELSYS
 }

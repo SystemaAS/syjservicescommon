@@ -1,5 +1,7 @@
 package no.systema.jservices.common.dao.services;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Iterator;
@@ -28,6 +30,9 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 	private String tableName;
 	private String tableAlias;
 	private GenericObjectMapper mapper;
+	private Field[] fields;
+	private Method[] methods;
+	
 
 	public GenericDaoServiceImpl() {
 		Type t = getClass().getGenericSuperclass();
@@ -35,6 +40,9 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		type = (Class) pt.getActualTypeArguments()[0];
 		tableName = type.getSimpleName().substring(0, type.getSimpleName().length() - 3);
 		tableAlias = tableName.substring(0, 3);  //all good things are three..
+		fields = type.getDeclaredFields();
+		methods = type.getDeclaredMethods();
+		
 		try {
 			mapper = new GenericObjectMapper((IDao) type.newInstance());
 		} catch (InstantiationException e) {
@@ -205,12 +213,58 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 
 	@Override
 	public T create(T t) {
-		throw new UnsupportedOperationException("Not implemented");
+		Object[] values = new Object[fields.length-1];
+		StringBuilder createString = new StringBuilder("INSERT into ");
+		createString.append(tableName);
+		createString.append(" ( ");
+
+		int i = 0;
+		Class<?> returnType = null;
+		String value = "";
+		for (Method method : methods) {
+			String getter = method.getName();
+			if (getter.startsWith("get")) {
+				returnType = method.getReturnType();
+				if (returnType.equals(String.class)) {
+					String field = method.getName().replace("get", "").toLowerCase();
+					if (!"keys".equals(field)) {
+						createString.append(field + ",");
+						try {
+							value = (String) method.invoke(t);
+							values[i++] = (value == null) ? "" : value;
+							//logger.info(field + " " + value);
+						} catch (Exception e) {
+							logger.info("Error:", e);
+						}
+					}
+				}
+			}
+		}
+
+		createString.deleteCharAt(createString.length() - 1); // Remove last ,
+		createString.append(" ) ");
+		createString.append(" VALUES ( ");
+
+		for (int ii = 1; ii < fields.length; ii++) {
+			createString.append(" ?,");
+		}
+		createString.deleteCharAt(createString.length() - 1); // Remove last ,
+		createString.append(" ) ");
+
+		int ret = jdbcTemplate.update(createString.toString(), values);
+
+		return t;
 	}
 
 	@Override
 	public void delete(Object id) {
-		throw new UnsupportedOperationException("Not implemented");
+		IDao dao = (IDao )id;
+		Map<String, Object> params = dao.getKeys();
+		StringBuilder deleteString = new StringBuilder("DELETE from ");
+		deleteString.append(tableName);
+		deleteString.append(this.getQueryClauses(params, null));
+		
+		jdbcTemplate.update(deleteString.toString());
 	}
 
 	@Override
