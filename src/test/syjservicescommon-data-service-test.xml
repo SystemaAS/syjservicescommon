@@ -36,6 +36,13 @@
 		</property>
 	</bean>
 
+	<bean id="fratxtDaoService"
+		class="no.systema.jservices.common.dao.services.FratxtDaoServiceImpl">
+		<property name="jdbcTemplate">
+			<ref bean="jdbcTemplate" />
+		</property>
+	</bean>
+
 
 	<bean id="dataSource" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource"
 		destroy-method="close">
