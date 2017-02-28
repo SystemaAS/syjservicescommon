@@ -60,7 +60,7 @@ public interface GenericDaoService<T> {
 	/**
 	 * Check if T id exist.
 	 * 
-	 * Including a hardwired join on firma. Use this when table FIRM is needed.
+	 * Including a hard-wired join on firma. Use this when table FIRM is needed.
 	 * 
 	 * NOTE: Assuming that your dao's firma id is namned <b>firma</b> !
 	 * 
@@ -78,6 +78,14 @@ public interface GenericDaoService<T> {
 	 */	
 	public boolean exist(Object id);
 
+	/**
+	 * Insert delivered T into corresponding table.
+	 * 
+	 * No checks on keys.
+	 * 
+	 * @param t, populated IDao
+	 * @return created T
+	 */
 	public T create(T t);
 
 	public void delete(Object id);
@@ -96,6 +104,13 @@ public interface GenericDaoService<T> {
 	 */	
 	public T findInFirma(Object id);
 
+	/**
+	 * A full update on delivered IDao.
+	 * Respecting all fields
+	 * 
+	 * @param t, populated IDao
+	 * @return the updated IDao
+	 */
 	public T update(T t);  	
 	
 }

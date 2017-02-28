@@ -252,6 +252,9 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		createString.append(" ) ");
 
 		int ret = jdbcTemplate.update(createString.toString(), values);
+		if (ret != 1) {
+			t = null;
+		}
 
 		return t;
 	}
@@ -269,7 +272,77 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 
 	@Override
 	public T update(T t) {
-		throw new UnsupportedOperationException("Not implemented");
+		IDao dao = (IDao) t;
+		Map<String, Object> keys = dao.getKeys();
+		if (!exist(dao)) {
+			logger.info("::update::Record does not exist in " + tableName + " on keys=" + keys);
+			return null;
+		}
+		Object[] values = new Object[fields.length - 1];
+		StringBuilder updateString = new StringBuilder("UPDATE ");
+		updateString.append(tableName);
+		updateString.append(" SET ");
+
+		int i = 0;
+		Class<?> returnType = null;
+		String value = "";
+		for (Method method : methods) {
+			String getter = method.getName();
+			if (getter.startsWith("get")) {
+				returnType = method.getReturnType();
+				if (returnType.equals(String.class)) {
+					String field = method.getName().replace("get", "").toLowerCase();
+					if (!"keys".equals(field)) {
+						updateString.append(field + " = ? ,");
+						try {
+							value = (String) method.invoke(t);
+							values[i++] = (value == null) ? "" : value;
+							//logger.info(field + " " + value);
+						} catch (Exception e) {
+							logger.info("Error:", e);
+						}
+					} else {
+						keys.put(field, value);
+					}
+				}
+			}
+		}
+
+		updateString.deleteCharAt(updateString.length() - 1); // Remove last ,
+		updateString.append(addKeys(keys));
+
+		int ret = jdbcTemplate.update(updateString.toString(), values);
+		if (ret != 1) {
+			t = null;
+		}
+		
+		return t;
+
+	}
+	
+	private String addKeys(Map<String, Object> keys) {
+		StringBuilder whereKeysString = new StringBuilder();
+		if ((keys != null) && !keys.isEmpty()) {
+			whereKeysString.append(" where ");
+			for (final Iterator<Map.Entry<String, Object>> it = keys.entrySet().iterator(); it.hasNext();) {
+				final Map.Entry<String, Object> entry = it.next();
+				if (entry.getValue() instanceof Boolean) {
+					whereKeysString.append(entry.getKey()).append(" = ").append(entry.getValue()).append(" ");
+				} else {
+					if (entry.getValue() instanceof Number) {
+						whereKeysString.append(entry.getKey()).append(" = ").append(entry.getValue());
+					} else {
+						whereKeysString.append(entry.getKey()).append(" = '").append(entry.getValue()).append("'");
+					}
+				}
+				if (it.hasNext()) {
+					whereKeysString.append(" and ");
+				}
+			}
+		}
+		
+		return whereKeysString.toString();
+
 	}
 
 	@Override
