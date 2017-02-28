@@ -5,13 +5,13 @@ import java.util.Map;
 
 public class FratxtDao implements IDao {
 
-	private String fxknr; // key
-	private String fxlnr; // key
-	private String fxtxt;
-	private String fxxxx;
-	private String delsys; // key
-	private String fxusr;
-	private String fxdt;
+	private String fxknr = ""; // key
+	private String fxlnr = ""; // key
+	private String fxtxt = "";
+	private String fxxxx = "";
+	private String delsys = ""; // key
+	private String fxusr = "";
+	private String fxdt = "";
 
 	Map<String, Object> keys = new HashMap<String, Object>();
 

@@ -1,6 +1,6 @@
 package no.systema.jservices.common.dao.services;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
@@ -66,15 +66,7 @@ public class TestJFratxtDaoService {
 	
 	@Test
 	public final void testCreateAndDelete() {
-		FratxtDao dao = new FratxtDao();
-		dao.setFxknr("24");
-		dao.setFxlnr("99");
-		dao.setDelsys("A");
-		
-		dao.setFxdt("2017");
-		dao.setFxusr("user");
-		dao.setFxxxx("xxx");
-		dao.setFxtxt("txt");
+		FratxtDao dao = getFratxtDao();
 		FratxtDao returnDao =  fratxtDaoService.create(dao);
 		assertNotNull(returnDao);
 
@@ -83,6 +75,35 @@ public class TestJFratxtDaoService {
 		boolean exist =  fratxtDaoService.exist(dao);
 		assertTrue("24, 99 should not exist",!exist);
 		
-	}		
+	}	
+	
+	@Test
+	public final void testUpdate() {
+		FratxtDao getDao =  getFratxtDao();
+		
+		boolean exist =  fratxtDaoService.exist(getDao);
+		assertTrue(getDao.getFxknr()+ " should not exist",!exist);		
+		
+		FratxtDao createDao = fratxtDaoService.create(getDao);
+		createDao.setFxtxt("Kilroy was here.");
+		
+		FratxtDao updateDao = fratxtDaoService.update(createDao);
+		assertNotNull(updateDao);
+		assertEquals("Dao have been updated.", updateDao.getFxtxt(), createDao.getFxtxt());
+		
+		fratxtDaoService.delete(updateDao); //Clean DB
+		
+	}
+	
+	private FratxtDao getFratxtDao() {
+		FratxtDao dao = new FratxtDao();
+		dao.setFxknr("24");
+		dao.setFxlnr("99");
+		dao.setDelsys("A");
+		dao.setFxtxt("txt");
+		dao.setFxdt("0");
+		return dao;
+	}
+	
 	
 }
