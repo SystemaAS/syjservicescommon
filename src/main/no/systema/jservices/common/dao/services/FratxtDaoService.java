@@ -14,4 +14,11 @@ public interface FratxtDaoService extends GenericDaoService<FratxtDao> {
 	 * @return a List of FratxtDao
 	 */
 	public List<FratxtDao> getDelsys(String fxknr, String delsys);
+	
+	/**
+	 * Delete all fritekst-lines for customer.
+	 * 
+	 * @param fxknr, customer
+	 */
+	public void deleteAll(String fxknr);
 }

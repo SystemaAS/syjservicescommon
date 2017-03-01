@@ -35,7 +35,7 @@ public class TestJFratxtDaoService {
 	@Test
 	public final void testCountAllWithParams() {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("fxknr", 24);
+		params.put("fxknr", 0);
 		params.put("fxlnr", 100);
 		params.put("delsys", "A");		
 		int count  =  fratxtDaoService.countAll(params);  
@@ -56,7 +56,7 @@ public class TestJFratxtDaoService {
 	@Test
 	public final void testExist() {
 		FratxtDao dao = new FratxtDao();
-		dao.setFxknr("24");
+		dao.setFxknr("0");
 		dao.setFxlnr("99");
 		dao.setDelsys("A");		
 
@@ -71,9 +71,8 @@ public class TestJFratxtDaoService {
 		assertNotNull(returnDao);
 
 		fratxtDaoService.delete(dao);
-		
 		boolean exist =  fratxtDaoService.exist(dao);
-		assertTrue("24, 99 should not exist",!exist);
+		assertTrue(dao.getFxknr()+" 99 should not exist",!exist);
 		
 	}	
 	
@@ -91,13 +90,35 @@ public class TestJFratxtDaoService {
 		assertNotNull(updateDao);
 		assertEquals("Dao have been updated.", updateDao.getFxtxt(), createDao.getFxtxt());
 		
-		fratxtDaoService.delete(updateDao); //Clean DB
+		fratxtDaoService.delete(getDao); //Clean DB
+		exist =  fratxtDaoService.exist(getDao);
+		assertTrue(getDao.getFxknr()+" 99 should not exist",!exist);		
+	}
+	
+	@Test
+	public final void testDeleteAll() {
+		FratxtDao getDao1 =  getFratxtDao();
+		FratxtDao getDao2 =  getFratxtDao();
+		getDao2.setFxlnr("98");
+		
+		fratxtDaoService.create(getDao1);
+		fratxtDaoService.create(getDao2);
+		
+		fratxtDaoService.delete(getDao1); //Clean DB
+		fratxtDaoService.delete(getDao2); //Clean DB
+		
+		boolean exist =  fratxtDaoService.exist(getDao1);
+		assertTrue(getDao1.getFxknr()+" 99 should not exist",!exist);	
+		exist =  fratxtDaoService.exist(getDao2);
+		assertTrue(getDao2.getFxknr()+" 99 should not exist",!exist);		
 		
 	}
 	
+	
+	
 	private FratxtDao getFratxtDao() {
 		FratxtDao dao = new FratxtDao();
-		dao.setFxknr("24");
+		dao.setFxknr("0");
 		dao.setFxlnr("99");
 		dao.setDelsys("A");
 		dao.setFxtxt("txt");

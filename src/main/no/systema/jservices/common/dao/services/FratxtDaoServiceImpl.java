@@ -16,4 +16,11 @@ public class FratxtDaoServiceImpl extends GenericDaoServiceImpl<FratxtDao> imple
 		return findAll(params);
 	}
 
+	@Override
+	public void deleteAll(String fxknr) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("fxknr", fxknr);
+		deleteAll(params);
+	}
+
 }

@@ -269,6 +269,17 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		
 		jdbcTemplate.update(deleteString.toString());
 	}
+	
+	@Override
+	public void deleteAll(Map<String, Object> params) {
+		StringBuilder deleteString = new StringBuilder("DELETE from ");
+		deleteString.append(tableName);
+		deleteString.append(this.getQueryClauses(params, null));
+		
+		jdbcTemplate.update(deleteString.toString());
+		
+	}
+	
 
 	@Override
 	public T update(T t) {
@@ -354,6 +365,5 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 	private JdbcTemplate jdbcTemplate = null;                                                            
 	public void setJdbcTemplate( JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}          
 	public JdbcTemplate getJdbcTemplate() {return this.jdbcTemplate;}
-
 
 }
