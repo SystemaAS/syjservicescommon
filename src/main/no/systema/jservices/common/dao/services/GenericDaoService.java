@@ -88,8 +88,20 @@ public interface GenericDaoService<T> {
 	 */
 	public T create(T t);
 
+	/**
+	 * Delete object.
+	 * 
+	 * @param id, actual T
+	 */
 	public void delete(Object id);
-
+	
+	/**
+	 * Delete all T on delivered args.
+	 * 
+	 * @param params, String = columnname, Object = any value
+	 */
+	public void deleteAll(Map<String, Object> params);	
+	
 	public T find(Object id);
 
 
