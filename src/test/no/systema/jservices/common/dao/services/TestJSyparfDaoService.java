@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Before;
@@ -78,7 +79,24 @@ public class TestJSyparfDaoService {
 		exist = syparfDaoService.exist(getDao);
 		assertTrue(getDao.getSykunr() + ", " + getDao.getSyrecn() + " should not exist", !exist);
 	}
-
+	
+	@Test
+	public final void testFindAll() {
+		String sykunr = "1";
+		List<SyparfDao> daoList = syparfDaoService.findAll(sykunr);
+		assertNotNull(daoList);
+		
+	}	
+	
+	@Test
+	public final void testFind() {
+		String sykunr = "1";
+		String syrecn = "15";
+		SyparfDao dao = syparfDaoService.find(sykunr,syrecn);
+		assertNotNull(dao);
+	}	
+	
+	
 	private SyparfDao getSyparfDao() {
 		SyparfDao dao = new SyparfDao();
 		dao.setSykunr("0"); // key
