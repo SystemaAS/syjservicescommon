@@ -71,10 +71,6 @@ public class FratxtDao implements IDao {
 		this.fxdt = fxdt;
 	}
 
-	public void setKeys(Map<String, Object> keys) {
-		this.keys = keys;
-	}
-
 	@Override
 	public Map<String, Object> getKeys() {
 		keys.put("fxknr", fxknr);
