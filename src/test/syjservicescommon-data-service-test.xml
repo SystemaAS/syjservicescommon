@@ -50,6 +50,12 @@
 		</property>
 	</bean>
 
+	<bean id="dktseDaoService"
+		class="no.systema.jservices.common.dao.services.DktseDaoServiceImpl">
+		<property name="jdbcTemplate">
+			<ref bean="jdbcTemplate" />
+		</property>
+	</bean>
 
 	<bean id="dataSource" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource"
 		destroy-method="close">

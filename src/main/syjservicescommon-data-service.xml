@@ -25,4 +25,7 @@
       <property name="jdbcTemplate"><ref bean="jdbcTemplate"/></property>
   </bean>  
    
+   <bean id="dktseDaoService" class="no.systema.jservices.common.dao.services.DktseDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>
  </beans>
