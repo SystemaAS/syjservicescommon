@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import no.systema.jservices.common.dao.SyparfDao;
+import no.systema.jservices.common.dto.SyparfDto;
 
 public class SyparfDaoServiceImpl extends GenericDaoServiceImpl<SyparfDao> implements SyparfDaoService{
 
