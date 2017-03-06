@@ -43,13 +43,24 @@ public class TestJDktseDaoService {
 		System.out.println(count);
 	}		
 
-	
+	@Test
+	public final void testFindAll() {
+		DktseDao dao = this.getDktseDao();
+		Map params = new HashMap();
+		params.put("dkse_knr", dao.getDkse_knr());
+		params.put("dkse_331", dao.getDkse_331());
+		params.put("dkse_34", dao.getDkse_34());
+		
+		List<DktseDao>list =  dktseDaoService.findAll(params);
+		//System.out.println(list.size());
+		assertFalse(list.isEmpty());
+	}
 	
 	@Test
 	public final void testExist() {
 		DktseDao dao = new DktseDao();
 		dao.setDkse_knr("0");
-		//dao.setDkse_331("6505059090");	
+		//dao.setDkse_331("6202930000");	
 
 		boolean exist =  dktseDaoService.exist(dao);
 		//System.out.println(exist);
@@ -103,11 +114,11 @@ public class TestJDktseDaoService {
 	
 	private DktseDao getDktseDao() {
 		DktseDao dao = new DktseDao();
-		dao.setDkse_knr("99");
-		dao.setDkse_331("7701000077");
+		dao.setDkse_knr("0");
+		dao.setDkse_331("6202930000");
 		dao.setDkse_34("NO");
-		dao.setDkse_4421("Y900");
-		dao.setDkse_442A("XXXX");
+		//dao.setDkse_4421("Y900");
+		//dao.setDkse_442A("XXXX");
 		return dao;
 	}
 	
