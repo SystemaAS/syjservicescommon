@@ -59,7 +59,7 @@ public class JsonResponseWriter2<T> {
 	public String setJsonSimpleErrorResult(String user, String errMsg, String status, StringBuffer dbErrorStackTrace) {
 		String result = null;
 		container.setUser(user);
-		container.setErrMsg(status + "::" + errMsg + "::" + dbErrorStackTrace);
+		container.setErrMsg(errMsg);
 		result = writeValue();
 		return result;
 
