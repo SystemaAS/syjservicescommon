@@ -34,7 +34,13 @@
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>	
-
+	
+	<bean id="dktardDaoService" class="no.systema.jservices.common.dao.services.DktardDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>
+	
+	
+	
 <!--  	
     the transactional advice 
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
