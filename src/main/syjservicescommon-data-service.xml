@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
-<!--  
-   - data layer components  
- -->
-<beans>  
+<beans> 
   
   <bean id="valufDaoService" class="no.systema.jservices.common.dao.services.ValufDaoServiceImpl">
       <property name="jdbcTemplate"><ref bean="jdbcTemplate"/></property>
@@ -23,9 +20,37 @@
  
  <bean id="syparfDaoService" class="no.systema.jservices.common.dao.services.SyparfDaoServiceImpl">
       <property name="jdbcTemplate"><ref bean="jdbcTemplate"/></property>
+      <property name="tellgeDaoService"><ref bean="tellgeDaoService"/></property>
   </bean>  
    
    <bean id="dktseDaoService" class="no.systema.jservices.common.dao.services.DktseDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>
+	
+   <bean id="tellgeDaoService" class="no.systema.jservices.common.dao.services.TellgeDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>	
+
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>	
+
+<!--  	
+    the transactional advice 
+    <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+        the transactional semantics...
+        <tx:attributes>
+             all methods starting with 'get' are read-only , set to rollback when Exception
+            <tx:method name="find*" read-only="true" rollback-for="Exception"/>
+            other methods use the default transaction settings (see below) 
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+    
+     ensure that the above transactional advice runs for any executionof an operation defined by the SyparfDaoService interface 
+    <aop:config>
+        <aop:pointcut id="syparfDaoOperation" expression="execution(* no.systema.jservices.common.dao.services.SyparfDaoService.*(..))"/>
+        <aop:advisor advice-ref="transactionAdvice" pointcut-ref="syparfDaoOperation"/>
+    </aop:config>    
+-->   
  </beans>

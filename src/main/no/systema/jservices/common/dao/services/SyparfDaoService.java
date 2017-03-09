@@ -23,4 +23,5 @@ public interface SyparfDaoService extends GenericDaoService<SyparfDao> {
 	 * @return a {@link SyparfDao}, i found, else null
 	 */
 	public SyparfDao find(String sykunr, String syrecn);
+	
 }

@@ -44,7 +44,6 @@ public class TestJSyparfDaoService {
 	@Test
 	public final void testExist() {
 		SyparfDao dao = getSyparfDao();
-
 		boolean exist = syparfDaoService.exist(dao);
 		assertTrue(dao.getSykunr() + ", " + dao.getSyrecn() + " should not exist", !exist);
 	}

@@ -25,7 +25,7 @@ import no.systema.jservices.common.dao.IDao;
  * @param <T>, A dao implementing {@link IDao}
  */
 public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
-	private static final Logger logger = Logger.getLogger(GenericDaoServiceImpl.class.getName());
+	protected static final Logger logger = Logger.getLogger(GenericDaoServiceImpl.class.getName());
 	private Class<T> type;
 	private String tableName;
 	private String tableAlias;

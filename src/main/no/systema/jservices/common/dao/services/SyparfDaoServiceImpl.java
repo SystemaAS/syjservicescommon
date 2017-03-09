@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import no.systema.jservices.common.dao.SyparfDao;
-import no.systema.jservices.common.dto.SyparfDto;
 
 public class SyparfDaoServiceImpl extends GenericDaoServiceImpl<SyparfDao> implements SyparfDaoService{
 
@@ -23,5 +22,22 @@ public class SyparfDaoServiceImpl extends GenericDaoServiceImpl<SyparfDao> imple
 		qDao.setSyrecn(syrecn);
 		return find(qDao);
 	}
+	
+	@Override
+	public SyparfDao create(SyparfDao dao) {
+		int geno = tellgeDaoService.getGenoAndIncrement("SYPAR");
+		dao.setSyrecn(String.valueOf(geno)); 
+		return super.create(dao);
+	}
+	
+	@Override
+	public void delete(Object id) {
+		super.delete(id);
+		tellgeDaoService.substractGeno("SYPAR");
+	}
+	
+	private TellgeDaoService tellgeDaoService = null;                                                            
+	public void setTellgeDaoService( TellgeDaoService tellgeDaoService) {this.tellgeDaoService = tellgeDaoService;}          
+	public TellgeDaoService getTellgeDaoService() {return this.tellgeDaoService;}
 
 }
