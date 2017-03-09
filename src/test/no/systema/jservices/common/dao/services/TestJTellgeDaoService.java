@@ -1,6 +1,11 @@
 package no.systema.jservices.common.dao.services;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -50,6 +55,39 @@ public class TestJTellgeDaoService {
 		assertEquals("Should have been substracted with 1", genoUpdated, geno -1);
 		
 	}
+	
+	@Test
+	public final void testFindAll() {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("geco", "ESPEDPRD");
+		List<TellgeDao> list = tellgeDaoService.findAll(params);
+		assertEquals("Should be 1", 1, list.size());
+		
+	}
+	
+	@Test
+	public final void testFindAllWithLike() {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("geco", "%ESP");
+		List<TellgeDao> list = tellgeDaoService.findAll(params);
+		assertEquals("Should be 0", 0, list.size());
+	
+		params = new HashMap<String, Object>();
+		params.put("geco", "SYPAR");
+		list = tellgeDaoService.findAll(params);
+		assertEquals("Should be 1", 1, list.size());		
+		
+		params = new HashMap<String, Object>();
+		params.put("geco", "ESP%");
+		list = tellgeDaoService.findAll(params);
+		assertEquals("Should be 2", 2, list.size());
+		
+		params = new HashMap<String, Object>();
+		params.put("geco", "%ESP%");
+		list = tellgeDaoService.findAll(params);
+		assertEquals("Should be 2", 2, list.size());
+		
+	}	
 
 	
 }

@@ -24,7 +24,7 @@ public interface GenericDaoService<T> {
 	/**
 	 * Find all T on delivered args.
 	 * 
-	 * @param params, String = columnname, Object = any value
+	 * @param params, String = columnname, Object = any value. Accepts wildcard %
 	 * @return a List of T
 	 */
 	public List<T> findAll(Map<String, Object> params);
@@ -32,7 +32,7 @@ public interface GenericDaoService<T> {
 	/**
 	 * Find all T on delivered args.
 	 * 
-	 * Including a hardwired join on firma. Use this when table FIRM is needed.
+	 * Including a hardwired join on firma. Use this when table FIRM is needed.  Accepts wildcard %
 	 * 
 	 * NOTE: Assuming that your dao's firma id is namned <b>firma</b> !
 	 * 
