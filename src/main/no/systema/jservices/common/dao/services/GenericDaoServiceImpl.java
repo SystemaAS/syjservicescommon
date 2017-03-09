@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -256,7 +257,18 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		createString.deleteCharAt(createString.length() - 1); // Remove last ,
 		createString.append(" ) ");
 
-		int ret = jdbcTemplate.update(createString.toString(), values);
+		//TODO Snygga till nedan.
+		int ret = 0;
+		try {
+			ret = jdbcTemplate.update(createString.toString(), values);
+		} catch (DataAccessException e) {
+			logger.info("Error:", e);
+			logger.info("Error, in GenericDaoImpl.createString.toString()="+createString.toString());
+			for (Object valueX : values) {
+				logger.info("value={"+valueX+"}");
+			}
+			throw e;
+		}
 		if (ret != 1) {
 			t = null;
 		}
