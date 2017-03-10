@@ -14,7 +14,14 @@ public class SyparfDaoServiceImpl extends GenericDaoServiceImpl<SyparfDao> imple
 		params.put("sykunr", sykunr);
 		return findAll(params);
 	}
-
+	
+	@Override
+	public void deleteAll(String sykunr) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("sykunr", sykunr);
+		deleteAll(params);
+	}	
+	
 	@Override
 	public SyparfDao find(String sykunr, String syrecn) {
 		SyparfDao qDao = new SyparfDao();
@@ -39,5 +46,7 @@ public class SyparfDaoServiceImpl extends GenericDaoServiceImpl<SyparfDao> imple
 	private TellgeDaoService tellgeDaoService = null;                                                            
 	public void setTellgeDaoService( TellgeDaoService tellgeDaoService) {this.tellgeDaoService = tellgeDaoService;}          
 	public TellgeDaoService getTellgeDaoService() {return this.tellgeDaoService;}
+
+
 
 }

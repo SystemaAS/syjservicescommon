@@ -3,7 +3,6 @@ package no.systema.jservices.common.dao.services;
 import java.util.List;
 
 import no.systema.jservices.common.dao.SyparfDao;
-import no.systema.jservices.common.dto.SyparfDto;
 
 public interface SyparfDaoService extends GenericDaoService<SyparfDao> {
 	
@@ -14,6 +13,13 @@ public interface SyparfDaoService extends GenericDaoService<SyparfDao> {
 	 * @return a List of SyparfDao, could be empty
 	 */
 	public List<SyparfDao> findAll(String sykunr);
+	
+	/**
+	 * Delete all syparf for sykunr, customer
+	 * 
+	 * @param sykunr, actual customer
+	 */
+	public void deleteAll(String sykunr);
 	
 	/**
 	 * Get unique syparf
