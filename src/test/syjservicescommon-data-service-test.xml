@@ -1,5 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
-<beans> 
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="
+  http://www.springframework.org/schema/beans 
+  http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/tx 
+  http://www.springframework.org/schema/tx/spring-tx.xsd
+  http://www.springframework.org/schema/aop 
+  http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
 
 
 	<bean id="valufDaoService"
@@ -58,7 +68,6 @@
 		</property>
 	</bean>
 
-
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource">
 			<ref bean="dataSource" />
@@ -68,7 +77,21 @@
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>	
-	
+
+    <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="find*" read-only="true"/>
+            <tx:method name="*" rollback-for="Throwable"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- Dao service Transactions -->
+    <aop:config>
+    	<!--  SyparfDao -->
+        <aop:pointcut id="syparfDaoOperation" expression="execution(* no.systema.jservices.common.dao.services.SyparfDaoService.*(..))"/>
+        <aop:advisor advice-ref="transactionAdvice" pointcut-ref="syparfDaoOperation"/>
+    </aop:config>   
+
 	<bean id="dataSource" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.ibm.as400.access.AS400JDBCDriver" />

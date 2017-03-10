@@ -261,7 +261,7 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		int ret = 0;
 		try {
 			ret = jdbcTemplate.update(createString.toString(), values);
-		} catch (DataAccessException e) {
+		} catch (DataAccessException e) { //RuntimeException
 			logger.info("Error:", e);
 			logger.info("Error, in GenericDaoImpl.createString.toString()="+createString.toString());
 			for (Object valueX : values) {

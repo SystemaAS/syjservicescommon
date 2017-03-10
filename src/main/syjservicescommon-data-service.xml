@@ -1,5 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
-<beans> 
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="
+  http://www.springframework.org/schema/beans 
+  http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/tx 
+  http://www.springframework.org/schema/tx/spring-tx.xsd
+  http://www.springframework.org/schema/aop 
+  http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
   
   <bean id="valufDaoService" class="no.systema.jservices.common.dao.services.ValufDaoServiceImpl">
       <property name="jdbcTemplate"><ref bean="jdbcTemplate"/></property>
@@ -31,32 +41,22 @@
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>	
 
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
-	</bean>	
-	
 	<bean id="dktardDaoService" class="no.systema.jservices.common.dao.services.DktardDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>
-	
-	
-	
-<!--  	
-    the transactional advice 
+
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
-        the transactional semantics...
         <tx:attributes>
-             all methods starting with 'get' are read-only , set to rollback when Exception
-            <tx:method name="find*" read-only="true" rollback-for="Exception"/>
-            other methods use the default transaction settings (see below) 
-            <tx:method name="*"/>
+            <tx:method name="find*" read-only="true"/>
+            <tx:method name="*" rollback-for="Throwable"/>
         </tx:attributes>
     </tx:advice>
-    
-     ensure that the above transactional advice runs for any executionof an operation defined by the SyparfDaoService interface 
+
+    <!-- Dao service Transactions -->
     <aop:config>
+    	<!--  SyparfDao -->
         <aop:pointcut id="syparfDaoOperation" expression="execution(* no.systema.jservices.common.dao.services.SyparfDaoService.*(..))"/>
         <aop:advisor advice-ref="transactionAdvice" pointcut-ref="syparfDaoOperation"/>
-    </aop:config>    
--->   
- </beans>
+    </aop:config>  
+
+</beans>

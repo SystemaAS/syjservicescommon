@@ -14,16 +14,21 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import no.systema.jservices.common.dao.SyparfDao;
+import no.systema.jservices.common.dao.TellgeDao;
+import no.systema.jservices.common.values.FasteKoder;
 
 public class TestJSyparfDaoService {
 
 	ApplicationContext context = null;
 	SyparfDaoService syparfDaoService = null;
+	TellgeDaoService tellgeDaoService = null;
 
 	@Before
 	public void setUp() throws Exception {
 		context = new ClassPathXmlApplicationContext("syjservicescommon-data-service-test.xml");
 		syparfDaoService = (SyparfDaoService) context.getBean("syparfDaoService");
+		tellgeDaoService = (TellgeDaoService) context.getBean("tellgeDaoService");
+		
 	}
 
 	@Test
@@ -90,12 +95,35 @@ public class TestJSyparfDaoService {
 	@Test
 	public final void testFind() {
 		String sykunr = "1";
-		String syrecn = "15";
+		String syrecn = "14";
 		SyparfDao dao = syparfDaoService.find(sykunr,syrecn);
 		assertNotNull(dao);
 	}	
 	
-	
+	@SuppressWarnings("unused")
+	@Test
+	public final void testCreateAndDeleteRollbackCheck() {
+		SyparfDao dao = getSyparfDao();
+		dao.setSykunr("KALLE");  
+		
+		TellgeDao qDao = new TellgeDao();
+		qDao.setGeco(FasteKoder.SYPAR.toString());
+		TellgeDao tellgeDao =  tellgeDaoService.find(qDao);		
+		int before = Integer.parseInt(tellgeDao.getGeno());
+		
+		try {
+			SyparfDao returnDao = syparfDaoService.create(dao);
+			assertTrue("Exception should have been thrown", false);
+		} catch (Exception e) {
+			assertTrue("RuntimeException should have been thrown",e instanceof RuntimeException );
+		}
+
+		tellgeDao =  tellgeDaoService.find(qDao);		
+		int after = Integer.parseInt(tellgeDao.getGeno());
+		assertEquals("Update of geco should have been rolledback",before, after); 
+		
+	}	
+		
 	private SyparfDao getSyparfDao() {
 		SyparfDao dao = new SyparfDao();
 		dao.setSykunr("0"); // key
