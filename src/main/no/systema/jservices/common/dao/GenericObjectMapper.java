@@ -43,6 +43,7 @@ public class GenericObjectMapper implements RowMapper {
 			Field[] fields = cl.getDeclaredFields();
 			List<Field> list = Arrays.asList(fields);
 			String name = null;
+			String value = null;
 			for (Field field : list) {
 				if (field.getType() != String.class) {
 					//logger.info("Only type String.class is supported, type="+field.getType());
@@ -51,7 +52,10 @@ public class GenericObjectMapper implements RowMapper {
 				name = (String) field.getName();
 				try {
 					field.setAccessible(true);
-					field.set(dao, rs.getString(name));
+					value = rs.getString(name);
+					if (value != null) {
+						field.set(dao, value.trim());
+					}
 				} catch (Exception e) {
 					// Usually when no column matches the JavaBean property...
 					logger.info(e.getMessage() + e.toString() + "name="+name);
