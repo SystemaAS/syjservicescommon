@@ -44,6 +44,10 @@
 	<bean id="dktardDaoService" class="no.systema.jservices.common.dao.services.DktardDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>
+	
+	<bean id="sadvareDaoService" class="no.systema.jservices.common.dao.services.SadvareDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>	
 
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
         <tx:attributes>
