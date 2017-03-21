@@ -49,6 +49,10 @@
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>
 	
+	<bean id="dkthaDaoService" class="no.systema.jservices.common.dao.services.DkthaDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>
+	
 	<bean id="sadvareDaoService" class="no.systema.jservices.common.dao.services.SadvareDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>	
