@@ -220,13 +220,16 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 	@Override
 	public T create(T t) {
 		Object[] values = new Object[fields.length-1];
-		StringBuilder createString = new StringBuilder("INSERT into ");
-		createString.append(tableName);
-		createString.append(" ( ");
-
+		StringBuilder debugFieldValue = new StringBuilder();
+		int ret = 0;
 		int i = 0;
 		Class<?> returnType = null;
 		String value = "";
+
+		StringBuilder createString = new StringBuilder("INSERT into ");
+		createString.append(tableName);
+		createString.append(" ( ");
+		
 		for (Method method : methods) {
 			String getter = method.getName();
 			if (getter.startsWith("get")) {
@@ -238,6 +241,7 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 						try {
 							value = (String) method.invoke(t);
 							values[i++] = (value == null) ? "" : value;
+							debugFieldValue.append(field + ":{"+value+"}"+'\n');
 							//logger.info(field + " " + value);
 						} catch (Exception e) {
 							logger.info("Error:", e);
@@ -257,23 +261,21 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		createString.deleteCharAt(createString.length() - 1); // Remove last ,
 		createString.append(" ) ");
 
-		//TODO Snygga till nedan.
-		int ret = 0;
 		try {
 			ret = jdbcTemplate.update(createString.toString(), values);
 		} catch (DataAccessException e) { //RuntimeException
 			logger.info("Error:", e);
-			logger.info("Error, in GenericDaoImpl.createString.toString()="+createString.toString());
-			for (Object valueX : values) {
-				logger.info("value={"+valueX+"}");
-			}
+			logger.info("Error, string="+createString.toString());
+			logger.info("debugFieldValue="+debugFieldValue.toString());
 			throw e;
 		}
+		
 		if (ret != 1) {
 			t = null;
 		}
 
 		return t;
+		
 	}
 
 	@Override
