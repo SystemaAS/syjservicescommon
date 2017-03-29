@@ -1,5 +1,6 @@
 package no.systema.jservices.common.json;
 
+import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 
 /**
@@ -33,9 +34,10 @@ public class JsonReader<T> {
 	@SuppressWarnings("unchecked")
 	public T get(String payLoad) {
 		T result = null;
+		mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		try {
 
-			result = (T) mapper.readValue(payLoad, t.getClass());
+			result = (T) mapper.readValue(payLoad.getBytes(), t.getClass());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

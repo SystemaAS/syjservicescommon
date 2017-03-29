@@ -68,6 +68,22 @@ public class JsonResponseWriter2<T> {
 		return result;
 
 	}
+	
+	/**
+	 * Small json
+	 * 
+	 * 
+	 * @param user
+	 * @param status
+	 * @return Json String
+	 */
+	public String setJsonSimpleValidResult(String user, String status) {
+		String result = null;
+		container.setUser(user);
+		result = writeValue();
+		return result;
+	}
+	
 
 	private void addValue(T value) {
 		List<T> dtoList = new ArrayList<T>();
@@ -84,4 +100,6 @@ public class JsonResponseWriter2<T> {
 		}
 		return result;
 	}
+
+
 }
