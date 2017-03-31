@@ -7,7 +7,7 @@ public class Kodts7Dao implements IDao {
 
 	private String ks7sta;
 	private String ks7uni; // key
-	private String ks7vf; // key
+	private int ks7vf; // key
 	private String ks7ftx;
 
 	Map<String, Object> keys = new HashMap<String, Object>();
@@ -28,11 +28,11 @@ public class Kodts7Dao implements IDao {
 		this.ks7uni = ks7uni;
 	}
 
-	public String getKs7vf() {
+	public int getKs7vf() {
 		return ks7vf;
 	}
 
-	public void setKs7vf(String ks7vf) {
+	public void setKs7vf(int ks7vf) {
 		this.ks7vf = ks7vf;
 	}
 
