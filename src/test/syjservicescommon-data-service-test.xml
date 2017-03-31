@@ -75,6 +75,12 @@
 		</property>
 	</bean>	
 	
+	<bean id="kodts7DaoService"
+		class="no.systema.jservices.common.dao.services.Kodts7DaoServiceImpl">
+		<property name="jdbcTemplate">
+			<ref bean="jdbcTemplate" />
+		</property>
+	</bean>	
 
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource">
