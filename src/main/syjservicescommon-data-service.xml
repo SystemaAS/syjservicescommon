@@ -63,8 +63,20 @@
 	
 	<bean id="kodts2DaoService" class="no.systema.jservices.common.dao.services.Kodts2DaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
-	</bean>		
+	</bean>
+	
+	<bean id="tariDaoService" class="no.systema.jservices.common.dao.services.TariDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>				
 
+	<bean id="kodts5DaoService" class="no.systema.jservices.common.dao.services.Kodts5DaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>	
+
+	<bean id="kodts6DaoService" class="no.systema.jservices.common.dao.services.Kodts6DaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>	
+	
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
         <tx:attributes>
             <tx:method name="find*" read-only="true"/>

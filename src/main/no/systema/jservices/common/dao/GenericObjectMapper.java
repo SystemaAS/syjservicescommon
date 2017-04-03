@@ -44,24 +44,36 @@ public class GenericObjectMapper implements RowMapper {
 			List<Field> list = Arrays.asList(fields);
 			String name = null;
 			String value = null;
+			int intValue;
 			for (Field field : list) {
-				if (field.getType() != String.class) {
-					//logger.info("Only type String.class is supported, type="+field.getType());
-					break;
-				}
 				name = (String) field.getName();
-				try {
-					field.setAccessible(true);
-					value = rs.getString(name);
-					if (value != null) {
-						field.set(dao, value.trim());
+				if (field.getType() == String.class) {
+					try {
+						field.setAccessible(true);
+						value = rs.getString(name);
+						if (value != null) {
+							field.set(dao, value.trim());
+						}
+					} catch (Exception e) {
+						// Usually when no column matches the JavaBean property...
+						logger.info(e.getMessage() + e.toString() + "name="+name);
+						continue;
 					}
-				} catch (Exception e) {
-					// Usually when no column matches the JavaBean property...
-					logger.info(e.getMessage() + e.toString() + "name="+name);
-					//System.out.println("kalle="+e.getMessage() + e.toString() + "name="+name);
-					continue;
+				} else if (field.getType() == int.class) {		
+					try {
+						field.setAccessible(true);
+						intValue = rs.getInt(name);
+						field.set(dao, intValue);
+					} catch (Exception e) {
+						// Usually when no column matches the JavaBean property...
+						logger.info(e.getMessage() + e.toString() + "name="+name);
+						continue;
+					}					
+				} else {
+					//logger.info("Type="+field.getType()+ " not supported.");
+					break;				
 				}
+				
 			}
 		} catch (Exception e) {
 			e.toString();

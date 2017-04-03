@@ -72,8 +72,9 @@ public interface GenericDaoService<T> {
 	
 	/**
 	 * Check if T id exist.
+	 * Object must implemented {@link IDao}
 	 * 
-	 * @param id, Object must implemented {@link IDao}
+	 * @param id
 	 * @return true, if exist, else return false.
 	 */	
 	public boolean exist(Object id);
@@ -102,6 +103,12 @@ public interface GenericDaoService<T> {
 	 */
 	public void deleteAll(Map<String, Object> params);	
 	
+	/**
+	 * Find T on provided keys.
+	 * 
+	 * @param id, the, with keys, populated T
+	 * @return T, if found, else null
+	 */
 	public T find(Object id);
 
 
