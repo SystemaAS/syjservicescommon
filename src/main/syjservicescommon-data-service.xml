@@ -76,6 +76,14 @@
 	<bean id="kodts6DaoService" class="no.systema.jservices.common.dao.services.Kodts6DaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>	
+
+	<bean id="kodts8DaoService" class="no.systema.jservices.common.dao.services.Kodts8DaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>		
+	
+	<bean id="kodtsaDaoService" class="no.systema.jservices.common.dao.services.KodtsaDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>	
 	
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
         <tx:attributes>

@@ -14,9 +14,9 @@ public interface GenericDaoService<T> {
 	 * 
 	 * (Implementation respecting the legacy way using jdbctemplate)
 	 * 
-	 * @param sql, sql including ... = ? setup
-	 * @param mapper, RowMapper, e.g. GeneringObjectMapper
-	 * @param args, args targeting = ? in sql
+	 * @param sql sql including ... = ? setup
+	 * @param mapper RowMapper, e.g. GeneringObjectMapper
+	 * @param args args targeting = ? in sql
 	 * @return a List of T
 	 */
 	public List<T> findAll(String sql, RowMapper<T> mapper, Object... args);
@@ -24,7 +24,7 @@ public interface GenericDaoService<T> {
 	/**
 	 * Find all T on delivered args.
 	 * 
-	 * @param params, String = columnname, Object = any value. Accepts wildcard %
+	 * @param params String = columnname, Object = any value. Accepts wildcard %. If params==null, no where-clause is added.
 	 * @return a List of T
 	 */
 	public List<T> findAll(Map<String, Object> params);
@@ -32,11 +32,11 @@ public interface GenericDaoService<T> {
 	/**
 	 * Find all T on delivered args.
 	 * 
-	 * Including a hardwired join on firma. Use this when table FIRM is needed.  Accepts wildcard %
+	 * Including a hardwired join on firma. Use this when table FIRM is needed.  Accepts wildcard %.If params==null, no where-clause is added.
 	 * 
 	 * NOTE: Assuming that your dao's firma id is namned <b>firma</b> !
 	 * 
-	 * @param params, String = columnname, Object = any value
+	 * @param params String = columnname, Object = any value.
 	 * @return a List of T
 	 */
 	public List<T> findAllInFirma(Map<String, Object> params);	
@@ -45,7 +45,7 @@ public interface GenericDaoService<T> {
 	/**
 	 * Count all T on delivered args.
 	 * 
-	 * @param params, String = columnname, Object = any value
+	 * @param params String = columnname, Object = any value, If params==null, no where-clause is added.
 	 * @return int
 	 */
 	public int countAll(Map<String, Object> params);
@@ -64,8 +64,8 @@ public interface GenericDaoService<T> {
 	 * 
 	 * NOTE: Assuming that your dao's firma id is namned <b>firma</b> !
 	 * 
-	 * @param id, Object is needs to be implementing {@link IDao}
-	 * @return true, if exist, else return false.
+	 * @param id Object is needs to be implementing {@link IDao}
+	 * @return true if exist, else return false.
 	 */
 	public boolean existInFirma(Object id);
 	
@@ -75,7 +75,7 @@ public interface GenericDaoService<T> {
 	 * Object must implemented {@link IDao}
 	 * 
 	 * @param id
-	 * @return true, if exist, else return false.
+	 * @return true if exist, else return false.
 	 */	
 	public boolean exist(Object id);
 
@@ -84,7 +84,7 @@ public interface GenericDaoService<T> {
 	 * 
 	 * No checks on keys.
 	 * 
-	 * @param t, populated IDao
+	 * @param t populated IDao
 	 * @return created T
 	 */
 	public T create(T t);
@@ -119,7 +119,7 @@ public interface GenericDaoService<T> {
 	 * 
 	 * NOTE: Assuming that your dao's firma id is namned <b>firma</b> !
 	 * 
-	 * @return a T, if found
+	 * @return a T if found
 	 */	
 	public T findInFirma(Object id);
 
@@ -127,7 +127,7 @@ public interface GenericDaoService<T> {
 	 * A full update on delivered IDao.
 	 * Respecting all fields
 	 * 
-	 * @param t, populated IDao
+	 * @param t populated IDao
 	 * @return the updated IDao
 	 */
 	public T update(T t);  	
