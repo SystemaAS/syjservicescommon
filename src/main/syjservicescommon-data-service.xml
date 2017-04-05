@@ -89,6 +89,10 @@
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>	
 	
+	<bean id="kodtvalfDaoService" class="no.systema.jservices.common.dao.services.KodtvalfDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>		
+	
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
         <tx:attributes>
             <tx:method name="find*" read-only="true"/>
