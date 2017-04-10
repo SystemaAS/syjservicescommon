@@ -18,6 +18,7 @@ public class TestJValufDaoService {
 
 	ApplicationContext context = null;
 	ValufDaoService valufDaoService = null;
+	String firmaColumnName = "firma";
 
 	
 	@Before
@@ -50,7 +51,7 @@ public class TestJValufDaoService {
 	
 	@Test
 	public final void testFindAllInFirma() {
-		List<ValufDao> list =  valufDaoService.findAllInFirma(null);
+		List<ValufDao> list =  valufDaoService.findAllInFirma(null, firmaColumnName);
 		assertNotNull(list);
 	}		
 	
@@ -58,8 +59,7 @@ public class TestJValufDaoService {
 	public final void testFindAInFirma() {
 		ValufDao qDao = new ValufDao();
 		qDao.setValkod("EUR");
-		ValufDao resultDao=  valufDaoService.findInFirma(qDao);
-		System.out.println("dao="+ReflectionToStringBuilder.toString(resultDao));
+		ValufDao resultDao=  valufDaoService.findInFirma(qDao,firmaColumnName);
 		assertNotNull(resultDao);
 	}	
 	
@@ -67,11 +67,11 @@ public class TestJValufDaoService {
 	public final void testExistFirma() {
 		ValufDao qDao = new ValufDao();
 		qDao.setValkod("EUR");
-		boolean exist =  valufDaoService.existInFirma(qDao);
+		boolean exist =  valufDaoService.existInFirma(qDao,firmaColumnName);
 		assertTrue("EUR should exist",exist);
 		
 		qDao.setValkod("KALLE");
-		exist =  valufDaoService.existInFirma(qDao);
+		exist =  valufDaoService.existInFirma(qDao,firmaColumnName);
 		assertTrue("KALLE should not exist",!exist);
 		
 	}		

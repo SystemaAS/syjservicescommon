@@ -34,12 +34,11 @@ public interface GenericDaoService<T> {
 	 * 
 	 * Including a hardwired join on firma. Use this when table FIRM is needed.  Accepts wildcard %.If params==null, no where-clause is added.
 	 * 
-	 * NOTE: Assuming that your dao's firma id is namned <b>firma</b> !
-	 * 
 	 * @param params String = columnname, Object = any value.
+	 * @param firmaColumnName String name of the column in T that represents firma
 	 * @return a List of T
 	 */
-	public List<T> findAllInFirma(Map<String, Object> params);	
+	public List<T> findAllInFirma(Map<String, Object> params, String firmaColumnName);	
 	
 	
 	/**
@@ -62,12 +61,11 @@ public interface GenericDaoService<T> {
 	 * 
 	 * Including a hard-wired join on firma. Use this when table FIRM is needed.
 	 * 
-	 * NOTE: Assuming that your dao's firma id is namned <b>firma</b> !
-	 * 
 	 * @param id Object is needs to be implementing {@link IDao}
+	 * @param firmaColumnName String name of the column in T that represents firma
 	 * @return true if exist, else return false.
 	 */
-	public boolean existInFirma(Object id);
+	public boolean existInFirma(Object id, String firmaColumnName);
 	
 	
 	/**
@@ -117,11 +115,12 @@ public interface GenericDaoService<T> {
 	 * 
 	 * Including a hardwired join on firma. Use this when table FIRM is needed.
 	 * 
-	 * NOTE: Assuming that your dao's firma id is namned <b>firma</b> !
+	 * @param Object
+	 * @param firmaColumnName String name of the column in T that represents firma
 	 * 
 	 * @return a T if found
 	 */	
-	public T findInFirma(Object id);
+	public T findInFirma(Object id, String firmaColumnName);
 
 	/**
 	 * A full update on delivered IDao.

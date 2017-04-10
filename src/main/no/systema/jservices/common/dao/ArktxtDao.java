@@ -19,6 +19,7 @@ public class ArktxtDao implements IDao {
 	private String arsfsk;
 	private String arscts;
 	private int arsrle;
+	private int arsrst;
 	private String arsrpa;
 	private String arsrno;
 
@@ -134,6 +135,14 @@ public class ArktxtDao implements IDao {
 
 	public void setArsrle(int arsrle) {
 		this.arsrle = arsrle;
+	}
+
+	public int getArsrst() {
+		return arsrst;
+	}
+
+	public void setArsrst(int arsrst) {
+		this.arsrst = arsrst;
 	}
 
 	public String getArsrpa() {

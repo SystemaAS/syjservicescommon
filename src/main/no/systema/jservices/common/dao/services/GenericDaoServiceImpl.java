@@ -64,11 +64,11 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 	}
 	
 	@Override
-	public List<T> findAllInFirma(Map<String, Object> params) {
+	public List<T> findAllInFirma(Map<String, Object> params, String firmaColumnName) {
 	    StringBuilder queryString = new StringBuilder("SELECT ").append(tableAlias).append(".* from ");
 	    queryString.append(tableName).append(" ").append(tableAlias).append(", firm f ");
 	    queryString.append("where ");
-	    queryString.append(tableAlias).append(".firma=").append("f.fifirm ");
+	    queryString.append(tableAlias).append("."+firmaColumnName+"=").append("f.fifirm ");
 		queryString.append(this.getQueryClausesInFirma(params, null));
 	    
 	    return jdbcTemplate.query(queryString.toString(), mapper);
@@ -76,10 +76,10 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 
 	
 	@Override
-	public T findInFirma(Object id) {
+	public T findInFirma(Object id, String  firmaColumnName) {
 		IDao dao = (IDao )id;
 		Map<String, Object> params = dao.getKeys();
-		List<T> list =findAllInFirma( params) ;
+		List<T> list =findAllInFirma( params, firmaColumnName) ;
 		if (list.size() ==1) {
 			return list.get(0);
 		}
@@ -100,8 +100,8 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 	
 	
 	@Override
-	public boolean existInFirma(Object id) {
-		T t = findInFirma(id);
+	public boolean existInFirma(Object id, String firmaColumnName) {
+		T t = findInFirma(id, firmaColumnName);
 		if (t != null) {
 			return true;
 		} else {
