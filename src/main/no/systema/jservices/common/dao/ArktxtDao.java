@@ -11,7 +11,7 @@ public class ArktxtDao implements IDao {
 	private String arksnd;
 	private String arklag;
 	private int arkdag;
-	private String arkved;
+	protected String arkved;
 	private String arslab;
 	private String arsban;
 	private String armrg;
