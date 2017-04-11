@@ -11,14 +11,14 @@ import no.systema.jservices.common.dao.ArktxtDao;
  */
 public class ArktxtDto extends ArktxtDao {
 
-	private String arctxtDesc;
+	private String arklagDesc;
 
-	public String getArctxtDesc() {
-		return arctxtDesc;
+	public String getArklagDesc() {
+		return arklagDesc;
 	}
 
-	public void setArctxtDesc(String arctxtDesc) {
-		this.arctxtDesc = arctxtDesc;
+	public void setArklagDesc(String arklagDesc) {
+		this.arklagDesc = arklagDesc;
 	}
 
 }
