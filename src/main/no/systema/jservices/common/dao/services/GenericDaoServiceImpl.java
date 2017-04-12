@@ -224,7 +224,7 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		int ret = 0;
 		int i = 0;
 		Class<?> returnType = null;
-		String value = "";
+		Object value = "";
 
 		StringBuilder createString = new StringBuilder("INSERT into ");
 		createString.append(tableName);
@@ -234,12 +234,12 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 			String getter = method.getName();
 			if (getter.startsWith("get")) {
 				returnType = method.getReturnType();
-				if (returnType.equals(String.class)) {
-					String field = method.getName().replace("get", "").toLowerCase();
+				String field = method.getName().replace("get", "").toLowerCase();
+				if (returnType.equals(String.class) || returnType.equals(int.class) ) {
 					if (!"keys".equals(field)) {
 						createString.append(field + ",");
 						try {
-							value = (String) method.invoke(t);
+							value = (Object) method.invoke(t);
 							values[i++] = (value == null) ? "" : value;
 							debugFieldValue.append(field + ":{"+value+"}"+'\n');
 							//logger.info(field + " " + value);
@@ -247,6 +247,8 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 							logger.info("Error:", e);
 						}
 					}
+				} else  {
+					logger.info("returnType not handled, field="+field);
 				}
 			}
 		}
@@ -280,13 +282,20 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 
 	@Override
 	public void delete(Object id) {
-		IDao dao = (IDao )id;
+		IDao dao = (IDao) id;
 		Map<String, Object> params = dao.getKeys();
 		StringBuilder deleteString = new StringBuilder("DELETE from ");
 		deleteString.append(tableName);
 		deleteString.append(this.getQueryClauses(params, null));
-		
-		jdbcTemplate.update(deleteString.toString());
+
+		try {
+			jdbcTemplate.update(deleteString.toString());
+		} catch (DataAccessException e) { // RuntimeException
+			logger.info("Error:", e);
+			logger.info("Error, string=" + deleteString.toString());
+			throw e;
+		}
+
 	}
 	
 	@Override
@@ -294,11 +303,16 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		StringBuilder deleteString = new StringBuilder("DELETE from ");
 		deleteString.append(tableName);
 		deleteString.append(this.getQueryClauses(params, null));
-		
-		jdbcTemplate.update(deleteString.toString());
-		
-	}
-	
+
+		try {
+			jdbcTemplate.update(deleteString.toString());
+		} catch (DataAccessException e) { // RuntimeException
+			logger.info("Error:", e);
+			logger.info("Error, string=" + deleteString.toString());
+			throw e;
+		}
+
+	}	
 
 	@Override
 	public T update(T t) {
@@ -309,42 +323,54 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 			return null;
 		}
 		Object[] values = new Object[fields.length - 1];
+		StringBuilder debugFieldValue = new StringBuilder();
 		StringBuilder updateString = new StringBuilder("UPDATE ");
 		updateString.append(tableName);
 		updateString.append(" SET ");
 
+		int ret = 0;		
 		int i = 0;
 		Class<?> returnType = null;
-		String value = "";
+		Object value = null;
 		for (Method method : methods) {
 			String getter = method.getName();
 			if (getter.startsWith("get")) {
 				returnType = method.getReturnType();
-				if (returnType.equals(String.class)) {
-					String field = method.getName().replace("get", "").toLowerCase();
+				String field = method.getName().replace("get", "").toLowerCase();
+				if (returnType.equals(String.class) || returnType.equals(int.class)) {
 					if (!"keys".equals(field)) {
 						updateString.append(field + " = ? ,");
 						try {
-							value = (String) method.invoke(t);
+							value = (Object) method.invoke(t);
 							values[i++] = (value == null) ? "" : value;
-							//logger.info(field + " " + value);
+							debugFieldValue.append(field + ":{"+value+"}"+'\n');
 						} catch (Exception e) {
 							logger.info("Error:", e);
 						}
 					} else {
 						keys.put(field, value);
 					}
+				} else  {
+					logger.info("returnType not handled, field="+field);
 				}
 			}
 		}
 
 		updateString.deleteCharAt(updateString.length() - 1); // Remove last ,
 		updateString.append(addKeys(keys));
-
-		int ret = jdbcTemplate.update(updateString.toString(), values);
+		
+		try {
+			ret = jdbcTemplate.update(updateString.toString(), values);
+		} catch (DataAccessException e) { //RuntimeException
+			logger.info("Error:", e);
+			logger.info("Error, string="+updateString.toString());
+			logger.info("debugFieldValue="+debugFieldValue.toString());
+			throw e;
+		}
+		
 		if (ret != 1) {
 			t = null;
-		}
+		}		
 		
 		return t;
 
