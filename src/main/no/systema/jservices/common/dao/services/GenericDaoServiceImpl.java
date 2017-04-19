@@ -34,6 +34,7 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 	private Field[] fields;
 	private Method[] methods;
 	private static CharSequence WILD_CARD = "%";
+	protected static String NOT_NULL = "NOT NULL";
 	
 
 	public GenericDaoServiceImpl() {
@@ -149,9 +150,13 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 					if (entry.getValue() instanceof Number) {
 						queryString.append(entry.getKey()).append(" = ").append(entry.getValue());
 					} else {
+						//wild card , %
 						if (String.valueOf(entry.getValue()).contains(WILD_CARD)) {
 							queryString.append(entry.getKey()).append(" LIKE '").append(entry.getValue()).append("'");
-						} else {
+						//not null
+						} else if (String.valueOf(entry.getValue()).equals(NOT_NULL)) {
+							 queryString.append("NULLIF(").append(entry.getKey() + ",").append(" '') ").append(" IS NOT NULL");  //NULLIF(<key>, '') IS NOT NULL
+						}else {
 							queryString.append(entry.getKey()).append(" = '").append(entry.getValue()).append("'");
 						}
 					}
