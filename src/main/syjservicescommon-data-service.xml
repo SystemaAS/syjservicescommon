@@ -100,6 +100,10 @@
 	<bean id="arkextDaoService" class="no.systema.jservices.common.dao.services.ArkextDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>	
+
+	<bean id="kodtftDaoService" class="no.systema.jservices.common.dao.services.KodtftDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>	
 	
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
         <tx:attributes>
