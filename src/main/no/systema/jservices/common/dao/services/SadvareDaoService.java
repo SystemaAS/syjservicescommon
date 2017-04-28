@@ -23,4 +23,14 @@ public interface SadvareDaoService extends GenericDaoService<SadvareDao> {
 	 */
 	public List<SadvareDao> findAll(String sykunr);	
 	
+	
+	
+	/**
+	 * Delete all sadvare-lines for customer.
+	 * 
+	 * @param levenr, customer
+	 */
+	public void deleteAll(String levenr);
+	
+	
 }
