@@ -27,7 +27,7 @@ public class SadvareDaoServiceImpl extends GenericDaoServiceImpl<SadvareDao> imp
 	public void deleteAll(String levenr) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("levenr", levenr);
-		deleteAll(levenr);
+		deleteAll(params);
 	}
 
 }

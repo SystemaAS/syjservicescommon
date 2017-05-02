@@ -27,5 +27,20 @@ public class StringUtils {
 			return false;
 		}
 	}
-		
+
+	
+	/**
+	 * Check if value has valid String value, ignore zero as value
+	 * 
+	 * @param value
+	 * @return true if value exist, in Systema perspective
+	 */
+	public static boolean hasValueIgnoreZero(String value) {
+		if (value != null && !"0".equals(value)) {
+			return hasValue(value);
+		} else {
+			return false;
+		}
+	}	
+	
 }

@@ -49,9 +49,9 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		try {
 			mapper = new GenericObjectMapper((IDao) type.newInstance());
 		} catch (InstantiationException e) {
-			logger.info("Error:",e);
+			logger.error("Error:",e);
 		} catch (IllegalAccessException e) {
-			logger.info("Error:",e);
+			logger.error("Error:",e);
 		}
 	}
 
@@ -271,7 +271,7 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		try {
 			ret = jdbcTemplate.update(createString.toString(), values);
 		} catch (DataAccessException e) { //RuntimeException
-			logger.info("Error:", e);
+			logger.error("Error:", e);
 			logger.info("Error, string="+createString.toString());
 			logger.info("debugFieldValue="+debugFieldValue.toString());
 			throw e;
@@ -311,9 +311,10 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 
 		try {
 			jdbcTemplate.update(deleteString.toString());
+			logger.debug("deleteAll executed. deleteString="+deleteString+" on params="+params);
 		} catch (DataAccessException e) { // RuntimeException
-			logger.info("Error:", e);
-			logger.info("Error, string=" + deleteString.toString());
+			logger.error("Error:", e);
+			logger.error("Error, string=" + deleteString.toString());
 			throw e;
 		}
 
@@ -356,18 +357,18 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 						keys.put(field, value);
 					}
 				} else  {
-					logger.info("returnType not handled, field="+field);
+					logger.info("returnType not handled, field="+field+", continues..");
 				}
 			}
 		}
 
 		updateString.deleteCharAt(updateString.length() - 1); // Remove last ,
 		updateString.append(addKeys(keys));
-		
+
 		try {
 			ret = jdbcTemplate.update(updateString.toString(), values);
 		} catch (DataAccessException e) { //RuntimeException
-			logger.info("Error:", e);
+			logger.error("Error:", e);
 			logger.info("Error, string="+updateString.toString());
 			logger.info("debugFieldValue="+debugFieldValue.toString());
 			throw e;

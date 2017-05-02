@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Cum3lmDao implements IDao {
 
-	private String m3firm;
+	private String m3firm; //key
 	private int m3kund; //key
 	private int m3m3;
 	private int mllm;
@@ -46,6 +46,7 @@ public class Cum3lmDao implements IDao {
 
 	@Override
 	public Map<String, Object> getKeys() {
+		keys.put("m3firm", m3firm);
 		keys.put("m3kund", m3kund);
 		return keys;
 	}
