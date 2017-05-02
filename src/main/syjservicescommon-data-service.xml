@@ -104,6 +104,11 @@
 	<bean id="kodtftDaoService" class="no.systema.jservices.common.dao.services.KodtftDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>	
+
+	<bean id="cum3lmDaoService" class="no.systema.jservices.common.dao.services.Cum3lmDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>	
+
 	
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
         <tx:attributes>
