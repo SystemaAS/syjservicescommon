@@ -165,6 +165,13 @@
 			<ref bean="jdbcTemplate" />
 		</property>
 	</bean>	
+
+	<bean id="firmDaoService"
+		class="no.systema.jservices.common.dao.services.FirmDaoServiceImpl">
+		<property name="jdbcTemplate">
+			<ref bean="jdbcTemplate" />
+		</property>
+	</bean>	
 			
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource">
