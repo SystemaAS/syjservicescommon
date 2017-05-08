@@ -72,6 +72,18 @@ public class SvtfiDao implements IDao {
 	public void setSvtf_cer2 (String value){ this.svtf_cer2 = value;   }   
 	public String getSvtf_cer2 (){ return this.svtf_cer2;   }  
 		
+	private String svtf_cer4 = "";                                
+	public void setSvtf_cer4 (String value){ this.svtf_cer4 = value;   }   
+	public String getSvtf_cer4 (){ return this.svtf_cer4;   } 
+	
+	private String svtf_usri = "";                                
+	public void setSvtf_usri (String value){ this.svtf_usri = value;   }   
+	public String getSvtf_usri (){ return this.svtf_usri;   }  
+	
+	private String svtf_usra = "";                                
+	public void setSvtf_usra (String value){ this.svtf_usra = value;   }   
+	public String getSvtf_usra (){ return this.svtf_usra;   }  
+	
 	
 	
 	Map<String, Object> keys = new HashMap<String, Object>();
