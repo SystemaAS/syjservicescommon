@@ -364,7 +364,7 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 
 		updateString.deleteCharAt(updateString.length() - 1); // Remove last ,
 		updateString.append(addKeys(keys));
-
+		
 		try {
 			ret = jdbcTemplate.update(updateString.toString(), values);
 		} catch (DataAccessException e) { //RuntimeException
