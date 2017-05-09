@@ -31,6 +31,10 @@
  <bean id="syparfDaoService" class="no.systema.jservices.common.dao.services.SyparfDaoServiceImpl">
       <property name="jdbcTemplate"><ref bean="jdbcTemplate"/></property>
       <property name="tellgeDaoService"><ref bean="tellgeDaoService"/></property>
+  </bean> 
+  <bean id="syparf2DaoService" class="no.systema.jservices.common.dao.services.Syparf2DaoServiceImpl">
+      <property name="jdbcTemplate"><ref bean="jdbcTemplate"/></property>
+      <property name="tellgeDaoService"><ref bean="tellgeDaoService"/></property>
   </bean>  
    
    <bean id="dktseDaoService" class="no.systema.jservices.common.dao.services.DktseDaoServiceImpl">
