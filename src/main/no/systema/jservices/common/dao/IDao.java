@@ -15,4 +15,5 @@ public interface IDao {
 	 * @return A Map with table keys
 	 */
 	public Map<String, Object> getKeys();
+	
 }

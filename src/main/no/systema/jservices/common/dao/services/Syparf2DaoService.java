@@ -2,33 +2,33 @@ package no.systema.jservices.common.dao.services;
 
 import java.util.List;
 
-import no.systema.jservices.common.dao.Syparf2Dao;
+import no.systema.jservices.common.dao.SyparfDao;
 
-public interface Syparf2DaoService extends GenericDaoService<Syparf2Dao> {
+public interface Syparf2DaoService extends GenericDaoService<SyparfDao> {
 	
 	/**
-	 * Retrieve all syparf for sykunr, customer
+	 * Retrieve all syparf for syuser, user
 	 * 
-	 * @param sykunr, actual customer
+	 * @param syuser, actual user
 	 * @return a List of SyparfDao, could be empty
 	 */
-	public List<Syparf2Dao> findAll(String sykunr);
+	public List<SyparfDao> findAll(String syuser);
 	
 	/**
-	 * Delete all syparf for sykunr, customer
+	 * Delete all syparf for syuser, user
 	 * 
-	 * @param sykunr, actual customer
+	 * @param syuser, actual user
 	 */
-	public void deleteAll(String sykunr);
+	public void deleteAll(String syuser);
 	
 	/**
 	 * Get unique syparf
 	 * 
 	 * @param syuser, user
 	 * @param syrecn, recordnr
-	 * @return a {@link Syparf2Dao}, i found, else null
+	 * @return a {@link SyparfDao}, i found, else null
 	 */
-	public Syparf2Dao find(String syuser, String syrecn);
+	public SyparfDao find(String syuser, String syrecn);
 	
 	
 }

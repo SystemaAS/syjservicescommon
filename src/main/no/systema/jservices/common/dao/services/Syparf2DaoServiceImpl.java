@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import no.systema.jservices.common.dao.Syparf2Dao;
+import no.systema.jservices.common.dao.SyparfDao;
 
-public class Syparf2DaoServiceImpl extends GenericDaoServiceImpl<Syparf2Dao> implements Syparf2DaoService{
+public class Syparf2DaoServiceImpl extends GenericDaoServiceImpl<SyparfDao> implements Syparf2DaoService{
 
 	@Override
-	public List<Syparf2Dao> findAll(String syuser) {
+	public List<SyparfDao> findAll(String syuser) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("syuser", syuser);
 		return findAll(params);
@@ -23,15 +23,15 @@ public class Syparf2DaoServiceImpl extends GenericDaoServiceImpl<Syparf2Dao> imp
 	}	
 	
 	@Override
-	public Syparf2Dao find(String syuser, String syrecn) {
-		Syparf2Dao qDao = new Syparf2Dao();
+	public SyparfDao find(String syuser, String syrecn) {
+		SyparfDao qDao = new SyparfDao();
 		qDao.setSyuser(syuser);
 		qDao.setSyrecn(syrecn);
 		return find(qDao);
 	}
 	
 	@Override
-	public Syparf2Dao create(Syparf2Dao dao) {
+	public SyparfDao create(SyparfDao dao) {
 		int geno = tellgeDaoService.getGenoAndIncrement("SYPAR");
 		dao.setSyrecn(String.valueOf(geno)); 
 		return super.create(dao);

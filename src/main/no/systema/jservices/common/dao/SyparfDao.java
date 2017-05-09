@@ -86,5 +86,11 @@ public class SyparfDao implements IDao {
 		keys.put("syrecn", syrecn);
 		return keys;
 	}
+	
+	public void setKeys(String syuser) {
+		keys.put("syuser", syuser);
+		keys.put("syrecn", syrecn);
+		keys.put("sykunr", "0");		
+	}
 
 }
