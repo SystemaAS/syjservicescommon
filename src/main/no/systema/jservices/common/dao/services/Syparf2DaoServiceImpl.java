@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import no.systema.jservices.common.dao.IDao;
 import no.systema.jservices.common.dao.SyparfDao;
 
 public class Syparf2DaoServiceImpl extends GenericDaoServiceImpl<SyparfDao> implements Syparf2DaoService{
@@ -27,7 +28,29 @@ public class Syparf2DaoServiceImpl extends GenericDaoServiceImpl<SyparfDao> impl
 		SyparfDao qDao = new SyparfDao();
 		qDao.setSyuser(syuser);
 		qDao.setSyrecn(syrecn);
-		return find(qDao);
+		return this.find(qDao);
+	}
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public SyparfDao find(SyparfDao id) {
+		//blank the sykunr from parent class
+		id.setKeys(id.getSyuser());
+		//start process
+		//IDao dao = (IDao )id;
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("syuser", id.getSyuser());
+		params.put("syrecn", id.getSyrecn());
+		params.put("sykunr", "0");
+		
+		List<SyparfDao> list =findAll( params) ;
+		if (list.size() ==1) {
+			return list.get(0);
+		}
+		return null;		
+		
 	}
 	
 	@Override
