@@ -60,8 +60,7 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 	    StringBuilder queryString = new StringBuilder("SELECT * from ");
 	    queryString.append(tableName);
 		queryString.append(this.getQueryClauses(params, null));
-		
-	    return jdbcTemplate.query(queryString.toString(), mapper);
+		return jdbcTemplate.query(queryString.toString(), mapper);
 	}
 	
 	@Override
