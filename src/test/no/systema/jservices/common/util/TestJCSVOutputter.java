@@ -44,7 +44,7 @@ public class TestJCSVOutputter {
 	@Test
 	public void testWriteToCVS() {
 		String csvOutput = null;
-		csvOutput =cvsFilePrinter.writeAsCSV(faktDaoList);
+		csvOutput =cvsFilePrinter.writeAsString(faktDaoList);
 		assertNotNull("message",csvOutput);
 	}	
 	

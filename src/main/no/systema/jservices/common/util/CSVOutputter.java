@@ -24,18 +24,15 @@ public class CSVOutputter<T> {
 	private static final Logger logger = Logger.getLogger(CSVOutputter.class.getName());
 
 	/**
-	 * Read all objects and create it in csv forma.
+	 * Read all objects and create a String in csv format.
 	 * 
 	 * @param objects List of {@link IDao}
 	 * @return String as csv records
 	 */
-	public String writeAsCSV(List<T> objects) {
+	public String writeAsString(List<T> objects) {
 		StringWriter stringWriter = new StringWriter();
 		CSVPrinter csvFileprinter = null;
 		try {
-			
-			
-
 			for (T dao : objects) {
 				if (csvFileprinter == null) {
 					csvFileprinter = new CSVPrinter(stringWriter, CSVFormat.EXCEL);
@@ -50,11 +47,10 @@ public class CSVOutputter<T> {
 			csvFileprinter.close();
 
 		} catch (IOException e) {
-			logger.error("Error when writing to file, error:", e);
+			logger.error("Error when writing to StringWriter, error:", e);
 		}
 
 		return stringWriter.toString();
-
 	}
 
 	/**
@@ -87,7 +83,6 @@ public class CSVOutputter<T> {
 		} catch (IOException e) {
 			logger.error("Error when writing to file, error:", e);
 		}
-
 	}
 	
 	private List<String> getPopulatedCvsRecord(T dao) {
@@ -105,14 +100,10 @@ public class CSVOutputter<T> {
 						if (value != null) {
 							value = value.trim();
 						}
-
 						csvRecord.add(value);
-
 					} else if (returnType.equals(int.class)) {
 						int value = (Integer) method.invoke(dao);
-
 						csvRecord.add(String.valueOf(value));
-
 					}
 				}
 			}
@@ -121,7 +112,6 @@ public class CSVOutputter<T> {
 		}
 
 		return csvRecord;
-		
 	}
 	
 	private List<String> getHeaders(T dao) {
@@ -142,7 +132,6 @@ public class CSVOutputter<T> {
 		}
 
 		return csvRecord;
-		
 	}	
 	
 }
