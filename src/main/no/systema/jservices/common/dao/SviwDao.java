@@ -6,7 +6,7 @@ import java.util.Map;
 public class SviwDao implements IDao {
 
 	private int sviw_knnr; // kundnummer 1 8 8 8 0 s //key
-	private String sviw_knso; // søkbegrepp 9 43 35 a
+	private String sviw_knso; // søkbegrepp 9 43 35 a //key
 	private int sviw_kota;// kollital 44 48 5 5 0 s
 	private int sviw_kot2;// kollital 49 53 5 5 0 s
 	private int sviw_kot3;// kollital 54 58 5 5 0 s
@@ -26,7 +26,7 @@ public class SviwDao implements IDao {
 	private String sviw_god3;// godsmærkning 523 564 42 a
 	private String sviw_god4;// godsmærkning 565 606 42 a
 	private String sviw_god5;// godsmærkning 607 648 42 a
-	private int sviw_vano;// varupost nr. 649 653 5 5 0 s //key ??
+	private int sviw_vano;// varupost nr. 649 653 5 5 0 s
 	private String sviw_vata;// varukod taric nr 654 661 8 a
 	private String sviw_vati;// varukod till 33:3 662 665 4 a
 	private String sviw_vat4;// varukod till 33:4 666 669 4 a
@@ -1154,7 +1154,7 @@ public class SviwDao implements IDao {
 	@Override
 	public Map<String, Object> getKeys() { // keys Hokuspokus
 		keys.put("sviw_knnr", sviw_knnr);
-		keys.put("sviw_vano", sviw_vano);
+		keys.put("sviw_knso", sviw_knso);
 		return keys;
 	}
 
