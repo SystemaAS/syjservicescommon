@@ -65,6 +65,13 @@ public class TestJSviwDaoService {
 		SviwDao resultDao = sviwDaoService.find(qDao);
 		assertNotNull(resultDao);
 		assertEquals("nr should be the same.",1, resultDao.getSviw_knnr());
+		
+		
+		SviwDao resultDao2 = sviwDaoService.find(1, "Elfenben");
+		assertNotNull(resultDao2);
+		assertEquals("nr should be the same.",resultDao2.getSviw_knnr(), resultDao.getSviw_knnr());
+		
+		
 	}		
 	
 	@Test
@@ -81,5 +88,5 @@ public class TestJSviwDaoService {
 		assertTrue(qDao.getSviw_knnr() + "," + qDao.getSviw_knso()+"should not exist", !exist);
 
 	}
-
+	
 }

@@ -1152,7 +1152,7 @@ public class SviwDao implements IDao {
 	}
 
 	@Override
-	public Map<String, Object> getKeys() { // keys Hokuspokus
+	public Map<String, Object> getKeys() { 
 		keys.put("sviw_knnr", sviw_knnr);
 		keys.put("sviw_knso", sviw_knso);
 		return keys;
