@@ -120,6 +120,9 @@
 	<bean id="svthaDaoService" class="no.systema.jservices.common.dao.services.SvthaDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>
+	<bean id="svtvkDaoService" class="no.systema.jservices.common.dao.services.SvtvkDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>
 	
 
 	<bean id="firmDaoService" class="no.systema.jservices.common.dao.services.FirmDaoServiceImpl">
