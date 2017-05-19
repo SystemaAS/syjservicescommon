@@ -30,7 +30,7 @@ public class TestJCSVOutputter {
 		dao2.setFali(1);	
 		
 		faktDaoList.add(dao1);
-		faktDaoList.add(dao2);		
+		faktDaoList.add(dao2);	
 		
 		
 	}
