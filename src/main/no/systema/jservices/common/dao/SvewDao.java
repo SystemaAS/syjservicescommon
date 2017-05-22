@@ -27,16 +27,16 @@ public class SvewDao implements IDao {
 	private String svew_god3;// godsmærkning 523 564 42 a
 	private String svew_god4;// godsmærkning 565 606 42 a
 	private String svew_god5;// godsmærkning 607 648 42 a
-	private int svew_vano;// varupost nr. 649 653 5 5 0 s 
+	private int svew_vano;// varupost nr. 649 653 5 5 0 s
 	private String svew_vata;// varukod taric nr 654 661 8 a
 	private String svew_vati;// varukod till 33:3 662 665 4 a
 	private String svew_vat4;// varukod till 33:4 666 669 4 a
 	private String svew_vat5;// varukod till 33:5 670 673 4 a
 	private String svew_ulkd;// ursprungsland, kod 674 675 2 a
-	private int svew_brut;// bruttovikt 676 689 14 14 3 s
+	private float svew_brut;// bruttovikt 676 689 14 14 3 s
 	private String svew_eup1;// førfarande 37:1 690 693 4 a
 	private String svew_eup2;// førfarande 37:2 694 696 3 a
-	private int svew_neto;// nettovikt 697 710 14 14 3 s
+	private float svew_neto;// nettovikt 697 710 14 14 3 s
 	private String svew_kono;// kontigentnummer 711 713 3 a
 	private int svew_ankv;// annan kvantitet 714 723 10 10 0 s
 	private String svew_suko;// særsk.uppl.kod 724 728 5 a
@@ -63,7 +63,7 @@ public class SvewDao implements IDao {
 	private String svew_atin;// åtgærdsindikator 1822 1824 3 a
 	private int svew_stva;// stat.værde 1825 1835 11 11 0 s
 	private int svew_stva2;// tullværde 1836 1846 11 11 0 s
-	private int svew_fabl;// fakturabelopp 1847 1857 11 11 3 s
+	private float svew_fabl;// fakturabelopp 1847 1857 11 11 3 s
 	private String svew_betk;// betalkod transp 1858 1858 1 a
 	private String svew_komr;// komm refnr 1859 1928 70 a
 	private String svew_fnkd;// fn kod fg 1929 1932 4 a
@@ -138,6 +138,30 @@ public class SvewDao implements IDao {
 	private String svew_call;// call me 2992 2993 2 a
 
 	Map<String, Object> keys = new HashMap<String, Object>();
+
+	public float getSvew_brut() {
+		return svew_brut;
+	}
+
+	public void setSvew_brut(float svew_brut) {
+		this.svew_brut = svew_brut;
+	}
+
+	public float getSvew_neto() {
+		return svew_neto;
+	}
+
+	public void setSvew_neto(float svew_neto) {
+		this.svew_neto = svew_neto;
+	}
+
+	public float getSvew_fabl() {
+		return svew_fabl;
+	}
+
+	public void setSvew_fabl(float svew_fabl) {
+		this.svew_fabl = svew_fabl;
+	}
 
 	public int getSvew_knnr() {
 		return svew_knnr;
@@ -363,14 +387,6 @@ public class SvewDao implements IDao {
 		this.svew_ulkd = svew_ulkd;
 	}
 
-	public int getSvew_brut() {
-		return svew_brut;
-	}
-
-	public void setSvew_brut(int svew_brut) {
-		this.svew_brut = svew_brut;
-	}
-
 	public String getSvew_eup1() {
 		return svew_eup1;
 	}
@@ -385,14 +401,6 @@ public class SvewDao implements IDao {
 
 	public void setSvew_eup2(String svew_eup2) {
 		this.svew_eup2 = svew_eup2;
-	}
-
-	public int getSvew_neto() {
-		return svew_neto;
-	}
-
-	public void setSvew_neto(int svew_neto) {
-		this.svew_neto = svew_neto;
 	}
 
 	public String getSvew_kono() {
@@ -601,14 +609,6 @@ public class SvewDao implements IDao {
 
 	public void setSvew_stva2(int svew_stva2) {
 		this.svew_stva2 = svew_stva2;
-	}
-
-	public int getSvew_fabl() {
-		return svew_fabl;
-	}
-
-	public void setSvew_fabl(int svew_fabl) {
-		this.svew_fabl = svew_fabl;
 	}
 
 	public String getSvew_betk() {
@@ -1188,7 +1188,7 @@ public class SvewDao implements IDao {
 	}
 
 	@Override
-	public Map<String, Object> getKeys() {   
+	public Map<String, Object> getKeys() {
 		keys.put("svew_knnr", svew_knnr);
 		keys.put("svew_knso", svew_knso);
 		return keys;

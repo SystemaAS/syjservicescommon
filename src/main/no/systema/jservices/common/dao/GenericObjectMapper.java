@@ -45,6 +45,7 @@ public class GenericObjectMapper implements RowMapper {
 			String name = null;
 			String value = null;
 			int intValue;
+			float floatValue;
 			for (Field field : list) {
 				name = (String) field.getName();
 				if (field.getType() == String.class) {
@@ -64,6 +65,16 @@ public class GenericObjectMapper implements RowMapper {
 						field.setAccessible(true);
 						intValue = rs.getInt(name);
 						field.set(dao, intValue);
+					} catch (Exception e) {
+						// Usually when no column matches the JavaBean property...
+						logger.info(e.getMessage() + e.toString() + "name="+name);
+						continue;
+					}	
+				} else if (field.getType() == float.class) {		
+					try {
+						field.setAccessible(true);
+						floatValue = rs.getFloat(name);
+						field.set(dao, floatValue);
 					} catch (Exception e) {
 						// Usually when no column matches the JavaBean property...
 						logger.info(e.getMessage() + e.toString() + "name="+name);

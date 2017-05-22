@@ -15,6 +15,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import no.systema.jservices.common.dao.SvewDao;
+import no.systema.jservices.common.dao.SviwDao;
 import no.systema.jservices.common.dao.TariDao;
 
 public class TestJSvewDaoService {
@@ -66,6 +67,16 @@ public class TestJSvewDaoService {
 		qDao.setSvew_knso ("Tarzan");
 		SvewDao resultDao = svewDaoService.find(qDao);
 		assertEquals("nr should be the same.",1, resultDao.getSvew_knnr());
+		
+		SvewDao resultDao2 = svewDaoService.find(1, "Tarzan");
+		assertNotNull(resultDao2);
+		assertEquals("nr should be the same.",resultDao2.getSvew_knnr(), resultDao.getSvew_knnr());		
+		
+		
+		SvewDao resultDao3 = svewDaoService.find(1, "Jane");
+		System.out.println("resultDao3="+ReflectionToStringBuilder.toString(resultDao3));
+		System.out.println("getSvew_brut="+resultDao3.getSvew_brut());
+		
 	}		
 	
 	@Test
