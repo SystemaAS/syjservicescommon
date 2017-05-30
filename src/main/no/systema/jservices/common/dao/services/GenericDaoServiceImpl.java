@@ -60,7 +60,7 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 	    StringBuilder queryString = new StringBuilder("SELECT * from ");
 	    queryString.append(tableName);
 		queryString.append(this.getQueryClauses(params, null));
-		//logger.info(queryString.toString());
+		logger.info(queryString.toString());
 		return jdbcTemplate.query(queryString.toString(), mapper);
 	}
 	
@@ -240,6 +240,7 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 			if (getter.startsWith("get")) {
 				returnType = method.getReturnType();
 				String field = method.getName().replace("get", "").toLowerCase();
+				//logger.info("AA:" + field);;
 				if (returnType.equals(String.class) || returnType.equals(int.class) ) {
 					if (!"keys".equals(field)) {
 						createString.append(field + ",");
@@ -269,6 +270,9 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		createString.append(" ) ");
 
 		try {
+			//logger.info(createString.toString());
+			//logger.info(values);
+			
 			ret = jdbcTemplate.update(createString.toString(), values);
 		} catch (DataAccessException e) { //RuntimeException
 			logger.error("Error:", e);

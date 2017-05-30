@@ -15,27 +15,22 @@ import java.util.Map;
 public class SvtvkDao implements IDao  {
 
 	private String svvk_kd = "";                                
-	public String getSvvk_kdPropertyName (){ return "svvk_kd"; }
 	public void setSvvk_kd (String value){ this.svvk_kd = value;   }   
 	public String getSvvk_kd (){ return this.svvk_kd;   }  
 	
-	private String svvk_dts = "0"; 
-	public String getSvvk_dtsPropertyName (){ return "svvk_dts"; }
+	private String svvk_dts = ""; 
 	public void setSvvk_dts (String value){ this.svvk_dts = value;   }   
 	public String getSvvk_dts (){ return this.svvk_dts;   }              
 
-	private String svvk_dte = "0";
-	public String getSvvk_dtePropertyName (){ return "svvk_dte"; }
+	private String svvk_dte = "";
 	public void setSvvk_dte (String value){ this.svvk_dte = value;   }   
 	public String getSvvk_dte (){ return this.svvk_dte;   }              
 
-	private String svvk_omr = "0";
-	public String getSvvk_omrPropertyName (){ return "svvk_omr"; }
+	private String svvk_omr = "";
 	public void setSvvk_omr (String value){ this.svvk_omr = value;   }   
 	public String getSvvk_omr (){ return this.svvk_omr;   }              
 
-	private String svvk_krs = "0"; 
-	public String getSvvk_krsPropertyName (){ return "svvk_krs"; }
+	private String svvk_krs = ""; 
 	public void setSvvk_krs (String value){ this.svvk_krs = value;   }   
 	public String getSvvk_krs (){ return this.svvk_krs;   }              
 

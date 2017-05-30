@@ -41,6 +41,31 @@ public class StringUtils {
 		} else {
 			return false;
 		}
-	}	
+	}
+	
+	/**
+	 * 
+	 * @param value
+	 * @return
+	 */
+	public boolean isNotNull(String value){
+		boolean retval = false;
+		if(value!=null && !"".equals(value)){
+			retval = true;
+		}
+		return retval;
+	}
+	/**
+	 * 
+	 * @param value
+	 * @return
+	 */
+	public boolean isNull(String value){
+		boolean retval = false;
+		if(value==null || "".equals(value)){
+			retval = true;
+		}
+		return retval;
+	}
 	
 }
