@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -240,8 +241,7 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 			if (getter.startsWith("get")) {
 				returnType = method.getReturnType();
 				String field = method.getName().replace("get", "").toLowerCase();
-				//logger.info("AA:" + field);;
-				if (returnType.equals(String.class) || returnType.equals(int.class) ) {
+				if (returnType.equals(String.class) || returnType.equals(int.class) || returnType.equals(float.class) ) {
 					if (!"keys".equals(field)) {
 						createString.append(field + ",");
 						try {
@@ -327,9 +327,10 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 	@Override
 	public T update(T t) {
 		IDao dao = (IDao) t;
+		logger.debug("update:IDao="+ReflectionToStringBuilder.toString(dao));
 		Map<String, Object> keys = dao.getKeys();
 		if (!exist(dao)) {
-			logger.info("::update::Record does not exist in " + tableName + " on keys=" + keys);
+			logger.error("::update::Record does not exist in " + tableName + " on keys=" + keys);
 			return null;
 		}
 		Object[] values = new Object[fields.length - 1];
@@ -347,7 +348,7 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 			if (getter.startsWith("get")) {
 				returnType = method.getReturnType();
 				String field = method.getName().replace("get", "").toLowerCase();
-				if (returnType.equals(String.class) || returnType.equals(int.class)) {
+				if (returnType.equals(String.class) || returnType.equals(int.class) || returnType.equals(float.class)) {
 					if (!"keys".equals(field)) {
 						updateString.append(field + " = ? ,");
 						try {
@@ -355,13 +356,13 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 							values[i++] = (value == null) ? "" : value;
 							debugFieldValue.append(field + ":{"+value+"}"+'\n');
 						} catch (Exception e) {
-							logger.info("Error:", e);
+							logger.error("Error:", e);
 						}
 					} else {
 						keys.put(field, value);
 					}
 				} else  {
-					logger.info("returnType not handled, field="+field+", continues..");
+					logger.error("returnType not handled, field="+field+", continues..");
 				}
 			}
 		}

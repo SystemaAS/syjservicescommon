@@ -3,6 +3,8 @@ package no.systema.jservices.common.dao;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.format.annotation.NumberFormat;
+
 public class SvewDao implements IDao {
 
 	private int svew_knnr; // kundnummer 1 8 8 8 0 s //key
