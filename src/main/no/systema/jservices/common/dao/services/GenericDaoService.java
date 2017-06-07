@@ -28,7 +28,15 @@ public interface GenericDaoService<T> {
 	 * @return a List of T
 	 */
 	public List<T> findAll(Map<String, Object> params);
-
+	
+	/**
+	 * Find all T on delivered clause. Exclude where in arg
+	 * 
+	 * @param params String any valid DB2 syntax
+	 * @return a List of T
+	 */
+	public List<T> findWhere(String clause);	
+	
 	/**
 	 * Find all T on delivered args.
 	 * 

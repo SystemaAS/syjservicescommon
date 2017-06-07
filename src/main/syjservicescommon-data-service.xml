@@ -123,7 +123,9 @@
 	<bean id="svtvkDaoService" class="no.systema.jservices.common.dao.services.SvtvkDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>
-	
+	<bean id="svtlvDaoService" class="no.systema.jservices.common.dao.services.SvtlvDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>
 
 	<bean id="firmDaoService" class="no.systema.jservices.common.dao.services.FirmDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
@@ -148,6 +150,10 @@
 	<bean id="svtx03fDaoService" class="no.systema.jservices.common.dao.services.Svtx03fDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>	
+	
+	<bean id="svtx10fDaoService" class="no.systema.jservices.common.dao.services.Svtx10fDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>		
 	
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
         <tx:attributes>

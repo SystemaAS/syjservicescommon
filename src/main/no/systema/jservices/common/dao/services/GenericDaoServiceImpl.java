@@ -66,6 +66,16 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 	}
 	
 	@Override
+	public List<T> findWhere(String clause) {
+	    StringBuilder queryString = new StringBuilder("SELECT * from ");
+	    queryString.append(tableName);
+	    queryString.append(" where "); queryString.append(clause);	
+		logger.info(queryString.toString());
+		return jdbcTemplate.query(queryString.toString(), mapper);	    
+	}	
+	
+	
+	@Override
 	public List<T> findAllInFirma(Map<String, Object> params, String firmaColumnName) {
 	    StringBuilder queryString = new StringBuilder("SELECT ").append(tableAlias).append(".* from ");
 	    queryString.append(tableName).append(" ").append(tableAlias).append(", firm f ");
@@ -157,7 +167,7 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 						//not null
 						} else if (String.valueOf(entry.getValue()).equals(NOT_NULL)) {
 							 queryString.append("NULLIF(").append(entry.getKey() + ",").append(" '') ").append(" IS NOT NULL");  //NULLIF(<key>, '') IS NOT NULL
-						}else {
+						}else { 
 							queryString.append(entry.getKey()).append(" = '").append(entry.getValue()).append("'");
 						}
 					}
