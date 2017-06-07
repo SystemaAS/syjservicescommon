@@ -50,6 +50,9 @@ public class TestJSvewDaoService {
 		params.put("svew_knnr", 1);
 		params.put("svew_knso", "Tarzan");		
 		List<SvewDao> list = svewDaoService.findAll(params);
+		SvewDao dao = list.get(0);
+		System.out.println("SvewDao="+ReflectionToStringBuilder.toString(dao));
+		System.out.println("dao.getSvew_brut()"+dao.getSvew_brut());
 		assertNotNull(list);
 	}
 	

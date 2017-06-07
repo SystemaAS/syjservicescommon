@@ -1,5 +1,7 @@
 package no.systema.jservices.common.util;
 
+import java.math.BigDecimal;
+
 /**
  * This class serves with convenience methods where GUI/DB has specialhandling.
  * 
@@ -66,6 +68,20 @@ public class StringUtils {
 			retval = true;
 		}
 		return retval;
+	}
+	
+	/**
+	 * Converts the decimal separator for a BigDecimal value, from dot to comma.
+	 * 
+	 * @param dbValue {@linkplain BigDecimal}
+	 * @return a BigDecimal value as String with , as decimal separator.
+	 */
+	public static String convertToSystemaUIFormat(BigDecimal dbValue) {
+		if (dbValue == null) {
+			return null;
+		} else {
+			return dbValue.toString().replace(".", ",");
+		}
 	}
 	
 }

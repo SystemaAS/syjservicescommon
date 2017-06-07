@@ -1,6 +1,7 @@
 package no.systema.jservices.common.dao;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -45,7 +46,7 @@ public class GenericObjectMapper implements RowMapper {
 			String name = null;
 			String value = null;
 			int intValue;
-			float floatValue;
+			BigDecimal bigdecimalValue;
 			for (Field field : list) {
 				name = (String) field.getName();
 				if (field.getType() == String.class) {
@@ -70,11 +71,11 @@ public class GenericObjectMapper implements RowMapper {
 						logger.info(e.getMessage() + e.toString() + "name="+name);
 						continue;
 					}	
-				} else if (field.getType() == float.class) {		
+				} else if (field.getType() == BigDecimal.class) {		
 					try {
 						field.setAccessible(true);
-						floatValue = rs.getFloat(name);
-						field.set(dao, floatValue);
+						bigdecimalValue = rs.getBigDecimal(name);
+						field.set(dao, bigdecimalValue);
 					} catch (Exception e) {
 						// Usually when no column matches the JavaBean property...
 						logger.info(e.getMessage() + e.toString() + "name="+name);
