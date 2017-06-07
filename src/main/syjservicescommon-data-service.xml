@@ -153,7 +153,11 @@
 	
 	<bean id="svtx10fDaoService" class="no.systema.jservices.common.dao.services.Svtx10fDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
-	</bean>		
+	</bean>	
+	
+	<bean id="svtproDaoService" class="no.systema.jservices.common.dao.services.SvtproDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>			
 	
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
         <tx:attributes>
