@@ -23,6 +23,13 @@ public interface Svtx03fDaoService extends GenericDaoService<Svtx03fDao> {
 	
 	
 	/**
+	 * Retrieves all Svtx03fDao where svtx03_01 = 'A' and svtx03_02 = 'KLI'
+	 * 
+	 * @return a list with Svtx03fDao
+	 */
+	public List<Svtx03fDao> getKollislagKoder();		
+	
+	/**
 	 * Check if svtx03_03 (id)  exist  where svtx03_01 = 'A' and svtx03_02 = 'GCY'
 	 * 
 	 * @return true is exist, else false
@@ -34,6 +41,13 @@ public interface Svtx03fDaoService extends GenericDaoService<Svtx03fDao> {
 	 * 
 	 * @return true is exist, else false
 	 */
-	public boolean eup2Exist(String eup2);			
+	public boolean eup2Exist(String eup2);		
+	
+	/**
+	 * Check if svtx03_03 (id)  exist  where svtx03_01 = 'A' and svtx03_02 = 'KLI'
+	 * 
+	 * @return true is exist, else false
+	 */
+	public boolean kollislagExist(String kosl);			
 	
 }

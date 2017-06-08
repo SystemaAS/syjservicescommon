@@ -92,6 +92,13 @@ public class TestJSvtx03fDaoService {
 	}		
 
 	@Test
+	public final void testGetKollislagKoder() {
+		List<Svtx03fDao> list = svtx03fDaoService.getKollislagKoder();
+		assertNotNull(list);	
+	}		
+	
+	
+	@Test
 	public final void testLandKodeExist() {
 		boolean exist = svtx03fDaoService.landKodeExist("BO");
 		assertTrue("BO should exist", exist);
@@ -109,6 +116,16 @@ public class TestJSvtx03fDaoService {
 		exist = svtx03fDaoService.eup2Exist("XX");
 		assertTrue("XX should NOT exist", !exist);
 		
-	}		
+	}	
+	
+	@Test
+	public final void testKollislagExist() {
+		boolean exist = svtx03fDaoService.kollislagExist("4C");
+		assertTrue("4C should exist", exist);
+
+		exist = svtx03fDaoService.kollislagExist("XX");
+		assertTrue("XX should NOT exist", !exist);
+		
+	}	
 
 }

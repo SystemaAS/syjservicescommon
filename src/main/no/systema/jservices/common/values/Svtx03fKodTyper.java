@@ -14,4 +14,5 @@ import no.systema.jservices.common.dao.Svtx03fDao;
 public enum Svtx03fKodTyper implements Serializable {
 	GCY,
 	FFK,
+	KLI
 }
