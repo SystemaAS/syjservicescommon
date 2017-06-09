@@ -73,8 +73,9 @@ public class SvtproDao implements IDao {
 
 	@Override
 	public Map<String, Object> getKeys() {
-		throw new UnsupportedOperationException(
-				"No keys identified and defined in dao, hence reduced GenericDao-functionality for Svtx10fDao!");
+		keys.put("svpr_ie", svpr_ie);
+		keys.put("svpr_pr", svpr_pr);
+		return keys;
 	}
 
 }

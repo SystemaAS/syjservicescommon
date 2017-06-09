@@ -1,6 +1,8 @@
 package no.systema.jservices.common.dao.services;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import no.systema.jservices.common.dao.Svtx10fDao;
 
@@ -34,6 +36,13 @@ public class Svtx10fDaoServiceImpl extends GenericDaoServiceImpl<Svtx10fDao> imp
 	public boolean taricImportNrExist(String taricnr) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public List<Svtx10fDao> findByLikeId(String varukod) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("svtx10_01", WILD_CARD + varukod + WILD_CARD);
+		return findAll(params);
 	}
 
 }

@@ -36,7 +36,8 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 	private GenericObjectMapper mapper;
 	private Field[] fields;
 	private Method[] methods;
-	private static CharSequence WILD_CARD = "%";
+	/** value=%  */
+	protected static CharSequence WILD_CARD = "%";
 	protected static String NOT_NULL = "NOT NULL";
 	
 
@@ -317,7 +318,7 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		} catch (Exception e) {
 			logger.error("Error:", e);
 			logger.error("Error, string=" + deleteString.toString());
-			throw e;
+			//Not compiling throw e;
 		}
 		
 		if (ret != 1) {
@@ -342,7 +343,7 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		} catch (Exception e) { 
 			logger.error("Error:", e);
 			logger.error("Error, string=" + deleteString.toString());
-			throw e;
+			//Not compiling -->throw e;
 		}
 		
 		if (ret == 0) {

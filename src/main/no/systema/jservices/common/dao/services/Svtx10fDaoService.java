@@ -40,6 +40,12 @@ public interface Svtx10fDaoService extends GenericDaoService<Svtx10fDao> {
 	public boolean taricImportNrExist(String taricnr);			
 	
 	
-	
+	/**
+	 * Retrieves all Svtx10fDao where svtx10_01 LIKE arg.
+	 * 
+	 * @param varukod with LIKE search.
+	 * @return a list with Svtx10fDao
+	 */
+	public List<Svtx10fDao> findByLikeId(String varukod);
 	
 }

@@ -40,6 +40,12 @@ public class TestJSvtproDaoService {
 		exist = svtproDaoService.svpr_prExist("XXX");
 		assertTrue("XXX should not exist.", !exist);	
 		
-	}		
+	}	
+	
+	@Test
+	public final void testGetEup1Koder() {
+		List<SvtproDao> list =  svtproDaoService.getEup1Koder();
+		assertNotNull(list);
+	}
 	
 }
