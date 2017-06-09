@@ -317,7 +317,7 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		} catch (Exception e) {
 			logger.error("Error:", e);
 			logger.error("Error, string=" + deleteString.toString());
-			throw e;
+			//Not compiling throw e;
 		}
 		
 		if (ret != 1) {
@@ -342,7 +342,7 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		} catch (Exception e) { 
 			logger.error("Error:", e);
 			logger.error("Error, string=" + deleteString.toString());
-			throw e;
+			//Not compiling -->throw e;
 		}
 		
 		if (ret == 0) {

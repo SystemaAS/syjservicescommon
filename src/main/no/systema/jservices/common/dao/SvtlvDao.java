@@ -10,7 +10,6 @@ import java.util.Map;
  */
 public class SvtlvDao implements IDao {
 
-	//Note: fields copy form other FirmDao
 	private String svlv_kd = "";      //key                        
 	public void setSvlv_kd (String value){ this.svlv_kd = value;   }   
 	public String getSvlv_kd (){ return this.svlv_kd;   }  
