@@ -12,6 +12,7 @@ import java.util.Map;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -308,13 +309,22 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		deleteString.append(tableName);
 		deleteString.append(this.getQueryClauses(params, null));
 
+		int ret = 0;		
+		
 		try {
-			jdbcTemplate.update(deleteString.toString());
-		} catch (DataAccessException e) { // RuntimeException
-			logger.info("Error:", e);
-			logger.info("Error, string=" + deleteString.toString());
+			ret = jdbcTemplate.update(deleteString.toString());
+			logger.debug("delete executed. deleteString="+deleteString+" on params="+params);
+		} catch (Exception e) {
+			logger.error("Error:", e);
+			logger.error("Error, string=" + deleteString.toString());
 			throw e;
 		}
+		
+		if (ret != 1) {
+			logger.error("Row not found for DELETE!");
+			logger.error("Error, string=" + deleteString.toString());
+			throw new DataAccessResourceFailureException("Row not found for DELETE on key/value:"+params.keySet().toString() +"/"+params.values()) ;
+		}	
 
 	}
 	
@@ -324,14 +334,21 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		deleteString.append(tableName);
 		deleteString.append(this.getQueryClauses(params, null));
 
+		int ret = 0;		
+		
 		try {
-			jdbcTemplate.update(deleteString.toString());
+			ret = jdbcTemplate.update(deleteString.toString());
 			logger.debug("deleteAll executed. deleteString="+deleteString+" on params="+params);
-		} catch (DataAccessException e) { // RuntimeException
+		} catch (Exception e) { 
 			logger.error("Error:", e);
 			logger.error("Error, string=" + deleteString.toString());
 			throw e;
 		}
+		
+		if (ret == 0) {
+			logger.info("Rows not found for DELETE");
+			logger.info("Inof, string=" + deleteString.toString());
+		}			
 
 	}	
 
@@ -373,7 +390,7 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 						keys.put(field, value);
 					}
 				} else  {
-					logger.error("returnType not handled, field="+field+", continues..");
+					logger.info("returnType not handled, field="+field+", continues..");
 				}
 			}
 		}
@@ -381,12 +398,15 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		updateString.deleteCharAt(updateString.length() - 1); // Remove last ,
 		updateString.append(addKeys(keys));
 		
+		logger.debug("updateString="+updateString.toString());
+		logger.debug("debugFieldValue="+debugFieldValue.toString());
+		
 		try {
 			ret = jdbcTemplate.update(updateString.toString(), values);
 		} catch (DataAccessException e) { //RuntimeException
 			logger.error("Error:", e);
-			logger.info("Error, string="+updateString.toString());
-			logger.info("debugFieldValue="+debugFieldValue.toString());
+			logger.error("Error, string="+updateString.toString());
+			logger.error("debugFieldValue="+debugFieldValue.toString());
 			throw e;
 		}
 		
