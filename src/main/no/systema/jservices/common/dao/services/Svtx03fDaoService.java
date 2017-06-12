@@ -30,6 +30,14 @@ public interface Svtx03fDaoService extends GenericDaoService<Svtx03fDao> {
 	public List<Svtx03fDao> getKollislagKoder();		
 	
 	/**
+	 * Retrieves all Svtx03fDao where svtx03_01 = 'A' and svtx03_02 = 'MCF'
+	 * 
+	 * @return a list with Svtx03fDao
+	 */
+	public List<Svtx03fDao> getBilagdaHandlingarKoder();		
+
+	
+	/**
 	 * Check if svtx03_03 (id)  exist  where svtx03_01 = 'A' and svtx03_02 = 'GCY'
 	 * 
 	 * @return true is exist, else false
@@ -50,4 +58,13 @@ public interface Svtx03fDaoService extends GenericDaoService<Svtx03fDao> {
 	 */
 	public boolean kollislagExist(String kosl);			
 	
+	/**
+	 * Check if svtx03_03 (id)  exist  where svtx03_01 = 'A' and svtx03_02 = 'MCF'
+	 * 
+	 * @return true is exist, else false
+	 */
+	public boolean bilagdHandlingExist(String bit);			
+
+
+
 }

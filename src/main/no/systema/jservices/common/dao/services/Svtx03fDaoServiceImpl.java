@@ -35,6 +35,15 @@ public class Svtx03fDaoServiceImpl extends GenericDaoServiceImpl<Svtx03fDao> imp
 	}
 
 	@Override
+	public List<Svtx03fDao> getBilagdaHandlingarKoder() {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("svtx03_01", "A");
+		params.put("svtx03_02", Svtx03fKodTyper.MCF);
+		return findAll(params);		
+	}
+
+	
+	@Override
 	public boolean eup2Exist(String eup2) {
 		Svtx03fDao qDao = new Svtx03fDao();
 		qDao.setSvtx03_01("A");
@@ -57,6 +66,16 @@ public class Svtx03fDaoServiceImpl extends GenericDaoServiceImpl<Svtx03fDao> imp
 		qDao.setSvtx03_01("A");
 		qDao.setSvtx03_02(Svtx03fKodTyper.KLI.toString());
 		qDao.setSvtx03_03(kosl);
+		return exist(qDao);	
+	}
+
+
+	@Override
+	public boolean bilagdHandlingExist(String bit) {
+		Svtx03fDao qDao = new Svtx03fDao();
+		qDao.setSvtx03_01("A");
+		qDao.setSvtx03_02(Svtx03fKodTyper.MCF.toString());
+		qDao.setSvtx03_03(bit);
 		return exist(qDao);	
 	}
 
