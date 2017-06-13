@@ -42,6 +42,13 @@ public class Svtx03fDaoServiceImpl extends GenericDaoServiceImpl<Svtx03fDao> imp
 		return findAll(params);		
 	}
 
+	@Override
+	public List<Svtx03fDao> getTidigareHandlingarKoder() {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("svtx03_01", "A");
+		params.put("svtx03_02", Svtx03fKodTyper.THO);
+		return findAll(params);		
+	}	
 	
 	@Override
 	public boolean eup2Exist(String eup2) {
@@ -76,6 +83,15 @@ public class Svtx03fDaoServiceImpl extends GenericDaoServiceImpl<Svtx03fDao> imp
 		qDao.setSvtx03_01("A");
 		qDao.setSvtx03_02(Svtx03fKodTyper.MCF.toString());
 		qDao.setSvtx03_03(bit);
+		return exist(qDao);	
+	}
+
+	@Override
+	public boolean tidigareHandlingExist(String tit) {
+		Svtx03fDao qDao = new Svtx03fDao();
+		qDao.setSvtx03_01("A");
+		qDao.setSvtx03_02(Svtx03fKodTyper.THO.toString());
+		qDao.setSvtx03_03(tit);
 		return exist(qDao);	
 	}
 

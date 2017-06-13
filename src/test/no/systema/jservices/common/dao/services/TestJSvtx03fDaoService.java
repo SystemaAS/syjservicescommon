@@ -102,7 +102,12 @@ public class TestJSvtx03fDaoService {
 		List<Svtx03fDao> list = svtx03fDaoService.getBilagdaHandlingarKoder();
 		assertNotNull(list);	
 	}	
-	
+
+	@Test
+	public final void testGetTidigareHandlingarKoder() {
+		List<Svtx03fDao> list = svtx03fDaoService.getTidigareHandlingarKoder();
+		assertNotNull(list);	
+	}		
 	
 	@Test
 	public final void testLandKodeExist() {
@@ -144,6 +149,15 @@ public class TestJSvtx03fDaoService {
 		
 	}	
 	
+	@Test
+	public final void testTidiagreHandlingExist() {
+		boolean exist = svtx03fDaoService.tidigareHandlingExist("AAD");
+		assertTrue("AAD should exist", exist);
+
+		exist = svtx03fDaoService.kollislagExist("XXXX");
+		assertTrue("XXX should NOT exist", !exist);
+		
+	}	
 	
 	
 	

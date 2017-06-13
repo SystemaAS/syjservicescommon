@@ -36,6 +36,13 @@ public interface Svtx03fDaoService extends GenericDaoService<Svtx03fDao> {
 	 */
 	public List<Svtx03fDao> getBilagdaHandlingarKoder();		
 
+	/**
+	 * Retrieves all Svtx03fDao where svtx03_01 = 'A' and svtx03_02 = 'THO'
+	 * 
+	 * @return a list with Svtx03fDao
+	 */
+	public List<Svtx03fDao> getTidigareHandlingarKoder();	
+	
 	
 	/**
 	 * Check if svtx03_03 (id)  exist  where svtx03_01 = 'A' and svtx03_02 = 'GCY'
@@ -65,6 +72,12 @@ public interface Svtx03fDaoService extends GenericDaoService<Svtx03fDao> {
 	 */
 	public boolean bilagdHandlingExist(String bit);			
 
+	/**
+	 * Check if svtx03_03 (id)  exist  where svtx03_01 = 'A' and svtx03_02 = 'MCF'
+	 * 
+	 * @return true is exist, else false
+	 */
+	public boolean tidigareHandlingExist(String tit);			
 
 
 }
