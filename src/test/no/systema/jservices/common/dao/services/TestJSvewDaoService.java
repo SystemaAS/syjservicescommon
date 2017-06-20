@@ -51,8 +51,6 @@ public class TestJSvewDaoService {
 		params.put("svew_knso", "Tarzan");		
 		List<SvewDao> list = svewDaoService.findAll(params);
 		SvewDao dao = list.get(0);
-		System.out.println("SvewDao="+ReflectionToStringBuilder.toString(dao));
-		System.out.println("dao.getSvew_brut()"+dao.getSvew_brut());
 		assertNotNull(list);
 	}
 	
@@ -77,8 +75,8 @@ public class TestJSvewDaoService {
 		
 		
 		SvewDao resultDao3 = svewDaoService.find(1, "Jane");
-		System.out.println("resultDao3="+ReflectionToStringBuilder.toString(resultDao3));
-		System.out.println("getSvew_brut="+resultDao3.getSvew_brut());
+		assertNotNull(resultDao3);
+		assertEquals("nr should be the same.",resultDao3.getSvew_knnr(), resultDao.getSvew_knnr());		
 		
 	}		
 	

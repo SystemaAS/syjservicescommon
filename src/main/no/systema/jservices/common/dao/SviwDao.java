@@ -1,5 +1,6 @@
 package no.systema.jservices.common.dao;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,10 +33,10 @@ public class SviwDao implements IDao {
 	private String sviw_vat4;// varukod till 33:4 666 669 4 a
 	private String sviw_vat5;// varukod till 33:5 670 673 4 a
 	private String sviw_ulkd;// ursprungsland, kod 674 675 2 a
-	private int sviw_brut;// bruttovikt 676 689 14 14 3 s
+	private BigDecimal sviw_brut;// bruttovikt 676 689 14 14 3 s
 	private String sviw_eup1;// førfarande 37:1 690 693 4 a
 	private String sviw_eup2;// førfarande 37:2 694 696 3 a
-	private int sviw_neto;// nettovikt 697 710 14 14 3 s
+	private BigDecimal sviw_neto;// nettovikt 697 710 14 14 3 s
 	private String sviw_kono;// kontigentnummer 711 713 3 a
 	private int sviw_ankv;// annan kvantitet 714 723 10 10 0 s
 	private String sviw_suko;// særsk.uppl.kod 724 728 5 a
@@ -62,7 +63,7 @@ public class SviwDao implements IDao {
 	private String sviw_atin;// åtgærdsindikator 1822 1824 3 a
 	private int sviw_stva;// stat.værde 1825 1835 11 11 0 s
 	private int sviw_stva2;// tullværde 1836 1846 11 11 0 s
-	private int sviw_fabl;// fakturabelopp 1847 1857 11 11 3 s
+	private BigDecimal sviw_fabl;// fakturabelopp 1847 1857 11 11 3 s
 	private String sviw_bit1;// bil.handl, typ 1933 1936 4 a
 	private String sviw_bit2;// bil.handl, typ 1937 1940 4 a
 	private String sviw_bit3;// bil.handl, typ 1941 1944 4 a
@@ -351,11 +352,11 @@ public class SviwDao implements IDao {
 		this.sviw_ulkd = sviw_ulkd;
 	}
 
-	public int getSviw_brut() {
+	public BigDecimal getSviw_brut() {
 		return sviw_brut;
 	}
 
-	public void setSviw_brut(int sviw_brut) {
+	public void setSviw_brut(BigDecimal sviw_brut) {
 		this.sviw_brut = sviw_brut;
 	}
 
@@ -375,11 +376,11 @@ public class SviwDao implements IDao {
 		this.sviw_eup2 = sviw_eup2;
 	}
 
-	public int getSviw_neto() {
+	public BigDecimal getSviw_neto() {
 		return sviw_neto;
 	}
 
-	public void setSviw_neto(int sviw_neto) {
+	public void setSviw_neto(BigDecimal sviw_neto) {
 		this.sviw_neto = sviw_neto;
 	}
 
@@ -591,11 +592,11 @@ public class SviwDao implements IDao {
 		this.sviw_stva2 = sviw_stva2;
 	}
 
-	public int getSviw_fabl() {
+	public BigDecimal getSviw_fabl() {
 		return sviw_fabl;
 	}
 
-	public void setSviw_fabl(int sviw_fabl) {
+	public void setSviw_fabl(BigDecimal sviw_fabl) {
 		this.sviw_fabl = sviw_fabl;
 	}
 
