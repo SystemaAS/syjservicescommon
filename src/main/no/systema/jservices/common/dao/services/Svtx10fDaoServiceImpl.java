@@ -8,6 +8,8 @@ import no.systema.jservices.common.dao.Svtx10fDao;
 
 public class Svtx10fDaoServiceImpl extends GenericDaoServiceImpl<Svtx10fDao> implements Svtx10fDaoService{
 
+	private static String trailingZeros = "00";
+	
 	@Override
 	public List<Svtx10fDao> getTaricExportNumbers() {
 		return findWhere("SUBSTR(svtx10_01, 9, 2) = '00'");	
@@ -15,27 +17,26 @@ public class Svtx10fDaoServiceImpl extends GenericDaoServiceImpl<Svtx10fDao> imp
 
 	@Override
 	public List<Svtx10fDao> getTaricImportNumbers() {
-		// TODO Auto-generated method stub
-		return null;
+		return findWhere("SUBSTR(svtx10_01, 9, 2) <> '00'");	
 	}
 
 	@Override
 	public boolean tariExportNrExist(String taricnr) {
+		String taricnrToValidate = taricnr + trailingZeros;		
 		StringBuilder clauseString = new StringBuilder();
 		clauseString.append("SUBSTR(svtx10_01, 9, 2) = '00'");
-		clauseString.append("AND svtx10_01 = '");clauseString.append(taricnr+"'");
-		List<Svtx10fDao> daoList = findWhere(clauseString.toString());	
-		if (daoList.size() > 0) {
-			return true;
-		} else {
-			return false;
-		}
+		clauseString.append("AND svtx10_01 = '");clauseString.append(taricnrToValidate+"'");
+
+		return exist(clauseString.toString());
 	}
 
 	@Override
 	public boolean taricImportNrExist(String taricnr) {
-		// TODO Auto-generated method stub
-		return false;
+		StringBuilder clauseString = new StringBuilder();
+		clauseString.append("SUBSTR(svtx10_01, 9, 2) <> '00'");
+		clauseString.append("AND svtx10_01 = '");clauseString.append(taricnr+"'");
+
+		return exist(clauseString.toString());
 	}
 
 	@Override
@@ -43,6 +44,15 @@ public class Svtx10fDaoServiceImpl extends GenericDaoServiceImpl<Svtx10fDao> imp
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("svtx10_01", WILD_CARD + varukod + WILD_CARD);
 		return findAll(params);
+	}
+	
+	private boolean exist(String clause){
+		List<Svtx10fDao> daoList = findWhere(clause);	
+		if (daoList.size() > 0) {
+			return true;
+		} else {
+			return false;
+		}		
 	}
 
 }
