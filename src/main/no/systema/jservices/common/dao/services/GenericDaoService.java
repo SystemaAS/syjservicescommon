@@ -88,8 +88,6 @@ public interface GenericDaoService<T> {
 	/**
 	 * Insert delivered T into corresponding table.
 	 * 
-	 * No checks on keys.
-	 * 
 	 * @param t populated IDao
 	 * @return created T
 	 */

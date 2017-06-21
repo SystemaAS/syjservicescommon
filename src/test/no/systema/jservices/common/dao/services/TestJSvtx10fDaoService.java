@@ -41,11 +41,11 @@ public class TestJSvtx10fDaoService {
 	
 	@Test
 	public final void testExist() {
-		boolean exist = svtx10fDaoService.tariExportNrExist("0101210000");
-		assertTrue("0101210000 should exist.", exist);
+		boolean exist = svtx10fDaoService.tariExportNrExist("01012100");
+		assertTrue("01012100 should exist.", exist);
 		
 		exist = svtx10fDaoService.tariExportNrExist("999");
-		assertTrue("0101210000 should not exist.", !exist);	
+		assertTrue("999 should not exist.", !exist);	
 		
 		
 	}		

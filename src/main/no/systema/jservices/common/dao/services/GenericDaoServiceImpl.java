@@ -13,6 +13,7 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataAccessResourceFailureException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -238,6 +239,14 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 
 	@Override
 	public T create(T t) {
+		IDao dao = (IDao) t;
+		logger.debug("create:IDao="+ReflectionToStringBuilder.toString(dao));
+		Map<String, Object> keys = dao.getKeys();
+		if (exist(dao)) {
+			String errMsg = "::create::Record already exist in " + tableName + " on keys=" + keys;
+			logger.error(errMsg);
+			throw new DuplicateKeyException(errMsg);
+		}
 		Object[] values = new Object[fields.length-1];
 		StringBuilder debugFieldValue = new StringBuilder();
 		int ret = 0;
