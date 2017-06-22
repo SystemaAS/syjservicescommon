@@ -108,6 +108,13 @@ public class TestJSvtx03fDaoService {
 		List<Svtx03fDao> list = svtx03fDaoService.getTidigareHandlingarKoder();
 		assertNotNull(list);	
 	}		
+
+	@Test
+	public final void testGetFormansKoder() {
+		List<Svtx03fDao> list = svtx03fDaoService.getFormansKoder();
+		assertNotNull(list);	
+	}		
+	
 	
 	@Test
 	public final void testLandKodeExist() {
@@ -155,10 +162,19 @@ public class TestJSvtx03fDaoService {
 		assertTrue("AAD should exist", exist);
 
 		exist = svtx03fDaoService.kollislagExist("XXXX");
-		assertTrue("XXX should NOT exist", !exist);
+		assertTrue("XXXX should NOT exist", !exist);
 		
 	}	
 	
+	@Test
+	public final void testformansKodExist() {
+		boolean exist = svtx03fDaoService.formansExist("100");
+		assertTrue("100 should exist", exist);
+
+		exist = svtx03fDaoService.formansExist("XXXX");
+		assertTrue("XXXX should NOT exist", !exist);
+		
+	}	
 	
 	
 	

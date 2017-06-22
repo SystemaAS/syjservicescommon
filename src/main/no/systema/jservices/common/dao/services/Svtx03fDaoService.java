@@ -43,6 +43,12 @@ public interface Svtx03fDaoService extends GenericDaoService<Svtx03fDao> {
 	 */
 	public List<Svtx03fDao> getTidigareHandlingarKoder();	
 	
+	/**
+	 * Retrieves all Svtx03fDao where svtx03_01 = 'I' and svtx03_02 = 'FOR'
+	 * 
+	 * @return a list with Svtx03fDao
+	 */
+	public List<Svtx03fDao> getFormansKoder();	
 	
 	/**
 	 * Check if svtx03_03 (id)  exist  where svtx03_01 = 'A' and svtx03_02 = 'GCY'
@@ -79,5 +85,12 @@ public interface Svtx03fDaoService extends GenericDaoService<Svtx03fDao> {
 	 */
 	public boolean tidigareHandlingExist(String tit);			
 
+	/**
+	 * Check if svtx03_03 (id)  exist  where svtx03_01 = 'I' and svtx03_02 = 'FOR'
+	 * 
+	 * @return true is exist, else false
+	 */
+	public boolean formansExist(String tit);			
 
+	
 }

@@ -66,6 +66,14 @@ public class Svtx03fDaoServiceImpl extends GenericDaoServiceImpl<Svtx03fDao> imp
 		params.put("svtx03_02", Svtx03fKodTyper.KLI);
 		return findAll(params);		
 	}
+	
+	@Override
+	public List<Svtx03fDao> getFormansKoder() {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("svtx03_01", "I");
+		params.put("svtx03_02", Svtx03fKodTyper.FOR);
+		return findAll(params);		
+	}
 
 	@Override
 	public boolean kollislagExist(String kosl) {
@@ -91,6 +99,15 @@ public class Svtx03fDaoServiceImpl extends GenericDaoServiceImpl<Svtx03fDao> imp
 		Svtx03fDao qDao = new Svtx03fDao();
 		qDao.setSvtx03_01("A");
 		qDao.setSvtx03_02(Svtx03fKodTyper.THO.toString());
+		qDao.setSvtx03_03(tit);
+		return exist(qDao);	
+	}
+
+	@Override
+	public boolean formansExist(String tit) {
+		Svtx03fDao qDao = new Svtx03fDao();
+		qDao.setSvtx03_01("I");
+		qDao.setSvtx03_02(Svtx03fKodTyper.FOR.toString());
 		qDao.setSvtx03_03(tit);
 		return exist(qDao);	
 	}

@@ -133,7 +133,8 @@ public class SviwDao implements IDao {
 	private String sviw_lagt;// 49.lager typ 2989 2989 1 a
 	private String sviw_lagl;// 49.lager lk 2990 2991 2 a
 	private String sviw_call;// call me 2992 2993 2 a
-
+	private String sviw_fokd;//  Førmåner, kod  617  619     3         A
+	
 	Map<String, Object> keys = new HashMap<String, Object>();
 
 	public int getSviw_knnr() {
@@ -1152,6 +1153,14 @@ public class SviwDao implements IDao {
 		this.sviw_call = sviw_call;
 	}
 
+	public String getSviw_fokd() {
+		return sviw_fokd;
+	}
+
+	public void setSviw_fokd(String sviw_fokd) {
+		this.sviw_fokd = sviw_fokd;
+	}
+	
 	@Override
 	public Map<String, Object> getKeys() { 
 		keys.put("sviw_knnr", sviw_knnr);

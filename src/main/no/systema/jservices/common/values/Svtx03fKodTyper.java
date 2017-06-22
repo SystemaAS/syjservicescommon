@@ -16,5 +16,6 @@ public enum Svtx03fKodTyper implements Serializable {
 	FFK,
 	KLI,
 	MCF,
-	THO
+	THO, 
+	FOR
 }
