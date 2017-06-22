@@ -32,11 +32,9 @@ public class Svtx10fDaoServiceImpl extends GenericDaoServiceImpl<Svtx10fDao> imp
 
 	@Override
 	public boolean taricImportNrExist(String taricnr) {
-		StringBuilder clauseString = new StringBuilder();
-		clauseString.append("SUBSTR(svtx10_01, 9, 2) <> '00'");
-		clauseString.append("AND svtx10_01 = '");clauseString.append(taricnr+"'");
-
-		return exist(clauseString.toString());
+		Svtx10fDao qDao = new Svtx10fDao();
+		qDao.setSvtx10_01(taricnr);
+		return exist(qDao);
 	}
 
 	@Override
