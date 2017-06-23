@@ -30,6 +30,14 @@ public interface GenericDaoService<T> {
 	public List<T> findAll(Map<String, Object> params);
 	
 	/**
+	 * Find all T on delivered args.
+	 * Used when distinct values (single) are to be used. Usually when the table must deliver one-and-only sql-distinct value
+	 * @param params String = columnname, Object = any value. Accepts wildcard %. If params==null, no where-clause is added.
+	 * @return a List of T
+	 */
+	public List<T> findAllDistinct(String columnName);
+	
+	/**
 	 * Find all T on delivered clause. Exclude where in arg
 	 * 
 	 * @param params String any valid DB2 syntax

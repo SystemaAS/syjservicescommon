@@ -70,6 +70,15 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 	}
 	
 	@Override
+	public List<T> findAllDistinct(String columnName) {
+	    StringBuilder queryString = new StringBuilder("SELECT distinct " + columnName + " from ");
+	    queryString.append(tableName);
+		//queryString.append(this.getQueryClauses(params, null));
+		logger.info(queryString.toString());
+		return jdbcTemplate.query(queryString.toString(), mapper);
+	}
+	
+	@Override
 	public List<T> findWhere(String clause) {
 	    StringBuilder queryString = new StringBuilder("SELECT * from ");
 	    queryString.append(tableName);
