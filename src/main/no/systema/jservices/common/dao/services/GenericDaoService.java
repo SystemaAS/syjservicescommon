@@ -31,6 +31,15 @@ public interface GenericDaoService<T> {
 	
 	/**
 	 * Find all T on delivered args.
+	 * 
+	 * @param params String = columnname, Object = any value. Accepts wildcard %. If params==null, no where-clause is added.
+	 * @param numberOfRows in order to return a discrete number of rows: 50, 100 or more. Ususally used when the table is big enough to cause problems, e.g. HEADF
+	 * @return a List of T
+	 */
+	public List<T> findAll(Map<String, Object> params, String numberOfRows);
+	
+	/**
+	 * Find all T on delivered args.
 	 * Used when distinct values (single) are to be used. Usually when the table must deliver one-and-only sql-distinct value
 	 * @param params String = columnname, Object = any value. Accepts wildcard %. If params==null, no where-clause is added.
 	 * @return a List of T
