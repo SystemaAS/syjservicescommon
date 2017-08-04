@@ -13,6 +13,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import no.systema.jservices.common.dao.FaktDao;
+import no.systema.jservices.common.dto.FaktDto;
 
 public class TestJFaktDaoService {
 
@@ -30,6 +31,18 @@ public class TestJFaktDaoService {
 		int count  =  faktDaoService.countAll();
 		assertNotNull(count);
 	}	
+	
+	@Test
+	public final void testCount2017() {
+		List<FaktDao> list  =  faktDaoService.getYear(2017);
+		assertNotNull(list.size());
+	}		
+	
+	@Test
+	public final void testCountGroup2017() {
+		List<FaktDto> list  =  faktDaoService.getYearSumGroupAvdOpdDato(2017);
+		assertNotNull(list.size());
+	}		
 	
 	@Test
 	public final void testCountAllWithParams() {

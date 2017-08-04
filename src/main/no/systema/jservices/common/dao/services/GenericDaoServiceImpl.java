@@ -37,9 +37,15 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 	private GenericObjectMapper mapper;
 	private Field[] fields;
 	private Method[] methods;
-	/** value=%  */
+
+	/** %  */
 	protected static CharSequence WILD_CARD = "%";
+	/** NOT NULL  */
 	protected static String NOT_NULL = "NOT NULL";
+	/** >  */
+	protected static String GREATER_THEN = " > ";
+	/** <  */
+	protected static String LESS_THEN = " < ";
 	
 
 	public GenericDaoServiceImpl() {
@@ -183,7 +189,12 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 					queryString.append(entry.getKey()).append(" = ").append(entry.getValue()).append(" ");
 				} else {
 					if (entry.getValue() instanceof Number) {
-						queryString.append(entry.getKey()).append(" = ").append(entry.getValue());
+						//>
+						if (String.valueOf(entry.getKey()).contains(GREATER_THEN)) {
+							queryString.append(entry.getKey()).append(entry.getValue());
+						} else {
+							queryString.append(entry.getKey()).append(" = ").append(entry.getValue());
+						}
 					} else {
 						//wild card , %
 						if (String.valueOf(entry.getValue()).contains(WILD_CARD)) {
@@ -191,7 +202,7 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 						//not null
 						} else if (String.valueOf(entry.getValue()).equals(NOT_NULL)) {
 							 queryString.append("NULLIF(").append(entry.getKey() + ",").append(" '') ").append(" IS NOT NULL");  //NULLIF(<key>, '') IS NOT NULL
-						}else { 
+						} else { 
 							queryString.append(entry.getKey()).append(" = '").append(entry.getValue()).append("'");
 						}
 					}
