@@ -1,18 +1,20 @@
 package no.systema.jservices.common.dao.services;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import no.systema.jservices.common.dao.HeadfDao;
+import no.systema.jservices.common.dto.HeadfDto;
 
 public class TestJHeadfDaoService {
 
@@ -61,6 +63,24 @@ public class TestJHeadfDaoService {
 		HeadfDao resultDao=  headfDaoService.find(qDao);
 		assertNotNull(resultDao);
 	}	
+	
+	@Test
+	public final void testGetListAvdDato() {
+		HeadfDto qDao = new HeadfDto();
+		qDao.setHeavd(2);
+		qDao.setHedtop(20000210);
+		List<HeadfDto> resultDaoList=  headfDaoService.get(qDao);
+		assertEquals("Should be the same", 7, resultDaoList.size());
+	}	
+	
+	@Test
+	public final void testGetListAvd() {
+		HeadfDto qDao = new HeadfDto();
+		qDao.setHeavd(2);
+		List<HeadfDto> resultDaoList=  headfDaoService.get(qDao);
+		assertEquals("Should be the same", 4635, resultDaoList.size());
+	}
+	
 	
 	@Test
 	public final void testExist() {
