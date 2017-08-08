@@ -80,6 +80,17 @@ public class TestJHeadfDaoService {
 		List<HeadfDto> resultDaoList = headfDaoService.get(qDao);
 		assertEquals("Should be the same", 4635, resultDaoList.size());
 	}
+	
+	@Test
+	public final void testGetListAvsenderMottaker() {
+		HeadfDto qDao = new HeadfDto();
+		qDao.setHenas("%DATA%");
+		qDao.setHenak("THAR%");
+		List<HeadfDto> resultDaoList = headfDaoService.get(qDao);
+		assertEquals("Should be the same", 1, resultDaoList.size());
+	}	
+	
+	
 
 	@Test
 	public final void testExist() {
