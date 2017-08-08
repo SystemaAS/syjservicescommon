@@ -28,6 +28,10 @@ public class HeadfDaoServiceImpl extends GenericDaoServiceImpl<HeadfDao> impleme
 		queryString.append(" and   (:hepns is null or hepns = :hepns ) ");
 		queryString.append(" and   (:helkk is null or helkk = :helkk ) ");
 		queryString.append(" and   (:hepnk is null or hepnk = :hepnk ) ");
+		queryString.append(" FETCH FIRST :limit ROWS ONLY ");
+		
+		logger.debug("queryString.toString()="+queryString.toString());
+		logger.debug("namedParameters="+namedParameters);
 		
 		return namedParameterJdbcTemplate.query(queryString.toString(), namedParameters, new GenericObjectMapper(new HeadfDto()));
 

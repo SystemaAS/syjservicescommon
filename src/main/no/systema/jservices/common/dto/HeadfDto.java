@@ -40,6 +40,16 @@ public class HeadfDto implements IDao {
 	private String hepnk;
 	/* Signatur*/
 	private String hesg; 
+	
+	private int limit; //TODO Replace with correct algo when it comes...
+	
+	public int getLimit() {
+		return limit;
+	}
+
+	public void setLimit(int limit) {
+		this.limit = limit;
+	}
 
 	public String getHesg() {
 		return hesg;
