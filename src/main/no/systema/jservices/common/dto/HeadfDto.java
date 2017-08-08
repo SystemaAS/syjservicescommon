@@ -38,6 +38,16 @@ public class HeadfDto implements IDao {
 	private String helkk;
 	/* Postnr kjøper */
 	private String hepnk;
+	/* Signatur*/
+	private String hesg; 
+
+	public String getHesg() {
+		return hesg;
+	}
+
+	public void setHesg(String hesg) {
+		this.hesg = hesg;
+	}
 
 	public int getHeopd() {
 		return heopd;

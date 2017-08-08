@@ -17,12 +17,13 @@ public class HeadfDaoServiceImpl extends GenericDaoServiceImpl<HeadfDao> impleme
 		NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getJdbcTemplate().getDataSource());
 		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(qDto);
 		StringBuilder queryString = new StringBuilder(
-							"select heavd, heopd , hedtop , henas , henak , hent , hevkt , hem3 , helks ,  hepns , helkk , hepnk from headf");
+							"select heavd, heopd , hedtop , henas , henak, hesg , hent , hevkt , hem3 , helks ,  hepns , helkk , hepnk from headf");
 		queryString.append(" where (:heavd = 0 or :heavd = :heavd )");
 		queryString.append(" and   (:heopd = 0 or heopd = :heopd )");
 		queryString.append(" and   (:hedtop = 0 or hedtop = :hedtop )");
 		queryString.append(" and   (:henas is null or henas like :henas ) ");
 		queryString.append(" and   (:henak is null or henak like :henak ) ");
+		queryString.append(" and   (:hesg  is null or hesg  like :hesg ) ");
 		queryString.append(" and   (:helks is null or helks = :helks ) ");
 		queryString.append(" and   (:hepns is null or hepns = :hepns ) ");
 		queryString.append(" and   (:helkk is null or helkk = :helkk ) ");

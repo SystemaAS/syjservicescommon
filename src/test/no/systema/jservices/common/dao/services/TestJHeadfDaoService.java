@@ -90,7 +90,15 @@ public class TestJHeadfDaoService {
 		assertEquals("Should be the same", 1, resultDaoList.size());
 	}	
 	
-	
+	@Test
+	public final void testGetListSign() {
+		HeadfDto qDao = new HeadfDto();
+		qDao.setHeavd(1);
+		qDao.setHenas("%DATA%");
+		qDao.setHesg("%JOV%");
+		List<HeadfDto> resultDaoList = headfDaoService.get(qDao);
+		assertEquals("Should be the same", 2, resultDaoList.size());
+	}	
 
 	@Test
 	public final void testExist() {
