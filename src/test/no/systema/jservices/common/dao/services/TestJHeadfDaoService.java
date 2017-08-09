@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -115,4 +117,28 @@ public class TestJHeadfDaoService {
 
 	}
 
+	@Test
+	public final void testCreateAndDelete() {
+		HeadfDao dao = getBigHeadfDao();
+		HeadfDao returnDao = headfDaoService.create(dao);
+		assertNotNull(returnDao);
+
+		headfDaoService.delete(dao);
+		boolean exist = headfDaoService.exist(dao);
+		assertTrue(dao.getHeavd() + ", " + dao.getHeopd() + " should not exist", !exist);
+
+	}	
+	
+	
+	private HeadfDao getBigHeadfDao() {
+		HeadfDao dao = new HeadfDao();
+		dao.setHeavd(1); // key
+		dao.setHeopd(999);// key
+		dao.setHesg("JOV");
+		dao.setHeank(1);
+		dao.setHehbre(new BigDecimal(14.1));
+		
+		return dao;
+	}	
+	
 }

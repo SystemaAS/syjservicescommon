@@ -14,4 +14,15 @@ public interface HeadfDaoService extends GenericDaoService<HeadfDao> {
 	 */
 	public List<HeadfDto> get(HeadfDto qDto);		
 	
+	
+	/**
+	 * Get unique headf
+	 * 
+	 * @param heavd avdeling
+	 * @param heopd oppdrag
+	 * @return a {@link HeadfDto}, i found, else null
+	 */
+	public HeadfDao find(int heavd, int heopd);	
+	
+	
 }

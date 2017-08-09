@@ -37,4 +37,12 @@ public class HeadfDaoServiceImpl extends GenericDaoServiceImpl<HeadfDao> impleme
 
 	}
 
+	@Override
+	public HeadfDao find(int heavd, int heopd) {
+		HeadfDao qDao = new HeadfDao();
+		qDao.setHeavd(heavd);
+		qDao.setHeopd(heopd);
+		return find(qDao);
+	}
+
 }

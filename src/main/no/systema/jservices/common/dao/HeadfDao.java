@@ -34,10 +34,10 @@ public class HeadfDao implements IDao {
 	private String hesdla;//    TEGN           20      20       237        Begge    Lastested      
 	private String hesdl;//      TEGN           20      20       257        Begge    Lossested   
 	private String hevalt; //     TEGN            3       3       277        Begge    Frakttillegg kode     
-	private BigDecimal hevalp; //     SONET        3  3       3       280        Begge    Frakttillegg  %        
+	private BigDecimal hevalp = new BigDecimal(0); //     SONET        3  3       3       280        Begge    Frakttillegg  %        
 	private int heknt; //      SONET        8  0       8       283        Begge    Kundenr Transportør   
 	private String helka; //      TEGN            2       2       291        Begge    Landkode   
-	private String hekns; //      SONET        8  0       8       293        Begge    Kundenr Selger  
+	private int hekns; //      SONET        8  0       8       293        Begge    Kundenr Selger  
 	private String henas; //      TEGN           30      30       301        Begge    Navn Selger      
 	private String heads1;//  TEGN           30      30       331        Begge    Adresse-1 Selger      
 	private String heads2; //     TEGN           30      30       361        Begge    Adresse-2 Selger 
@@ -51,7 +51,7 @@ public class HeadfDao implements IDao {
 	private String hepnh; //      TEGN            9       9       530        Begge    Postnr Hen.adr 
 	private String headh3; //     TEGN           30      30       539        Begge    Adresse-3 Hen.adr
 	private String helkh; //      TEGN            2       2       569        Begge    Landkode Hen.ad
-	private BigDecimal hehbre;//   SONET        8  6       8       571        Begge    HENTING, BREDDEGRAD  
+	private BigDecimal hehbre = new BigDecimal(0);//   SONET        8  6       8       571        Begge    HENTING, BREDDEGRAD  
 	private String hehblk;//    TEGN            1       1       588        Begge    HENT. BRE/LEN-KODE
 	private String hekdfs; //     TEGN            1       1       589        Begge    Fakturakode Selger   
 	private String hevals; //    TEGN            3       3       590        Begge    Valutakode Selger 
@@ -72,8 +72,8 @@ public class HeadfDao implements IDao {
 	private String hepnl; //      tegn            9       9       869        begge    postnr lev.ad
 	private String headl3; //     tegn           30      30       878        begge    adresse-3 lev.adr
 	private String helkl; //      tegn            2       2       908        begge    landkode lev.adr
-	private BigDecimal helbre; //     sonet        8  6       8       910        begge    levering, breddegrad
-	private BigDecimal hellen; //     sonet        9  6       9       918        begge    levering, lengdegrad
+	private BigDecimal helbre = new BigDecimal(0); //     sonet        8  6       8       910        begge    levering, breddegrad
+	private BigDecimal hellen = new BigDecimal(0);; //     sonet        9  6       9       918        begge    levering, lengdegrad
 	private String helblk; //     tegn            1       1       927        begge    leve. bre/len-ko
 	private String hekdfk; //     tegn            1       1       928        begge    fakturakode kjøper 
 	private String hevalk; //     tegn            3       3       929        begge    valutakode kjøper  
@@ -89,14 +89,14 @@ public class HeadfDao implements IDao {
 	private String hegm1; //      tegn           15      15      1034        begge    godsmerking-1  
 	private String hegm2; //      tegn           15      15      1049        begge    godsmerking-2 
 	private int hevkt; //      pakket       9  0       5      1064        begge    bruttovekt
-	private BigDecimal helm; //       sonet        4  2       4      1069        begge    lastemeter faktura      
-	private BigDecimal hem3;//      pakket       7  3       4      1073        begge    kubikkmeter   
+	private BigDecimal helm = new BigDecimal(0); //       sonet        4  2       4      1069        begge    lastemeter faktura      
+	private BigDecimal hem3 = new BigDecimal(0);//      pakket       7  3       4      1073        begge    kubikkmeter   
 	private int hefbv; //     pakket       9  0       5      1077        begge    fraktb.vekt   
 	private String hekf; //       tegn            2       2      1082        begge    utl forb.kode    
 	private String hekft1; //     tegn            1       1      1084        begge    utl forb status   
 	private String heft1; //      tegn           51      51      1085        begge    utl forb tekst      
 	private int hedtcp; //     sonet        2  0       2      1136        begge    regnskapsårhundre 
-	private int hedtåp; //     sonet        2  0       2      1138        begge    regnskapsår
+	//OBS å private int hedtåp; //     sonet        2  0       2      1138        begge    regnskapsår
 	private int hedtmp; //     sonet        2  0       2      1140        begge    regnskapsperiod 
 	private String hekdkk; //     tegn            1       1      1142        begge    kreditkode kjøper  
 	private int hefngk; //     sonet        7  0       7      1143        begge    kred. faknr kjøper 
@@ -150,12 +150,12 @@ public class HeadfDao implements IDao {
 	private String trkdak; //    tegn            1       1      1430        begge    oppdragsg.kode   
 	private String trkdff;//     tegn            1       1      1431        begge    fakturere s/k   
 	private String trverv; //     tegn            3       3      1432        begge    valkod vareverdi
-	private BigDecimal trverb; //     pakket      13  2       7      1435        begge    vareverdi       
+	private BigDecimal trverb = new BigDecimal(0);; //     pakket      13  2       7      1435        begge    vareverdi       
 	private String trettv; //     tegn            3       3      1442        begge    valkod etterkrav
-	private BigDecimal trettb; //     pakket      13  2       7      1445        begge    etterkrav       
+	private BigDecimal trettb = new BigDecimal(0);; //     pakket      13  2       7      1445        begge    etterkrav       
 	private String trfrak; //     tegn            1       1      1452        begge    kode frakt      
 	private String trfrav; //     tegn            3       3      1453        begge    valkod frakt    
-	private BigDecimal trfrab; //     pakket      13  2       7      1456        begge    fraktbeløp     
+	private BigDecimal trfrab = new BigDecimal(0); //     pakket      13  2       7      1456        begge    fraktbeløp     
 	private String trmva; //      tegn            1       1      1463        begge    mvakode frakt  
 	private String trfa11; //     tegn            7       7      1464        begge    farlig gods 11 
 	private String trfa12; //     tegn            4       4      1471        begge    farlig gods 12 
@@ -186,7 +186,7 @@ public class HeadfDao implements IDao {
 	private int helaan; //     sonet        3  0       3      1558        begge    lev.adr.adr.nr          
 	private int helmla; //     sonet        4  2       4      1561        begge    lastemeter lasting      
 	private int hepoen; //     sonet        5  0       5      1565        begge    adr-poeng                   
-	//private int hestl1; //     tegn            1       1      1570        begge    vlinje 1 status             
+	private String hestl1; //     tegn            1       1      1570        begge    vlinje 1 status             
 	private String hestl2; //     tegn            1       1      1571        begge    vlinje 2 status             
 	private String hestl3; //     tegn            1       1      1572        begge    vlinje 3 status             
 	private String hestl4; //     tegn            1       1      1573        begge    vlinje 4 status             
@@ -208,6 +208,550 @@ public class HeadfDao implements IDao {
 	private int hesnn; //      pakket       9  0       5      1657        begge    meldingsnr    
 	private int heunik; //     pakket       9  0       5      1662        begge    recordnr      
 	private String hereff; //     tegn           17      17      1667        begge    referanse     
+
+	public int getHedtop() {
+		return hedtop;
+	}
+
+	public void setHedtop(int hedtop) {
+		this.hedtop = hedtop;
+	}
+
+	public int getHedtr() {
+		return hedtr;
+	}
+
+	public void setHedtr(int hedtr) {
+		this.hedtr = hedtr;
+	}
+
+	public int getHepro() {
+		return hepro;
+	}
+
+	public void setHepro(int hepro) {
+		this.hepro = hepro;
+	}
+
+	public int getTrrund() {
+		return trrund;
+	}
+
+	public void setTrrund(int trrund) {
+		this.trrund = trrund;
+	}
+
+	public int getHepos2() {
+		return hepos2;
+	}
+
+	public void setHepos2(int hepos2) {
+		this.hepos2 = hepos2;
+	}
+
+	public int getTrknfa() {
+		return trknfa;
+	}
+
+	public void setTrknfa(int trknfa) {
+		this.trknfa = trknfa;
+	}
+
+	public int getHekna() {
+		return hekna;
+	}
+
+	public void setHekna(int hekna) {
+		this.hekna = hekna;
+	}
+
+	public BigDecimal getHevalp() {
+		return hevalp;
+	}
+
+	public void setHevalp(BigDecimal hevalp) {
+		this.hevalp = hevalp;
+	}
+
+	public int getHeknt() {
+		return heknt;
+	}
+
+	public void setHeknt(int heknt) {
+		this.heknt = heknt;
+	}
+
+	public int getHeknh() {
+		return heknh;
+	}
+
+	public void setHeknh(int heknh) {
+		this.heknh = heknh;
+	}
+
+	public BigDecimal getHehbre() {
+		return hehbre;
+	}
+
+	public void setHehbre(BigDecimal hehbre) {
+		this.hehbre = hehbre;
+	}
+
+	public int getHeknsf() {
+		return heknsf;
+	}
+
+	public void setHeknsf(int heknsf) {
+		this.heknsf = heknsf;
+	}
+
+	public int getHeans() {
+		return heans;
+	}
+
+	public void setHeans(int heans) {
+		this.heans = heans;
+	}
+
+	public int getHeknk() {
+		return heknk;
+	}
+
+	public void setHeknk(int heknk) {
+		this.heknk = heknk;
+	}
+
+	public int getHeknl() {
+		return heknl;
+	}
+
+	public void setHeknl(int heknl) {
+		this.heknl = heknl;
+	}
+
+	public BigDecimal getHelbre() {
+		return helbre;
+	}
+
+	public void setHelbre(BigDecimal helbre) {
+		this.helbre = helbre;
+	}
+
+	public BigDecimal getHellen() {
+		return hellen;
+	}
+
+	public void setHellen(BigDecimal hellen) {
+		this.hellen = hellen;
+	}
+
+	public int getHeknkf() {
+		return heknkf;
+	}
+
+	public void setHeknkf(int heknkf) {
+		this.heknkf = heknkf;
+	}
+
+	public int getHeank() {
+		return heank;
+	}
+
+	public void setHeank(int heank) {
+		this.heank = heank;
+	}
+
+	public int getHent() {
+		return hent;
+	}
+
+	public void setHent(int hent) {
+		this.hent = hent;
+	}
+
+	public int getHevkt() {
+		return hevkt;
+	}
+
+	public void setHevkt(int hevkt) {
+		this.hevkt = hevkt;
+	}
+
+	public BigDecimal getHelm() {
+		return helm;
+	}
+
+	public void setHelm(BigDecimal helm) {
+		this.helm = helm;
+	}
+
+	public BigDecimal getHem3() {
+		return hem3;
+	}
+
+	public void setHem3(BigDecimal hem3) {
+		this.hem3 = hem3;
+	}
+
+	public int getHefbv() {
+		return hefbv;
+	}
+
+	public void setHefbv(int hefbv) {
+		this.hefbv = hefbv;
+	}
+
+	public int getHedtcp() {
+		return hedtcp;
+	}
+
+	public void setHedtcp(int hedtcp) {
+		this.hedtcp = hedtcp;
+	}
+
+	public int getHekns() {
+		return hekns;
+	}
+
+	public void setHekns(int hekns) {
+		this.hekns = hekns;
+	}
+
+	public int getHebelt() {
+		return hebelt;
+	}
+
+	public void setHebelt(int hebelt) {
+		this.hebelt = hebelt;
+	}
+
+	public int getHebelm() {
+		return hebelm;
+	}
+
+	public void setHebelm(int hebelm) {
+		this.hebelm = hebelm;
+	}
+
+	public BigDecimal getTrverb() {
+		return trverb;
+	}
+
+	public void setTrverb(BigDecimal trverb) {
+		this.trverb = trverb;
+	}
+
+	public BigDecimal getTrettb() {
+		return trettb;
+	}
+
+	public void setTrettb(BigDecimal trettb) {
+		this.trettb = trettb;
+	}
+
+	public BigDecimal getTrfrab() {
+		return trfrab;
+	}
+
+	public void setTrfrab(BigDecimal trfrab) {
+		this.trfrab = trfrab;
+	}
+
+	public int getTrflp2() {
+		return trflp2;
+	}
+
+	public void setTrflp2(int trflp2) {
+		this.trflp2 = trflp2;
+	}
+
+	public int getTrkm() {
+		return trkm;
+	}
+
+	public void setTrkm(int trkm) {
+		this.trkm = trkm;
+	}
+
+	public String getHestl1() {
+		return hestl1;
+	}
+
+	public void setHestl1(String hestl1) {
+		this.hestl1 = hestl1;
+	}
+
+	public int getHesnn() {
+		return hesnn;
+	}
+
+	public void setHesnn(int hesnn) {
+		this.hesnn = hesnn;
+	}
+
+	public int getHeunik() {
+		return heunik;
+	}
+
+	public void setHeunik(int heunik) {
+		this.heunik = heunik;
+	}
+
+	public int getHedtmp() {
+		return hedtmp;
+	}
+
+	public void setHedtmp(int hedtmp) {
+		this.hedtmp = hedtmp;
+	}
+
+	public int getHefngk() {
+		return hefngk;
+	}
+
+	public void setHefngk(int hefngk) {
+		this.hefngk = hefngk;
+	}
+
+	public int getHefngs() {
+		return hefngs;
+	}
+
+	public void setHefngs(int hefngs) {
+		this.hefngs = hefngs;
+	}
+
+	public int getHetrm() {
+		return hetrm;
+	}
+
+	public void setHetrm(int hetrm) {
+		this.hetrm = hetrm;
+	}
+
+	public int getHetrc() {
+		return hetrc;
+	}
+
+	public void setHetrc(int hetrc) {
+		this.hetrc = hetrc;
+	}
+
+	public int getHefbk() {
+		return hefbk;
+	}
+
+	public void setHefbk(int hefbk) {
+		this.hefbk = hefbk;
+	}
+
+	public int getHentvs() {
+		return hentvs;
+	}
+
+	public void setHentvs(int hentvs) {
+		this.hentvs = hentvs;
+	}
+
+	public int getHevn() {
+		return hevn;
+	}
+
+	public void setHevn(int hevn) {
+		this.hevn = hevn;
+	}
+
+	public int getHentf() {
+		return hentf;
+	}
+
+	public void setHentf(int hentf) {
+		this.hentf = hentf;
+	}
+
+	public int getHeklmo() {
+		return heklmo;
+	}
+
+	public void setHeklmo(int heklmo) {
+		this.heklmo = heklmo;
+	}
+
+	public int getTravd0() {
+		return travd0;
+	}
+
+	public void setTravd0(int travd0) {
+		this.travd0 = travd0;
+	}
+
+	public int getTropd0() {
+		return tropd0;
+	}
+
+	public void setTropd0(int tropd0) {
+		this.tropd0 = tropd0;
+	}
+
+	public int getTravd1() {
+		return travd1;
+	}
+
+	public void setTravd1(int travd1) {
+		this.travd1 = travd1;
+	}
+
+	public int getTropd1() {
+		return tropd1;
+	}
+
+	public void setTropd1(int tropd1) {
+		this.tropd1 = tropd1;
+	}
+
+	public int getTravd2() {
+		return travd2;
+	}
+
+	public void setTravd2(int travd2) {
+		this.travd2 = travd2;
+	}
+
+	public int getTropd2() {
+		return tropd2;
+	}
+
+	public void setTropd2(int tropd2) {
+		this.tropd2 = tropd2;
+	}
+
+	public int getTrsffd() {
+		return trsffd;
+	}
+
+	public void setTrsffd(int trsffd) {
+		this.trsffd = trsffd;
+	}
+
+	public int getTrsffk() {
+		return trsffk;
+	}
+
+	public void setTrsffk(int trsffk) {
+		this.trsffk = trsffk;
+	}
+
+	public int getTrsdfd() {
+		return trsdfd;
+	}
+
+	public void setTrsdfd(int trsdfd) {
+		this.trsdfd = trsdfd;
+	}
+
+	public int getTrsdfk() {
+		return trsdfk;
+	}
+
+	public void setTrsdfk(int trsdfk) {
+		this.trsdfk = trsdfk;
+	}
+
+	public int getTrsdtd() {
+		return trsdtd;
+	}
+
+	public void setTrsdtd(int trsdtd) {
+		this.trsdtd = trsdtd;
+	}
+
+	public int getTrsdtk() {
+		return trsdtk;
+	}
+
+	public void setTrsdtk(int trsdtk) {
+		this.trsdtk = trsdtk;
+	}
+
+	public int getTrsvtd() {
+		return trsvtd;
+	}
+
+	public void setTrsvtd(int trsvtd) {
+		this.trsvtd = trsvtd;
+	}
+
+	public int getTrsvtk() {
+		return trsvtk;
+	}
+
+	public void setTrsvtk(int trsvtk) {
+		this.trsvtk = trsvtk;
+	}
+
+	public int getHestd() {
+		return hestd;
+	}
+
+	public void setHestd(int hestd) {
+		this.hestd = hestd;
+	}
+
+	public int getHxpall() {
+		return hxpall;
+	}
+
+	public void setHxpall(int hxpall) {
+		this.hxpall = hxpall;
+	}
+
+	public int getHehakn() {
+		return hehakn;
+	}
+
+	public void setHehakn(int hehakn) {
+		this.hehakn = hehakn;
+	}
+
+	public int getHehaan() {
+		return hehaan;
+	}
+
+	public void setHehaan(int hehaan) {
+		this.hehaan = hehaan;
+	}
+
+	public int getHelakn() {
+		return helakn;
+	}
+
+	public void setHelakn(int helakn) {
+		this.helakn = helakn;
+	}
+
+	public int getHelaan() {
+		return helaan;
+	}
+
+	public void setHelaan(int helaan) {
+		this.helaan = helaan;
+	}
+
+	public int getHelmla() {
+		return helmla;
+	}
+
+	public void setHelmla(int helmla) {
+		this.helmla = helmla;
+	}
+
+	public int getHepoen() {
+		return hepoen;
+	}
+
+	public void setHepoen(int hepoen) {
+		this.hepoen = hepoen;
+	}
 
 	Map<String, Object> keys = new HashMap<String, Object>();
 
@@ -251,21 +795,7 @@ public class HeadfDao implements IDao {
 		this.hesg = hesg;
 	}
 
-	public int getHedtop() {
-		return hedtop;
-	}
 
-	public void setHedtop(int hedtop) {
-		this.hedtop = hedtop;
-	}
-
-	public int getHedtr() {
-		return hedtr;
-	}
-
-	public void setHedtr(int hedtr) {
-		this.hedtr = hedtr;
-	}
 
 	public String getHesdff() {
 		return hesdff;
@@ -315,13 +845,6 @@ public class HeadfDao implements IDao {
 		this.hegnn = hegnn;
 	}
 
-	public int getHepro() {
-		return hepro;
-	}
-
-	public void setHepro(int hepro) {
-		this.hepro = hepro;
-	}
 
 	public String getHeplan() {
 		return heplan;
@@ -331,13 +854,7 @@ public class HeadfDao implements IDao {
 		this.heplan = heplan;
 	}
 
-	public int getTrrund() {
-		return trrund;
-	}
 
-	public void setTrrund(int trrund) {
-		this.trrund = trrund;
-	}
 
 	public String getHepos1() {
 		return hepos1;
@@ -347,21 +864,6 @@ public class HeadfDao implements IDao {
 		this.hepos1 = hepos1;
 	}
 
-	public int getHepos2() {
-		return hepos2;
-	}
-
-	public void setHepos2(int hepos2) {
-		this.hepos2 = hepos2;
-	}
-
-	public int getTrknfa() {
-		return trknfa;
-	}
-
-	public void setTrknfa(int trknfa) {
-		this.trknfa = trknfa;
-	}
 
 	public String getHenao() {
 		return henao;
@@ -371,13 +873,7 @@ public class HeadfDao implements IDao {
 		this.henao = henao;
 	}
 
-	public int getHekna() {
-		return hekna;
-	}
 
-	public void setHekna(int hekna) {
-		this.hekna = hekna;
-	}
 
 	public String getHenaa() {
 		return henaa;
@@ -435,21 +931,7 @@ public class HeadfDao implements IDao {
 		this.hevalt = hevalt;
 	}
 
-	public BigDecimal getHevalp() {
-		return hevalp;
-	}
 
-	public void setHevalp(BigDecimal hevalp) {
-		this.hevalp = hevalp;
-	}
-
-	public int getHeknt() {
-		return heknt;
-	}
-
-	public void setHeknt(int heknt) {
-		this.heknt = heknt;
-	}
 
 	public String getHelka() {
 		return helka;
@@ -459,13 +941,6 @@ public class HeadfDao implements IDao {
 		this.helka = helka;
 	}
 
-	public String getHekns() {
-		return hekns;
-	}
-
-	public void setHekns(String hekns) {
-		this.hekns = hekns;
-	}
 
 	public String getHenas() {
 		return henas;
@@ -515,13 +990,7 @@ public class HeadfDao implements IDao {
 		this.helks = helks;
 	}
 
-	public int getHeknh() {
-		return heknh;
-	}
 
-	public void setHeknh(int heknh) {
-		this.heknh = heknh;
-	}
 
 	public String getHenah() {
 		return henah;
@@ -571,13 +1040,7 @@ public class HeadfDao implements IDao {
 		this.helkh = helkh;
 	}
 
-	public BigDecimal getHehbre() {
-		return hehbre;
-	}
 
-	public void setHehbre(BigDecimal hehbre) {
-		this.hehbre = hehbre;
-	}
 
 	public String getHehblk() {
 		return hehblk;
@@ -603,21 +1066,7 @@ public class HeadfDao implements IDao {
 		this.hevals = hevals;
 	}
 
-	public int getHeknsf() {
-		return heknsf;
-	}
 
-	public void setHeknsf(int heknsf) {
-		this.heknsf = heknsf;
-	}
-
-	public int getHeans() {
-		return heans;
-	}
-
-	public void setHeans(int heans) {
-		this.heans = heans;
-	}
 
 	public String getHenasf() {
 		return henasf;
@@ -627,13 +1076,6 @@ public class HeadfDao implements IDao {
 		this.henasf = henasf;
 	}
 
-	public int getHeknk() {
-		return heknk;
-	}
-
-	public void setHeknk(int heknk) {
-		this.heknk = heknk;
-	}
 
 	public String getHenak() {
 		return henak;
@@ -683,13 +1125,7 @@ public class HeadfDao implements IDao {
 		this.helkk = helkk;
 	}
 
-	public int getHeknl() {
-		return heknl;
-	}
 
-	public void setHeknl(int heknl) {
-		this.heknl = heknl;
-	}
 
 	public String getHenal() {
 		return henal;
@@ -739,21 +1175,7 @@ public class HeadfDao implements IDao {
 		this.helkl = helkl;
 	}
 
-	public BigDecimal getHelbre() {
-		return helbre;
-	}
 
-	public void setHelbre(BigDecimal helbre) {
-		this.helbre = helbre;
-	}
-
-	public BigDecimal getHellen() {
-		return hellen;
-	}
-
-	public void setHellen(BigDecimal hellen) {
-		this.hellen = hellen;
-	}
 
 	public String getHelblk() {
 		return helblk;
@@ -779,21 +1201,7 @@ public class HeadfDao implements IDao {
 		this.hevalk = hevalk;
 	}
 
-	public int getHeknkf() {
-		return heknkf;
-	}
 
-	public void setHeknkf(int heknkf) {
-		this.heknkf = heknkf;
-	}
-
-	public int getHeank() {
-		return heank;
-	}
-
-	public void setHeank(int heank) {
-		this.heank = heank;
-	}
 
 	public String getHenakf() {
 		return henakf;
@@ -827,13 +1235,7 @@ public class HeadfDao implements IDao {
 		this.hefr = hefr;
 	}
 
-	public int getHent() {
-		return hent;
-	}
 
-	public void setHent(int hent) {
-		this.hent = hent;
-	}
 
 	public String getHevs1() {
 		return hevs1;
@@ -867,37 +1269,8 @@ public class HeadfDao implements IDao {
 		this.hegm2 = hegm2;
 	}
 
-	public int getHevkt() {
-		return hevkt;
-	}
 
-	public void setHevkt(int hevkt) {
-		this.hevkt = hevkt;
-	}
 
-	public BigDecimal getHelm() {
-		return helm;
-	}
-
-	public void setHelm(BigDecimal helm) {
-		this.helm = helm;
-	}
-
-	public BigDecimal getHem3() {
-		return hem3;
-	}
-
-	public void setHem3(BigDecimal hem3) {
-		this.hem3 = hem3;
-	}
-
-	public int getHefbv() {
-		return hefbv;
-	}
-
-	public void setHefbv(int hefbv) {
-		this.hefbv = hefbv;
-	}
 
 	public String getHekf() {
 		return hekf;
@@ -923,29 +1296,7 @@ public class HeadfDao implements IDao {
 		this.heft1 = heft1;
 	}
 
-	public int getHedtcp() {
-		return hedtcp;
-	}
 
-	public void setHedtcp(int hedtcp) {
-		this.hedtcp = hedtcp;
-	}
-
-	public int getHedtåp() {
-		return hedtåp;
-	}
-
-	public void setHedtåp(int hedtåp) {
-		this.hedtåp = hedtåp;
-	}
-
-	public int getHedtmp() {
-		return hedtmp;
-	}
-
-	public void setHedtmp(int hedtmp) {
-		this.hedtmp = hedtmp;
-	}
 
 	public String getHekdkk() {
 		return hekdkk;
@@ -955,21 +1306,7 @@ public class HeadfDao implements IDao {
 		this.hekdkk = hekdkk;
 	}
 
-	public int getHefngk() {
-		return hefngk;
-	}
 
-	public void setHefngk(int hefngk) {
-		this.hefngk = hefngk;
-	}
-
-	public int getHefngs() {
-		return hefngs;
-	}
-
-	public void setHefngs(int hefngs) {
-		this.hefngs = hefngs;
-	}
 
 	public String getHekdtm() {
 		return hekdtm;
@@ -979,13 +1316,6 @@ public class HeadfDao implements IDao {
 		this.hekdtm = hekdtm;
 	}
 
-	public int getHetrm() {
-		return hetrm;
-	}
-
-	public void setHetrm(int hetrm) {
-		this.hetrm = hetrm;
-	}
 
 	public String getHetri() {
 		return hetri;
@@ -995,13 +1325,7 @@ public class HeadfDao implements IDao {
 		this.hetri = hetri;
 	}
 
-	public int getHetrc() {
-		return hetrc;
-	}
 
-	public void setHetrc(int hetrc) {
-		this.hetrc = hetrc;
-	}
 
 	public String getHetrcn() {
 		return hetrcn;
@@ -1011,13 +1335,7 @@ public class HeadfDao implements IDao {
 		this.hetrcn = hetrcn;
 	}
 
-	public int getHefbk() {
-		return hefbk;
-	}
 
-	public void setHefbk(int hefbk) {
-		this.hefbk = hefbk;
-	}
 
 	public String getHetle() {
 		return hetle;
@@ -1043,45 +1361,7 @@ public class HeadfDao implements IDao {
 		this.hetlku = hetlku;
 	}
 
-	public int getHentvs() {
-		return hentvs;
-	}
 
-	public void setHentvs(int hentvs) {
-		this.hentvs = hentvs;
-	}
-
-	public int getHevn() {
-		return hevn;
-	}
-
-	public void setHevn(int hevn) {
-		this.hevn = hevn;
-	}
-
-	public int getHentf() {
-		return hentf;
-	}
-
-	public void setHentf(int hentf) {
-		this.hentf = hentf;
-	}
-
-	public int getHebelt() {
-		return hebelt;
-	}
-
-	public void setHebelt(int hebelt) {
-		this.hebelt = hebelt;
-	}
-
-	public int getHebelm() {
-		return hebelm;
-	}
-
-	public void setHebelm(int hebelm) {
-		this.hebelm = hebelm;
-	}
 
 	public String getHesgm() {
 		return hesgm;
@@ -1099,13 +1379,7 @@ public class HeadfDao implements IDao {
 		this.hedtmo = hedtmo;
 	}
 
-	public int getHeklmo() {
-		return heklmo;
-	}
 
-	public void setHeklmo(int heklmo) {
-		this.heklmo = heklmo;
-	}
 
 	public String getHepk1() {
 		return hepk1;
@@ -1227,117 +1501,12 @@ public class HeadfDao implements IDao {
 		this.herfk = herfk;
 	}
 
-	public int getTravd0() {
-		return travd0;
-	}
 
-	public void setTravd0(int travd0) {
-		this.travd0 = travd0;
-	}
 
-	public int getTropd0() {
-		return tropd0;
-	}
 
-	public void setTropd0(int tropd0) {
-		this.tropd0 = tropd0;
-	}
 
-	public int getTravd1() {
-		return travd1;
-	}
 
-	public void setTravd1(int travd1) {
-		this.travd1 = travd1;
-	}
 
-	public int getTropd1() {
-		return tropd1;
-	}
-
-	public void setTropd1(int tropd1) {
-		this.tropd1 = tropd1;
-	}
-
-	public int getTravd2() {
-		return travd2;
-	}
-
-	public void setTravd2(int travd2) {
-		this.travd2 = travd2;
-	}
-
-	public int getTropd2() {
-		return tropd2;
-	}
-
-	public void setTropd2(int tropd2) {
-		this.tropd2 = tropd2;
-	}
-
-	public int getTrsffd() {
-		return trsffd;
-	}
-
-	public void setTrsffd(int trsffd) {
-		this.trsffd = trsffd;
-	}
-
-	public int getTrsffk() {
-		return trsffk;
-	}
-
-	public void setTrsffk(int trsffk) {
-		this.trsffk = trsffk;
-	}
-
-	public int getTrsdfd() {
-		return trsdfd;
-	}
-
-	public void setTrsdfd(int trsdfd) {
-		this.trsdfd = trsdfd;
-	}
-
-	public int getTrsdfk() {
-		return trsdfk;
-	}
-
-	public void setTrsdfk(int trsdfk) {
-		this.trsdfk = trsdfk;
-	}
-
-	public int getTrsdtd() {
-		return trsdtd;
-	}
-
-	public void setTrsdtd(int trsdtd) {
-		this.trsdtd = trsdtd;
-	}
-
-	public int getTrsdtk() {
-		return trsdtk;
-	}
-
-	public void setTrsdtk(int trsdtk) {
-		this.trsdtk = trsdtk;
-	}
-
-	public int getTrsvtd() {
-		return trsvtd;
-	}
-
-	public void setTrsvtd(int trsvtd) {
-		this.trsvtd = trsvtd;
-	}
-
-	public int getTrsvtk() {
-		return trsvtk;
-	}
-
-	public void setTrsvtk(int trsvtk) {
-		this.trsvtk = trsvtk;
-	}
 
 	public String getTrkdak() {
 		return trkdak;
@@ -1363,13 +1532,6 @@ public class HeadfDao implements IDao {
 		this.trverv = trverv;
 	}
 
-	public BigDecimal getTrverb() {
-		return trverb;
-	}
-
-	public void setTrverb(BigDecimal trverb) {
-		this.trverb = trverb;
-	}
 
 	public String getTrettv() {
 		return trettv;
@@ -1379,13 +1541,6 @@ public class HeadfDao implements IDao {
 		this.trettv = trettv;
 	}
 
-	public BigDecimal getTrettb() {
-		return trettb;
-	}
-
-	public void setTrettb(BigDecimal trettb) {
-		this.trettb = trettb;
-	}
 
 	public String getTrfrak() {
 		return trfrak;
@@ -1401,14 +1556,6 @@ public class HeadfDao implements IDao {
 
 	public void setTrfrav(String trfrav) {
 		this.trfrav = trfrav;
-	}
-
-	public BigDecimal getTrfrab() {
-		return trfrab;
-	}
-
-	public void setTrfrab(BigDecimal trfrab) {
-		this.trfrab = trfrab;
 	}
 
 	public String getTrmva() {
@@ -1459,13 +1606,6 @@ public class HeadfDao implements IDao {
 		this.trfa22 = trfa22;
 	}
 
-	public int getTrflp2() {
-		return trflp2;
-	}
-
-	public void setTrflp2(int trflp2) {
-		this.trflp2 = trflp2;
-	}
 
 	public String getTrtsta() {
 		return trtsta;
@@ -1523,14 +1663,6 @@ public class HeadfDao implements IDao {
 		this.trsta4 = trsta4;
 	}
 
-	public int getTrkm() {
-		return trkm;
-	}
-
-	public void setTrkm(int trkm) {
-		this.trkm = trkm;
-	}
-
 	public String getHe01() {
 		return he01;
 	}
@@ -1539,13 +1671,6 @@ public class HeadfDao implements IDao {
 		this.he01 = he01;
 	}
 
-	public int getHestd() {
-		return hestd;
-	}
-
-	public void setHestd(int hestd) {
-		this.hestd = hestd;
-	}
 
 	public String getHxsndn() {
 		return hxsndn;
@@ -1555,13 +1680,6 @@ public class HeadfDao implements IDao {
 		this.hxsndn = hxsndn;
 	}
 
-	public int getHxpall() {
-		return hxpall;
-	}
-
-	public void setHxpall(int hxpall) {
-		this.hxpall = hxpall;
-	}
 
 	public String getHxblgk() {
 		return hxblgk;
@@ -1603,61 +1721,8 @@ public class HeadfDao implements IDao {
 		this.hxteri = hxteri;
 	}
 
-	public int getHehakn() {
-		return hehakn;
-	}
 
-	public void setHehakn(int hehakn) {
-		this.hehakn = hehakn;
-	}
 
-	public int getHehaan() {
-		return hehaan;
-	}
-
-	public void setHehaan(int hehaan) {
-		this.hehaan = hehaan;
-	}
-
-	public int getHelakn() {
-		return helakn;
-	}
-
-	public void setHelakn(int helakn) {
-		this.helakn = helakn;
-	}
-
-	public int getHelaan() {
-		return helaan;
-	}
-
-	public void setHelaan(int helaan) {
-		this.helaan = helaan;
-	}
-
-	public int getHelmla() {
-		return helmla;
-	}
-
-	public void setHelmla(int helmla) {
-		this.helmla = helmla;
-	}
-
-	public int getHepoen() {
-		return hepoen;
-	}
-
-	public void setHepoen(int hepoen) {
-		this.hepoen = hepoen;
-	}
-
-//	public int getHestl1() {
-//		return hestl1;
-//	}
-//
-//	public void setHestl1(int hestl1) {
-//		this.hestl1 = hestl1;
-//	}
 
 	public String getHestl2() {
 		return hestl2;
@@ -1801,22 +1866,6 @@ public class HeadfDao implements IDao {
 
 	public void setHelvl(String helvl) {
 		this.helvl = helvl;
-	}
-
-	public int getHesnn() {
-		return hesnn;
-	}
-
-	public void setHesnn(int hesnn) {
-		this.hesnn = hesnn;
-	}
-
-	public int getHeunik() {
-		return heunik;
-	}
-
-	public void setHeunik(int heunik) {
-		this.heunik = heunik;
 	}
 
 	public String getHereff() {
