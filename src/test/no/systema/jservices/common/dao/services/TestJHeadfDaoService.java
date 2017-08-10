@@ -1,6 +1,6 @@
 package no.systema.jservices.common.dao.services;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -22,11 +22,15 @@ public class TestJHeadfDaoService {
 
 	ApplicationContext context = null;
 	HeadfDaoService headfDaoService = null;
+	HeadfDto qDao = null;
+	int VERY_MANY_DAYS = 20*365;
 
 	@Before
 	public void setUp() throws Exception {
 		context = new ClassPathXmlApplicationContext("syjservicescommon-data-service-test.xml");
 		headfDaoService = (HeadfDaoService) context.getBean("headfDaoService");
+		 qDao = new HeadfDto();
+		 qDao.setDftdg(VERY_MANY_DAYS);
 	}
 
 	@Test
@@ -52,23 +56,7 @@ public class TestJHeadfDaoService {
 	}
 
 	@Test
-	public final void testFindAll() {
-		List<HeadfDao> list = headfDaoService.findAll(null);
-		assertNotNull(list);
-	}
-
-	@Test
-	public final void testFind() {
-		HeadfDao qDao = new HeadfDao();
-		qDao.setHeavd(1);
-		qDao.setHeopd(773587);
-		HeadfDao resultDao = headfDaoService.find(qDao);
-		assertNotNull(resultDao);
-	}
-
-	@Test
 	public final void testGetListAvdDato() {
-		HeadfDto qDao = new HeadfDto();
 		qDao.setHeavd(2);
 		qDao.setHedtop(20000210);
 		List<HeadfDto> resultDaoList = headfDaoService.get(qDao);
@@ -77,15 +65,13 @@ public class TestJHeadfDaoService {
 
 	@Test
 	public final void testGetListAvd() {
-		HeadfDto qDao = new HeadfDto();
 		qDao.setHeavd(2);
 		List<HeadfDto> resultDaoList = headfDaoService.get(qDao);
-		assertEquals("Should be the same", 4635, resultDaoList.size());
+		assertTrue("Should be many", resultDaoList.size() > 1000);
 	}
 	
 	@Test
 	public final void testGetListAvsenderMottaker() {
-		HeadfDto qDao = new HeadfDto();
 		qDao.setHenas("%DATA%");
 		qDao.setHenak("THAR%");
 		List<HeadfDto> resultDaoList = headfDaoService.get(qDao);
@@ -94,14 +80,25 @@ public class TestJHeadfDaoService {
 	
 	@Test
 	public final void testGetListSign() {
-		HeadfDto qDao = new HeadfDto();
 		qDao.setHeavd(1);
 		qDao.setHenas("%DATA%");
 		qDao.setHesg("%JOV%");
 		List<HeadfDto> resultDaoList = headfDaoService.get(qDao);
 		assertEquals("Should be the same", 2, resultDaoList.size());
 	}	
-
+	
+	
+	@Test
+	public final void testDftdg() {
+		List<HeadfDto> resultDaoList = headfDaoService.get(qDao);
+		assertTrue("Should be many", resultDaoList.size() > 1000);
+		
+		qDao.setDftdg(10);
+		resultDaoList = headfDaoService.get(qDao);
+		assertEquals("Should be the same", 3, resultDaoList.size());		
+		
+	}
+	
 	@Test
 	public final void testExist() {
 		HeadfDao qDao = new HeadfDao();

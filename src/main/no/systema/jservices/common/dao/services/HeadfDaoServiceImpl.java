@@ -17,21 +17,20 @@ public class HeadfDaoServiceImpl extends GenericDaoServiceImpl<HeadfDao> impleme
 		NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getJdbcTemplate().getDataSource());
 		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(qDto);
 		StringBuilder queryString = new StringBuilder(
-							"select heavd, heopd , hedtop , henas , henak, hesg , hent , hevkt , hem3 , helks ,  hepns , helkk , hepnk from headf");
-		queryString.append(" where (:heavd = 0 or :heavd = :heavd )");
-		queryString.append(" and   (:heopd = 0 or heopd = :heopd )");
-		queryString.append(" and   (:hedtop = 0 or hedtop = :hedtop )");
-		queryString.append(" and   (:henas is null or henas like :henas ) ");
-		queryString.append(" and   (:henak is null or henak like :henak ) ");
-		queryString.append(" and   (:hesg  is null or hesg  like :hesg ) ");
-		queryString.append(" and   (:helks is null or helks = :helks ) ");
-		queryString.append(" and   (:hepns is null or hepns = :hepns ) ");
-		queryString.append(" and   (:helkk is null or helkk = :helkk ) ");
-		queryString.append(" and   (:hepnk is null or hepnk = :hepnk ) ");
-		queryString.append(" FETCH FIRST :limit ROWS ONLY ");
-		
-		logger.debug("queryString.toString()="+queryString.toString());
-		logger.debug("namedParameters="+namedParameters);
+							"SELECT heavd, heopd , hedtop ,hedtr, henas , henak, hesg , hent , hevkt , hem3 , helks ,  hepns , helkk , hepnk, heot FROM headf");
+		queryString.append(" WHERE (:heavd = 0 OR :heavd = :heavd )");
+		queryString.append(" AND   (:heopd = 0 OR heopd = :heopd )");
+		queryString.append(" AND   (:hedtop = 0 OR hedtop = :hedtop )");
+		queryString.append(" AND   (:henas IS NULL OR henas like :henas ) ");
+		queryString.append(" AND   (:henak IS NULL OR henak like :henak ) ");
+		queryString.append(" AND   (:hesg  IS NULL OR hesg  like :hesg ) ");
+		queryString.append(" AND   (:helks IS NULL OR helks = :helks ) ");
+		queryString.append(" AND   (:hepns IS NULL OR hepns = :hepns ) ");
+		queryString.append(" AND   (:helkk IS NULL OR helkk = :helkk ) ");
+		queryString.append(" AND   (:hepnk IS NULL OR hepnk = :hepnk ) ");
+		queryString.append(" AND DATE( LEFT(DIGITS(hedtr), 4 ) CONCAT '-' CONCAT SUBSTR(DIGITS(hedtr), 5, 2) CONCAT '-' CONCAT RIGHT( DIGITS(hedtr), 2) )  >  ( CURRENT DATE - :dftdg DAYS ) "); 
+		queryString.append(" AND hedtr > 0 ");
+		queryString.append(" ORDER BY hedtr DESC ");		
 		
 		return namedParameterJdbcTemplate.query(queryString.toString(), namedParameters, new GenericObjectMapper(new HeadfDto()));
 

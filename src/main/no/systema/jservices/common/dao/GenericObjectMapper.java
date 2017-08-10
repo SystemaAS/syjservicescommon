@@ -8,7 +8,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.junit.runners.Parameterized.Parameter;
 import org.springframework.jdbc.core.RowMapper;
+
+import no.systema.jservices.common.dto.ExludeMapping;
 
 /**
  * This class transform as ResultSet into IDao
@@ -49,6 +52,9 @@ public class GenericObjectMapper implements RowMapper {
 			BigDecimal bigdecimalValue;
 			for (Field field : list) {
 				name = (String) field.getName();
+				if (field.isAnnotationPresent(ExludeMapping.class)) {
+					continue;
+				}
 				if (field.getType() == String.class) {
 					try {
 						field.setAccessible(true);

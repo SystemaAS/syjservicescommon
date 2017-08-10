@@ -1,7 +1,11 @@
 package no.systema.jservices.common.dto;
 
+import java.beans.Transient;
 import java.math.BigDecimal;
 import java.util.Map;
+
+import org.junit.Ignore;
+import org.junit.runners.Parameterized.Parameter;
 
 import no.systema.jservices.common.dao.IDao;
 
@@ -13,13 +17,14 @@ import no.systema.jservices.common.dao.IDao;
  *
  */
 public class HeadfDto implements IDao {
-
 	/* Avdeling */
 	private int heavd; 
 	/* Ordernr */
 	private int heopd;
 	/*  Oppdragsdato  */
 	private int hedtop;
+	/* Registreringsdata*/
+	private int hedtr;
 	/* Avsender */
 	private String henas;
 	/* Mottaker */
@@ -39,16 +44,35 @@ public class HeadfDto implements IDao {
 	/* Postnr kjøper */
 	private String hepnk;
 	/* Signatur*/
-	private String hesg; 
-	
-	private int limit; //TODO Replace with correct algo when it comes...
-	
-	public int getLimit() {
-		return limit;
+	private String hesg;
+	/* Oppdragstype */
+	private String heot;
+	/* days to view in list*/
+	@ExludeMapping
+	private int dftdg; 
+
+	public String getHeot() {
+		return heot;
 	}
 
-	public void setLimit(int limit) {
-		this.limit = limit;
+	public void setHeot(String heot) {
+		this.heot = heot;
+	}
+
+	public int getHedtr() {
+		return hedtr;
+	}
+
+	public void setHedtr(int hedtr) {
+		this.hedtr = hedtr;
+	}
+
+	public int getDftdg() {
+		return dftdg;
+	}
+
+	public void setDftdg(int dftdg) {
+		this.dftdg = dftdg;
 	}
 
 	public String getHesg() {
