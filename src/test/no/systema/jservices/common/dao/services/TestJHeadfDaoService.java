@@ -125,6 +125,25 @@ public class TestJHeadfDaoService {
 		assertTrue(dao.getHeavd() + ", " + dao.getHeopd() + " should not exist", !exist);
 
 	}	
+
+	
+	@Test
+	public final void testCreateUpdateAndDelete() {
+		String updHenas = "Updated namn";
+		HeadfDao dao = getBigHeadfDao();
+		HeadfDao returnDao = headfDaoService.create(dao);
+		HeadfDao updateDao = null;
+		assertNotNull(returnDao);
+
+		returnDao.setHenas(updHenas);
+		updateDao = headfDaoService.update(returnDao);
+		assertTrue("Name should be update", returnDao.getHenas().equals(updHenas));
+		
+		headfDaoService.delete(updateDao);
+		boolean exist = headfDaoService.exist(updateDao);
+		assertTrue(updateDao.getHeavd() + ", " + updateDao.getHeopd() + " should not exist", !exist);
+
+	}		
 	
 	
 	private HeadfDao getBigHeadfDao() {
