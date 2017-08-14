@@ -53,7 +53,13 @@
 			<ref bean="jdbcTemplate" />
 		</property>
 	</bean>	
-	
+
+	<bean id="kufastDaoService"
+		class="no.systema.jservices.common.dao.services.KufastDaoServiceImpl">
+		<property name="jdbcTemplate">
+			<ref bean="jdbcTemplate" />
+		</property>
+	</bean>		
 	
 	<bean id="fratxtDaoService"
 		class="no.systema.jservices.common.dao.services.FratxtDaoServiceImpl">
