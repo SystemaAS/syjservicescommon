@@ -1,11 +1,7 @@
 package no.systema.jservices.common.dto;
 
-import java.beans.Transient;
 import java.math.BigDecimal;
 import java.util.Map;
-
-import org.junit.Ignore;
-import org.junit.runners.Parameterized.Parameter;
 
 import no.systema.jservices.common.dao.IDao;
 

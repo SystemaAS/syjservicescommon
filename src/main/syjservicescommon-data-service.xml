@@ -101,6 +101,10 @@
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>	
 	
+	<bean id="kodtfrDaoService" class="no.systema.jservices.common.dao.services.KodtfrDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>	
+
 	<bean id="arktxtDaoService" class="no.systema.jservices.common.dao.services.ArktxtDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>		
