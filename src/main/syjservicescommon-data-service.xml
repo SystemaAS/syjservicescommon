@@ -11,6 +11,9 @@
   http://www.springframework.org/schema/aop 
   http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
   
+  <bean id="trkodfDaoService" class="no.systema.jservices.common.dao.services.TrkodfDaoServiceImpl">
+      <property name="jdbcTemplate"><ref bean="jdbcTemplate"/></property>
+  </bean> 
   <bean id="valufDaoService" class="no.systema.jservices.common.dao.services.ValufDaoServiceImpl">
       <property name="jdbcTemplate"><ref bean="jdbcTemplate"/></property>
   </bean>
