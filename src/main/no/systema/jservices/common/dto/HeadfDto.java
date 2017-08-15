@@ -13,45 +13,58 @@ import no.systema.jservices.common.dao.IDao;
  *
  */
 public class HeadfDto implements IDao {
-	/* Avdeling */
 	private int heavd; 
-	/* Ordernr */
 	private int heopd;
-	/*  Oppdragsdato  */
 	private int hedtop;
-	/*  Oppdragsdato AS String */
 	@ExludeMapping
 	private String hedtopAsString;
-	/* Registreringsdata*/
 	private int hedtr;
-	/* Avsender */
 	private String henas;
-	/* Mottaker */
 	private String henak;
-	/* Antall */
 	private int hent;
-	/* Vekt */
 	private int hevkt;
-	/* M3 */
 	private BigDecimal hem3;
-	/* Landkode selger */
 	private String helks;
-	/* Postnr selger */
 	private String hepns;
-	/* Landkode kjøper */
 	private String helkk;
-	/* Postnr kjøper */
 	private String hepnk;
-	/* Signatur*/
 	private String hesg;
-	/* Oppdragstype */
 	private String heot;
+	private String heur;
+	private int hepro;
+	private String hegn;
+	
 	/* days to view in list*/
 	@ExludeMapping
 	private int dftdg; 
 	/* false if no query params delivere, else true*/ 
 	@ExludeMapping
 	private boolean whereClause;
+
+	
+	public String getHeur() {
+		return heur;
+	}
+
+	public void setHeur(String heur) {
+		this.heur = heur;
+	}
+
+	public int getHepro() {
+		return hepro;
+	}
+
+	public void setHepro(int hepro) {
+		this.hepro = hepro;
+	}
+
+	public String getHegn() {
+		return hegn;
+	}
+
+	public void setHegn(String hegn) {
+		this.hegn = hegn;
+	}
 
 	public String getHedtopAsString() {
 		return hedtopAsString;
