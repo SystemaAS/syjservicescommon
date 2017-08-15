@@ -39,11 +39,15 @@ public class HeadfDaoServiceImpl extends GenericDaoServiceImpl<HeadfDao> impleme
 		queryString.append(" AND   (:hepns IS NULL OR hepns = :hepns ) ");
 		queryString.append(" AND   (:helkk IS NULL OR helkk = :helkk ) ");
 		queryString.append(" AND   (:hepnk IS NULL OR hepnk = :hepnk ) ");
+		logger.info("qDto.hasWhereClause()="+qDto.hasWhereClause());
 		if(!qDto.hasWhereClause()) {
 			queryString.append(" AND DATE( LEFT(DIGITS(hedtr), 4 ) CONCAT '-' CONCAT SUBSTR(DIGITS(hedtr), 5, 2) CONCAT '-' CONCAT RIGHT( DIGITS(hedtr), 2) )  >  ( CURRENT DATE - :dftdg DAYS ) "); 
 		}
 		queryString.append(" AND hedtr > 0 ");
 		queryString.append(" ORDER BY hedtr DESC ");		
+		
+		
+		logger.info("queryString="+queryString.toString());
 		
 		return namedParameterJdbcTemplate.query(queryString.toString(), namedParameters, new GenericObjectMapper(new HeadfDto()));
 
