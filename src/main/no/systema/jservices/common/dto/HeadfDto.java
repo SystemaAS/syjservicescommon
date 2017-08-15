@@ -19,6 +19,9 @@ public class HeadfDto implements IDao {
 	private int heopd;
 	/*  Oppdragsdato  */
 	private int hedtop;
+	/*  Oppdragsdato AS String */
+	@ExludeMapping
+	private String hedtopAsString;
 	/* Registreringsdata*/
 	private int hedtr;
 	/* Avsender */
@@ -46,6 +49,25 @@ public class HeadfDto implements IDao {
 	/* days to view in list*/
 	@ExludeMapping
 	private int dftdg; 
+	/* false if no query params delivere, else true*/ 
+	@ExludeMapping
+	private boolean whereClause;
+
+	public String getHedtopAsString() {
+		return hedtopAsString;
+	}
+
+	public void setHedtopAsString(String hedtopAsString) {
+		this.hedtopAsString = hedtopAsString;
+	}
+
+	public boolean hasWhereClause() {
+		return whereClause;
+	}
+
+	public void setWhereClause(boolean whereClause) {
+		this.whereClause = whereClause;
+	}
 
 	public String getHeot() {
 		return heot;

@@ -8,7 +8,10 @@ import no.systema.jservices.common.dto.HeadfDto;
 public interface HeadfDaoService extends GenericDaoService<HeadfDao> {
 	
 	/**
-	 * Retrieves all <b>HeadfDto</b> , potentially filtered.</br>
+	 * Retrieves all <b>HeadfDto</b> , potentially filtered on its parameters.</br>
+	 * Special treatment on hedtop: if delivered, filter on hedtop where hedtop is between delivered hedtop and CURRENT DATE.<br>
+	 * If no query params is set, days to view in list, dftdg, is used.<br>
+	 * hedtop and hedtr must not be 0.
 	 * @param qDto HeadfDto populated with queryparams.
 	 * @return a list with {@link HeadfDto}
 	 */

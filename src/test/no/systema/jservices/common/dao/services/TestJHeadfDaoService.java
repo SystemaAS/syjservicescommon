@@ -59,21 +59,25 @@ public class TestJHeadfDaoService {
 	public final void testGetListAvdDato() {
 		qDao.setHeavd(2);
 		qDao.setHedtop(20000210);
+		qDao.setWhereClause(true);
 		List<HeadfDto> resultDaoList = headfDaoService.get(qDao);
-		assertEquals("Should be the same", 7, resultDaoList.size());
+		assertTrue("Should be many, is="+resultDaoList.size(), resultDaoList.size() > 100);
 	}
 
 	@Test
 	public final void testGetListAvd() {
 		qDao.setHeavd(2);
+		qDao.setWhereClause(true);
 		List<HeadfDto> resultDaoList = headfDaoService.get(qDao);
-		assertTrue("Should be many", resultDaoList.size() > 1000);
+		assertTrue("Should be many, is="+resultDaoList.size(), resultDaoList.size() > 100);
 	}
 	
 	@Test
 	public final void testGetListAvsenderMottaker() {
 		qDao.setHenas("%DATA%");
 		qDao.setHenak("THAR%");
+		qDao.setHedtop(20000101);
+		qDao.setWhereClause(true);
 		List<HeadfDto> resultDaoList = headfDaoService.get(qDao);
 		assertEquals("Should be the same", 1, resultDaoList.size());
 	}	
@@ -83,8 +87,10 @@ public class TestJHeadfDaoService {
 		qDao.setHeavd(1);
 		qDao.setHenas("%DATA%");
 		qDao.setHesg("%JOV%");
+		qDao.setHedtop(20000101);
+		qDao.setWhereClause(true);
 		List<HeadfDto> resultDaoList = headfDaoService.get(qDao);
-		assertEquals("Should be the same", 2, resultDaoList.size());
+		assertEquals("Should be the same", 1, resultDaoList.size());
 	}	
 	
 	
