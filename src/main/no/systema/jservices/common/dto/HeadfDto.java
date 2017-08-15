@@ -16,8 +16,6 @@ public class HeadfDto implements IDao {
 	private int heavd; 
 	private int heopd;
 	private int hedtop;
-	@ExludeMapping
-	private String hedtopAsString;
 	private int hedtr;
 	private String henas;
 	private String henak;
@@ -37,10 +35,6 @@ public class HeadfDto implements IDao {
 	/* days to view in list*/
 	@ExludeMapping
 	private int dftdg; 
-	/* false if no query params delivere, else true*/ 
-	@ExludeMapping
-	private boolean whereClause;
-
 	
 	public String getHeur() {
 		return heur;
@@ -64,22 +58,6 @@ public class HeadfDto implements IDao {
 
 	public void setHegn(String hegn) {
 		this.hegn = hegn;
-	}
-
-	public String getHedtopAsString() {
-		return hedtopAsString;
-	}
-
-	public void setHedtopAsString(String hedtopAsString) {
-		this.hedtopAsString = hedtopAsString;
-	}
-
-	public boolean hasWhereClause() {
-		return whereClause;
-	}
-
-	public void setWhereClause(boolean whereClause) {
-		this.whereClause = whereClause;
 	}
 
 	public String getHeot() {

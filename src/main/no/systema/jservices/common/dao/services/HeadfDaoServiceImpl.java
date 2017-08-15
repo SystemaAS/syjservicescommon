@@ -2,7 +2,7 @@ package no.systema.jservices.common.dao.services;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -21,16 +21,15 @@ public class HeadfDaoServiceImpl extends GenericDaoServiceImpl<HeadfDao> impleme
 	public List<HeadfDto> get(HeadfDto qDto) {
 		NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getJdbcTemplate().getDataSource());
 		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(qDto);
-		String hedtopAsString = setDateIntAsStringForTheMysteriousDB2Format(qDto);
+		int fromDate = fromDate(qDto.getHedtop(), qDto.getDftdg());
 		StringBuilder queryString = new StringBuilder(
 							"SELECT heavd, heopd , hedtop ,hedtr, henas , henak, hesg , hent , hevkt , hem3 , helks ,  hepns , helkk , hepnk, heot, heur, hepro, hegn FROM headf");
 		queryString.append(" WHERE (:heavd = 0 OR heavd = :heavd )");
 		queryString.append(" AND   (:heopd = 0 OR heopd = :heopd )");
-		if (hedtopAsString !=  null) {
-			queryString.append(" AND ( DATE(LEFT(DIGITS(hedtop), 4 ) CONCAT '-' CONCAT SUBSTR(DIGITS(hedtop), 5, 2) CONCAT '-' CONCAT RIGHT( DIGITS(hedtop), 2)) ");
-			queryString.append("		BETWEEN '" +hedtopAsString + "' AND CURRENT DATE	) ");	
-			queryString.append(" AND hedtop > 0 ");
-		}
+		
+		//TODO Om avd och op, inga andra wherecluase
+		
+		queryString.append(" AND   (:hedtop = 0 OR hedtop >= :hedtop )");
 		queryString.append(" AND   (:henas IS NULL OR henas like :henas ) ");
 		queryString.append(" AND   (:henak IS NULL OR henak like :henak ) ");
 		queryString.append(" AND   (:hesg  IS NULL OR hesg  like :hesg ) ");
@@ -38,10 +37,9 @@ public class HeadfDaoServiceImpl extends GenericDaoServiceImpl<HeadfDao> impleme
 		queryString.append(" AND   (:hepns IS NULL OR hepns = :hepns ) ");
 		queryString.append(" AND   (:helkk IS NULL OR helkk = :helkk ) ");
 		queryString.append(" AND   (:hepnk IS NULL OR hepnk = :hepnk ) ");
-		if(!qDto.hasWhereClause()) {
-			queryString.append(" AND DATE( LEFT(DIGITS(hedtr), 4 ) CONCAT '-' CONCAT SUBSTR(DIGITS(hedtr), 5, 2) CONCAT '-' CONCAT RIGHT( DIGITS(hedtr), 2) )  >  ( CURRENT DATE - :dftdg DAYS ) "); 
+		if(qDto.getHedtop() == 0) {  //Bara om dato är tomt
+			queryString.append(" AND  hedtr >= "+fromDate);
 		}
-		queryString.append(" AND hedtr > 0 ");
 		queryString.append(" ORDER BY hedtr DESC ");		
 		
 		logger.info("queryString="+queryString.toString());
@@ -50,26 +48,24 @@ public class HeadfDaoServiceImpl extends GenericDaoServiceImpl<HeadfDao> impleme
 
 	}
 
-	private String setDateIntAsStringForTheMysteriousDB2Format(HeadfDto qDto) {
-		if (qDto.getHedtop() == 0) {
-			return null;
-		}
-		Integer value = qDto.getHedtop();
-		SimpleDateFormat originalFormat = new SimpleDateFormat("yyyyMMdd");
-		Date date = null;
+	
+	
+	private int fromDate(int hedtop, int dftdg) {
+		String hedstopAsString = String.valueOf(hedtop);  
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		Calendar c = Calendar.getInstance();
 		try {
-			date = originalFormat.parse(value.toString());
+			c.setTime(sdf.parse(hedstopAsString));
 		} catch (ParseException e) {
-			logger.error( e);
+			e.printStackTrace();
 		}
-
-		SimpleDateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd");
+		c.add(Calendar.DATE, -dftdg);  // number of days withdraw
+		hedstopAsString = sdf.format(c.getTime()); 
 		
-		String hedtopAsString =  newFormat.format(date);	
-		qDto.setHedtopAsString(hedtopAsString);
-		return hedtopAsString;
+		return Integer.valueOf(hedstopAsString.toString());
+		
 	}
-
+	
 	@Override
 	public HeadfDao find(int heavd, int heopd) {
 		HeadfDao qDao = new HeadfDao();

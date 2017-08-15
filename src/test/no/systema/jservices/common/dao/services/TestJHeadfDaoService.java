@@ -6,6 +6,9 @@ import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,7 +62,6 @@ public class TestJHeadfDaoService {
 	public final void testGetListAvdDato() {
 		qDao.setHeavd(2);
 		qDao.setHedtop(20000210);
-		qDao.setWhereClause(true);
 		List<HeadfDto> resultDaoList = headfDaoService.get(qDao);
 		assertTrue("Should be many, is="+resultDaoList.size(), resultDaoList.size() > 100);
 	}
@@ -67,7 +69,6 @@ public class TestJHeadfDaoService {
 	@Test
 	public final void testGetListAvd() {
 		qDao.setHeavd(2);
-		qDao.setWhereClause(true);
 		List<HeadfDto> resultDaoList = headfDaoService.get(qDao);
 		assertTrue("Should be many, is="+resultDaoList.size(), resultDaoList.size() > 100);
 	}
@@ -77,7 +78,6 @@ public class TestJHeadfDaoService {
 		qDao.setHenas("%DATA%");
 		qDao.setHenak("THAR%");
 		qDao.setHedtop(20000101);
-		qDao.setWhereClause(true);
 		List<HeadfDto> resultDaoList = headfDaoService.get(qDao);
 		assertEquals("Should be the same", 1, resultDaoList.size());
 	}	
@@ -88,7 +88,6 @@ public class TestJHeadfDaoService {
 		qDao.setHenas("%DATA%");
 		qDao.setHesg("%JOV%");
 		qDao.setHedtop(20000101);
-		qDao.setWhereClause(true);
 		List<HeadfDto> resultDaoList = headfDaoService.get(qDao);
 		assertEquals("Should be the same", 1, resultDaoList.size());
 	}	
@@ -104,6 +103,14 @@ public class TestJHeadfDaoService {
 		assertEquals("Should be the same", 3, resultDaoList.size());		
 		
 	}
+	
+	@Test
+	public final void testDato() {
+		qDao.setDftdg(10);
+		qDao.setHedtop(20130101);
+		List<HeadfDto> resultDaoList = headfDaoService.get(qDao);
+		assertTrue("Should be many, is="+resultDaoList.size(), resultDaoList.size() > 100);
+	}	
 	
 	@Test
 	public final void testExist() {
@@ -150,7 +157,6 @@ public class TestJHeadfDaoService {
 		assertTrue(updateDao.getHeavd() + ", " + updateDao.getHeopd() + " should not exist", !exist);
 
 	}		
-	
 	
 	private HeadfDao getBigHeadfDao() {
 		HeadfDao dao = new HeadfDao();
