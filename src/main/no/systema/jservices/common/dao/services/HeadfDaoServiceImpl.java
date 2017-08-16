@@ -27,19 +27,22 @@ public class HeadfDaoServiceImpl extends GenericDaoServiceImpl<HeadfDao> impleme
 		queryString.append(" WHERE (:heavd = 0 OR heavd = :heavd )");
 		queryString.append(" AND   (:heopd = 0 OR heopd = :heopd )");
 		
-		//TODO Om avd och op, inga andra wherecluase
-		
-		queryString.append(" AND   (:hedtop = 0 OR hedtop >= :hedtop )");
-		queryString.append(" AND   (:henas IS NULL OR henas like :henas ) ");
-		queryString.append(" AND   (:henak IS NULL OR henak like :henak ) ");
-		queryString.append(" AND   (:hesg  IS NULL OR hesg  like :hesg ) ");
-		queryString.append(" AND   (:helks IS NULL OR helks = :helks ) ");
-		queryString.append(" AND   (:hepns IS NULL OR hepns = :hepns ) ");
-		queryString.append(" AND   (:helkk IS NULL OR helkk = :helkk ) ");
-		queryString.append(" AND   (:hepnk IS NULL OR hepnk = :hepnk ) ");
-		if(qDto.getHedtop() == 0) {  //Bara om dato är tomt
-			queryString.append(" AND  hedtr >= "+fromDate);
+		if (qDto.getHeavd() > 0 && qDto.getHeopd() > 0) {
+			logger.info("heavd and heopd delivered, no more in where-clause");
+		} else {
+			queryString.append(" AND   (:hedtop = 0 OR hedtop >= :hedtop )");
+			queryString.append(" AND   (:henas IS NULL OR henas like :henas ) ");
+			queryString.append(" AND   (:henak IS NULL OR henak like :henak ) ");
+			queryString.append(" AND   (:hesg  IS NULL OR hesg  like :hesg ) ");
+			queryString.append(" AND   (:helks IS NULL OR helks = :helks ) ");
+			queryString.append(" AND   (:hepns IS NULL OR hepns = :hepns ) ");
+			queryString.append(" AND   (:helkk IS NULL OR helkk = :helkk ) ");
+			queryString.append(" AND   (:hepnk IS NULL OR hepnk = :hepnk ) ");
+			if(qDto.getHedtop() == 0) {  //Only if date not delivered
+				queryString.append(" AND  hedtr >= "+fromDate);
+			}
 		}
+		
 		queryString.append(" ORDER BY hedtr DESC ");		
 		
 		logger.info("queryString="+queryString.toString());

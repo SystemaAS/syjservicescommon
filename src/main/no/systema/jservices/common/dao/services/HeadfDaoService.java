@@ -9,9 +9,7 @@ public interface HeadfDaoService extends GenericDaoService<HeadfDao> {
 	
 	/**
 	 * Retrieves all <b>HeadfDto</b> , potentially filtered on its parameters.</br>
-	 * Special treatment on hedtop: if delivered, filter on hedtop where hedtop is between delivered hedtop and CURRENT DATE.<br>
-	 * If no query params is set, days to view in list, dftdg, is used.<br>
-	 * hedtop and hedtr must not be 0.
+	 * If no hedtop(fromDate) is set, days to view in list, dftdg, is used.<br>
 	 * @param qDto HeadfDto populated with queryparams.
 	 * @return a list with {@link HeadfDto}
 	 */

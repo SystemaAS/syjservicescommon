@@ -209,6 +209,8 @@ public class HeadfDao implements IDao {
 	private int heunik; //     pakket       9  0       5      1662        begge    recordnr      
 	private String hereff; //     tegn           17      17      1667        begge    referanse     
 
+	Map<String, Object> keys = new HashMap<String, Object>();
+	
 	public int getHedtop() {
 		return hedtop;
 	}
@@ -752,8 +754,6 @@ public class HeadfDao implements IDao {
 	public void setHepoen(int hepoen) {
 		this.hepoen = hepoen;
 	}
-
-	Map<String, Object> keys = new HashMap<String, Object>();
 
 	public String getHest() {
 		return hest;

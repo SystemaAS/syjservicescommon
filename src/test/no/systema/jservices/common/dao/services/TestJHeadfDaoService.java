@@ -1,14 +1,10 @@
 package no.systema.jservices.common.dao.services;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -103,6 +99,23 @@ public class TestJHeadfDaoService {
 		assertEquals("Should be the same", 3, resultDaoList.size());		
 		
 	}
+	
+	@Test
+	public final void testHeavdHeopd() {
+		qDao.setHeavd(80);
+		qDao.setHeopd(201602);
+		
+		qDao.setHenas("%DATA%");//ignored
+		qDao.setHesg("%JOV%");//ignored
+		qDao.setHedtop(20000101);	//ignored
+		qDao.setDftdg(10);//ignored
+		
+		List<HeadfDto> resultDaoList = headfDaoService.get(qDao);
+		assertEquals("Should be the same", 1, resultDaoList.size());		
+		
+	}	
+	
+	
 	
 	@Test
 	public final void testDato() {
