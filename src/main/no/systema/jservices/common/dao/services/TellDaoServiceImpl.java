@@ -20,27 +20,14 @@ public class TellDaoServiceImpl extends GenericDaoServiceImpl<TellDao> implement
 
 	@Override
 	public void substractTeopdn(int teavd) {
-//		int existingTeopdn;
-//		TellDao qDao = new TellDao();
-//		qDao.setTeavd(teavd);
-//		TellgeDao dao = find(qDao);
-//		existingTeopdn = Integer.parseInt(dao.getGeno());
-//		dao.setGeno(String.valueOf(--existingTeopdn));
-//		update(dao);
+		int existingTeopdn;
+		TellDao qDao = new TellDao();
+		qDao.setTeavd(teavd);
+		TellDao dao = find(qDao);
+		existingTeopdn = dao.getTeopdn();
+		dao.setTeopdn(--existingTeopdn);
+		update(dao);
 		
 	}
 
-	
-
-//
-//	@Override
-//	public void substractGeno(String geco) {
-//		int existingGeno;
-//		TellgeDao qDao = new TellgeDao();
-//		qDao.setGeco(geco);
-//		TellgeDao dao = find(qDao);
-//		existingGeno = Integer.parseInt(dao.getGeno());
-//		dao.setGeno(String.valueOf(--existingGeno));
-//		update(dao);
-//	}
 }
