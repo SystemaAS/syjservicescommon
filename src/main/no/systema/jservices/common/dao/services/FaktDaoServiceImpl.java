@@ -24,6 +24,7 @@ public class FaktDaoServiceImpl extends GenericDaoServiceImpl<FaktDao> implement
 		queryString.append(" and  faavd > 0 ");
 		queryString.append(" and  faopd > 0  ");
 		queryString.append(" group by faopd, faavd , fadato, fakda ");
+		queryString.append(" order by fadato ");
 		return getJdbcTemplate().query(queryString.toString(), new GenericObjectMapper(new FaktDto()));
 	}
 	
