@@ -15,12 +15,17 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import no.systema.jservices.common.dao.HeadfDao;
+import no.systema.jservices.common.dao.SyparfDao;
+import no.systema.jservices.common.dao.TellDao;
+import no.systema.jservices.common.dao.TellgeDao;
 import no.systema.jservices.common.dto.HeadfDto;
+import no.systema.jservices.common.values.FasteKoder;
 
 public class TestJHeadfDaoService {
 
 	ApplicationContext context = null;
 	HeadfDaoService headfDaoService = null;
+	TellDaoService tellDaoService = null;
 	HeadfDto qDao = null;
 	int VERY_MANY_DAYS = 20*365;
 
@@ -28,8 +33,9 @@ public class TestJHeadfDaoService {
 	public void setUp() throws Exception {
 		context = new ClassPathXmlApplicationContext("syjservicescommon-data-service-test.xml");
 		headfDaoService = (HeadfDaoService) context.getBean("headfDaoService");
-		 qDao = new HeadfDto();
-		 qDao.setDftdg(VERY_MANY_DAYS);
+		qDao = new HeadfDto();
+		qDao.setDftdg(VERY_MANY_DAYS);
+		tellDaoService = (TellDaoService) context.getBean("tellDaoService");
 	}
 
 	@Test
@@ -171,6 +177,31 @@ public class TestJHeadfDaoService {
 
 	}		
 	
+
+	@SuppressWarnings("unused")
+	@Test
+	public final void testCreateAndDeleteRollbackCheck() {
+		HeadfDao dao = getBigHeadfDao();
+		dao.setHesg("JOV_AND_THE LONG_HORNS_SHOULD_GENERATE_EXCEPTION");
+		
+		TellDao tellqDao = new TellDao();
+		tellqDao.setTeavd(dao.getHeavd());
+		TellDao tellDao =  tellDaoService.find(tellqDao);		
+		int before = tellDao.getTeopdn();
+		
+		try {
+			HeadfDao returnDao = headfDaoService.create(dao);
+			assertTrue("Exception should have been thrown", false);
+		} catch (Exception e) {
+			assertTrue("RuntimeException should have been thrown",e instanceof RuntimeException );
+		}
+
+		tellDao =  tellDaoService.find(tellqDao);		
+		int after = tellDao.getTeopdn();
+		assertEquals("Update of teopdn should have been rolledback",before, after); 
+		
+	}	
+		
 	private HeadfDao getBigHeadfDao() {
 		HeadfDao dao = new HeadfDao();
 		dao.setHeavd(1); // key

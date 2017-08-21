@@ -44,7 +44,11 @@
    <bean id="tellgeDaoService" class="no.systema.jservices.common.dao.services.TellgeDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>	
-
+	
+   <bean id="tellDaoService" class="no.systema.jservices.common.dao.services.TellDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>		
+	
 	<bean id="dktardDaoService" class="no.systema.jservices.common.dao.services.DktardDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>
@@ -153,6 +157,7 @@
 	
 	<bean id="headfDaoService" class="no.systema.jservices.common.dao.services.HeadfDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+ 		<property name="tellDaoService"><ref bean="tellDaoService"/></property>		
 	</bean>	
 
 	<bean id="svewDaoService" class="no.systema.jservices.common.dao.services.SvewDaoServiceImpl">
@@ -186,11 +191,16 @@
         </tx:attributes>
     </tx:advice>
 
-    <!-- Dao service Transactions -->
+    <!-- Dao service 2PC Transactions -->
     <aop:config>
     	<!--  SyparfDao -->
         <aop:pointcut id="syparfDaoOperation" expression="execution(* no.systema.jservices.common.dao.services.SyparfDaoService.*(..))"/>
         <aop:advisor advice-ref="transactionAdvice" pointcut-ref="syparfDaoOperation"/>
-    </aop:config>  
+    </aop:config> 
+    <aop:config>
+    	<!--  HeadfDao -->
+        <aop:pointcut id="headfDaoOperation" expression="execution(* no.systema.jservices.common.dao.services.HeadfDaoService.*(..))"/>
+        <aop:advisor advice-ref="transactionAdvice" pointcut-ref="headfDaoOperation"/>
+    </aop:config>      
 
 </beans>

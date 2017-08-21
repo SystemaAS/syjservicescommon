@@ -88,6 +88,14 @@
 		</property>
 	</bean>
 	
+	<bean id="tellDaoService"
+		class="no.systema.jservices.common.dao.services.TellDaoServiceImpl">
+		<property name="jdbcTemplate">
+			<ref bean="jdbcTemplate" />
+		</property>
+	</bean>	
+	
+	
 	<bean id="sadvareDaoService"
 		class="no.systema.jservices.common.dao.services.SadvareDaoServiceImpl">
 		<property name="jdbcTemplate">
@@ -212,6 +220,8 @@
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
+		<property name="tellDaoService"><ref bean="tellDaoService"/></property>
+
 	</bean>	
 
 	<bean id="svewDaoService"
@@ -273,12 +283,17 @@
         </tx:attributes>
     </tx:advice>
 
-    <!-- Dao service Transactions -->
+    <!-- Dao service 2PC Transactions -->
     <aop:config>
     	<!--  SyparfDao -->
         <aop:pointcut id="syparfDaoOperation" expression="execution(* no.systema.jservices.common.dao.services.SyparfDaoService.*(..))"/>
         <aop:advisor advice-ref="transactionAdvice" pointcut-ref="syparfDaoOperation"/>
-    </aop:config>   
+    </aop:config>  
+    <aop:config>
+    	<!--  HeadfDao -->
+        <aop:pointcut id="headfDaoOperation" expression="execution(* no.systema.jservices.common.dao.services.HeadfDaoService.*(..))"/>
+        <aop:advisor advice-ref="transactionAdvice" pointcut-ref="headfDaoOperation"/>
+    </aop:config>        
 
 	<bean id="dataSource" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource"
 		destroy-method="close">

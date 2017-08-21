@@ -77,4 +77,23 @@ public class HeadfDaoServiceImpl extends GenericDaoServiceImpl<HeadfDao> impleme
 		return find(qDao);
 	}
 
+	@Override
+	public HeadfDao create(HeadfDao dao) {
+		int teopdn = tellDaoService.getTeopdnAndIncrement(dao.getHeavd());
+		dao.setHeopd(teopdn); 
+		return super.create(dao);
+	}
+	
+	@Override
+	public void delete(Object id) {
+		HeadfDao dao = (HeadfDao) id;
+		super.delete(id);
+		tellDaoService.substractTeopdn(dao.getHeavd());
+	}
+	
+	private TellDaoService tellDaoService = null;                                                            
+	public void setTellDaoService( TellDaoService tellDaoService) {this.tellDaoService = tellDaoService;}          
+	public TellDaoService getTellDaoService() {return this.tellDaoService;}	
+	
+	
 }

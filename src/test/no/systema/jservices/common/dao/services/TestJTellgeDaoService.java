@@ -3,91 +3,50 @@ package no.systema.jservices.common.dao.services;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import no.systema.jservices.common.dao.TellgeDao;
-import no.systema.jservices.common.values.FasteKoder;
+import no.systema.jservices.common.dao.TellDao;
 
 public class TestJTellgeDaoService {
 
 	ApplicationContext context = null;
-	TellgeDaoService tellgeDaoService = null;
+	TellDaoService tellDaoService = null;
+	int teavd = 1;
+	TellDao qDao = new TellDao();
 
 	
 	@Before
 	public void setUp() throws Exception {
 			context = new ClassPathXmlApplicationContext("syjservicescommon-data-service-test.xml");
-			tellgeDaoService = (TellgeDaoService) context.getBean("tellgeDaoService");
+			tellDaoService = (TellDaoService) context.getBean("tellDaoService");
+			qDao.setTeavd(teavd);
 	}
 
 	@Test
 	public final void testExist() {
-		TellgeDao qDao = new TellgeDao();
-		qDao.setGeco(FasteKoder.SYPAR.toString());
-		
-		boolean exist =  tellgeDaoService.exist(qDao);
-		assertTrue(qDao.getGeco() +" should exist",exist);
+		boolean exist =  tellDaoService.exist(qDao);
+		assertTrue(qDao.getTeavd() +" should exist",exist);
 		
 	}	
 	
 	@Test
-	public final void testGetGenoAndIncrement() {
-		TellgeDao qDao = new TellgeDao();
-		qDao.setGeco(FasteKoder.SYPAR.toString());
+	public final void testGetTeopdnAndIncrement() {
+		TellDao resultDao =  tellDaoService.find(qDao);
 		
-		TellgeDao resultDao =  tellgeDaoService.find(qDao);
-		
-		int geno = tellgeDaoService.getGenoAndIncrement("SYPAR");
-		int genoUpdated = Integer.parseInt(resultDao.getGeno()) + 1;
-		assertEquals("Should have been incremented with 1", genoUpdated, geno);
+		int teopdn = tellDaoService.getTeopdnAndIncrement(1);
+		int teopdnUpdated = resultDao.getTeopdn() + 1;
+		assertEquals("Should have been incremented with 1", teopdnUpdated, teopdn);
 		
 		//Clean db
-		tellgeDaoService.substractGeno("SYPAR");
-		resultDao =  tellgeDaoService.find(qDao);
-		genoUpdated = Integer.parseInt(resultDao.getGeno());
-		assertEquals("Should have been substracted with 1", genoUpdated, geno -1);
+		tellDaoService.substractTeopdn(teavd);
+		resultDao =  tellDaoService.find(qDao);
+		teopdnUpdated = resultDao.getTeopdn();
+		assertEquals("Should have been substracted with 1", teopdnUpdated, teopdn -1);
 		
 	}
 	
-	@Test
-	public final void testFindAll() {
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("geco", "ESPEDPRD");
-		List<TellgeDao> list = tellgeDaoService.findAll(params);
-		assertEquals("Should be 1", 1, list.size());
-		
-	}
-	
-	@Test
-	public final void testFindAllWithLike() {
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("geco", "%ESP");
-		List<TellgeDao> list = tellgeDaoService.findAll(params);
-		assertEquals("Should be 0", 0, list.size());
-	
-		params = new HashMap<String, Object>();
-		params.put("geco", "SYPAR");
-		list = tellgeDaoService.findAll(params);
-		assertEquals("Should be 1", 1, list.size());		
-		
-		params = new HashMap<String, Object>();
-		params.put("geco", "ESP%");
-		list = tellgeDaoService.findAll(params);
-		assertEquals("Should be 2", 2, list.size());
-		
-		params = new HashMap<String, Object>();
-		params.put("geco", "%ESP%");
-		list = tellgeDaoService.findAll(params);
-		assertEquals("Should be 2", 2, list.size());
-		
-	}	
-
 	
 }
