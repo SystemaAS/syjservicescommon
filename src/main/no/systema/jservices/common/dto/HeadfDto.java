@@ -6,14 +6,15 @@ import java.util.Map;
 import no.systema.jservices.common.dao.IDao;
 
 /**
- * * This is the Data Transfer Object between service and UI delivering data into searchlist, due to big HeadfDao appr. 200 attributes.
+ * * This is the Data Transfer Object between service and UI delivering data
+ * into searchlist, due to big HeadfDao appr. 200 attributes.
  * 
  * @author Fredrik Möller
  * @date Aug 7, 2017
  *
  */
 public class HeadfDto implements IDao {
-	private int heavd; 
+	private int heavd;
 	private int heopd;
 	private int hedtop;
 	private int hedtr;
@@ -31,11 +32,19 @@ public class HeadfDto implements IDao {
 	private String heur;
 	private int hepro;
 	private String hegn;
-	
-	/* days to view in list*/
+	private String hest;
+	/* days to view in list */
 	@ExludeMapping
-	private int dftdg; 
-	
+	private int dftdg;
+
+	public String getHest() {
+		return hest;
+	}
+
+	public void setHest(String hest) {
+		this.hest = hest;
+	}
+
 	public String getHeur() {
 		return heur;
 	}
@@ -190,7 +199,7 @@ public class HeadfDto implements IDao {
 
 	@Override
 	public Map<String, Object> getKeys() {
-		//Only to be used in IDao context.
+		// Only to be used in IDao context.
 		return null;
 	}
 
