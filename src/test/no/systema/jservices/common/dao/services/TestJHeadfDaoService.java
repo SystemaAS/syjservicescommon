@@ -15,11 +15,12 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import no.systema.jservices.common.dao.HeadfDao;
-import no.systema.jservices.common.dao.SyparfDao;
 import no.systema.jservices.common.dao.TellDao;
-import no.systema.jservices.common.dao.TellgeDao;
+import no.systema.jservices.common.dto.ArktxtDto;
 import no.systema.jservices.common.dto.HeadfDto;
-import no.systema.jservices.common.values.FasteKoder;
+import no.systema.jservices.common.json.JsonDtoContainer;
+import no.systema.jservices.common.json.JsonReader;
+import no.systema.jservices.common.json.JsonResponseWriter2;
 
 public class TestJHeadfDaoService {
 
@@ -27,6 +28,7 @@ public class TestJHeadfDaoService {
 	HeadfDaoService headfDaoService = null;
 	TellDaoService tellDaoService = null;
 	HeadfDto qDao = null;
+	HeadfDao dao = null;
 	int VERY_MANY_DAYS = 20*365;
 
 	@Before
@@ -34,6 +36,7 @@ public class TestJHeadfDaoService {
 		context = new ClassPathXmlApplicationContext("syjservicescommon-data-service-test.xml");
 		headfDaoService = (HeadfDaoService) context.getBean("headfDaoService");
 		qDao = new HeadfDto();
+		dao = new HeadfDao();
 		qDao.setDftdg(VERY_MANY_DAYS);
 		tellDaoService = (TellDaoService) context.getBean("tellDaoService");
 	}
@@ -148,7 +151,7 @@ public class TestJHeadfDaoService {
 
 	@Test
 	public final void testCreateAndDelete() {
-		HeadfDao dao = getBigHeadfDao();
+		dao = getBigHeadfDao();
 		HeadfDao returnDao = headfDaoService.create(dao);
 		assertNotNull(returnDao);
 
@@ -162,7 +165,7 @@ public class TestJHeadfDaoService {
 	@Test
 	public final void testCreateUpdateAndDelete() {
 		String updHenas = "Updated namn";
-		HeadfDao dao = getBigHeadfDao();
+		dao = getBigHeadfDao();
 		HeadfDao returnDao = headfDaoService.create(dao);
 		HeadfDao updateDao = null;
 		assertNotNull(returnDao);
@@ -181,7 +184,7 @@ public class TestJHeadfDaoService {
 	@SuppressWarnings("unused")
 	@Test
 	public final void testCreateAndDeleteRollbackCheck() {
-		HeadfDao dao = getBigHeadfDao();
+		dao = getBigHeadfDao();
 		dao.setHesg("JOV_AND_THE LONG_HORNS_SHOULD_GENERATE_EXCEPTION");
 		
 		TellDao tellqDao = new TellDao();
@@ -201,7 +204,32 @@ public class TestJHeadfDaoService {
 		assertEquals("Update of teopdn should have been rolledback",before, after); 
 		
 	}	
+
+	@Test
+	public final void testAsJsonObject() {
+		dao = getBigHeadfDao();
+		HeadfDao record = new HeadfDao();
+		//writer
+		JsonResponseWriter2<HeadfDao> jsonWriter = new JsonResponseWriter2<HeadfDao>();
+		//reader
+		JsonReader<JsonDtoContainer<HeadfDao>> jsonReader = new JsonReader<JsonDtoContainer<HeadfDao>>();
+		jsonReader.set(new JsonDtoContainer<HeadfDao>());
+
+		//****Returned from tror-service****/
+		String json = jsonWriter.setJsonResult_Common_GetComposite("OSCAR", dao);	
+		//**********************************/
+		//System.out.println("json="+json);
+		assertNotNull(json);
+		JsonDtoContainer<HeadfDao> container = (JsonDtoContainer<HeadfDao>) jsonReader.get(json);
+		if (container != null) {
+			for (HeadfDao dao : container.getDtoList()) {
+				record = dao;
+				assertNotNull(record.getHeopd());
+			}
+		}
 		
+	}
+	
 	private HeadfDao getBigHeadfDao() {
 		HeadfDao dao = new HeadfDao();
 		dao.setHeavd(1); // key
