@@ -218,7 +218,7 @@ public class TestJHeadfDaoService {
 		//****Returned from tror-service****/
 		String json = jsonWriter.setJsonResult_Common_GetComposite("OSCAR", dao);	
 		//**********************************/
-		//System.out.println("json="+json);
+		System.out.println("json="+json);
 		assertNotNull(json);
 		JsonDtoContainer<HeadfDao> container = (JsonDtoContainer<HeadfDao>) jsonReader.get(json);
 		if (container != null) {
