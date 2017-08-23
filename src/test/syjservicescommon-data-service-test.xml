@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:aop="http://www.springframework.org/schema/aop"
-  xmlns:tx="http://www.springframework.org/schema/tx"
-  xsi:schemaLocation="
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
   http://www.springframework.org/schema/beans 
   http://www.springframework.org/schema/beans/spring-beans.xsd
   http://www.springframework.org/schema/tx 
@@ -52,15 +51,15 @@
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
-	</bean>	
+	</bean>
 
 	<bean id="kufastDaoService"
 		class="no.systema.jservices.common.dao.services.KufastDaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
-	</bean>		
-	
+	</bean>
+
 	<bean id="fratxtDaoService"
 		class="no.systema.jservices.common.dao.services.FratxtDaoServiceImpl">
 		<property name="jdbcTemplate">
@@ -70,8 +69,12 @@
 
 	<bean id="syparfDaoService"
 		class="no.systema.jservices.common.dao.services.SyparfDaoServiceImpl">
-		<property name="jdbcTemplate"><ref bean="jdbcTemplate" /></property>
-		<property name="tellgeDaoService"><ref bean="tellgeDaoService"/></property>
+		<property name="jdbcTemplate">
+			<ref bean="jdbcTemplate" />
+		</property>
+		<property name="tellgeDaoService">
+			<ref bean="tellgeDaoService" />
+		</property>
 	</bean>
 
 	<bean id="dktseDaoService"
@@ -87,227 +90,241 @@
 			<ref bean="jdbcTemplate" />
 		</property>
 	</bean>
-	
+
 	<bean id="tellDaoService"
 		class="no.systema.jservices.common.dao.services.TellDaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
-	</bean>	
-	
-	
+	</bean>
+
+
 	<bean id="sadvareDaoService"
 		class="no.systema.jservices.common.dao.services.SadvareDaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
-	</bean>	
-	
+	</bean>
+
 	<bean id="kodts7DaoService"
 		class="no.systema.jservices.common.dao.services.Kodts7DaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
 	</bean>
-	
+
 	<bean id="kodts2DaoService"
 		class="no.systema.jservices.common.dao.services.Kodts2DaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
-	</bean>	
-	
+	</bean>
+
 	<bean id="tariDaoService"
 		class="no.systema.jservices.common.dao.services.TariDaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
-	</bean>	
+	</bean>
 
 	<bean id="kodts5DaoService"
 		class="no.systema.jservices.common.dao.services.Kodts5DaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
-	</bean>	
-	
+	</bean>
+
 	<bean id="kodts6DaoService"
 		class="no.systema.jservices.common.dao.services.Kodts6DaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
 	</bean>
-	
+
 	<bean id="kodts8DaoService"
 		class="no.systema.jservices.common.dao.services.Kodts8DaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
-	</bean>			
-	
+	</bean>
+
 	<bean id="kodtsaDaoService"
 		class="no.systema.jservices.common.dao.services.KodtsaDaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
-	</bean>	
-	
+	</bean>
+
 	<bean id="kodtsbDaoService"
 		class="no.systema.jservices.common.dao.services.KodtsbDaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
 	</bean>
-	
+
 	<bean id="kodtvalfDaoService"
 		class="no.systema.jservices.common.dao.services.KodtvalfDaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
-	</bean>	
-	
+	</bean>
+
 	<bean id="kodtvaDaoService"
 		class="no.systema.jservices.common.dao.services.KodtvaDaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
-	</bean>							
+	</bean>
 
 	<bean id="arktxtDaoService"
 		class="no.systema.jservices.common.dao.services.ArktxtDaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
-	</bean>	
+	</bean>
 
 	<bean id="arkextDaoService"
 		class="no.systema.jservices.common.dao.services.ArkextDaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
-	</bean>	
+	</bean>
 
 	<bean id="kodtftDaoService"
 		class="no.systema.jservices.common.dao.services.KodtftDaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
-	</bean>	
+	</bean>
 
 	<bean id="cum3lmDaoService"
 		class="no.systema.jservices.common.dao.services.Cum3lmDaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
-	</bean>	
+	</bean>
 
 	<bean id="firmDaoService"
 		class="no.systema.jservices.common.dao.services.FirmDaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
-	</bean>	
-	
+	</bean>
+
 	<bean id="faktDaoService"
 		class="no.systema.jservices.common.dao.services.FaktDaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
-	</bean>		
+	</bean>
 
 	<bean id="headfDaoService"
 		class="no.systema.jservices.common.dao.services.HeadfDaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
-		<property name="tellDaoService"><ref bean="tellDaoService"/></property>
+		<property name="tellDaoService">
+			<ref bean="tellDaoService" />
+		</property>
 
-	</bean>	
+	</bean>
 
 	<bean id="svewDaoService"
 		class="no.systema.jservices.common.dao.services.SvewDaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
-	</bean>		
+	</bean>
 
 	<bean id="sviwDaoService"
 		class="no.systema.jservices.common.dao.services.SviwDaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
-	</bean>	
-	
+	</bean>
+
 	<bean id="svtx03fDaoService"
 		class="no.systema.jservices.common.dao.services.Svtx03fDaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
-	</bean>	
-	
+	</bean>
+
 	<bean id="svtx10fDaoService"
 		class="no.systema.jservices.common.dao.services.Svtx10fDaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
-	</bean>	
+	</bean>
 
 	<bean id="svtproDaoService"
 		class="no.systema.jservices.common.dao.services.SvtproDaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
-	</bean>	
+	</bean>
 
 	<bean id="bridfDaoService"
 		class="no.systema.jservices.common.dao.services.BridfDaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
-	</bean>	
-	
+	</bean>
+
 	<bean id="dokufDaoService"
 		class="no.systema.jservices.common.dao.services.DokufDaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
-	</bean>	
-	
+		<property name="firfbDaoService">
+			<ref bean="firfbDaoService" />
+		</property>
+	</bean>
+
 	<bean id="firfbDaoService"
 		class="no.systema.jservices.common.dao.services.FirfbDaoServiceImpl">
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
-	</bean>		
-	
+	</bean>
+
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource">
 			<ref bean="dataSource" />
 		</property>
 	</bean>
-	
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
-	</bean>	
+	</bean>
 
-    <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
-        <tx:attributes>
-            <tx:method name="find*" read-only="true"/>
-            <tx:method name="*" rollback-for="Throwable"/>
-        </tx:attributes>
-    </tx:advice>
+	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="find*" read-only="true" />
+			<tx:method name="*" rollback-for="Throwable" />
+		</tx:attributes>
+	</tx:advice>
 
-    <!-- Dao service 2PC Transactions -->
-    <aop:config>
-    	<!--  SyparfDao -->
-        <aop:pointcut id="syparfDaoOperation" expression="execution(* no.systema.jservices.common.dao.services.SyparfDaoService.*(..))"/>
-        <aop:advisor advice-ref="transactionAdvice" pointcut-ref="syparfDaoOperation"/>
-    </aop:config>  
-    <aop:config>
-    	<!--  HeadfDao -->
-        <aop:pointcut id="headfDaoOperation" expression="execution(* no.systema.jservices.common.dao.services.HeadfDaoService.*(..))"/>
-        <aop:advisor advice-ref="transactionAdvice" pointcut-ref="headfDaoOperation"/>
-    </aop:config>        
+	<!-- Dao service 2PC Transactions -->
+	<aop:config>
+		<!-- SyparfDao -->
+		<aop:pointcut id="syparfDaoOperation"
+			expression="execution(* no.systema.jservices.common.dao.services.SyparfDaoService.*(..))" />
+		<aop:advisor advice-ref="transactionAdvice" pointcut-ref="syparfDaoOperation" />
+	</aop:config>
+	<aop:config>
+		<!-- HeadfDao -->
+		<aop:pointcut id="headfDaoOperation"
+			expression="execution(* no.systema.jservices.common.dao.services.HeadfDaoService.*(..))" />
+		<aop:advisor advice-ref="transactionAdvice" pointcut-ref="headfDaoOperation" />
+	</aop:config>
+	<aop:config>
+		<!-- DokufDao -->
+		<aop:pointcut id="dokufDaoOperation"
+			expression="execution(* no.systema.jservices.common.dao.services.DokufDaoService.*(..))" />
+		<aop:advisor advice-ref="transactionAdvice" pointcut-ref="dokufDaoOperation" />
+	</aop:config>	
 
 	<bean id="dataSource" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource"
 		destroy-method="close">
