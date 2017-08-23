@@ -22,9 +22,9 @@ public class GSINCheckDigit {
 	 * @throws IllegalArgumentException
 	 *             if an error occurs calculating the check digit
 	 */
-	public String calculate(String code)  {
+	public static String calculate(String code)  {
 		if (code == null || code.length() == 0 || code.length() != 16) {
-			throw new IllegalArgumentException("Code lenght is incorrect");
+			throw new IllegalArgumentException("Code lenght is incorrect, code="+code);
 		}
 		int total = 0;
 		for (int i = 0; i < code.length(); i++) {
@@ -65,7 +65,7 @@ public class GSINCheckDigit {
 	 *            to left
 	 * @return The weighted value of the character.
 	 */
-	protected int weightedValue(int charValue, int rightPos) {
+	protected static int weightedValue(int charValue, int rightPos) {
 		int weight = POSITION_WEIGHT[rightPos % 2];
 		return charValue * weight;
 	}
