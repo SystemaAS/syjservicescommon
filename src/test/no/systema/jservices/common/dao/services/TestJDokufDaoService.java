@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -97,6 +98,23 @@ public class TestJDokufDaoService {
 
 	}	
 
+	@Test
+	public final void testCreateFromHeadfAndDelete() {
+		HeadfDao headfDao = getBigHeadfDao();
+		DokufDao newDao = dokufDaoService.create(headfDao);
+		boolean exist = dokufDaoService.exist(newDao);
+		System.out.println("newDao="+ReflectionToStringBuilder.toString(newDao));
+		assertTrue(newDao.getDfavd() + ", " + newDao.getDfopd() + ", " +  newDao.getDffbnr() +" should exist", exist);
+
+		dokufDaoService.delete(newDao);
+		exist = dokufDaoService.exist(newDao);
+		assertTrue(newDao.getDfavd() + ", " + newDao.getDfopd() + ", " +  newDao.getDffbnr() +" should not exist", !exist);
+		
+		
+		//Remmeber to update firfb table back to org.
+
+	}	
+	
 	
 	private DokufDao getBigDokufDao() {
 		DokufDao dao = new DokufDao();
@@ -108,6 +126,21 @@ public class TestJDokufDaoService {
 		dao.setDfm3(new BigDecimal(14.1));
 		
 		return dao;
-	}	
+	}
+	
+	
+	private HeadfDao getBigHeadfDao() {
+		HeadfDao dao = new HeadfDao();
+		dao.setHeavd(1); // key
+		dao.setHeopd(999);// key
+		dao.setHesg("JOV");
+		dao.setHeank(1);
+		dao.setHehbre(new BigDecimal(14.1));
+		
+		return dao;
+	}		
+	
+	
+	
 	
 }

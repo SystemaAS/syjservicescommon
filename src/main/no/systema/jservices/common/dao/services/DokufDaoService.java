@@ -9,7 +9,8 @@ public interface DokufDaoService extends GenericDaoService<DokufDao> {
 	 * Create, e.g. copy much of data from {@link HeadfDao}
 	 * 
 	 * @param headfDao a populated dao.
+	 * @return {@link DokufDao}
 	 */
-	public void create(HeadfDao headfDao);
+	public DokufDao create(HeadfDao headfDao);
 
 }

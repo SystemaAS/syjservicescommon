@@ -6,9 +6,9 @@ import no.systema.jservices.common.dao.HeadfDao;
 public class DokufDaoServiceImpl extends GenericDaoServiceImpl<DokufDao> implements DokufDaoService{
 
 	@Override
-	public void create(HeadfDao headfDao) {
+	public DokufDao create(HeadfDao headfDao) {
 		DokufDao newDao = getPopulatedDao(headfDao);
-		super.create(newDao);
+		return super.create(newDao);
 		
 	}
 
@@ -26,20 +26,18 @@ public class DokufDaoServiceImpl extends GenericDaoServiceImpl<DokufDao> impleme
 		newDao.setDfnavs(headfDao.getHenas());
 		newDao.setDfad1s(headfDao.getHeads1());
 		newDao.setDfad2s(" ");
-		newDao.setDfpnls(Integer.valueOf(headfDao.getHeads3().substring(0, 4)));  //TODO översyn
-		newDao.setDfad3s(headfDao.getHeads3().substring(headfDao.getHeads3().length()-25, headfDao.getHeads3().length()));  //TODO översyn
+		newDao.setDfpnls(Integer.parseInt(getFourFirstChar(headfDao.getHeads3()))); 
+		newDao.setDfad3s(getTwentyFiveLastChar(headfDao.getHeads3()));
 		newDao.setDfknsm(headfDao.getHeknk());
 		newDao.setDfnavm(headfDao.getHenak());
 		newDao.setDfad1m(headfDao.getHeadk1());
 		newDao.setDfad2m(" ");
 		newDao.setDfad3m(headfDao.getHeadk3());
-	
 		newDao.setDfnavl(headfDao.getHenak());
-
 		newDao.setDfad1l(headfDao.getHeadk1());
 		newDao.setDfad2l(" ");
-		newDao.setDfpoul(Integer.valueOf(headfDao.getHeadk3().substring(0, 4)));  //TODO översyn
-		newDao.setDfad3s(headfDao.getHeadk3().substring(headfDao.getHeadk3().length()-25, headfDao.getHeadk3().length()));  //TODO översyn
+		newDao.setDfpoul(Integer.parseInt(getFourFirstChar(headfDao.getHeadk3()))); 
+		newDao.setDfad3s(getTwentyFiveLastChar(headfDao.getHeadk3()));
 		//newDao.setDfkdme(??);
 		//newDao.setDftoll(??);
 		newDao.setDfvs(headfDao.getHevs1());
@@ -57,7 +55,18 @@ public class DokufDaoServiceImpl extends GenericDaoServiceImpl<DokufDao> impleme
 		return newDao;
 	}
 
-/*	
+	private String getFourFirstChar(String string) {
+		return string.substring(0,4);
+	}
+	
+	private String getTwentyFiveLastChar(String string) {
+		if (string != null && string.length() <= 25) {
+			return string;
+		}
+		return string.substring(string.length() - 25 ,string.length() );
+	}
+	
+	/*	
 
 HEADF               DOKUF
 (el konstant) 
@@ -72,8 +81,8 @@ HEKNS         DFKNSS newDao.setDfknss(headfDao.getHekns());
 HENAS         DFNAVS newDao.setDfnavs(headfDao.getHenas());
 HEADS1        DFAD1S newDao.setDfad1s(headfDao.getHeads1());
 *BLANKS       DFAD2S newDao.setDfad2s(" ");
-HEADS3        DFPNLS  (4 først av HEADS3 = postnr lastested)  newDao.setDfpnls(Integer.valueOf(headfDao.getHeads3().substring(0, 4)));  //TODO översyn
-HEADS3        DFAD3S  (25 siste (eller alle) av HEADS3)  newDao.setDfad3s(headfDao.getHeads3().substring(headfDao.getHeads3().length()-25, headfDao.getHeads3().length()));  //TODO översyn
+HEADS3        DFPNLS  (4 først av HEADS3 = postnr lastested) 	newDao.setDfpnls(Integer.parseInt(getFourFirstChar(headfDao.getHeads3()))); 
+HEADS3        DFAD3S  (25 siste (eller alle) av HEADS3) newDao.setDfad3s(getTwentyFiveLastChar(headfDao.getHeads3()));
 ?? (avsender 5 felt over bør hentes fra "avdeloingens kundenr" når det er import...)  ??
 HEKNK         DFKNSM newDao.setDfknsm(headfDao.getHeknk());
 HENAK         DFNAVM newDao.setDfnavm(headfDao.getHenak());
@@ -83,8 +92,8 @@ HEADK3        DFAD3M newDao.setDfad3m(headfDao.getHeadk3());
 HENAK         DFNAVL newDao.setDfnavl(headfDao.getHenak());
 HEADK1        DFAD1L newDao.setDfad1l(headfDao.getHeadk1());
 *BLANKS       DFAD2L newDao.setDfad2l(" ");
-HEADK3        DFPOUL  (4 først av HEADK3 = postnr utleveringssted)   newDao.setDfpoul(Integer.valueOf(headfDao.getHeadk3().substring(0, 4)));  //TODO översyn
-HEADK3        DFAD3S  (25 siste (eller alle) av HEADK3)  newDao.setDfad3s(headfDao.getHeadk3().substring(headfDao.getHeadk3().length()-25, headfDao.getHeadk3().length()));  //TODO översyn
+HEADK3        DFPOUL  (4 først av HEADK3 = postnr utleveringssted)  	newDao.setDfpoul(Integer.parseInt(getFourFirstChar(headfDao.getHeadk3()))); 
+HEADK3        DFAD3S  (25 siste (eller alle) av HEADK3) 	newDao.setDfad3s(getTwentyFiveLastChar(headfDao.getHeadk3()));
 ????          DFKDME  (HVIS felt for merkelapp er fylt ut i ordrebildet)   ?? inte lagrat i HEADF ??
 ????          DFTOLL  (HVIS felt for tollsted er fylt ut i ordrebildet)    ?? inte lagrat i HEADF ??
 HEVS1         DFVS   newDao.setDfvs(headfDao.getHevs1());
@@ -103,7 +112,6 @@ HEFBV         DFVKTF newDao.setDfvktf(headfDao.getHefbv());
 	private FirfbDaoService firfbDaoService = null;                                                            
 	public void setFirfbDaoService( FirfbDaoService firfbDaoService) {this.firfbDaoService = firfbDaoService;}          
 	public FirfbDaoService getFirfbDaoService() {return this.firfbDaoService;}
-	
 	
 	
 }
