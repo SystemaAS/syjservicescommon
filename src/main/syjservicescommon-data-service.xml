@@ -197,6 +197,10 @@
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>		
 	
+	<bean id="vadrDaoService" class="no.systema.jservices.common.dao.services.VadrDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>		
+	
 	
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
         <tx:attributes>
