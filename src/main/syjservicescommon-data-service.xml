@@ -222,8 +222,8 @@
     </aop:config>  
     <aop:config>
     	<!--  DokufDao -->
-        <aop:pointcut id="dokufDaoService" expression="execution(* no.systema.jservices.common.dao.services.DokufDaoService.*(..))"/>
-        <aop:advisor advice-ref="transactionAdvice" pointcut-ref="dokufDaoService"/>
+        <aop:pointcut id="dokufDaoOperation" expression="execution(* no.systema.jservices.common.dao.services.DokufDaoService.*(..))"/>
+        <aop:advisor advice-ref="transactionAdvice" pointcut-ref="dokufDaoOperation"/>
     </aop:config> 
 
 </beans>
