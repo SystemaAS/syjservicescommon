@@ -34,7 +34,7 @@ public class DokufDaoServiceImpl extends GenericDaoServiceImpl<DokufDao> impleme
 		newDao.setDfnavs(headfDao.getHenas());
 		newDao.setDfad1s(headfDao.getHeads1());
 		newDao.setDfad2s(" ");
-		newDao.setDfpnls(Integer.parseInt(getFourFirstChar(headfDao.getHeads3()))); 
+		newDao.setDfpnls(getFourFirstChar(headfDao.getHeads3())); 
 		newDao.setDfad3s(getTwentyFiveLastChar(headfDao.getHeads3()));
 		newDao.setDfknsm(headfDao.getHeknk());
 		newDao.setDfnavm(headfDao.getHenak());
@@ -44,7 +44,7 @@ public class DokufDaoServiceImpl extends GenericDaoServiceImpl<DokufDao> impleme
 		newDao.setDfnavl(headfDao.getHenak());
 		newDao.setDfad1l(headfDao.getHeadk1());
 		newDao.setDfad2l(" ");
-		newDao.setDfpoul(Integer.parseInt(getFourFirstChar(headfDao.getHeadk3()))); 
+		newDao.setDfpoul(getFourFirstChar(headfDao.getHeadk3())); 
 		newDao.setDfad3s(getTwentyFiveLastChar(headfDao.getHeadk3()));
 		//newDao.setDfkdme(??);
 		//newDao.setDftoll(??);
@@ -63,11 +63,23 @@ public class DokufDaoServiceImpl extends GenericDaoServiceImpl<DokufDao> impleme
 		return newDao;
 	}
 
-	private String getFourFirstChar(String string) {
-		return string.substring(0,4);
+	private int getFourFirstChar(String string) {
+		int nr = 0;
+		if (string == null) {
+			return nr;
+		}
+		try {
+			nr = Integer.parseInt(string.substring(0,4));
+		} catch (NumberFormatException e) {
+			//do nothing.
+		}
+		return nr;
 	}
 	
 	private String getTwentyFiveLastChar(String string) {
+		if (string == null) {
+			return null;
+		}
 		if (string != null && string.length() <= 25) {
 			return string;
 		}
