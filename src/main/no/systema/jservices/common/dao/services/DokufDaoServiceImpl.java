@@ -1,10 +1,20 @@
 package no.systema.jservices.common.dao.services;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import no.systema.jservices.common.dao.DokufDao;
 import no.systema.jservices.common.dao.HeadfDao;
 
 public class DokufDaoServiceImpl extends GenericDaoServiceImpl<DokufDao> implements DokufDaoService{
 
+	@Override
+	public DokufDao create(DokufDao t) {
+		t.setDffbnr(createDffbnr(t.getDfavd(),t.getDfopd()));
+		return super.create(t);
+	}
+	
 	@Override
 	public DokufDao create(HeadfDao headfDao) {
 		DokufDao newDao = getPopulatedDao(headfDao);
@@ -12,14 +22,12 @@ public class DokufDaoServiceImpl extends GenericDaoServiceImpl<DokufDao> impleme
 		
 	}
 
-	
 	private DokufDao getPopulatedDao(HeadfDao headfDao) {
 		DokufDao newDao = new DokufDao();
 		newDao.setDfst(" ");
 		newDao.setDfri("F");
 		newDao.setDfavd(headfDao.getHeavd());
 		newDao.setDfopd(headfDao.getHeopd());
-		//newDao.getDffbnr(??);
 		newDao.setDfsg(headfDao.getHesg());
 		newDao.setDf1004(firfbDaoService.getSendningsnr());
 		newDao.setDfknss(headfDao.getHekns());
@@ -64,6 +72,20 @@ public class DokufDaoServiceImpl extends GenericDaoServiceImpl<DokufDao> impleme
 			return string;
 		}
 		return string.substring(string.length() - 25 ,string.length() );
+	}
+
+	
+	private int createDffbnr(int avd, int opd) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("dfavd", avd);
+		params.put("dfopd", opd);
+		List<DokufDao> daoList = findAll(params);
+		if (!daoList.isEmpty()) {
+			DokufDao latestRecord = daoList.get(daoList.size()-1);
+			return latestRecord.getDffbnr() + 1;
+		} else {
+			return 1;
+		}
 	}
 	
 	/*	

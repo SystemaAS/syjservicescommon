@@ -99,28 +99,44 @@ public class TestJDokufDaoService {
 	}	
 
 	@Test
+	public final void testExistAndCreate() {
+		DokufDao dao = getBigDokufDao();
+		DokufDao returnDao = dokufDaoService.create(dao);
+		boolean exist = dokufDaoService.exist(returnDao);
+		assertTrue(returnDao.getDfavd() + ", " + returnDao.getDfopd() + ", " +  returnDao.getDffbnr() +" should exist.", exist);
+		assertTrue(returnDao.getDffbnr() == 2);
+		
+		//Clean up returnDao
+		exist = dokufDaoService.exist(returnDao);
+		assertTrue(returnDao.getDfavd() + ", " + returnDao.getDfopd() + ", " +  returnDao.getDffbnr() +" should exist, ready to be deleted.", exist);
+		dokufDaoService.delete(returnDao);
+		exist = dokufDaoService.exist(returnDao);
+		assertTrue(returnDao.getDfavd() + ", " + returnDao.getDfopd() + ", " +  returnDao.getDffbnr() +" should be deleted.", !exist);
+
+	}	
+	
+	@Test
 	public final void testCreateFromHeadfAndDelete() {
 		HeadfDao headfDao = getBigHeadfDao();
 		DokufDao newDao = dokufDaoService.create(headfDao);
 		boolean exist = dokufDaoService.exist(newDao);
-		System.out.println("newDao="+ReflectionToStringBuilder.toString(newDao));
 		assertTrue(newDao.getDfavd() + ", " + newDao.getDfopd() + ", " +  newDao.getDffbnr() +" should exist", exist);
 
 		dokufDaoService.delete(newDao);
 		exist = dokufDaoService.exist(newDao);
 		assertTrue(newDao.getDfavd() + ", " + newDao.getDfopd() + ", " +  newDao.getDffbnr() +" should not exist", !exist);
 		
-		
-		//Remmeber to update firfb table back to org.
+		//Remember to update firfb table back to org.
 
 	}	
 	
 	
+	
 	private DokufDao getBigDokufDao() {
 		DokufDao dao = new DokufDao();
-		dao.setDfavd(1); // key
-		dao.setDfopd(999);// key
-		dao.setDffbnr(1); //key
+		dao.setDfavd(1); // key /*EXIST in DB*/
+		dao.setDfopd(999);// key /*EXIST in DB*/
+		//dffbnr generated //key
 		dao.setDfnt(1);
 		dao.setDfpro2("Prod tekst");
 		dao.setDfm3(new BigDecimal(14.1));
