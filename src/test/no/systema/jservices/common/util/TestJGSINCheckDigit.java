@@ -24,11 +24,16 @@ public class TestJGSINCheckDigit {
 	@Test
 	public final void testValidGsin() {
 		String cd1 =GSINCheckDigit.calculate("7012345000123456");
-		assertEquals("1", cd1);
+		assertEquals("1", cd1);  //http://www.gs1.no/produkter-og-tjenester/onlinetjenester/kontrollsifferberegning
 
 		String cd2 =GSINCheckDigit.calculate("4356223942392349");
 		assertEquals("4", cd2);		
 		
+		
+		String cd3 =GSINCheckDigit.calculate("7070155005000108");
+		assertEquals("3", cd3);		
+		
+		
 	}
-
+	
 }

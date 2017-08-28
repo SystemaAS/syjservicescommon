@@ -38,6 +38,9 @@ public class GSINCheckDigit {
 		}
 
 		int value = 10 - total % 10;
+		if (value == 10) {  //Sanity check
+			value = 0;
+		}
 		return String.valueOf(value);
 
 	}
