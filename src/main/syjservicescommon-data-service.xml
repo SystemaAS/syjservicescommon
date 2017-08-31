@@ -200,7 +200,10 @@
 	<bean id="vadrDaoService" class="no.systema.jservices.common.dao.services.VadrDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>		
-	
+
+	<bean id="sted2DaoService" class="no.systema.jservices.common.dao.services.Sted2DaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>	
 	
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
         <tx:attributes>
