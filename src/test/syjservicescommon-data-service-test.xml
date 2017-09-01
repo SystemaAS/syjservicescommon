@@ -316,6 +316,13 @@
 		</property>
 	</bean>		
 	
+	<bean id="kodttstDaoService"
+		class="no.systema.jservices.common.dao.services.KodttstDaoServiceImpl">
+		<property name="jdbcTemplate">
+			<ref bean="jdbcTemplate" />
+		</property>
+	</bean>	
+	
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource">
 			<ref bean="dataSource" />
