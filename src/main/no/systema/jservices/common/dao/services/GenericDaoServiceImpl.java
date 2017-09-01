@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,7 @@ import no.systema.jservices.common.dao.IDao;
  *
  * @param <T>, A dao implementing {@link IDao}
  */
-public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
+public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 	protected static final Logger logger = Logger.getLogger(GenericDaoServiceImpl.class.getName());
 	private Class<T> type;
 	private String tableName;
@@ -46,6 +47,8 @@ public class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 	protected static String GREATER_THEN = " > ";
 	/** <  */
 	protected static String LESS_THEN = " < ";
+	/** map for query params, used in implementing classes.*/
+	protected Map<String, Object> params = new HashMap<String, Object>();
 	
 
 	public GenericDaoServiceImpl() {

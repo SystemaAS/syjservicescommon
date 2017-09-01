@@ -1,7 +1,6 @@
 package no.systema.jservices.common.dao.services;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -9,6 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.ibm.as400.access.AS400SecurityException;
 
 import no.systema.jservices.common.dao.Sted2Dao;
 
@@ -59,6 +60,19 @@ public class TestJSted2DaoService {
 		Sted2Dao resultDao = sted2DaoService.find(dao);
 		assertNotNull(resultDao);
 	}
+	
+	@Test
+	public final void testFindByLike() {
+		List<Sted2Dao> list = sted2DaoService.findByLike("1");
+		assertNotNull(list);
+		assertTrue(list.size() > 1);
+		
+		list = sted2DaoService.findByLike("8000");
+		assertNotNull(list);
+		assertEquals(4, list.size());		
+		
+	}
+	
 	
 	
 }
