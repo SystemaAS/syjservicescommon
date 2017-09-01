@@ -73,6 +73,15 @@ public class TestJSted2DaoService {
 		
 	}
 	
+	@Test
+	public final void testFindByLike2() {
+		List<Sted2Dao> list = sted2DaoService.findByLike("00");
+		assertNotNull(list);
+		assertTrue(list.size() > 1);
+		
+	}	
+	
+	
 	
 	
 }
