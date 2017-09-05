@@ -38,6 +38,7 @@ public class HeadfDaoServiceImpl extends GenericDaoServiceImpl<HeadfDao> impleme
 			queryString.append(" AND   (:hepns IS NULL OR hepns = :hepns ) ");
 			queryString.append(" AND   (:helkk IS NULL OR helkk = :helkk ) ");
 			queryString.append(" AND   (:hepnk IS NULL OR hepnk = :hepnk ) ");
+			queryString.append(" AND   (:hest IS NULL OR hest = :hest ) ");
 			if(qDto.getHedtop() == 0) {  //Only if date not delivered
 				queryString.append(" AND  hedtr >= "+fromDate);
 			}
