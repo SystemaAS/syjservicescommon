@@ -19,11 +19,12 @@ public class FaktDaoServiceImpl extends GenericDaoServiceImpl<FaktDao> implement
 	}
 
 	public List<FaktDto> getYearSumGroupAvdOpdDato(int year) {
-		StringBuilder queryString = new StringBuilder("select faavd, faopd, sum(fabeln) sumfabeln, fadato, fakda from fakt");
+		StringBuilder queryString = new StringBuilder("select faavd, faopd, sum(fabeln) sumfabeln, fadato, fakda, faopko ");
+		queryString.append(" from fakt ");
 		queryString.append(" where fadato > 0 ");
 		queryString.append(" and  faavd > 0 ");
 		queryString.append(" and  faopd > 0  ");
-		queryString.append(" group by faopd, faavd , fadato, fakda ");
+		queryString.append(" group by faopd, faavd , fadato, fakda, faopko ");
 		queryString.append(" order by fadato ");
 		return getJdbcTemplate().query(queryString.toString(), new GenericObjectMapper(new FaktDto()));
 	}

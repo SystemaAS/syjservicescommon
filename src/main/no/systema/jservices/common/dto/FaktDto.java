@@ -18,7 +18,16 @@ public class FaktDto implements IDao {
 	private int faopd; // oppdrag
 	private int sumfabeln; // sum pengarader
 	private String fadato; // datum
-	private String fakda;
+	private String fakda;  //pengatyp
+	private String faopko; //status
+
+	public String getFaopko() {
+		return faopko;
+	}
+
+	public void setFaopko(String faopko) {
+		this.faopko = faopko;
+	}
 
 	public String getFadato() {
 		return fadato;
