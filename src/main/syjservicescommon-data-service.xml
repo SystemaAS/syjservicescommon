@@ -211,6 +211,10 @@
 	
 	<bean id="kodttstDaoService" class="no.systema.jservices.common.dao.services.KodttstDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>
+	
+	<bean id="kodterlfDaoService" class="no.systema.jservices.common.dao.services.KodterlfDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>		
 	
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
