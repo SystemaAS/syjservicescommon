@@ -17,9 +17,26 @@ public class FaktDto implements IDao {
 	private int faavd; // avdelning
 	private int faopd; // oppdrag
 	private int sumfabeln; // sum pengarader
-	private String fadato; // datum
-	private String fakda;  //pengatyp
-	private String faopko; //status
+	private String hedtop; // datum (headf)
+	private String fakda; // pengatyp
+	private String faopko; // status
+	private int trknfa; // kundenr (headf)
+
+	public String getHedtop() {
+		return hedtop;
+	}
+
+	public void setHedtop(String hedtop) {
+		this.hedtop = hedtop;
+	}
+
+	public int getTrknfa() {
+		return trknfa;
+	}
+
+	public void setTrknfa(int trknfa) {
+		this.trknfa = trknfa;
+	}
 
 	public String getFaopko() {
 		return faopko;
@@ -27,14 +44,6 @@ public class FaktDto implements IDao {
 
 	public void setFaopko(String faopko) {
 		this.faopko = faopko;
-	}
-
-	public String getFadato() {
-		return fadato;
-	}
-
-	public void setFadato(String fadato) {
-		this.fadato = fadato;
 	}
 
 	public String getFakda() {
