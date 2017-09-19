@@ -33,18 +33,18 @@ public class TestJTellgeDaoService {
 	}	
 	
 	@Test
-	public final void testGetTeopdnAndIncrement() {
+	public final void testGetExistingTeopdnAndIncrement() {
+		int existingTeopdn = tellDaoService.getExistingTeopdnAndIncrement(teavd);
 		TellDao resultDao =  tellDaoService.find(qDao);
+		int incrementedTeopdn = resultDao.getTeopdn();
 		
-		int teopdn = tellDaoService.getTeopdnAndIncrement(1);
-		int teopdnUpdated = resultDao.getTeopdn() + 1;
-		assertEquals("Should have been incremented with 1", teopdnUpdated, teopdn);
+		assertEquals("Should have been incremented with 1, updatedTeopdn="+incrementedTeopdn+",existingTeopdn="+existingTeopdn, 1, incrementedTeopdn - existingTeopdn);
 		
 		//Clean db
 		tellDaoService.substractTeopdn(teavd);
 		resultDao =  tellDaoService.find(qDao);
-		teopdnUpdated = resultDao.getTeopdn();
-		assertEquals("Should have been substracted with 1", teopdnUpdated, teopdn -1);
+		int subtractedTeopdn = resultDao.getTeopdn();
+		assertEquals("Should have been substracted with 1", existingTeopdn, subtractedTeopdn);
 		
 	}
 	

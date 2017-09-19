@@ -5,12 +5,12 @@ import no.systema.jservices.common.dao.TellDao;
 public interface TellDaoService extends GenericDaoService<TellDao> {
 	
 	/**
-	 * Increment geno with 1 and return it updated.
+	 * Increment teopdn with 1 and but return current.
 	 * 
 	 * @param teavd, actual avdeling.
-	 * @return updated teopdn
+	 * @return existing teopdn
 	 */
-	public int getTeopdnAndIncrement(int teavd);
+	public int getExistingTeopdnAndIncrement(int teavd);
 	
 	/**
 	 * Substract teopdn with 1.
