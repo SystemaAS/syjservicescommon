@@ -10,6 +10,16 @@ import no.systema.jservices.common.dto.FaktDto;
 
 public class FaktDaoServiceImpl extends GenericDaoServiceImpl<FaktDao> implements FaktDaoService{
 
+	/*
+	  Database   SYSDPEDF 
+	 Tabellnavn: 
+	TTHEADF  
+	TTFAKT     
+	TTTURER
+	TTKOSBU 
+	 */
+	
+	
 	@Override
 	public List<FaktDao> getYear(int year) {
 		int qYear = year * 10000; // e.g. 2016 -> 20160000
@@ -20,19 +30,19 @@ public class FaktDaoServiceImpl extends GenericDaoServiceImpl<FaktDao> implement
 
 	public List<FaktDto> getYearSumGroupAvdOpdDato(int year) {
 		String qYear = year + "0000"; // e.g. 2016 -> 20160000
-		StringBuilder queryString = new StringBuilder("select f.faavd, f.faopd, sum(f.fabeln) sumfabeln, h.hedtop, f.fakda, f.faopko, h.trknfa ");
-		queryString.append(" from  fakt f, headf h ");
-		queryString.append(" where f.faavd  = h.heavd ");
+		StringBuilder queryString = new StringBuilder("select t.tupro, t.tubilk, f.faavd, f.faopd, sum(f.fabeln) sumfabeln, h.hedtop, f.fakda, f.faopko, h.trknfa ");
+		queryString.append(" from  fakt f, headf h, turer t ");
+		//queryString.append(" from  ttfakt f, ttheadf h, ttturer t ");  //==Toten data!!
+		queryString.append(" where t.tupro = h.hepro ");
+		queryString.append(" and f.faavd  = h.heavd ");
 		queryString.append(" and   f.faopd = heopd ");
 		queryString.append(" and   h.hedtop > ").append(qYear);
-		//queryString.append(" and   f.fadato > 0 ");
 		queryString.append(" and   f.faavd > 0 ");
 		queryString.append(" and   f.faopd > 0  ");
 		queryString.append(" and   f.faopko = 'O' ");
-		
-		queryString.append(" group by f.faopd, f.faavd , h.hedtop, f.fakda, f.faopko, h.trknfa ");
-		queryString.append(" order by h.hedtop ");
-		
+		queryString.append(" group by t.tupro, t.tubilk, f.faopd, f.faavd , h.hedtop, f.fakda, f.faopko, h.trknfa ");
+		queryString.append(" order by t.tupro ");
+
 		logger.info("Abut to run queryString.toString()="+queryString.toString());
 		List<FaktDto> list = null;
 		list=  getJdbcTemplate().query(queryString.toString(), new GenericObjectMapper(new FaktDto()));

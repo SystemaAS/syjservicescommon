@@ -83,7 +83,7 @@ public class HeadfDaoServiceImpl extends GenericDaoServiceImpl<HeadfDao> impleme
 
 	@Override
 	public HeadfDao create(HeadfDao dao) {
-		int teopdn = tellDaoService.getTeopdnAndIncrement(dao.getHeavd());
+		int teopdn = tellDaoService.getExistingTeopdnAndIncrement(dao.getHeavd());
 		dao.setHeopd(teopdn); 
 		return super.create(dao);
 	}

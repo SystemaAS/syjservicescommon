@@ -39,8 +39,9 @@ public class TestJFaktDaoService {
 	}		
 	
 	@Test
-	public final void testCountGroup2016() {
-		List<FaktDto> list  =  faktDaoService.getYearSumGroupAvdOpdDato(2017);
+	public final void testCountOnService() {
+		int year = 2017;
+		List<FaktDto> list  =  faktDaoService.getYearSumGroupAvdOpdDato(year);
 		System.out.println("list.size()="+list.size());
 		assertNotNull(list.size());
 	}		

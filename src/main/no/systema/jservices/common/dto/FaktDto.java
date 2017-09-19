@@ -14,6 +14,8 @@ import no.systema.jservices.common.dao.IDao;
  */
 public class FaktDto implements IDao {
 
+	private int tupro; //turnr
+	private String tubilk; //turnr
 	private int faavd; // avdelning
 	private int faopd; // oppdrag
 	private int sumfabeln; // sum pengarader
@@ -21,6 +23,23 @@ public class FaktDto implements IDao {
 	private String fakda; // pengatyp
 	private String faopko; // status
 	private int trknfa; // kundenr (headf)
+
+	
+	public String getTubilk() {
+		return tubilk;
+	}
+
+	public void setTubilk(String tubilk) {
+		this.tubilk = tubilk;
+	}
+
+	public int getTupro() {
+		return tupro;
+	}
+
+	public void setTupro(int tupro) {
+		this.tupro = tupro;
+	}
 
 	public String getHedtop() {
 		return hedtop;
