@@ -93,6 +93,7 @@ public class TestJFaktDaoService {
 		exist =  faktDaoService.exist(qDao);
 		assertTrue(qDao.getFaavd()+":"+qDao.getFali()+":"+qDao.getFaopd()+" should not exist",!exist);
 		
-	}		
+	}	
+	
 	
 }

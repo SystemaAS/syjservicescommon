@@ -7,6 +7,7 @@ import java.util.Map;
 import no.systema.jservices.common.dao.FaktDao;
 import no.systema.jservices.common.dao.GenericObjectMapper;
 import no.systema.jservices.common.dto.FaktDto;
+import no.systema.jservices.common.util.DateTimeManager;
 
 public class FaktDaoServiceImpl extends GenericDaoServiceImpl<FaktDao> implements FaktDaoService{
 
@@ -18,6 +19,7 @@ public class FaktDaoServiceImpl extends GenericDaoServiceImpl<FaktDao> implement
 	TTTURER
 	TTKOSBU 
 	 */
+	DateTimeManager dm = new DateTimeManager();
 	
 	
 	@Override
@@ -28,15 +30,17 @@ public class FaktDaoServiceImpl extends GenericDaoServiceImpl<FaktDao> implement
 		return findAll(params);
 	}
 
-	public List<FaktDto> getYearSumGroupAvdOpdDato(int year) {
-		String qYear = year + "0000"; // e.g. 2016 -> 20160000
+	public List<FaktDto> getYearSumGroupAvdOpdDato(int fromYear) {
+		String hedtopFromDate = fromYear + "0000"; // e.g. 2016 -> 20160000		
+		String hedtopToDate = dm.getCurrentDate_ISO();
 		StringBuilder queryString = new StringBuilder("select t.tupro, t.tubilk, f.faavd, f.faopd, sum(f.fabeln) sumfabeln, h.hedtop, f.fakda, f.faopko, h.trknfa ");
-		queryString.append(" from  fakt f, headf h, turer t ");
-		//queryString.append(" from  ttfakt f, ttheadf h, ttturer t ");  //==Toten data!!
+		//queryString.append(" from  fakt f, headf h, turer t ");
+		queryString.append(" from  ttfakt f, ttheadf h, ttturer t ");  //==Toten data!!
 		queryString.append(" where t.tupro = h.hepro ");
 		queryString.append(" and f.faavd  = h.heavd ");
 		queryString.append(" and   f.faopd = heopd ");
-		queryString.append(" and   h.hedtop > ").append(qYear);
+		queryString.append(" and   h.hedtop >= ").append(hedtopFromDate);
+		queryString.append(" and   h.hedtop <= ").append(hedtopToDate);
 		queryString.append(" and   f.faavd > 0 ");
 		queryString.append(" and   f.faopd > 0  ");
 		queryString.append(" and   f.faopko = 'O' ");

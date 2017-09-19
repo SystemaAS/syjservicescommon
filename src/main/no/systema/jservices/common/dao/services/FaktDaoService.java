@@ -22,10 +22,10 @@ public interface FaktDaoService extends GenericDaoService<FaktDao> {
 	 * filter: faavd  > 0</br>
 	 * filter: faopd  > 0</br>
 	 * filter: fadato > 0
-	 * @param year format yyyy
+	 * @param fromYear format yyyy
 	 * @return a list with {@link FaktDto}
 	 */
-	public List<FaktDto> getYearSumGroupAvdOpdDato(int year);	
+	public List<FaktDto> getYearSumGroupAvdOpdDato(int fromYear);	
 	
 	
 }
