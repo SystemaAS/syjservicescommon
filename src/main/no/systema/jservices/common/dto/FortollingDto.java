@@ -15,8 +15,26 @@ public class FortollingDto implements IDao {
 
 	private int siavd;
 	private int sitdn;
-	private int sidt;
+	private String sidt;
 	private String sisg;
+	private int antvareposter;
+
+
+	public String getSidt() {
+		return sidt;
+	}
+
+	public void setSidt(String sidt) {
+		this.sidt = sidt;
+	}
+
+	public int getAntvareposter() {
+		return antvareposter;
+	}
+
+	public void setAntvareposter(int antvareposter) {
+		this.antvareposter = antvareposter;
+	}
 
 	public int getSiavd() {
 		return siavd;
@@ -32,14 +50,6 @@ public class FortollingDto implements IDao {
 
 	public void setSitdn(int sitdn) {
 		this.sitdn = sitdn;
-	}
-
-	public int getSidt() {
-		return sidt;
-	}
-
-	public void setSidt(int sidt) {
-		this.sidt = sidt;
 	}
 
 	public String getSisg() {
