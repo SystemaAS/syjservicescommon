@@ -15,10 +15,28 @@ public class FortollingDto implements IDao {
 
 	private int avdeling;
 	private int deklarasjonsnr;
-	private String registreringsdato; 
+	private String registreringsdato;
 	private String signatur;
 	private int mottaker;
+	private int totaltoll;
+	private int totalavg;
 	private int vareposter;
+
+	public int getTotaltoll() {
+		return totaltoll;
+	}
+
+	public void setTotaltoll(int totaltoll) {
+		this.totaltoll = totaltoll;
+	}
+
+	public int getTotalavg() {
+		return totalavg;
+	}
+
+	public void setTotalavg(int totalavg) {
+		this.totalavg = totalavg;
+	}
 
 	public int getMottaker() {
 		return mottaker;

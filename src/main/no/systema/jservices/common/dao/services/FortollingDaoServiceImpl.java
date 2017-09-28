@@ -43,7 +43,7 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(qDto);
 		//String sidtFromDate = qDto.getRegistreringsdato(); 
 		String sidtToDate = dm.getCurrentDate_ISO();
-		StringBuilder queryString = new StringBuilder("select sh.siavd avdeling, sh.sitdn deklarasjonsnr, sh.sidt registreringsdato, sh.sisg signatur, sh.siknk mottaker, count(sv.svtdn) vareposter ");
+		StringBuilder queryString = new StringBuilder("select sh.siavd avdeling, sh.sitdn deklarasjonsnr, sh.sidt registreringsdato, sh.sisg signatur, sh.siknk mottaker, sh.sibel5 totaltoll, sh.sibel7 totalavg ,count(sv.svtdn) vareposter ");
 		queryString.append(" from  sadh sh, sadv sv ");  
 		queryString.append(" where sv.svavd = sh.siavd ");  
 		queryString.append(" and   sv.svtdn = sh.sitdn ");  		
@@ -55,7 +55,7 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		queryString.append(" and   sh.sitdn > 0 "); //sanity check
 		queryString.append(" and   (:mottaker = 0 OR sh.siknk = :mottaker )");
 		queryString.append(" and   (:signatur IS NULL OR sh.sisg = :signatur) ");
-		queryString.append(" group by  sh.siavd, sh.sitdn, sh.sidt, sh.sisg, sh.siknk ");
+		queryString.append(" group by  sh.siavd, sh.sitdn, sh.sidt, sh.sisg, sh.siknk, sh.sibel5, sh.sibel7 ");
 	
 		
 		logger.info("About to run getStats.queryString.toString()="+queryString.toString());	
