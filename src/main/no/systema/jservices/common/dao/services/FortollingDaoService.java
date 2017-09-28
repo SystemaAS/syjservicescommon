@@ -13,14 +13,13 @@ import no.systema.jservices.common.dto.FortollingDto;
  */
 public interface FortollingDaoService extends GenericDaoService<FortollingDto> {
 
-	
 	/**
-	 * Retrieves all <b>FortollingDao</b> filtered on year.</br>
+	 * Retrieves all <b>FortollingDto</b> filtered, minimum, on year.</br>
 	 * Concerned tables:SADH, SADV, EDIM
-	 * @param fromYear format yyyy
+	 * 
+	 * @param qDto holder for the where-clause, possible to filter on year, avdeling, signatur and mottaker
 	 * @return a list with {@link FortollingDto}
 	 */
-	public List<FortollingDto> getStats(int fromYear);	
-	
+	public List<FortollingDto> getStats(FortollingDto qDto);		
 	
 }

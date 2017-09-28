@@ -23,11 +23,17 @@ public class TestJFortollingDaoService {
 	}
 
 	@Test
-	public final void testGetStats() {
-		int year = 2016;
-		List<FortollingDto> list  =  fortollingDaoService.getStats(year);
+	public final void testGetStats2() {
+		FortollingDto qDto = new FortollingDto();
+		qDto.setRegistreringsdato("20160000");
+		qDto.setAvdeling(1);
+		qDto.setSignatur("YBC");
+		qDto.setMottaker(176);
+		
+		List<FortollingDto> list  =  fortollingDaoService.getStats(qDto);
 		System.out.println("list.size()="+list.size());
 		assertNotNull(list.size());
 	}		
+	
 	
 }

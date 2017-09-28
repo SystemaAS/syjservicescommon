@@ -13,51 +13,59 @@ import no.systema.jservices.common.dao.IDao;
  */
 public class FortollingDto implements IDao {
 
-	private int siavd;
-	private int sitdn;
-	private String sidt;
-	private String sisg;
-	private int antvareposter;
+	private int avdeling;
+	private int deklarasjonsnr;
+	private String registreringsdato; 
+	private String signatur;
+	private int mottaker;
+	private int vareposter;
 
-
-	public String getSidt() {
-		return sidt;
+	public int getMottaker() {
+		return mottaker;
 	}
 
-	public void setSidt(String sidt) {
-		this.sidt = sidt;
+	public void setMottaker(int mottaker) {
+		this.mottaker = mottaker;
 	}
 
-	public int getAntvareposter() {
-		return antvareposter;
+	public int getAvdeling() {
+		return avdeling;
 	}
 
-	public void setAntvareposter(int antvareposter) {
-		this.antvareposter = antvareposter;
+	public void setAvdeling(int avdeling) {
+		this.avdeling = avdeling;
 	}
 
-	public int getSiavd() {
-		return siavd;
+	public int getDeklarasjonsnr() {
+		return deklarasjonsnr;
 	}
 
-	public void setSiavd(int siavd) {
-		this.siavd = siavd;
+	public void setDeklarasjonsnr(int deklarasjonsnr) {
+		this.deklarasjonsnr = deklarasjonsnr;
 	}
 
-	public int getSitdn() {
-		return sitdn;
+	public String getRegistreringsdato() {
+		return registreringsdato;
 	}
 
-	public void setSitdn(int sitdn) {
-		this.sitdn = sitdn;
+	public void setRegistreringsdato(String registreringsdato) {
+		this.registreringsdato = registreringsdato;
 	}
 
-	public String getSisg() {
-		return sisg;
+	public String getSignatur() {
+		return signatur;
 	}
 
-	public void setSisg(String sisg) {
-		this.sisg = sisg;
+	public void setSignatur(String signatur) {
+		this.signatur = signatur;
+	}
+
+	public int getVareposter() {
+		return vareposter;
+	}
+
+	public void setVareposter(int vareposter) {
+		this.vareposter = vareposter;
 	}
 
 	@Override
