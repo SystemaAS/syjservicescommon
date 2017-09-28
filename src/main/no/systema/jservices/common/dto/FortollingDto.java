@@ -21,6 +21,15 @@ public class FortollingDto implements IDao {
 	private int totaltoll;
 	private int totalavg;
 	private int vareposter;
+	private String type;
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	public int getTotaltoll() {
 		return totaltoll;

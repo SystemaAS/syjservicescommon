@@ -25,7 +25,7 @@ public class TestJFortollingDaoService {
 	@Test
 	public final void testGetStats2() {
 		FortollingDto qDto = new FortollingDto();
-		qDto.setRegistreringsdato("20160000");
+		qDto.setRegistreringsdato("20170000");
 		qDto.setAvdeling(1);
 		qDto.setSignatur("YBC");
 		qDto.setMottaker(176);

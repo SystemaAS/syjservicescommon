@@ -1,5 +1,6 @@
 package no.systema.jservices.common.dao.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -32,6 +33,7 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		logger.info("About to run getStats.queryString.toString()="+queryString.toString());	
 		List<FortollingDto> list = null;
 		list=  getJdbcTemplate().query(queryString.toString(), new GenericObjectMapper(new FortollingDto()));
+		
 		return list;
 	
 	}
@@ -39,11 +41,23 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 	
 	@Override
 	public List<FortollingDto> getStats(FortollingDto qDto) {
+		List<FortollingDto> impList = getImportStats(qDto);
+		List<FortollingDto> expList = getExportStats(qDto);
+		List<FortollingDto> impAndExpList =  new ArrayList<FortollingDto>();
+		impAndExpList.addAll(impList);
+		impAndExpList.addAll(expList);
+		
+		return impAndExpList;
+	
+	}
+
+
+	private List<FortollingDto> getImportStats(FortollingDto qDto) {
 		NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getJdbcTemplate().getDataSource());
 		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(qDto);
 		//String sidtFromDate = qDto.getRegistreringsdato(); 
 		String sidtToDate = dm.getCurrentDate_ISO();
-		StringBuilder queryString = new StringBuilder("select sh.siavd avdeling, sh.sitdn deklarasjonsnr, sh.sidt registreringsdato, sh.sisg signatur, sh.siknk mottaker, sh.sibel5 totaltoll, sh.sibel7 totalavg ,count(sv.svtdn) vareposter ");
+		StringBuilder queryString = new StringBuilder("select sh.siavd avdeling, sh.sitdn deklarasjonsnr, sh.sidt registreringsdato, sh.sisg signatur, sh.siknk mottaker, sh.sibel5 totaltoll, sh.sibel7 totalavg ,count(sv.svtdn) vareposter, 'Export' type");
 		queryString.append(" from  sadh sh, sadv sv ");  
 		queryString.append(" where sv.svavd = sh.siavd ");  
 		queryString.append(" and   sv.svtdn = sh.sitdn ");  		
@@ -58,11 +72,42 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		queryString.append(" group by  sh.siavd, sh.sitdn, sh.sidt, sh.sisg, sh.siknk, sh.sibel5, sh.sibel7 ");
 	
 		
-		logger.info("About to run getStats.queryString.toString()="+queryString.toString());	
+		logger.info("About to run getImportStats.queryString.toString()="+queryString.toString());	
 		List<FortollingDto> list = null;
 		list=  namedParameterJdbcTemplate.query(queryString.toString(), namedParameters, new GenericObjectMapper(new FortollingDto()));
 		return list;
-	
 	}	
+
+	private List<FortollingDto> getExportStats(FortollingDto qDto) {
+		NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getJdbcTemplate().getDataSource());
+		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(qDto);
+		//String sidtFromDate = qDto.getRegistreringsdato(); 
+		String sidtToDate = dm.getCurrentDate_ISO();
+		StringBuilder queryString = new StringBuilder("select sh.seavd avdeling, sh.setdn deklarasjonsnr, sh.sedt registreringsdato, sh.sesg signatur, sh.seknk mottaker, sh.sebel1 totaltoll, sh.sebel2 totalavg ,count(sv.svtdn) vareposter, 'Import' type");
+		queryString.append(" from  saeh sh, saev sv ");  
+		queryString.append(" where sv.svavd = sh.seavd ");  
+		queryString.append(" and   sv.svtdn = sh.setdn ");  		
+		queryString.append(" and   (:registreringsdato IS NULL OR sh.sedt >= :registreringsdato )");
+		queryString.append(" and   (:registreringsdato IS NULL OR sh.sedt <="+sidtToDate+")");
+		queryString.append(" and   (:avdeling = 0 OR sh.seavd = :avdeling )");
+		queryString.append(" and   (:deklarasjonsnr = 0 OR sh.setdn = :deklarasjonsnr )");
+		queryString.append(" and   sh.seavd > 0 "); //sanity check
+		queryString.append(" and   sh.setdn > 0 "); //sanity check
+		queryString.append(" and   (:mottaker = 0 OR sh.seknk = :mottaker )");
+		queryString.append(" and   (:signatur IS NULL OR sh.sesg = :signatur) ");
+		queryString.append(" group by  sh.seavd, sh.setdn, sh.sedt, sh.sesg, sh.seknk, sh.sebel1, sh.sebel2 ");  //TODO se över sebelxxx
+	
+		
+		logger.info("About to run getExportStats.queryString.toString()="+queryString.toString());	
+		List<FortollingDto> list = null;
+		list=  namedParameterJdbcTemplate.query(queryString.toString(), namedParameters, new GenericObjectMapper(new FortollingDto()));
+		return list;
+	}	
+	
+	
+	
+	
+	
+	
 	
 }
