@@ -18,10 +18,25 @@ public class FortollingDto implements IDao {
 	private String registreringsdato;
 	private String signatur;
 	private int mottaker;
-	private int totaltoll;
-	private int totalavg;
-	private int vareposter;
+	private int reg_vareposter;
+	private int off_vareposter;
 	private String type;
+
+	public int getOff_vareposter() {
+		return off_vareposter;
+	}
+
+	public void setOff_vareposter(int off_vareposter) {
+		this.off_vareposter = off_vareposter;
+	}
+
+	public int getReg_vareposter() {
+		return reg_vareposter;
+	}
+
+	public void setReg_vareposter(int reg_vareposter) {
+		this.reg_vareposter = reg_vareposter;
+	}
 
 	public String getType() {
 		return type;
@@ -29,22 +44,6 @@ public class FortollingDto implements IDao {
 
 	public void setType(String type) {
 		this.type = type;
-	}
-
-	public int getTotaltoll() {
-		return totaltoll;
-	}
-
-	public void setTotaltoll(int totaltoll) {
-		this.totaltoll = totaltoll;
-	}
-
-	public int getTotalavg() {
-		return totalavg;
-	}
-
-	public void setTotalavg(int totalavg) {
-		this.totalavg = totalavg;
 	}
 
 	public int getMottaker() {
@@ -85,14 +84,6 @@ public class FortollingDto implements IDao {
 
 	public void setSignatur(String signatur) {
 		this.signatur = signatur;
-	}
-
-	public int getVareposter() {
-		return vareposter;
-	}
-
-	public void setVareposter(int vareposter) {
-		this.vareposter = vareposter;
 	}
 
 	@Override
