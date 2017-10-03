@@ -27,6 +27,7 @@ import java.io.Serializable;
  */
 public enum FasteKoder implements Serializable {
 	FUNKSJON,
+	MLAPKOD,
 	DELSYS,
 	SYPAR,
 	ARKIVU,

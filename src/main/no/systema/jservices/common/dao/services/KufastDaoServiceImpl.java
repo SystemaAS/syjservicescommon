@@ -14,7 +14,7 @@ public class KufastDaoServiceImpl extends GenericDaoServiceImpl<KufastDao> imple
 		KufastDao qDao = new KufastDao();
 		qDao.setKftyp(kftyp.name());
 		qDao.setKfkod(kfkod);
-		return find(qDao);
+		return find(qDao);//
 	}
 
 	@Override

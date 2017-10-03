@@ -13,6 +13,9 @@ public interface VadrDaoService extends GenericDaoService<VadrDao> {
 	 * @param kundnr 
 	 * @return a list with {@link VadrDao} filtered on kundnr
 	 */
-	public List<VadrDao> getList(int kundnr);		
+	public List<VadrDao> getList(int kundnr);
+	public List<VadrDao> getList(int kundnr, String firma);
+	public List<VadrDao> getList(int kundnr, int vadrnr, String firma);
+	
 	
 }
