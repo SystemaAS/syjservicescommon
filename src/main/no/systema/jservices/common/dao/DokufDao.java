@@ -12,6 +12,7 @@ import java.util.Map;
  */
 public class DokufDao implements IDao {
 
+	
 	private String dfst; // Status   
 	private String dfri; //  Record ID   
 	private int dfavd; // Avdeling //KEY
@@ -104,9 +105,9 @@ public class DokufDao implements IDao {
 	private String dftpk2; // TILLEGGS PROD.KODE 2   
 	private String dftpk3; // TILLEGGS PROD.KODE 3      
 	private String dftpk4; // TILLEGGS PROD.KODE 4    
-
 	private Map<String, Object> keys = new HashMap<String, Object>();
 
+	
 	public String getDfst() {
 		return dfst;
 	}
@@ -834,6 +835,8 @@ public class DokufDao implements IDao {
 	public void setDftpk4(String dftpk4) {
 		this.dftpk4 = dftpk4;
 	}
+	
+	
 
 	@Override
 	public Map<String, Object> getKeys() {
