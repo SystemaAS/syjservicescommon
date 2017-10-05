@@ -14,17 +14,76 @@ import no.systema.jservices.common.dao.IDao;
  */
 public class FaktDto implements IDao {
 
-	private int tupro; //turnr
-	private String tubilk; //turnr
-	private int faavd; // avdelning
-	private int faopd; // oppdrag
-	private int sumfabeln; // sum pengarader
-	private String hedtop; // datum (headf)
-	private String fakda; // pengatyp
-	private String faopko; // status
-	private int trknfa; // kundenr (headf)
+	private int avdeling;
+	private String registreringsdato;
+	@ExludeMapping
+	private String signatur;
+	private int mottaker;
 
-	
+	private int tupro; // turnr
+	private String tubilk; // turnr
+	private int faopd; // oppdrag
+	private int fabeln; // belopp
+	private String fakda; // pengatyp
+	private String fask;
+	private String favk;
+
+	public int getAvdeling() {
+		return avdeling;
+	}
+
+	public void setAvdeling(int avdeling) {
+		this.avdeling = avdeling;
+	}
+
+	public String getRegistreringsdato() {
+		return registreringsdato;
+	}
+
+	public void setRegistreringsdato(String registreringsdato) {
+		this.registreringsdato = registreringsdato;
+	}
+
+	public String getSignatur() {
+		return signatur;
+	}
+
+	public void setSignatur(String signatur) {
+		this.signatur = signatur;
+	}
+
+	public int getMottaker() {
+		return mottaker;
+	}
+
+	public void setMottaker(int mottaker) {
+		this.mottaker = mottaker;
+	}
+
+	public String getFask() {
+		return fask;
+	}
+
+	public void setFask(String fask) {
+		this.fask = fask;
+	}
+
+	public String getFavk() {
+		return favk;
+	}
+
+	public void setFavk(String favk) {
+		this.favk = favk;
+	}
+
+	public int getFabeln() {
+		return fabeln;
+	}
+
+	public void setFabeln(int fabeln) {
+		this.fabeln = fabeln;
+	}
+
 	public String getTubilk() {
 		return tubilk;
 	}
@@ -41,52 +100,12 @@ public class FaktDto implements IDao {
 		this.tupro = tupro;
 	}
 
-	public String getHedtop() {
-		return hedtop;
-	}
-
-	public void setHedtop(String hedtop) {
-		this.hedtop = hedtop;
-	}
-
-	public int getTrknfa() {
-		return trknfa;
-	}
-
-	public void setTrknfa(int trknfa) {
-		this.trknfa = trknfa;
-	}
-
-	public String getFaopko() {
-		return faopko;
-	}
-
-	public void setFaopko(String faopko) {
-		this.faopko = faopko;
-	}
-
 	public String getFakda() {
 		return fakda;
 	}
 
 	public void setFakda(String fakda) {
 		this.fakda = fakda;
-	}
-
-	public int getSumfabeln() {
-		return sumfabeln;
-	}
-
-	public void setSumfabeln(int sumfabeln) {
-		this.sumfabeln = sumfabeln;
-	}
-
-	public int getFaavd() {
-		return faavd;
-	}
-
-	public void setFaavd(int faavd) {
-		this.faavd = faavd;
 	}
 
 	public int getFaopd() {

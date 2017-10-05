@@ -40,8 +40,10 @@ public class TestJFaktDaoService {
 	
 	@Test
 	public final void testCountOnService() {
-		int year = 2017;
-		List<FaktDto> list  =  faktDaoService.getYearSumGroupAvdOpdDato(year);
+		FaktDto qDto = new   FaktDto();
+		qDto.setRegistreringsdato("201602");
+		//qDto.setAvdeling(1);
+		List<FaktDto> list  =  faktDaoService.getStats(qDto);
 		System.out.println("list.size()="+list.size());
 		assertNotNull(list.size());
 	}		
