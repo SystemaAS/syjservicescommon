@@ -21,6 +21,15 @@ public class FortollingDto implements IDao {
 	private int reg_vareposter;
 	private int off_vareposter;
 	private String type;
+	private String edim;
+	
+	public String getEdim() {
+		return edim;
+	}
+
+	public void setEdim(String edim) {
+		this.edim = edim;
+	}
 
 	public int getOff_vareposter() {
 		return off_vareposter;
