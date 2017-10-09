@@ -31,5 +31,6 @@ public enum FasteKoder implements Serializable {
 	DELSYS,
 	SYPAR,
 	ARKIVU,
-	PRODTYPE
+	PRODTYPE,
+	FRBREVPRO
 }
