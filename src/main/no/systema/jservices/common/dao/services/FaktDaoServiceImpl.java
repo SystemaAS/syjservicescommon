@@ -37,11 +37,17 @@ public class FaktDaoServiceImpl extends GenericDaoServiceImpl<FaktDao> implement
 	public List<FaktDto> getStats(FaktDto qDto) {
 		NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getJdbcTemplate().getDataSource());
 		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(qDto);
-		String hedtopFromDate = qDto.getRegistreringsdato() + "00"; // e.g. 201601 -> 20160000		
-		String hedtopToDate = qDto.getRegistreringsdato() + "31"; // e.g. 201601 -> 20161231
+		String hedtopFromDate = null;
+		String hedtopToDate = null;
+		if (isOverview(qDto)) {
+			hedtopFromDate = qDto.getRegistreringsdato() + "0100"; //incl. jan, e.g 2016 -> 20160100
+			hedtopToDate = qDto.getRegistreringsdato() + "1231";   //incl. jan, e.g 2016 -> 20161231
+		} else {  //details
+			hedtopFromDate = qDto.getRegistreringsdato() + "00"; // e.g. 201601 -> 20160100	
+			hedtopToDate = qDto.getRegistreringsdato() + "31";   // e.g. 201601 -> 20160131
+		}
 		
 		//String hedtopToDate = dm.getCurrentDate_ISO();
-		//StringBuilder queryString = new StringBuilder("select t.tupro, t.tubilk, f.faavd, f.faopd, sum(f.fabeln) sumfabeln, h.hedtop, f.fakda, f.faopko, h.trknfa ");
 		StringBuilder queryString = new StringBuilder("select t.tupro, t.tubilk, h.heavd avdeling, f.faopd, f.fabeln, h.hedtop registreringsdato, f.fakda, f.faopko, h.trknfa mottaker, f.fask, f.favk ");
 		queryString.append(" from  fakt f, headf h, turer t ");
 		//queryString.append(" from  ttfakt f, ttheadf h, ttturer t ");  //==Toten data!!
@@ -67,6 +73,14 @@ public class FaktDaoServiceImpl extends GenericDaoServiceImpl<FaktDao> implement
 		
 		return list;
 		
+	}
+
+	private boolean isOverview(FaktDto qDto) {
+		if (qDto.getRegistreringsdato().length() == 4) {
+			return true;
+		} else {
+			return false;			
+		}
 	}
 	
 }
