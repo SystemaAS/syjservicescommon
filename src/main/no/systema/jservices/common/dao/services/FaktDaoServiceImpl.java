@@ -43,8 +43,8 @@ public class FaktDaoServiceImpl extends GenericDaoServiceImpl<FaktDao> implement
 		//String hedtopToDate = dm.getCurrentDate_ISO();
 		//StringBuilder queryString = new StringBuilder("select t.tupro, t.tubilk, f.faavd, f.faopd, sum(f.fabeln) sumfabeln, h.hedtop, f.fakda, f.faopko, h.trknfa ");
 		StringBuilder queryString = new StringBuilder("select t.tupro, t.tubilk, h.heavd avdeling, f.faopd, f.fabeln, h.hedtop registreringsdato, f.fakda, f.faopko, h.trknfa mottaker, f.fask, f.favk ");
-		//queryString.append(" from  fakt f, headf h, turer t ");
-		queryString.append(" from  ttfakt f, ttheadf h, ttturer t ");  //==Toten data!!
+		queryString.append(" from  fakt f, headf h, turer t ");
+		//queryString.append(" from  ttfakt f, ttheadf h, ttturer t ");  //==Toten data!!
 		queryString.append(" where t.tupro = h.hepro ");
 		queryString.append(" and f.faavd  = h.heavd ");
 		queryString.append(" and   f.faopd = heopd ");
@@ -60,7 +60,7 @@ public class FaktDaoServiceImpl extends GenericDaoServiceImpl<FaktDao> implement
 		//queryString.append(" group by t.tupro, t.tubilk, f.faopd, f.faavd , h.hedtop, f.fakda, f.faopko, h.trknfa ");
 		//queryString.append(" order by t.tupro ");
 
-		logger.info("Abut to run queryString.toString()="+queryString.toString());
+		logger.info("About to run queryString.toString()="+queryString.toString());
 		List<FaktDto> list = null;
 		list=  namedParameterJdbcTemplate.query(queryString.toString(), namedParameters, new GenericObjectMapper(new FaktDto()));
 		logger.info("returning list with size="+list.size());

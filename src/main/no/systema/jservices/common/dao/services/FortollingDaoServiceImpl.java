@@ -59,8 +59,8 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		String sidtToDate = dm.getCurrentDate_ISO();
 		StringBuilder queryString = new StringBuilder(
 						    "select sh.siavd avdeling, sh.sitdn deklarasjonsnr, sh.sidt registreringsdato, sh.sisg signatur, sh.siknk mottaker ,count(sv.svtdn) reg_vareposter, max(sv.svln) off_vareposter,'Import' type, concat(t.f4815, t.f0078a) edim");
-		//queryString.append(" from  sadh sh, sadv sv, edim e,  tvinf t");
-		queryString.append(" from  ttsadh sh, ttsadv sv, ttedim e,  tttvinf t");  //=Toten-data
+		queryString.append(" from  sadh sh, sadv sv, edim e,  tvinf t");
+		//queryString.append(" from  ttsadh sh, ttsadv sv, ttedim e,  tttvinf t");  //=Toten-data
 		queryString.append(" where sh.siavd = sv.svavd ");  
 		queryString.append(" and   sh.sitdn = sv.svtdn ");
 		queryString.append(" and   sh.siavd = e.mavd ");
@@ -94,8 +94,8 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		String sidtToDate = dm.getCurrentDate_ISO();
 		StringBuilder queryString = new StringBuilder(
 							"select sh.seavd avdeling, sh.setdn deklarasjonsnr, sh.sedt registreringsdato, sh.sesg signatur, sh.seknk mottaker ,count(sv.svtdn) reg_vareposter, max(sv.svln) off_vareposter, 'Export' type, concat(t.f4815, t.f0078a) edim");
-		//queryString.append(" from saeh sh, saev sv, edim e,  tvinf t"); 
-		queryString.append(" from  ttsaeh sh, ttsaev sv, ttedim e,  tttvinf t");  //=Toten-data
+		queryString.append(" from saeh sh, saev sv, edim e,  tvinf t"); 
+		//queryString.append(" from  ttsaeh sh, ttsaev sv, ttedim e,  tttvinf t");  //=Toten-data
 		queryString.append(" where sh.seavd = sv.svavd ");  
 		queryString.append(" and   sh.setdn = sv.svtdn ");
 		queryString.append(" and   sh.seavd = e.mavd ");
