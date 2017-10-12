@@ -52,34 +52,32 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 	
 	}
 
-
 	private List<FortollingDto> getImportStats(FortollingDto qDto) {
 		NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getJdbcTemplate().getDataSource());
 		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(qDto);
 		String sidtToDate = dm.getCurrentDate_ISO();
 		StringBuilder queryString = new StringBuilder(
-						    "select sh.siavd avdeling, sh.sitdn deklarasjonsnr, sh.sidt registreringsdato, sh.sisg signatur, sh.siknk mottaker ,count(sv.svtdn) reg_vareposter, max(sv.svln) off_vareposter,'Import' type, concat(t.f4815, t.f0078a) edim");
-		queryString.append(" from  sadh sh, sadv sv, edim e,  tvinf t");
-		//queryString.append(" from  ttsadh sh, ttsadv sv, ttedim e,  tttvinf t");  //=Toten-data
-		queryString.append(" where sh.siavd = sv.svavd ");  
-		queryString.append(" and   sh.sitdn = sv.svtdn ");
-		queryString.append(" and   sh.siavd = e.mavd ");
-		queryString.append(" and   sh.sitdn = e.mtdn ");
-		queryString.append(" and   e.mmn = t.fmn "); 
-		queryString.append(" and   (:registreringsdato IS NULL OR sh.sidt >= :registreringsdato )");
-		queryString.append(" and   (:registreringsdato IS NULL OR sh.sidt <="+sidtToDate+")");
-		queryString.append(" and   (:avdeling = 0 OR sh.siavd = :avdeling )");
-		queryString.append(" and   (:deklarasjonsnr = 0 OR sh.sitdn = :deklarasjonsnr )");
-		queryString.append(" and   sh.siavd > 0 "); //sanity check
-		queryString.append(" and   sh.sitdn > 0 "); //sanity check
-		queryString.append(" and   (:mottaker = 0 OR sh.siknk = :mottaker ) ");
-		queryString.append(" and   (:signatur IS NULL OR sh.sisg = :signatur) ");
-		queryString.append(" and   e.msr = 'R' ");
-		queryString.append(" and   e.m0065 = 'CUSRES' ");
-		queryString.append(" and   e.m1n07 = 'DME' ");
-		queryString.append(" and   t.f0078a in('950','954','972','999') ");
-		queryString.append(" and   t.f4815 in('NE','PP') ");
-		queryString.append(" group by  sh.siavd, sh.sitdn, sh.sidt, sh.sisg, sh.siknk,concat(t.f4815, t.f0078a)	 ");
+							"SELECT  sh.avdeling, sh.deklarasjonsnr, sh.registreringsdato, sh.signatur,  sh.mottaker, count(sv.svtdn) reg_vareposter,  max(sv.svln) off_vareposter, 'Import' type,  COALESCE(concat(e.kalle, e.anka), 'OK') edim ");
+		queryString.append(" FROM (select shX.siavd avdeling, shX.sitdn deklarasjonsnr, shX.sidt registreringsdato, shX.sisg signatur,  shX.siknk mottaker ");
+		queryString.append(" 	   	from SADH shX  ");
+		queryString.append("      	where  (:registreringsdato IS NULL OR shX.sidt >= :registreringsdato )");
+		queryString.append(" 		and   (:registreringsdato IS NULL OR shX.sidt <="+sidtToDate+")");
+		queryString.append(" 		and   (:avdeling = 0 OR shX.siavd = :avdeling )");
+		queryString.append(" 		and   (:deklarasjonsnr = 0 OR shX.sitdn = :deklarasjonsnr )");
+		queryString.append(" 		and   shX.siavd > 0 "); //sanity check
+		queryString.append(" 		and   shX.sitdn > 0 "); //sanity check
+		queryString.append(" 		and   (:mottaker = 0 OR shX.siknk = :mottaker ) ");
+		queryString.append(" 		and   (:signatur IS NULL OR shX.sisg = :signatur)) as sh ");	
+		queryString.append(" JOIN SADV sv  ");
+		queryString.append("	 ON sh.avdeling = sv.svavd AND  sh.deklarasjonsnr = sv.svtdn ");
+		queryString.append(" LEFT OUTER JOIN (select e.mavd mavd , e.mtdn mtdn, t.f4815 kalle, t.f0078a anka ");
+		queryString.append(" 				  from EDIM e, TVINF t ");
+		queryString.append(" 				  where e.mmn = t.fmn ");
+		queryString.append(" 				  and   e.msr = 'R' and   e.m0065 = 'CUSRES' and   e.m1n07 = 'DME' ");
+		queryString.append(" 				  and   t.f0078a in('950','954','972','999') ");
+		queryString.append(" 				  and   t.f4815 in('NE','PP') ) e ");
+		queryString.append("  	ON sh.avdeling = e.mavd AND sh.deklarasjonsnr = e.mtdn ");
+		queryString.append(" group by  sh.avdeling, sh.deklarasjonsnr, sh.registreringsdato, sh.signatur,  sh.mottaker, COALESCE(concat(e.kalle, e.anka), 'OK') ");
 	
 		logger.info("About to run getImportStats.queryString.toString()="+queryString.toString());	
 		List<FortollingDto> list = null;
@@ -93,28 +91,27 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(qDto);
 		String sidtToDate = dm.getCurrentDate_ISO();
 		StringBuilder queryString = new StringBuilder(
-							"select sh.seavd avdeling, sh.setdn deklarasjonsnr, sh.sedt registreringsdato, sh.sesg signatur, sh.seknk mottaker ,count(sv.svtdn) reg_vareposter, max(sv.svln) off_vareposter, 'Export' type, concat(t.f4815, t.f0078a) edim");
-		queryString.append(" from saeh sh, saev sv, edim e,  tvinf t"); 
-		//queryString.append(" from  ttsaeh sh, ttsaev sv, ttedim e,  tttvinf t");  //=Toten-data
-		queryString.append(" where sh.seavd = sv.svavd ");  
-		queryString.append(" and   sh.setdn = sv.svtdn ");
-		queryString.append(" and   sh.seavd = e.mavd ");
-		queryString.append(" and   sh.setdn = e.mtdn ");
-		queryString.append(" and   e.mmn = t.fmn "); 		
-		queryString.append(" and   (:registreringsdato IS NULL OR sh.sedt >= :registreringsdato )");
-		queryString.append(" and   (:registreringsdato IS NULL OR sh.sedt <="+sidtToDate+")");
-		queryString.append(" and   (:avdeling = 0 OR sh.seavd = :avdeling )");
-		queryString.append(" and   (:deklarasjonsnr = 0 OR sh.setdn = :deklarasjonsnr )");
-		queryString.append(" and   sh.seavd > 0 "); //sanity check
-		queryString.append(" and   sh.setdn > 0 "); //sanity check
-		queryString.append(" and   (:mottaker = 0 OR sh.seknk = :mottaker )");
-		queryString.append(" and   (:signatur IS NULL OR sh.sesg = :signatur) ");
-		queryString.append(" and   e.msr = 'R' ");
-		queryString.append(" and   e.m0065 = 'CUSRES' ");
-		queryString.append(" and   e.m1n07 = 'DME' ");
-		queryString.append(" and   t.f0078a in('950','954','972','999') ");
-		queryString.append(" and   t.f4815 in('NE','PP') ");		
-		queryString.append(" group by  sh.seavd, sh.setdn, sh.sedt, sh.sesg, sh.seknk, concat(t.f4815, t.f0078a) ");  
+							"SELECT  sh.avdeling, sh.deklarasjonsnr, sh.registreringsdato, sh.signatur,  sh.mottaker, count(sv.svtdn) reg_vareposter,  max(sv.svln) off_vareposter, 'Export' type, COALESCE(concat(e.kalle, e.anka), 'OK') edim ");
+		queryString.append(" FROM (select shX.seavd avdeling, shX.setdn deklarasjonsnr, shX.sedt registreringsdato, shX.sesg signatur,  shX.seknk mottaker ");
+		queryString.append(" 	   	from SAEH shX  ");
+		queryString.append("      	where  (:registreringsdato IS NULL OR shX.sedt >= :registreringsdato )");
+		queryString.append(" 		and   (:registreringsdato IS NULL OR shX.sedt <="+sidtToDate+")");
+		queryString.append(" 		and   (:avdeling = 0 OR shX.seavd = :avdeling )");
+		queryString.append(" 		and   (:deklarasjonsnr = 0 OR shX.setdn = :deklarasjonsnr )");
+		queryString.append(" 		and   shX.seavd > 0 "); //sanity check
+		queryString.append(" 		and   shX.setdn > 0 "); //sanity check
+		queryString.append(" 		and   (:mottaker = 0 OR shX.seknk = :mottaker ) ");
+		queryString.append(" 		and   (:signatur IS NULL OR shX.sesg = :signatur)) as sh ");	
+		queryString.append(" JOIN SAEV sv  ");
+		queryString.append("	 ON sh.avdeling = sv.svavd AND  sh.deklarasjonsnr = sv.svtdn ");
+		queryString.append(" LEFT OUTER JOIN (select e.mavd mavd , e.mtdn mtdn, t.f4815 kalle, t.f0078a anka ");
+		queryString.append(" 				  from EDIM e, TVINF t ");
+		queryString.append(" 				  where e.mmn = t.fmn ");
+		queryString.append(" 				  and   e.msr = 'R' and   e.m0065 = 'CUSRES' and   e.m1n07 = 'DME' ");
+		queryString.append(" 				  and   t.f0078a in('950','954','972','999') ");
+		queryString.append(" 				  and   t.f4815 in('NE','PP') ) e ");
+		queryString.append("  	ON sh.avdeling = e.mavd AND sh.deklarasjonsnr = e.mtdn ");
+		queryString.append(" group by sh.avdeling, sh.deklarasjonsnr, sh.registreringsdato, sh.signatur,  sh.mottaker, COALESCE(concat(e.kalle, e.anka), 'OK') ");
 	
 		
 		logger.info("About to run getExportStats.queryString.toString()="+queryString.toString());	

@@ -16,6 +16,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 public class JsonResponseWriter2<T> {
 	private ObjectMapper mapper = new ObjectMapper();
 	private JsonDtoContainer<T> container = new JsonDtoContainer<T>();
+	private boolean hasContainer = true;
+
 
 	/**
 	 * Convert delivered object list into Json container.
@@ -47,6 +49,12 @@ public class JsonResponseWriter2<T> {
 		return result;
 	}
 
+	public String setJsonResult_Common_GetComposite_No_Container(T value) {
+		String result = null;
+		result = writeValue(value);
+		return result;
+	}	
+	
 	/**
 	 * Concat status, errmsg and db error into container
 	 * 
@@ -84,7 +92,16 @@ public class JsonResponseWriter2<T> {
 		return result;
 	}
 	
+	
+	public boolean isHasContainer() {
+		return hasContainer;
+	}
 
+	public void setHasContainer(boolean hasContainer) {
+		this.hasContainer = hasContainer;
+	}
+
+	
 	private void addValue(T value) {
 		List<T> dtoList = new ArrayList<T>();
 		dtoList.add(value);
@@ -101,5 +118,14 @@ public class JsonResponseWriter2<T> {
 		return result;
 	}
 
-
+	private String writeValue(T value) {
+		String result = null;
+		try {
+			result = mapper.writeValueAsString(value);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}	
+	
 }
