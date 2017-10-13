@@ -42,7 +42,10 @@ public class TestJFaktDaoService {
 	public final void testCountOnService() {
 		FaktDto qDto = new   FaktDto();
 		qDto.setRegistreringsdato("201602");
-		//qDto.setAvdeling(1);
+		qDto.getAvdelingList().add(1);
+		qDto.getAvdelingList().add(999);
+		qDto.getSignaturList().add("JOV");
+		qDto.getInclFavkList().add("FRA");
 		List<FaktDto> list  =  faktDaoService.getStats(qDto);
 		System.out.println("list.size()="+list.size());
 		assertNotNull(list.size());

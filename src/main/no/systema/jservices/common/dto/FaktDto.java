@@ -1,5 +1,7 @@
 package no.systema.jservices.common.dto;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import no.systema.jservices.common.dao.IDao;
@@ -15,6 +17,8 @@ import no.systema.jservices.common.dao.IDao;
 public class FaktDto implements IDao {
 
 	private int avdeling;
+	@ExludeMapping
+	private String avdelings;  //TODO Fix when time is there
 	private String registreringsdato;
 	@ExludeMapping
 	private String signatur;
@@ -27,6 +31,77 @@ public class FaktDto implements IDao {
 	private String fakda; // pengatyp
 	private String fask;
 	private String favk;
+
+	@ExludeMapping
+	private List avdelingList;
+	@ExludeMapping
+	private List signaturList;
+	@ExludeMapping
+	private List inclFavkList;
+	@ExludeMapping
+	private List exclFavkList;
+
+	public List getExclFavkList() {
+		if (exclFavkList != null) {
+			return exclFavkList;
+		} else {
+			exclFavkList = new ArrayList<>();
+		}
+		return exclFavkList;
+	}
+
+
+	public void setExclFavkList(List exclFavkList) {
+		this.exclFavkList = exclFavkList;
+	}	
+	
+	
+	public List getInclFavkList() {
+		if (inclFavkList != null) {
+			return inclFavkList;
+		} else {
+			inclFavkList = new ArrayList<>();
+		}
+		return inclFavkList;
+	}
+
+
+	public void setInclFavkList(List inclFavkList) {
+		this.inclFavkList = inclFavkList;
+	}	
+	
+	public List getSignaturList() {
+		if (signaturList != null) {
+			return signaturList;
+		} else {
+			signaturList = new ArrayList<>();
+		}
+		return signaturList;
+	}
+
+
+	public void setSignaturList(List signaturList) {
+		this.signaturList = signaturList;
+	}
+
+
+	public List getAvdelingList() {
+		if (avdelingList != null) {
+			return avdelingList;
+		} else {
+			avdelingList = new ArrayList<>();
+		}
+		return avdelingList;
+	}
+
+
+	public String getAvdelings() {
+		return avdelings;
+	}
+
+	public void setAvdelings(String avdelings) {
+		this.avdelings = avdelings;
+	}
 
 	public int getAvdeling() {
 		return avdeling;

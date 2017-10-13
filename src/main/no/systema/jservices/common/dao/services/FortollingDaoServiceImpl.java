@@ -63,6 +63,7 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		queryString.append("      	where  (:registreringsdato IS NULL OR shX.sidt >= :registreringsdato )");
 		queryString.append(" 		and   (:registreringsdato IS NULL OR shX.sidt <="+sidtToDate+")");
 		queryString.append(" 		and   (:avdeling = 0 OR shX.siavd = :avdeling )");
+		//queryString.append(" 		and   (:avdelings = 0 OR shX.siavd = :avdelings )");
 		queryString.append(" 		and   (:deklarasjonsnr = 0 OR shX.sitdn = :deklarasjonsnr )");
 		queryString.append(" 		and   shX.siavd > 0 "); //sanity check
 		queryString.append(" 		and   shX.sitdn > 0 "); //sanity check
@@ -97,6 +98,7 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		queryString.append("      	where  (:registreringsdato IS NULL OR shX.sedt >= :registreringsdato )");
 		queryString.append(" 		and   (:registreringsdato IS NULL OR shX.sedt <="+sidtToDate+")");
 		queryString.append(" 		and   (:avdeling = 0 OR shX.seavd = :avdeling )");
+		//queryString.append(" 		and   (:avdelings = 0 OR shX.seavd = :avdelings )");
 		queryString.append(" 		and   (:deklarasjonsnr = 0 OR shX.setdn = :deklarasjonsnr )");
 		queryString.append(" 		and   shX.seavd > 0 "); //sanity check
 		queryString.append(" 		and   shX.setdn > 0 "); //sanity check
