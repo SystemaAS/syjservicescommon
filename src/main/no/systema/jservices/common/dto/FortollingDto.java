@@ -1,5 +1,7 @@
 package no.systema.jservices.common.dto;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import no.systema.jservices.common.dao.IDao;
@@ -14,6 +16,8 @@ import no.systema.jservices.common.dao.IDao;
 public class FortollingDto implements IDao {
 
 	private int avdeling;
+	@ExludeMapping
+	private String avdelings;
 	private int deklarasjonsnr;
 	private String registreringsdato;
 	private String signatur;
@@ -22,7 +26,42 @@ public class FortollingDto implements IDao {
 	private int off_vareposter;
 	private String type;
 	private String edim;
-	
+
+	@ExludeMapping
+	private List avdelingList;
+	@ExludeMapping
+	private List signaturList;
+
+	public List getSignaturList() {
+		if (signaturList != null) {
+			return signaturList;
+		} else {
+			signaturList = new ArrayList<>();
+		}
+		return signaturList;
+	}
+
+	public void setSignaturList(List signaturList) {
+		this.signaturList = signaturList;
+	}
+
+	public List getAvdelingList() {
+		if (avdelingList != null) {
+			return avdelingList;
+		} else {
+			avdelingList = new ArrayList<>();
+		}
+		return avdelingList;
+	}
+
+	public String getAvdelings() {
+		return avdelings;
+	}
+
+	public void setAvdelings(String avdelings) {
+		this.avdelings = avdelings;
+	}
+
 	public String getEdim() {
 		return edim;
 	}

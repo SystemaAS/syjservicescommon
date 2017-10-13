@@ -59,7 +59,7 @@ public class FaktDaoServiceImpl extends GenericDaoServiceImpl<FaktDao> implement
 			hedtopToDate = qDto.getRegistreringsdato() + "31";   // e.g. 201601 -> 20160131
 		}
 		
-		System.out.println("qDto="+ReflectionToStringBuilder.toString(qDto));
+		//System.out.println("qDto="+ReflectionToStringBuilder.toString(qDto));
 		//String hedtopToDate = dm.getCurrentDate_ISO();
 		StringBuilder queryString = new StringBuilder("select t.tupro, t.tubilk, h.heavd avdeling, f.faopd, f.fabeln, h.hedtop registreringsdato, f.fakda, f.faopko, h.trknfa mottaker, f.fask, f.favk ");
 		queryString.append(" from  fakt f, headf h, turer t ");
