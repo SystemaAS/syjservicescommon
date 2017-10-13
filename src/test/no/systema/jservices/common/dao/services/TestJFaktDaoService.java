@@ -45,7 +45,9 @@ public class TestJFaktDaoService {
 		qDto.getAvdelingList().add(1);
 		qDto.getAvdelingList().add(999);
 		qDto.getSignaturList().add("JOV");
-		qDto.getInclFavkList().add("FRA");
+		qDto.getFavkList().add("FRA");
+		qDto.getFavkList().add("VEG");
+		//qDto.setFavkexcl("trueeee");
 		List<FaktDto> list  =  faktDaoService.getStats(qDto);
 		System.out.println("list.size()="+list.size());
 		assertNotNull(list.size());

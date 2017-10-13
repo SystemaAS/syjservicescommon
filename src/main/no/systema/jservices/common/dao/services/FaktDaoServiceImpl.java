@@ -82,8 +82,12 @@ public class FaktDaoServiceImpl extends GenericDaoServiceImpl<FaktDao> implement
 
 		queryString.append(" and   (:mottaker = 0 OR h.trknfa = :mottaker )");
 
-		if (!qDto.getInclFavkList().isEmpty()) {
-			queryString.append(" and   ( f.favk IN ( :inclFavkList ) )");
+		if (!qDto.getFavkList().isEmpty()) {
+			if (qDto.getFavkexcl() == null) {
+				queryString.append(" and   ( f.favk IN ( :favkList ) )");
+			} else {
+				queryString.append(" and   ( f.favk NOT IN ( :favkList ) )");
+			}
 		}
 		//queryString.append(" group by t.tupro, t.tubilk, f.faopd, f.faavd , h.hedtop, f.fakda, f.faopko, h.trknfa ");
 		//queryString.append(" order by t.tupro ");

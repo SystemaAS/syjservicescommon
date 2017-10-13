@@ -18,7 +18,7 @@ public class FaktDto implements IDao {
 
 	private int avdeling;
 	@ExludeMapping
-	private String avdelings;  //TODO Fix when time is there
+	private String avdelings; // TODO Fix when time is there
 	private String registreringsdato;
 	@ExludeMapping
 	private String signatur;
@@ -31,45 +31,37 @@ public class FaktDto implements IDao {
 	private String fakda; // pengatyp
 	private String fask;
 	private String favk;
-
+	@ExludeMapping
+	private String favkexcl;
 	@ExludeMapping
 	private List avdelingList;
 	@ExludeMapping
 	private List signaturList;
 	@ExludeMapping
-	private List inclFavkList;
-	@ExludeMapping
-	private List exclFavkList;
+	private List favkList;
 
-	public List getExclFavkList() {
-		if (exclFavkList != null) {
-			return exclFavkList;
-		} else {
-			exclFavkList = new ArrayList<>();
-		}
-		return exclFavkList;
+
+	public String getFavkexcl() {
+		return favkexcl;
 	}
 
-
-	public void setExclFavkList(List exclFavkList) {
-		this.exclFavkList = exclFavkList;
-	}	
-	
-	
-	public List getInclFavkList() {
-		if (inclFavkList != null) {
-			return inclFavkList;
-		} else {
-			inclFavkList = new ArrayList<>();
-		}
-		return inclFavkList;
+	public void setFavkexcl(String favkexcl) {
+		this.favkexcl = favkexcl;
 	}
 
+	public List getFavkList() {
+		if (favkList != null) {
+			return favkList;
+		} else {
+			favkList = new ArrayList<>();
+		}
+		return favkList;
+	}
 
-	public void setInclFavkList(List inclFavkList) {
-		this.inclFavkList = inclFavkList;
-	}	
-	
+	public void setFavkList(List inclFavkList) {
+		this.favkList = inclFavkList;
+	}
+
 	public List getSignaturList() {
 		if (signaturList != null) {
 			return signaturList;
@@ -79,11 +71,9 @@ public class FaktDto implements IDao {
 		return signaturList;
 	}
 
-
 	public void setSignaturList(List signaturList) {
 		this.signaturList = signaturList;
 	}
-
 
 	public List getAvdelingList() {
 		if (avdelingList != null) {
@@ -93,7 +83,6 @@ public class FaktDto implements IDao {
 		}
 		return avdelingList;
 	}
-
 
 	public String getAvdelings() {
 		return avdelings;
