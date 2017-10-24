@@ -40,10 +40,12 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		if (!qDto.getAvdelingList().isEmpty()) {
 			queryString.append("    and  (shX.siavd IN ( :avdelingList ) )");
 		}		
-		queryString.append(" 		and   (:deklarasjonsnr = 0 OR shX.sitdn = :deklarasjonsnr )");
 		queryString.append(" 		and   shX.siavd > 0 "); //sanity check
 		queryString.append(" 		and   shX.sitdn > 0 "); //sanity check
-		queryString.append(" 		and   (:mottaker = 0 OR shX.siknk = :mottaker ) ");
+		//queryString.append(" 		and   (:mottaker = 0 OR shX.siknk = :mottaker ) ");  Spring combined with DB2 is a fucker, hence this crappy workaround
+		if (qDto.getMottaker() > 0) {
+			queryString.append(" 	and   shX.siknk = "+qDto.getMottaker());	
+		}
 		if (!qDto.getSignaturList().isEmpty()) {
 			queryString.append("    and  (shX.sisg IN ( :signaturList )) ");
 		}
@@ -53,7 +55,7 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		queryString.append(" LEFT OUTER JOIN (select e.mavd mavd , e.mtdn mtdn, t.f4815 kalle, COALESCE(t.f0078a,t.f0077) anka ");
 		queryString.append(" 				  from EDIM e, TVINF t ");
 		queryString.append(" 				  where e.mmn = t.fmn ");
-		queryString.append(" 				  and   e.msr = 'R' and   e.m0065 = 'CUSRES' and   e.m1n07 = 'DME' ");
+		queryString.append(" 				  and   e.msr = 'R' and   e.m0065 = 'CUSRES' and   e.m1n07 in ('DME','DFI') ");
 		queryString.append(" 				  and   ( t.f0078a in('950','954','972','999') OR  NULLIF(t.f0077, '') IS NOT NULL )");
 		queryString.append(" 				  and   t.f4815 in('NE','PP') ) e ");
 		queryString.append("  	ON sh.avdeling = e.mavd AND sh.deklarasjonsnr = e.mtdn ");
@@ -80,10 +82,12 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		if (!qDto.getAvdelingList().isEmpty()) {
 			queryString.append("    and  (shX.seavd IN ( :avdelingList ) )");
 		}	
-		queryString.append(" 		and   (:deklarasjonsnr = 0 OR shX.setdn = :deklarasjonsnr )");
 		queryString.append(" 		and   shX.seavd > 0 "); //sanity check
 		queryString.append(" 		and   shX.setdn > 0 "); //sanity check
-		queryString.append(" 		and   (:mottaker = 0 OR shX.seknk = :mottaker ) ");
+		//queryString.append(" 		and   (:mottaker = 0 OR shX.seknk = :mottaker ) "); Spring combined with DB2 is a fucker, hence this crappy workaround
+		if (qDto.getMottaker() > 0) {
+			queryString.append(" 	and   shX.seknk = "+qDto.getMottaker());	
+		}		
 		if (!qDto.getSignaturList().isEmpty()) {
 			queryString.append("    and  (shX.sesg IN ( :signaturList )) ");
 		}		
@@ -93,7 +97,7 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		queryString.append(" LEFT OUTER JOIN (select e.mavd mavd , e.mtdn mtdn, t.f4815 kalle, COALESCE(t.f0078a,t.f0077) anka ");
 		queryString.append(" 				  from EDIM e, TVINF t ");
 		queryString.append(" 				  where e.mmn = t.fmn ");
-		queryString.append(" 				  and   e.msr = 'R' and   e.m0065 = 'CUSRES' and   e.m1n07 = 'DME' ");
+		queryString.append(" 				  and   e.msr = 'R' and   e.m0065 = 'CUSRES' and    e.m1n07 in ('DME','DFI')  ");
 		queryString.append(" 				  and   ( t.f0078a in('950','954','972','999') OR NULLIF(t.f0077, '') IS NOT NULL )");
 		queryString.append(" 				  and   t.f4815 in('NE','PP') ) e ");
 		queryString.append("  	ON sh.avdeling = e.mavd AND sh.deklarasjonsnr = e.mtdn ");
