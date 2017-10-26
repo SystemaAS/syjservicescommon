@@ -52,7 +52,11 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		queryString.append(" ) as sh ");
 		queryString.append(" JOIN SADV sv  ");
 		queryString.append("	 ON sh.avdeling = sv.svavd AND  sh.deklarasjonsnr = sv.svtdn ");
-		queryString.append(" LEFT OUTER JOIN (select e.mavd mavd , e.mtdn mtdn, t.f4815 kalle, COALESCE(t.f0078a,t.f0077) anka ");
+		queryString.append(" LEFT OUTER JOIN (select e.mavd mavd , e.mtdn mtdn, t.f4815 kalle,  ");
+		queryString.append(" 					CASE ");
+		queryString.append("  						WHEN NULLIF(t.f0077,  '') IS NULL THEN t.f0078a ");
+		queryString.append("  		 				WHEN t.f0077 IS NOT NULL THEN t.f0077 ");
+		queryString.append("  		 			END anka ");	
 		queryString.append(" 				  from EDIM e, TVINF t ");
 		queryString.append(" 				  where e.mmn = t.fmn ");
 		queryString.append(" 				  and   e.msr = 'R' and   e.m0065 = 'CUSRES' and   e.m1n07 in ('DME','DFI') ");
@@ -60,7 +64,7 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		queryString.append(" 				  and   t.f4815 in('NE','PP') ) e ");
 		queryString.append("  	ON sh.avdeling = e.mavd AND sh.deklarasjonsnr = e.mtdn ");
 		queryString.append(" group by  sh.avdeling, sh.deklarasjonsnr, sh.registreringsdato, sh.signatur,  sh.mottaker, COALESCE(concat(e.kalle, e.anka), 'OK') ");
-	
+
 		logger.info("About to run getImportStats.queryString.toString()="+queryString.toString());	
 		List<FortollingDto> list = null;
 		list=  namedParameterJdbcTemplate.query(queryString.toString(), namedParameters, new GenericObjectMapper(new FortollingDto()));
@@ -94,7 +98,11 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		queryString.append(" ) as sh ");
 		queryString.append(" JOIN SAEV sv  ");
 		queryString.append("	 ON sh.avdeling = sv.svavd AND  sh.deklarasjonsnr = sv.svtdn ");
-		queryString.append(" LEFT OUTER JOIN (select e.mavd mavd , e.mtdn mtdn, t.f4815 kalle, COALESCE(t.f0078a,t.f0077) anka ");
+		queryString.append(" LEFT OUTER JOIN (select e.mavd mavd , e.mtdn mtdn, t.f4815 kalle, ");
+		queryString.append(" 					CASE ");
+		queryString.append("  						WHEN NULLIF(t.f0077,  '') IS NULL THEN t.f0078a ");
+		queryString.append("  		 				WHEN t.f0077 IS NOT NULL THEN t.f0077 ");
+		queryString.append("  		 			END anka ");	
 		queryString.append(" 				  from EDIM e, TVINF t ");
 		queryString.append(" 				  where e.mmn = t.fmn ");
 		queryString.append(" 				  and   e.msr = 'R' and   e.m0065 = 'CUSRES' and    e.m1n07 in ('DME','DFI')  ");
