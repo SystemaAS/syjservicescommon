@@ -169,7 +169,7 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 	public int countAll() {
 	    StringBuilder queryString = new StringBuilder("SELECT count(*) from ");
 	    queryString.append(tableName);
-	    int count = jdbcTemplate.queryForInt(queryString.toString());
+	    int count = jdbcTemplate.queryForObject(queryString.toString(), Integer.class);
 		return count;
 	}         	
 		
@@ -178,7 +178,7 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		StringBuilder queryString = new StringBuilder("SELECT count(*) from ");
 		queryString.append(tableName);
 		queryString.append(this.getQueryClauses(params, null));
-		int count = jdbcTemplate.queryForInt(queryString.toString());
+		int count = jdbcTemplate.queryForObject(queryString.toString(), Integer.class);
 		return count;
 	}
 
