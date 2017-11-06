@@ -13,6 +13,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import no.systema.jservices.common.dao.FaktDao;
+import no.systema.jservices.common.dto.FaktDWDto;
 import no.systema.jservices.common.dto.FaktDto;
 
 public class TestJFaktDaoService {
@@ -51,7 +52,23 @@ public class TestJFaktDaoService {
 		List<FaktDto> list  =  faktDaoService.getStats(qDto);
 		System.out.println("list.size()="+list.size());
 		assertNotNull(list.size());
+	}	
+	
+	@Test
+	public final void testCountOnDWService() {
+		FaktDto qDto = new   FaktDto();
+		qDto.setRegistreringsdato("2016");
+		qDto.getAvdelingList().add(2);
+		//qDto.getAvdelingList().add(999);
+		//qDto.getSignaturList().add("JOV");
+		qDto.getFavkList().add("FRA");
+		//qDto.getFavkList().add("VEG");
+		//qDto.setFavkexcl("true");
+		List<FaktDWDto> list  =  faktDaoService.getStatsFromDW(qDto);
+		System.out.println("list.size()="+list.size());
+		assertNotNull(list.size());
 	}		
+	
 	
 	@Test
 	public final void testCountAllWithParams() {
