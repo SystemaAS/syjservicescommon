@@ -1,8 +1,8 @@
 package no.systema.jservices.common.json;
 
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-import org.codehaus.jackson.annotate.JsonTypeInfo;
 
 /**
  * This class is the placeholder for object(s) that should be delivered from service to UI.

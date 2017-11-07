@@ -3,7 +3,8 @@ package no.systema.jservices.common.json;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper; 
 
 /**
  * This Json writer is the evolutionary version of the the original based on

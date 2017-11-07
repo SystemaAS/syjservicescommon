@@ -1,7 +1,7 @@
 package no.systema.jservices.common.json;
 
-import org.codehaus.jackson.map.DeserializationConfig;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper; 
 
 /**
  * This class takes an object an created a Json string based on it.
@@ -34,7 +34,7 @@ public class JsonReader<T> {
 	@SuppressWarnings("unchecked")
 	public T get(String payLoad) {
 		T result = null;
-		mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		try {
 
 			result = (T) mapper.readValue(payLoad.getBytes(), t.getClass());
