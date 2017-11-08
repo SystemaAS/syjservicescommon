@@ -42,7 +42,6 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		}		
 		queryString.append(" 		and   shX.siavd > 0 "); //sanity check
 		queryString.append(" 		and   shX.sitdn > 0 "); //sanity check
-		//queryString.append(" 		and   (:mottaker = 0 OR shX.siknk = :mottaker ) ");  Spring combined with DB2 is a fucker, hence this crappy workaround
 		if (qDto.getMottaker() > 0) {
 			queryString.append(" 	and   shX.siknk = "+qDto.getMottaker());	
 		}
@@ -60,7 +59,7 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		queryString.append(" 				  from EDIM e, TVINF t ");
 		queryString.append(" 				  where e.mmn = t.fmn ");
 		queryString.append(" 				  and   e.msr = 'R' and   e.m0065 = 'CUSRES' and   e.m1n07 in ('DME','DFI') ");
-		queryString.append(" 				  and   ( t.f0078a in('950','954','972','999') OR  NULLIF(t.f0077, '') IS NOT NULL )");
+		queryString.append(" 				  and   ( t.f0078a in('950','954','972') OR  NULLIF(t.f0077, '') IS NOT NULL )");
 		queryString.append(" 				  and   t.f4815 in('NE','PP') ) e ");
 		queryString.append("  	ON sh.avdeling = e.mavd AND sh.deklarasjonsnr = e.mtdn ");
 		queryString.append(" group by  sh.avdeling, sh.deklarasjonsnr, sh.registreringsdato, sh.signatur,  sh.mottaker, COALESCE(concat(e.kalle, e.anka), 'OK') ");
@@ -88,7 +87,6 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		}	
 		queryString.append(" 		and   shX.seavd > 0 "); //sanity check
 		queryString.append(" 		and   shX.setdn > 0 "); //sanity check
-		//queryString.append(" 		and   (:mottaker = 0 OR shX.seknk = :mottaker ) "); Spring combined with DB2 is a fucker, hence this crappy workaround
 		if (qDto.getMottaker() > 0) {
 			queryString.append(" 	and   shX.seknk = "+qDto.getMottaker());	
 		}		
@@ -106,7 +104,7 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		queryString.append(" 				  from EDIM e, TVINF t ");
 		queryString.append(" 				  where e.mmn = t.fmn ");
 		queryString.append(" 				  and   e.msr = 'R' and   e.m0065 = 'CUSRES' and    e.m1n07 in ('DME','DFI')  ");
-		queryString.append(" 				  and   ( t.f0078a in('950','954','972','999') OR NULLIF(t.f0077, '') IS NOT NULL )");
+		queryString.append(" 				  and   ( t.f0078a in('950','954','972') OR NULLIF(t.f0077, '') IS NOT NULL )");
 		queryString.append(" 				  and   t.f4815 in('NE','PP') ) e ");
 		queryString.append("  	ON sh.avdeling = e.mavd AND sh.deklarasjonsnr = e.mtdn ");
 		queryString.append(" group by sh.avdeling, sh.deklarasjonsnr, sh.registreringsdato, sh.signatur,  sh.mottaker, COALESCE(concat(e.kalle, e.anka), 'OK') ");
