@@ -33,6 +33,10 @@ public class HeadfDto implements IDao {
 	private int hepro;
 	private String hegn;
 	private String hest;
+	private String hepk3;
+	private String hepk4;
+	
+	
 	/* days to view in list */
 	@ExludeMapping
 	private int dftdg;
@@ -197,6 +201,19 @@ public class HeadfDto implements IDao {
 		this.heavd = heavd;
 	}
 
+	public String getHepk3() {
+		return hepk3;
+	}
+
+	public void setHepk3(String hepk3) {
+		this.hepk3 = hepk3;
+	}
+	public String getHepk4() {
+		return hepk4;
+	}
+	public void setHepk4(String hepk4) {
+		this.hepk4 = hepk4;
+	}
 	@Override
 	public Map<String, Object> getKeys() {
 		// Only to be used in IDao context.

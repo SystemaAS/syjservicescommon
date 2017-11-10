@@ -23,7 +23,7 @@ public class HeadfDaoServiceImpl extends GenericDaoServiceImpl<HeadfDao> impleme
 		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(qDto);
 		int fromDate = fromDate(qDto.getHedtop(), qDto.getDftdg());
 		StringBuilder queryString = new StringBuilder(
-							"SELECT heavd, heopd , hedtop ,hedtr, henas , henak, hesg , hent , hevkt , hem3 , helks ,  hepns , helkk , hepnk, heot, heur, hepro, hegn, hest FROM headf");
+							"SELECT heavd, heopd , hedtop ,hedtr, henas , henak, hesg , hent , hevkt , hem3 , helks ,  hepns , helkk , hepnk, heot, heur, hepro, hegn, hest, hepk3, hepk4 FROM headf");
 		queryString.append(" WHERE (:heavd = 0 OR heavd = :heavd )");
 		queryString.append(" AND   (:heopd = 0 OR heopd = :heopd )");
 		
