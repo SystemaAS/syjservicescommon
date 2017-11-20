@@ -3,9 +3,9 @@ package no.systema.jservices.common.dao.services;
 import java.util.List;
 
 import no.systema.jservices.common.dao.FaktDao;
-import no.systema.jservices.common.dao.SingleValueObject;
 import no.systema.jservices.common.dto.FaktDWDto;
 import no.systema.jservices.common.dto.FaktDto;
+import no.systema.jservices.common.dto.SingleValueDto;
 
 public interface FaktDaoService extends GenericDaoService<FaktDao> {
 
@@ -28,7 +28,7 @@ public interface FaktDaoService extends GenericDaoService<FaktDao> {
 	 *  
 	 * @return years
 	 */
-	public List<SingleValueObject> getAvailableYears();
+	public List<SingleValueDto> getAvailableYears();
 	
 	
 }

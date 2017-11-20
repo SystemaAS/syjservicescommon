@@ -10,9 +10,9 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 import no.systema.jservices.common.dao.FaktDao;
 import no.systema.jservices.common.dao.GenericObjectMapper;
-import no.systema.jservices.common.dao.SingleValueObject;
 import no.systema.jservices.common.dto.FaktDWDto;
 import no.systema.jservices.common.dto.FaktDto;
+import no.systema.jservices.common.dto.SingleValueDto;
 import no.systema.jservices.common.util.DateTimeManager;
 
 public class FaktDaoServiceImpl extends GenericDaoServiceImpl<FaktDao> implements FaktDaoService{
@@ -176,9 +176,9 @@ f.favk OK
 
 
 	@Override
-	public List<SingleValueObject> getAvailableYears() {
+	public List<SingleValueDto> getAvailableYears() {
 		StringBuilder queryString = new StringBuilder("SELECT DISTINCT SUBSTR(hedtop, 1, 4) AS value FROM headf where hedtop > 0 ");
-		return findAll(queryString.toString(), new GenericObjectMapper(new SingleValueObject()));		
+		return findAll(queryString.toString(), new GenericObjectMapper(new SingleValueDto()));		
 	}
 	
 }

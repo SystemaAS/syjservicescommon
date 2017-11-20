@@ -1,8 +1,10 @@
-package no.systema.jservices.common.dao;
+package no.systema.jservices.common.dto;
 
 import java.util.Map;
 
-public class SingleValueObject implements IDao {
+import no.systema.jservices.common.dao.IDao;
+
+public class SingleValueDto implements IDao {
 
 	private String value;
 
