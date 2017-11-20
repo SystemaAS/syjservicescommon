@@ -13,6 +13,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import no.systema.jservices.common.dao.FaktDao;
+import no.systema.jservices.common.dao.SingleValueObject;
 import no.systema.jservices.common.dto.FaktDWDto;
 import no.systema.jservices.common.dto.FaktDto;
 
@@ -119,5 +120,10 @@ public class TestJFaktDaoService {
 		
 	}	
 	
+	@Test
+	public final void testAvailableYears() {
+		List<SingleValueObject> years =  faktDaoService.getAvailableYears();
+		assertNotNull(years);
+	}
 	
 }
