@@ -226,7 +226,10 @@
 	
 	<bean id="kodtgeDaoService" class="no.systema.jservices.common.dao.services.KodtgeDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
-	</bean>		
+	</bean>	
+	<bean id="trackfDaoService" class="no.systema.jservices.common.dao.services.TrackfDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>	
 	
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
         <tx:attributes>
