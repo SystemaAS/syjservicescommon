@@ -4,26 +4,27 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
+import no.systema.jservices.common.util.DateTimeManager;
+
 public class TrackfDao implements IDao {
 
 	private int ttavd; // key  SONET (4)
 	private int ttopd; // key  SONET (7)
-	private int ttfbnr; // key SONET (3)
+	private int ttfbnr = 0; // key SONET (3)
 	private String ttacti; // TEGN (3)
-	private int ttdate; // SONET (8) 
-	private int tttime; // SONET (6)
+	private int ttdate = 0; // SONET (8) 
+	private int tttime = 0; // SONET (6)
 	private String tttext; //TEGN (70)
 	private String ttuser; //TEGN (10)
-	private int ttdatl; //SONET (8)
-	private int tttiml; //SONET (6)
+	private int ttdatl = 0; //SONET (8)
+	private int tttiml = 0; //SONET (6)
 	private String ttedev; //TEGN (3) 
 	private String ttedre; //TEGN (3)
 	private String ttdepo; //TEGN (10)
 	private String ttname; //TEGN (10)
 	private String ttmanu; //TEGN (1)
-	private BigDecimal vmrab = new BigDecimal(0);
 	private String tttexl; //TEGN (70)
-	private int tttur; //SONET (8)
+	private int tttur = 0; //SONET (8)
 	private String ttlocc; //TEGN (10)
 	private String ttloct; //TEGN (30)
 	private BigDecimal ttbre = new BigDecimal(0); //SONET (8 6)
@@ -38,31 +39,21 @@ public class TrackfDao implements IDao {
 		return ttavd;
 	}
 
-
-
 	public void setTtavd(int ttavd) {
 		this.ttavd = ttavd;
 	}
-
-
 
 	public int getTtopd() {
 		return ttopd;
 	}
 
-
-
 	public void setTtopd(int ttopd) {
 		this.ttopd = ttopd;
 	}
 
-
-
 	public int getTtfbnr() {
 		return ttfbnr;
 	}
-
-
 
 	public void setTtfbnr(int ttfbnr) {
 		this.ttfbnr = ttfbnr;
@@ -86,25 +77,17 @@ public class TrackfDao implements IDao {
 		return ttdate;
 	}
 
-
-
 	public void setTtdate(int ttdate) {
 		this.ttdate = ttdate;
 	}
-
-
 
 	public int getTttime() {
 		return tttime;
 	}
 
-
-
 	public void setTttime(int tttime) {
 		this.tttime = tttime;
 	}
-
-
 
 	public String getTttext() {
 		return tttext;
@@ -116,31 +99,21 @@ public class TrackfDao implements IDao {
 		this.tttext = tttext;
 	}
 
-
-
 	public String getTtuser() {
 		return ttuser;
 	}
-
-
 
 	public void setTtuser(String ttuser) {
 		this.ttuser = ttuser;
 	}
 
-
-
 	public int getTtdatl() {
 		return ttdatl;
 	}
 
-
-
 	public void setTtdatl(int ttdatl) {
 		this.ttdatl = ttdatl;
 	}
-
-
 
 	public int getTttiml() {
 		return tttiml;
@@ -206,31 +179,13 @@ public class TrackfDao implements IDao {
 		return ttmanu;
 	}
 
-
-
 	public void setTtmanu(String ttmanu) {
 		this.ttmanu = ttmanu;
 	}
 
-
-
-	public BigDecimal getVmrab() {
-		return vmrab;
-	}
-
-
-
-	public void setVmrab(BigDecimal vmrab) {
-		this.vmrab = vmrab;
-	}
-
-
-
 	public String getTttexl() {
 		return tttexl;
 	}
-
-
 
 	public void setTttexl(String tttexl) {
 		this.tttexl = tttexl;
@@ -325,10 +280,6 @@ public class TrackfDao implements IDao {
 	public void setKeys(Map<String, Object> keys) {
 		this.keys = keys;
 	}
-
-
-
-	
 
 	@Override
 	public Map<String, Object> getKeys() {

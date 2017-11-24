@@ -37,6 +37,18 @@ public class DateTimeManager {
 		
 		return  retval; 
 	}
+	
+	public String getCurrentDate_ISO(String mask){
+		String retval = null;
+		SimpleDateFormat dateFormat = new SimpleDateFormat(mask);
+		Calendar cal = Calendar.getInstance();
+		try{
+			retval = dateFormat.format(cal.getTime()); 
+		}catch(Exception e){
+			//Nothing
+		}
+		return  retval; 
+	}
 	/**
 	 * 
 	 * @return

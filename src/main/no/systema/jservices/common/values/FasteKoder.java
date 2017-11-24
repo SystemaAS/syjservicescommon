@@ -32,5 +32,7 @@ public enum FasteKoder implements Serializable {
 	SYPAR,
 	ARKIVU,
 	PRODTYPE,
-	FRBREVPRO
+	FRBREVPRO,
+	TRACKT
+	
 }
