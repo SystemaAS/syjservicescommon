@@ -26,11 +26,19 @@ public class FortollingDto implements IDao {
 	private int off_vareposter;
 	private String type;
 	private String edim;
-
+	private String avsnitt;
 	@ExludeMapping
 	private List avdelingList;
 	@ExludeMapping
 	private List signaturList;
+	
+	public String getAvsnitt() {
+		return avsnitt;
+	}
+
+	public void setAvsnitt(String avsnitt) {
+		this.avsnitt = avsnitt;
+	}
 
 	public List getSignaturList() {
 		if (signaturList != null) {

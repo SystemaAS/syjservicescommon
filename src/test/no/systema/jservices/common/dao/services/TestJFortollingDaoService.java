@@ -26,9 +26,9 @@ public class TestJFortollingDaoService {
 	public final void testGetStats() {
 		FortollingDto qDto = new FortollingDto();
 		qDto.setRegistreringsdato("20170000");
-		qDto.getAvdelingList().add(1);
-		qDto.getSignaturList().add("YBC");
-		qDto.setMottaker(222);
+		//qDto.getAvdelingList().add(1);
+		//qDto.getSignaturList().add("YBC");
+		//qDto.setMottaker(222);
 		
 		List<FortollingDto> list  =  fortollingDaoService.getStats(qDto);
 		System.out.println("list.size()="+list.size());

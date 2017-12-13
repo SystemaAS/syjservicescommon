@@ -32,7 +32,8 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(qDto);
 		String sidtToDate = dm.getCurrentDate_ISO();
 		StringBuilder queryString = new StringBuilder(
-							"SELECT  sh.avdeling, sh.deklarasjonsnr, sh.registreringsdato, sh.signatur,  sh.mottaker, count(sv.svtdn) reg_vareposter,  max(sv.svln) off_vareposter, 'Import' type,  COALESCE(concat(e.kalle, e.anka), 'OK') edim ");
+							"SELECT  sh.avdeling, sh.deklarasjonsnr, sh.registreringsdato, sh.signatur,  sh.mottaker, count(sv.svtdn) reg_vareposter,  max(sv.svln) off_vareposter, "
+							+ "'Import' type,  COALESCE(concat(e.kalle, e.anka), 'OK') edim, sk.sadkap02 avsnitt ");
 		queryString.append(" FROM (select shX.siavd avdeling, shX.sitdn deklarasjonsnr, shX.sidt registreringsdato, shX.sisg signatur,  shX.siknk mottaker ");
 		queryString.append(" 	   	from SADH shX  ");
 		queryString.append("      	where  (:registreringsdato IS NULL OR shX.sidt >= :registreringsdato )");
@@ -51,6 +52,8 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		queryString.append(" ) as sh ");
 		queryString.append(" JOIN SADV sv  ");
 		queryString.append("	 ON sh.avdeling = sv.svavd AND  sh.deklarasjonsnr = sv.svtdn ");
+		queryString.append(" JOIN SADKAP sk  ");
+		queryString.append("	 ON SUBSTR(sv.svvnt, 1, 2) = sk.sadkap01 ");
 		queryString.append(" LEFT OUTER JOIN (select e.mavd mavd , e.mtdn mtdn, t.f4815 kalle,  ");
 		queryString.append(" 					CASE ");
 		queryString.append("  						WHEN NULLIF(t.f0077,  '') IS NULL THEN t.f0078a ");
@@ -62,7 +65,7 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		queryString.append(" 				  and   ( t.f0078a in('950','954','972') OR  NULLIF(t.f0077, '') IS NOT NULL )");
 		queryString.append(" 				  and   t.f4815 in('NE','PP') ) e ");
 		queryString.append("  	ON sh.avdeling = e.mavd AND sh.deklarasjonsnr = e.mtdn ");
-		queryString.append(" group by  sh.avdeling, sh.deklarasjonsnr, sh.registreringsdato, sh.signatur,  sh.mottaker, COALESCE(concat(e.kalle, e.anka), 'OK') ");
+		queryString.append(" group by  sh.avdeling, sh.deklarasjonsnr, sh.registreringsdato, sh.signatur,  sh.mottaker, COALESCE(concat(e.kalle, e.anka), 'OK'), sk.sadkap02  ");
 
 		logger.info("About to run getImportStats.queryString.toString()="+queryString.toString());	
 		List<FortollingDto> list = null;
@@ -77,7 +80,8 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(qDto);
 		String sidtToDate = dm.getCurrentDate_ISO();
 		StringBuilder queryString = new StringBuilder(
-							"SELECT  sh.avdeling, sh.deklarasjonsnr, sh.registreringsdato, sh.signatur,  sh.mottaker, count(sv.svtdn) reg_vareposter,  max(sv.svln) off_vareposter, 'Export' type, COALESCE(concat(e.kalle, e.anka), 'OK') edim ");
+							"SELECT  sh.avdeling, sh.deklarasjonsnr, sh.registreringsdato, sh.signatur,  sh.mottaker, count(sv.svtdn) reg_vareposter,  max(sv.svln) off_vareposter, "
+							+ "'Export' type, COALESCE(concat(e.kalle, e.anka), 'OK') edim, sk.sadkap02 avsnitt ");
 		queryString.append(" FROM (select shX.seavd avdeling, shX.setdn deklarasjonsnr, shX.sedt registreringsdato, shX.sesg signatur,  shX.seknk mottaker ");
 		queryString.append(" 	   	from SAEH shX  ");
 		queryString.append("      	where  (:registreringsdato IS NULL OR shX.sedt >= :registreringsdato )");
@@ -96,6 +100,8 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		queryString.append(" ) as sh ");
 		queryString.append(" JOIN SAEV sv  ");
 		queryString.append("	 ON sh.avdeling = sv.svavd AND  sh.deklarasjonsnr = sv.svtdn ");
+		queryString.append(" JOIN SADKAP sk  ");
+		queryString.append("	 ON SUBSTR(sv.svvnt, 1, 2) = sk.sadkap01 ");		
 		queryString.append(" LEFT OUTER JOIN (select e.mavd mavd , e.mtdn mtdn, t.f4815 kalle, ");
 		queryString.append(" 					CASE ");
 		queryString.append("  						WHEN NULLIF(t.f0077,  '') IS NULL THEN t.f0078a ");
@@ -107,7 +113,7 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		queryString.append(" 				  and   ( t.f0078a in('950','954','972') OR NULLIF(t.f0077, '') IS NOT NULL )");
 		queryString.append(" 				  and   t.f4815 in('NE','PP') ) e ");
 		queryString.append("  	ON sh.avdeling = e.mavd AND sh.deklarasjonsnr = e.mtdn ");
-		queryString.append(" group by sh.avdeling, sh.deklarasjonsnr, sh.registreringsdato, sh.signatur,  sh.mottaker, COALESCE(concat(e.kalle, e.anka), 'OK') ");
+		queryString.append(" group by sh.avdeling, sh.deklarasjonsnr, sh.registreringsdato, sh.signatur,  sh.mottaker, COALESCE(concat(e.kalle, e.anka), 'OK'), sk.sadkap02 ");
 	
 		
 		logger.info("About to run getExportStats.queryString.toString()="+queryString.toString());	
