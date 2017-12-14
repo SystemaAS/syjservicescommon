@@ -20,6 +20,7 @@ public class FortollingDto implements IDao {
 	private String avdelings;
 	private int deklarasjonsnr;
 	private String registreringsdato;
+	private String deklarasjonsdato;
 	private String signatur;
 	private int mottaker;
 	private int reg_vareposter;
@@ -31,7 +32,15 @@ public class FortollingDto implements IDao {
 	private List avdelingList;
 	@ExludeMapping
 	private List signaturList;
-	
+
+	public String getDeklarasjonsdato() {
+		return deklarasjonsdato;
+	}
+
+	public void setDeklarasjonsdato(String deklarasjonsdato) {
+		this.deklarasjonsdato = deklarasjonsdato;
+	}
+
 	public String getAvsnitt() {
 		return avsnitt;
 	}
