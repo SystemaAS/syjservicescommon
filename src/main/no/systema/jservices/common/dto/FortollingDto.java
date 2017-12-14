@@ -28,10 +28,19 @@ public class FortollingDto implements IDao {
 	private String type;
 	private String edim;
 	private String avsnitt;
+	private String inputtype;
 	@ExludeMapping
 	private List avdelingList;
 	@ExludeMapping
 	private List signaturList;
+
+	public String getInputtype() {
+		return inputtype;
+	}
+
+	public void setInputtype(String inputtype) {
+		this.inputtype = inputtype;
+	}
 
 	public String getDeklarasjonsdato() {
 		return deklarasjonsdato;
