@@ -49,6 +49,7 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		if (!qDto.getSignaturList().isEmpty()) {
 			queryString.append("    and  (shX.sisg IN ( :signaturList )) ");
 		}
+		queryString.append(" 		and shX.sist = 'P' ");
 		queryString.append(" ) as sh ");
 		queryString.append(" JOIN SADV sv  ");
 		queryString.append("	 ON sh.avdeling = sv.svavd AND  sh.deklarasjonsnr = sv.svtdn ");
@@ -97,6 +98,7 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		if (!qDto.getSignaturList().isEmpty()) {
 			queryString.append("    and  (shX.sesg IN ( :signaturList )) ");
 		}		
+		queryString.append(" 		and shX.sest = 'P' ");
 		queryString.append(" ) as sh ");
 		queryString.append(" JOIN SAEV sv  ");
 		queryString.append("	 ON sh.avdeling = sv.svavd AND  sh.deklarasjonsnr = sv.svtdn ");
