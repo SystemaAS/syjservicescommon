@@ -43,11 +43,11 @@ public class HeadfDaoServiceImpl extends GenericDaoServiceImpl<HeadfDao> impleme
 			queryString.append(" AND   (:hegn IS NULL OR hegn like :hegn ) ");
 			
 			if(qDto.getHedtop() == 0) {  //Only if date not delivered
-				queryString.append(" AND  hedtr >= "+fromDate);
+				queryString.append(" AND  hedtop >= "+fromDate);
 			}
 		}
 		
-		queryString.append(" ORDER BY hedtr DESC ");		
+		queryString.append(" ORDER BY hedtop DESC ");		
 		
 		logger.info("queryString="+queryString.toString());
 		
