@@ -23,12 +23,12 @@ public class FortollingDto implements IDao {
 	private String deklarasjonsdato;
 	private String signatur;
 	private int mottaker;
-	private int reg_vareposter;
 	private int off_vareposter;
 	private String type;
 	private String edim;
 	private String avsnitt;
 	private String inputtype;
+	private String sadkap01;
 	@ExludeMapping
 	private List avdelingList;
 	@ExludeMapping
@@ -104,14 +104,6 @@ public class FortollingDto implements IDao {
 		this.off_vareposter = off_vareposter;
 	}
 
-	public int getReg_vareposter() {
-		return reg_vareposter;
-	}
-
-	public void setReg_vareposter(int reg_vareposter) {
-		this.reg_vareposter = reg_vareposter;
-	}
-
 	public String getType() {
 		return type;
 	}
@@ -163,6 +155,14 @@ public class FortollingDto implements IDao {
 	@Override
 	public Map<String, Object> getKeys() {
 		return null; // Just used as upstreams DTO
+	}
+
+	public String getSadkap01() {
+		return sadkap01;
+	}
+
+	public void setSadkap01(String sadkap01) {
+		this.sadkap01 = sadkap01;
 	}
 
 }

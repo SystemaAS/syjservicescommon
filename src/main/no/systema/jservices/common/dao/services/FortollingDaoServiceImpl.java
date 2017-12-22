@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 import no.systema.jservices.common.dao.GenericObjectMapper;
 import no.systema.jservices.common.dto.FortollingDto;
+import no.systema.jservices.common.dto.SingleValueDto;
 import no.systema.jservices.common.util.DateTimeManager;
 
 public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDto> implements FortollingDaoService{
@@ -16,9 +17,9 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 	DateTimeManager dm = new DateTimeManager();
 	
 	@Override
-	public List<FortollingDto> getStats(FortollingDto qDto) {
+	public List<FortollingDto> getStats(FortollingDto qDto) {  
 		List<FortollingDto> impList = getImportStats(qDto);
-		List<FortollingDto> expList = getExportStats(qDto);
+		List<FortollingDto> expList = getExportStats(qDto);  
 		List<FortollingDto> impAndExpList =  new ArrayList<FortollingDto>();
 		impAndExpList.addAll(impList);
 		impAndExpList.addAll(expList);
@@ -27,7 +28,7 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 	
 	}
 
-	private List<FortollingDto> getImportStats(FortollingDto qDto) {
+	private List<FortollingDto> getImportStatsORG(FortollingDto qDto) {
 		NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getJdbcTemplate().getDataSource());
 		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(qDto);
 		String sidtToDate = dm.getCurrentDate_ISO();
@@ -75,8 +76,136 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		return list;
 	}	
 	
+	public List<FortollingDto> getImportStats(FortollingDto qDto) {
+		NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getJdbcTemplate().getDataSource());
+		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(qDto);
+		String sidtToDate = dm.getCurrentDate_ISO();
+		
+		StringBuilder queryString = new StringBuilder(" select 'Import' type, siavd avdeling, sitdn deklarasjonsnr, svln off_vareposter ,sidt registreringsdato, sisg signatur, svexr02 inputtype, siknk mottaker, sidtg deklarasjonsdato, SUBSTR(svvnt, 1, 2) sadkap01 ");
+		queryString.append(" 	   	from SADH, SADV ");
+		queryString.append("	    where siavd = svavd AND  sitdn = svtdn ");
+		queryString.append("      	and  (:registreringsdato IS NULL OR sidt >= :registreringsdato )");
+		queryString.append(" 		and   (:registreringsdato IS NULL OR sidt <="+sidtToDate+")");
+		if (!qDto.getAvdelingList().isEmpty()) {
+		queryString.append("    and  (siavd IN ( :avdelingList ) )");
+		}		
+		queryString.append(" 		and   siavd > 0 "); //sanity check
+		queryString.append(" 		and   sitdn > 0 "); //sanity check
+		if (qDto.getMottaker() > 0) {
+		queryString.append(" 	and   siknk = "+qDto.getMottaker());	
+		}
+		if (!qDto.getSignaturList().isEmpty()) {
+		queryString.append("    and  (sisg IN ( :signaturList )) ");
+		}
+		queryString.append(" 		and sist = 'P' ");
+		
+
+		logger.info("About to run getImportStats.queryString.toString()="+queryString.toString());	
+		List<FortollingDto> list = null;
+		list=  namedParameterJdbcTemplate.query(queryString.toString(), namedParameters, new GenericObjectMapper(new FortollingDto()));
+		logger.info("getImportStats list.size="+list.size());
+		
+		
+		addDataBySadkap(list);
+		addDataByEdimTvineF(list);
+		
+		return list;
+	}	
 	
-	private List<FortollingDto> getExportStats(FortollingDto qDto) {
+	public List<FortollingDto> getExportStats(FortollingDto qDto) {
+		NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getJdbcTemplate().getDataSource());
+		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(qDto);
+		String sidtToDate = dm.getCurrentDate_ISO();
+		
+		StringBuilder queryString = new StringBuilder(" select 'Export' type, seavd avdeling, setdn deklarasjonsnr, svln off_vareposter ,sedt registreringsdato, sesg signatur, svexr02 inputtype, seknk mottaker, sedtg deklarasjonsdato, SUBSTR(svvnt, 1, 2) sadkap01 ");
+		queryString.append(" 	   	from SAEH, SADV ");
+		queryString.append("	    where seavd = svavd AND  setdn = svtdn ");
+		queryString.append("      	and  (:registreringsdato IS NULL OR sedt >= :registreringsdato )");
+		queryString.append(" 		and   (:registreringsdato IS NULL OR sedt <="+sidtToDate+")");
+		if (!qDto.getAvdelingList().isEmpty()) {
+		queryString.append("    and  (seavd IN ( :avdelingList ) )");
+		}		
+		queryString.append(" 		and   seavd > 0 "); //sanity check
+		queryString.append(" 		and   setdn > 0 "); //sanity check
+		if (qDto.getMottaker() > 0) {
+		queryString.append(" 	and   seknk = "+qDto.getMottaker());	
+		}
+		if (!qDto.getSignaturList().isEmpty()) {
+		queryString.append("    and  (sesg IN ( :signaturList )) ");
+		}
+		queryString.append(" 		and sest = 'P' ");
+		
+
+		logger.info("About to run getExportStats.queryString.toString()="+queryString.toString());	
+		List<FortollingDto> list = null;
+		list=  namedParameterJdbcTemplate.query(queryString.toString(), namedParameters, new GenericObjectMapper(new FortollingDto()));
+		logger.info("getImportStats list.size="+list.size());
+		
+		
+		addDataBySadkap(list);
+		addDataByEdimTvineF(list);
+		
+		return list;
+	}		
+	
+	
+	private void addDataByEdimTvineF(List<FortollingDto> list) {
+		SingleValueDto resultDto = null;
+		List<SingleValueDto> dtoList = null;
+		for (FortollingDto fortollingDto : list) {		
+			StringBuilder queryString = new StringBuilder(" select concat(t.f4815,  ");
+			queryString.append(" 					CASE ");
+			queryString.append("  						WHEN NULLIF(t.f0077,  '') IS NULL THEN t.f0078a ");
+			queryString.append("  		 				WHEN t.f0077 IS NOT NULL THEN t.f0077 ");
+			queryString.append("  		 			END) AS value");	
+			queryString.append(" 				  from EDIM e, TVINF t ");
+			queryString.append(" 				  where e.mmn = t.fmn ");
+			queryString.append(" 				  and   e.msr = 'R' and   e.m0065 = 'CUSRES' and   e.m1n07 in ('DME','DFI') ");
+			queryString.append("  				  and e.mavd= "+fortollingDto.getAvdeling());
+			queryString.append("  				  and e.mtdn= "+fortollingDto.getDeklarasjonsnr());				
+			queryString.append(" 				  and   ( t.f0078a in('950','954','972') OR  NULLIF(t.f0077, '') IS NOT NULL )");
+			queryString.append(" 				  and   t.f4815 in('NE','PP') ");
+	
+	
+			dtoList = findAll(queryString.toString(), new GenericObjectMapper(new SingleValueDto()), null);
+			
+			//TODO iterate!!!
+			if (dtoList.size() > 0) {
+				resultDto = dtoList.get(0); 
+				fortollingDto.setEdim(resultDto.getValue());
+			} else {
+				fortollingDto.setEdim("OK");	
+			}
+			
+
+		
+		}
+		
+		
+		
+	}
+
+	private void addDataBySadkap(List<FortollingDto> list) {
+		SingleValueDto resultDto = null;
+		List<SingleValueDto> dtoList = null;
+		for (FortollingDto fortollingDto : list) {
+			StringBuilder queryString = new StringBuilder(" "
+					+ "			select sadkap02 as value ");
+			queryString.append("from sadkap ");
+			queryString.append("where sadkap01 ="+fortollingDto.getSadkap01());
+			
+			dtoList = findAll(queryString.toString(), new GenericObjectMapper(new SingleValueDto()), null);
+			
+			resultDto = dtoList.get(0); //TODO
+			
+			fortollingDto.setAvsnitt(resultDto.getValue());
+
+		}
+		
+	}
+	
+	
+	private List<FortollingDto> getExportStatsORG(FortollingDto qDto) {
 		NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getJdbcTemplate().getDataSource());
 		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(qDto);
 		String sidtToDate = dm.getCurrentDate_ISO();

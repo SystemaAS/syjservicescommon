@@ -1,9 +1,11 @@
 package no.systema.jservices.common.dao.services;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -25,14 +27,18 @@ public class TestJFortollingDaoService {
 	@Test
 	public final void testGetStats() {
 		FortollingDto qDto = new FortollingDto();
-		qDto.setRegistreringsdato("20170000");
+		qDto.setRegistreringsdato("20170700");
 		//qDto.getAvdelingList().add(1);
 		//qDto.getSignaturList().add("YBC");
-		//qDto.setMottaker(222);
+		//qDto.setMottaker(1);
 		
 		List<FortollingDto> list  =  fortollingDaoService.getStats(qDto);
-		System.out.println("list.size()="+list.size());
-		assertNotNull(list.size());
+		
+		for (FortollingDto fortollingDto : list) {
+			System.out.println(ReflectionToStringBuilder.toString(fortollingDto, ToStringStyle.MULTI_LINE_STYLE, true, true));	
+		}
+		
+		assertEquals(list.size(),5);
 	}		
 	
 	
