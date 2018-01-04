@@ -27,18 +27,18 @@ public class TestJFortollingDaoService {
 	@Test
 	public final void testGetStats() {
 		FortollingDto qDto = new FortollingDto();
-		qDto.setRegistreringsdato("20170700");
+		qDto.setRegistreringsdato("20170000");
 		//qDto.getAvdelingList().add(1);
 		//qDto.getSignaturList().add("YBC");
 		//qDto.setMottaker(1);
 		
 		List<FortollingDto> list  =  fortollingDaoService.getStats(qDto);
 		
-		for (FortollingDto fortollingDto : list) {
-			System.out.println(ReflectionToStringBuilder.toString(fortollingDto, ToStringStyle.MULTI_LINE_STYLE, true, true));	
-		}
+//		for (FortollingDto fortollingDto : list) {
+//			System.out.println(ReflectionToStringBuilder.toString(fortollingDto, ToStringStyle.MULTI_LINE_STYLE, true, true));	
+//		}
 		
-		assertEquals(list.size(),5);
+		assertEquals(list.size(),12);
 	}		
 	
 	
