@@ -4,8 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -27,7 +25,7 @@ public class TestJFortollingDaoService {
 	@Test
 	public final void testGetStats() {
 		FortollingDto qDto = new FortollingDto();
-		qDto.setRegistreringsdato("20170000");
+		qDto.setRegistreringsdato("20171000");
 		//qDto.getAvdelingList().add(1);
 		//qDto.getSignaturList().add("YBC");
 		//qDto.setMottaker(1);
@@ -38,7 +36,7 @@ public class TestJFortollingDaoService {
 //			System.out.println(ReflectionToStringBuilder.toString(fortollingDto, ToStringStyle.MULTI_LINE_STYLE, true, true));	
 //		}
 		
-		assertEquals(list.size(),12);
+		assertEquals(list.size(),86);
 	}		
 	
 	

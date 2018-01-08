@@ -23,10 +23,11 @@ public class FortollingDto implements IDao {
 	private String deklarasjonsdato;
 	private String signatur;
 	private int mottaker;
+	private int reg_vareposter;
 	private int off_vareposter;
 	private String type;
 	private String edim;
-	private String avsnitt;
+//	private String avsnitt;
 	private String inputtype;
 	private String sadkap01;
 	@ExludeMapping
@@ -48,14 +49,6 @@ public class FortollingDto implements IDao {
 
 	public void setDeklarasjonsdato(String deklarasjonsdato) {
 		this.deklarasjonsdato = deklarasjonsdato;
-	}
-
-	public String getAvsnitt() {
-		return avsnitt;
-	}
-
-	public void setAvsnitt(String avsnitt) {
-		this.avsnitt = avsnitt;
 	}
 
 	public List getSignaturList() {
@@ -102,6 +95,14 @@ public class FortollingDto implements IDao {
 
 	public void setOff_vareposter(int off_vareposter) {
 		this.off_vareposter = off_vareposter;
+	}
+
+	public int getReg_vareposter() {
+		return reg_vareposter;
+	}
+
+	public void setReg_vareposter(int reg_vareposter) {
+		this.reg_vareposter = reg_vareposter;
 	}
 
 	public String getType() {
