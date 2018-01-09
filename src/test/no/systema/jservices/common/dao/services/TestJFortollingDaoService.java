@@ -36,7 +36,7 @@ public class TestJFortollingDaoService {
 //			System.out.println(ReflectionToStringBuilder.toString(fortollingDto, ToStringStyle.MULTI_LINE_STYLE, true, true));	
 //		}
 		
-		assertEquals(list.size(),86);
+		assertEquals(86, list.size());
 	}		
 	
 	

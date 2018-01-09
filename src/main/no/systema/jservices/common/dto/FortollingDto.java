@@ -29,7 +29,7 @@ public class FortollingDto implements IDao {
 	private String edim;
 //	private String avsnitt;
 	private String inputtype;
-	private String sadkap01;
+//	private String sadkap01;
 	@ExludeMapping
 	private List avdelingList;
 	@ExludeMapping
@@ -156,14 +156,6 @@ public class FortollingDto implements IDao {
 	@Override
 	public Map<String, Object> getKeys() {
 		return null; // Just used as upstreams DTO
-	}
-
-	public String getSadkap01() {
-		return sadkap01;
-	}
-
-	public void setSadkap01(String sadkap01) {
-		this.sadkap01 = sadkap01;
 	}
 
 }

@@ -1,6 +1,5 @@
 package no.systema.jservices.common.dao.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -17,17 +16,40 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 	
 	@Override
 	public List<FortollingDto> getStats(FortollingDto qDto) {  
-		List<FortollingDto> impList = getImportStats(qDto);
-		List<FortollingDto> expList = getExportStats(qDto);  
-		List<FortollingDto> impAndExpList =  new ArrayList<FortollingDto>();
-		impAndExpList.addAll(impList);
-		impAndExpList.addAll(expList);
-		
-		return impAndExpList;
+		return getImportStatsNew(qDto);
 	
 	}
 
-	private List<FortollingDto> getImportStats(FortollingDto qDto) {
+	private List<FortollingDto> getImportStatsNew(FortollingDto qDto) {
+		NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getJdbcTemplate().getDataSource());
+		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(qDto);
+		String sidtToDate = dm.getCurrentDate_ISO();
+		StringBuilder queryString = new StringBuilder();
+		queryString.append( "SELECT  siavd avdeling,  sitdn deklarasjonsnr, sidt registreringsdato, sisg signatur,  siknk mottaker, wvpreg reg_vareposter,  wvpoff off_vareposter, ");
+		queryString.append("  		wie type,  wmerk edim,  sidtg deklarasjonsdato, wsvexr03 inputtype ");
+		queryString.append(" FROM SADHAN   ");	
+		queryString.append(" WHERE  (:registreringsdato IS NULL OR sidt >= :registreringsdato )");
+		queryString.append(" AND    (:registreringsdato IS NULL OR sidt <="+sidtToDate+")");
+		if (!qDto.getAvdelingList().isEmpty()) {
+			queryString.append("    AND  (siavd IN ( :avdelingList ) )");
+		}		
+		if (qDto.getMottaker() > 0) {
+			queryString.append(" 	AND   siknk = "+qDto.getMottaker());	
+		}
+		if (!qDto.getSignaturList().isEmpty()) {
+			queryString.append("    AND  (sisg IN ( :signaturList )) ");
+		}
+		
+		logger.info("About to run getImportStats.queryString.toString()="+queryString.toString());	
+		List<FortollingDto> list = null;
+		list=  namedParameterJdbcTemplate.query(queryString.toString(), namedParameters, new GenericObjectMapper(new FortollingDto()));
+		
+		logger.info("getImportStats list.size="+list.size());
+		return list;
+	}	
+	
+	@Deprecated
+	private List<FortollingDto> getImportStatsORG(FortollingDto qDto) {
 		NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getJdbcTemplate().getDataSource());
 		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(qDto);
 		String sidtToDate = dm.getCurrentDate_ISO();
@@ -70,9 +92,9 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		logger.info("getImportStats list.size="+list.size());
 		return list;
 	}	
-	
-	
 
+	
+	@Deprecated
 	private List<FortollingDto> getExportStats(FortollingDto qDto) {
 		NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getJdbcTemplate().getDataSource());
 		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(qDto);
