@@ -13,98 +13,98 @@ import java.util.Map;
 public class DokufDao implements IDao {
 
 	
-	private String dfst; // Status   
-	private String dfri; //  Record ID   
-	private int dfavd; // Avdeling //KEY
-	private int dfopd; // Oppdragsnummer //KEY
-	private int dffbnr; // Fraktbrevnummer //KEY
-	private String dfsg; // Signatur
-	private String dfcmn; // J=Kommunikasjon 
-	private String dfven; // Ventekode
-	private String df1004; // Sendningsnr
-	private int dfdtu; // R17.Utstedelsesdato 
-	private int dftoll; //  Tollsted, 00=Fr.brev 
-	private int dfknss; // SYSPED Knr Sender  
-	private String dfnavs; //  R01.Navn Sender 
-	private String dfad1s; // R02.Adresse Sender  
-	private String dfad2s; // Adresse2 Sender     
-	private int dfpnls; // Postnr Sender      
-	private String dfad3s; // Sted Sender  
-	private String dflks; // Sender Landkode 
-	private String dfpnus; // Sender Pnr utland  
-	private String dfkns; // R15.Kundenr Sender  
-	private String dfsref; //  R16.Senders ref  
-	private int dfpnat; // Postnr avg.terminal  
-	private int dfknsm; //  SYSPED Knr Mottaker 
-	private String dfnavm; // R04.Navn Mottaker   
-	private String dfad1m; //  R05.Adresse Mottaker 
-	private String dfad2m; //  Adresse 2 Mottaker
-	private String dfad3m; // R06.Pnr/sted Mottak  
-	private String dflkm; // Landkode Mottaker   
-	private String dfpnum; //  Pnr utland Mottaker
-	private String dfknm; // R23.Kundenr Mottaker 
-	private String dfmref; // R25.Mottakers ref  
-	private String dfnavl; //  R07.Navn Lev.adr       
-	private String dfad1l; // R08.Leveringsadresse        
-	private String dfad2l; // LeveringsAdresse 2 
-	private int dfpoul; // R09.Postnr Utl.sted     
-	private String dfadul; // R09.Utleveringssted      
-	private String dflkl; //  Lev.adr. Landkode   
-	private String dfpnul; //  Lev.adr. Pnr utland  
-	private int dfknsx; // SYSPED Knr Annen F  
-	private String dfnavx; //  R19.Navn Annen F   
-	private String dfad1x; // R21.Adresse Annen F   
-	private String dfad2x; // Adresse 2 Annen F 
-	private String dfad3x; // R22.Pnr/sted Annen  
-	private String dflkx; // Landkode Annen F     
-	private String dfpnux; //  Pnr utland Annen F   
-	private String dfknx; // R20.kundenr Annen F  
-	private String dfover; // R11.Over    
-	private int dftran; //  SYSPED Transp.no
-	private String dfnat; // R10.Navn Transportør 
-	private String dfprok; // R14.Produkt kode    
-	private String dfpro1; // R14.Prod. tekst 1   
-	private String dfpro2; // R14.Prod. tekst 2   
-	private int dfnteu; // R12.A.EURO-pl utveks
-	private int dfntau; // R13.A.Andr-pl utveks
-	private String dfbela; // R28.Belast S/M/A   
-	private String dfkde; //  Etterkrav  /X  
-	private String dfgm; // R33.Godsmerke (1/2)   
-	private String dfgm2; // R33.Godsmerke (2/2) 
-	private int dfnt; // R34.Ant kolli (sum)   
-	private String dfvs; // R35.Type/Slag (1/2) 
-	private String dfvs2; // R35.Type/Slag (2/2)     
-	private int dfvkt; //  R36.Brt vekt (sum)
+	private String dfst; // Status    (1)
+	private String dfri; //  Record ID   (1)
+	private int dfavd; // Avdeling //KEY  SONET (4)
+	private int dfopd; // Oppdragsnummer //KEY  SONET (7)
+	private int dffbnr; // Fraktbrevnummer //KEY  SONET (3)
+	private String dfsg; // Signatur  (3)
+	private String dfcmn; // J=Kommunikasjon (1) 
+	private String dfven; // Ventekode (1) 
+	private String df1004; // Sendningsnr (35)
+	private int dfdtu; // R17.Utstedelsesdato SONET (8) 
+	private int dftoll; //  Tollsted, 00=Fr.brev SONET(4)
+	private int dfknss; // SYSPED Knr Sender  SONET(8)
+	private String dfnavs; //  R01.Navn Sender (30)
+	private String dfad1s; // R02.Adresse Sender  (30)
+	private String dfad2s; // Adresse2 Sender   (30)  
+	private int dfpnls; // Postnr Sender    PAKKET (4)  
+	private String dfad3s; // Sted Sender  (30)
+	private String dflks; // Sender Landkode (2)
+	private String dfpnus; // Sender Pnr utland (9) 
+	private String dfkns; // R15.Kundenr Sender (12) 
+	private String dfsref; //  R16.Senders ref  (17)
+	private int dfpnat; // Postnr avg.terminal  PAKKET (4)
+	private int dfknsm; //  SYSPED Knr Mottaker SONET (8)
+	private String dfnavm; // R04.Navn Mottaker   (30)
+	private String dfad1m; //  R05.Adresse Mottaker (30)
+	private String dfad2m; //  Adresse 2 Mottaker (30)
+	private String dfad3m; // R06.Pnr/sted Mottak  (30)
+	private String dflkm; // Landkode Mottaker   (2)
+	private String dfpnum; //  Pnr utland Mottaker (9)
+	private String dfknm; // R23.Kundenr Mottaker (12)
+	private String dfmref; // R25.Mottakers ref  (17)
+	private String dfnavl; //  R07.Navn Lev.adr (30)      
+	private String dfad1l; // R08.Leveringsadresse  (30)      
+	private String dfad2l; // LeveringsAdresse 2 (30)
+	private int dfpoul; // R09.Postnr Utl.sted   PAKKET (4)  
+	private String dfadul; // R09.Utleveringssted    (30)  
+	private String dflkl; //  Lev.adr. Landkode   (2)
+	private String dfpnul; //  Lev.adr. Pnr utland  (9)
+	private int dfknsx; // SYSPED Knr Annen F  SONET(8)
+	private String dfnavx; //  R19.Navn Annen F   (30)
+	private String dfad1x; // R21.Adresse Annen F  (30) 
+	private String dfad2x; // Adresse 2 Annen F  (30)
+	private String dfad3x; // R22.Pnr/sted Annen  (30)
+	private String dflkx; // Landkode Annen F  (2)   
+	private String dfpnux; //  Pnr utland Annen F  (9)  
+	private String dfknx; // R20.kundenr Annen F  (12)
+	private String dfover; // R11.Over    (17)
+	private int dftran; //  SYSPED Transp.no SONET (8)
+	private String dfnat; // R10.Navn Transportør (20)
+	private String dfprok; // R14.Produkt kode    (5)
+	private String dfpro1; // R14.Prod. tekst 1   (30)
+	private String dfpro2; // R14.Prod. tekst 2   (30)
+	private int dfnteu; // R12.A.EURO-pl utveks SONET(2)
+	private int dfntau; // R13.A.Andr-pl utveks SONET(2)
+	private String dfbela; // R28.Belast S/M/A   (1)
+	private String dfkde; //  Etterkrav  /X  (1)
+	private String dfgm; // R33.Godsmerke (1/2) (12)  
+	private String dfgm2; // R33.Godsmerke (2/2) (12)
+	private int dfnt; // R34.Ant kolli (sum)   SONET(7)
+	private String dfvs; // R35.Type/Slag (1/2) (25)
+	private String dfvs2; // R35.Type/Slag (2/2)    (25) 
+	private int dfvkt; //  R36.Brt vekt (sum)  PAKKET(9) 
 	//   DFMÅL      TEGN           17      17       898        Begge   POD:DT(8)TID(4)SG(5)
-	private BigDecimal dfm3 = new BigDecimal(0); //  R37.Kub. METER 
-	private BigDecimal dflm = new BigDecimal(0); // Lastemeter   
-	private int dfvktf; // R39.F.ber.vkt(sum)   
-	private String dfkdme; // Merkelapp  /X    
-	private int dfntla; //  Ant. merkelapper     
-	private int dffore; // Foretaksnr  
-	private int dfrg; //  Regn Fylk.skatt.sjef  
-	private int dfkta; // Tollkontonr-1   
-	private int dfktb; // Tollkontonr-2    
-	private String dfst2; // STATUS FOR SAD
-	private String dffase; // Faktura-sender   
-	private BigDecimal dffvbl = new BigDecimal(0); // R24.Forsikringsverdi        
-	private String dffvcu; // R24.F.verdi, valuta 
-	private String dffkat; // R24.F.verdi,kategori   
-	private String dfpoli; // R26.Posisenr   
-	private String dfskfo; // R26.SKAL forsikres  
-	private String dflevb; // R27.Lev.betingelse 
-	private String dflevt; // R27.Lev.bet.tekst 
-	private String dflevi; // R30.Lev.innstruks
-	private int df6060; //  F.vekt i retur
-	private int df500a; //  B.frakt i retur     
-	private int df500b; // Rabatt i retur      
-	private BigDecimal dfbele = new BigDecimal(0); // Etterkravsbeløp      
-	private String dffrku; // FRITT KUNDESPESIAL    
-	private String dfbref; // R18.Booking ref        
-	private String dftpk1; // TILLEGGS PROD.KODE 1   
-	private String dftpk2; // TILLEGGS PROD.KODE 2   
-	private String dftpk3; // TILLEGGS PROD.KODE 3      
-	private String dftpk4; // TILLEGGS PROD.KODE 4    
+	private BigDecimal dfm3 = new BigDecimal(0); //  R37.Kub. METER PAKKET(7,3)
+	private BigDecimal dflm = new BigDecimal(0); // Lastemeter   SONET(4,2)
+	private int dfvktf; // R39.F.ber.vkt(sum)   PAKKET(9)
+	private String dfkdme; // Merkelapp  /X    (1)
+	private int dfntla; //  Ant. merkelapper     SONET(4)
+	private int dffore; // Foretaksnr  SONET(9)
+	private int dfrg; //  Regn Fylk.skatt.sjef SONET(8) 
+	private int dfkta; // Tollkontonr-1   SONET(5)
+	private int dfktb; // Tollkontonr-2    SONET(2)
+	private String dfst2; // STATUS FOR SAD (1)
+	private String dffase; // Faktura-sender  (25) 
+	private BigDecimal dffvbl = new BigDecimal(0); // R24.Forsikringsverdi       PAKKET(9,2)
+	private String dffvcu; // R24.F.verdi, valuta (3)
+	private String dffkat; // R24.F.verdi,kategori   (4)
+	private String dfpoli; // R26.Posisenr   (13)
+	private String dfskfo; // R26.SKAL forsikres (1) 
+	private String dflevb; // R27.Lev.betingelse (3)
+	private String dflevt; // R27.Lev.bet.tekst (20)
+	private String dflevi; // R30.Lev.innstruks (30)
+	private int df6060; //  F.vekt i retur PAKKET(5)
+	private int df500a; //  B.frakt i retur     Pakket(5)
+	private int df500b; // Rabatt i retur      Pakket(5)
+	private BigDecimal dfbele = new BigDecimal(0); // Etterkravsbeløp    PAKKET(9,2)  
+	private String dffrku; // FRITT KUNDESPESIAL    (30)
+	private String dfbref; // R18.Booking ref        (17)
+	private String dftpk1; // TILLEGGS PROD.KODE 1   (5)
+	private String dftpk2; // TILLEGGS PROD.KODE 2   (5)
+	private String dftpk3; // TILLEGGS PROD.KODE 3     (5) 
+	private String dftpk4; // TILLEGGS PROD.KODE 4    (5)
 	private Map<String, Object> keys = new HashMap<String, Object>();
 
 	

@@ -88,6 +88,7 @@ public class DokufDaoServiceImpl extends GenericDaoServiceImpl<DokufDao> impleme
 
 	
 	private int createDffbnr(int avd, int opd) {
+		logger.info("inside create ...");
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("dfavd", avd);
 		params.put("dfopd", opd);
