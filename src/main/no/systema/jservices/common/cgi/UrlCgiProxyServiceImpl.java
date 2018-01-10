@@ -53,6 +53,7 @@ public class UrlCgiProxyServiceImpl implements UrlCgiProxyService{
 		}catch(Exception e){
     		e.printStackTrace();
     		logger.info("Error:", e);
+    		throw new RuntimeException(e);
     		
     	}
 		return utfPayload;
