@@ -231,5 +231,6 @@ public class TranDao implements IDao {
 		keys.put("vmtrle", vmtrle);
 		return keys;
 	}
+	
 
 }
