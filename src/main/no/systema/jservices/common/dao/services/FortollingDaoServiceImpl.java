@@ -13,7 +13,7 @@ import no.systema.jservices.common.util.DateTimeManager;
 public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDto> implements FortollingDaoService{
 
 	private DateTimeManager dm = new DateTimeManager();
-	
+
 	@Override
 	public List<FortollingDto> getStats(FortollingDto qDto) {  
 		return getImportStatsNew(qDto);
@@ -23,13 +23,13 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 	private List<FortollingDto> getImportStatsNew(FortollingDto qDto) {
 		NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getJdbcTemplate().getDataSource());
 		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(qDto);
-		String sidtToDate = dm.getCurrentDate_ISO();
+//		String sidtToDate = dm.getCurrentDate_ISO();
 		StringBuilder queryString = new StringBuilder();
 		queryString.append( "SELECT  siavd avdeling,  sitdn deklarasjonsnr, sidt registreringsdato, sisg signatur,  siknk mottaker, wvpreg reg_vareposter,  wvpoff off_vareposter, ");
 		queryString.append("  		wie type,  wmerk edim,  sidtg deklarasjonsdato, wsvexr03 inputtype ");
 		queryString.append(" FROM SADHAN   ");	
 		queryString.append(" WHERE  (:registreringsdato IS NULL OR sidt >= :registreringsdato )");
-		queryString.append(" AND    (:registreringsdato IS NULL OR sidt <="+sidtToDate+")");
+		queryString.append(" AND    (:registreringsdato IS NULL OR sidt <="+dm.getCurrentDate_ISO()+")");
 		if (!qDto.getAvdelingList().isEmpty()) {
 			queryString.append("    AND  (siavd IN ( :avdelingList ) )");
 		}		
