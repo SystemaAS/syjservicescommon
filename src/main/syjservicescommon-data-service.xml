@@ -189,6 +189,10 @@
 		<property name="firfbDaoService"><ref bean="firfbDaoService"/></property>
 	</bean>	
 	
+	<bean id="dokufeDaoService" class="no.systema.jservices.common.dao.services.DokufeDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>
+	
 	<bean id="firfbDaoService" class="no.systema.jservices.common.dao.services.FirfbDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>		
