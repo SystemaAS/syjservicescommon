@@ -7,7 +7,5 @@ import java.util.Map;
 import no.systema.jservices.common.dao.DokufeDao;
 
 public class DokufeDaoServiceImpl extends GenericDaoServiceImpl<DokufeDao> implements DokufeDaoService{
-
-
 	
 }

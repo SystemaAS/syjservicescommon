@@ -176,7 +176,20 @@ public class DokufeDao implements IDao {
 		keys.put("fe_dfavd", fe_dfavd);
 		keys.put("fe_dfopd", fe_dfopd);
 		keys.put("fe_dffbnr", fe_dffbnr);
+		keys.put("fe_n3035", fe_n3035);
+		
 		return keys;
+	}
+	//alternative 
+	public void setKeys(int avd, int opd, int fbnr) {
+		keys.put("fe_dfavd", fe_dfavd);
+		keys.put("fe_dfopd", fe_dfopd);
+		keys.put("fe_dffbnr", fe_dffbnr);		
+	}
+	//alternative
+	public void setKeys(int avd, int opd) {
+		keys.put("fe_dfavd", fe_dfavd);
+		keys.put("fe_dfopd", fe_dfopd);
 	}
 
 }
