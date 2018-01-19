@@ -137,6 +137,10 @@ public class FortollingDto implements IDao {
 		this.deklarasjonsnr = deklarasjonsnr;
 	}
 
+	/**
+	 * 
+	 * @return format YYYY, where query
+	 */
 	public String getRegistreringsdato() {
 		return registreringsdato;
 	}
