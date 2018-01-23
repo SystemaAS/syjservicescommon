@@ -193,6 +193,10 @@
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>
 	
+	<bean id="dokufmDaoService" class="no.systema.jservices.common.dao.services.DokufmDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>
+	
 	<bean id="firfbDaoService" class="no.systema.jservices.common.dao.services.FirfbDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>		
