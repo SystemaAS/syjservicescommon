@@ -255,8 +255,15 @@ public class DokufmDao implements IDao {
 	
 	//alternative
 	public void setKeys(int avd, int opd) {
-		keys.put("fmavd", fmavd);
-		keys.put("fmopd", fmopd);
+		keys.put("fmavd", avd);
+		keys.put("fmopd", opd);
+	}
+	
+	public void setKeys(int avd, int opd, int fbnr, int mknr) {
+		keys.put("fmavd", avd);
+		keys.put("fmopd", opd);
+		keys.put("fmfbnr", fbnr);
+		keys.put("fmmknr", mknr);
 	}
 	
 	@Override
