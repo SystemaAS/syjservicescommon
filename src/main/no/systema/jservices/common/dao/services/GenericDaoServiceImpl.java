@@ -344,6 +344,81 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		return t;
 		
 	}
+	
+	@Override
+	public T createWithoutDulicateCheck(T t) {
+		IDao dao = (IDao) t;
+		logger.debug("create:IDao="+ReflectionToStringBuilder.toString(dao));
+		Map<String, Object> keys = dao.getKeys();
+		/* REMOVED
+		if (exist(dao)) {
+			String errMsg = "::create::Record already exist in " + tableName + " on keys=" + keys;
+			logger.error(errMsg);
+			throw new DuplicateKeyException(errMsg);
+		}*/
+		Object[] values = new Object[fields.length-1];
+		StringBuilder debugFieldValue = new StringBuilder();
+		int ret = 0;
+		int i = 0;
+		Class<?> returnType = null;
+		Object value = "";
+
+		StringBuilder createString = new StringBuilder("INSERT into ");
+		createString.append(tableName);
+		createString.append(" ( ");
+		
+		for (Method method : methods) {
+			String getter = method.getName();
+			if (getter.startsWith("get")) {
+				returnType = method.getReturnType();
+				String field = method.getName().replace("get", "").toLowerCase();
+				if (returnType.equals(String.class) || returnType.equals(int.class) || returnType.equals(BigDecimal.class) ) {
+					if (!"keys".equals(field)) {
+						createString.append(field + ",");
+						try {
+							value = (Object) method.invoke(t);
+							values[i++] = (value == null) ? "" : value;
+							debugFieldValue.append(field + ":{"+value+"}"+'\n');
+							//logger.info(field + " " + value);
+						} catch (Exception e) {
+							logger.info("Error:", e);
+						}
+					}
+				} else  {
+					logger.info("returnType not handled, field="+field);
+				}
+			}
+		}
+
+		createString.deleteCharAt(createString.length() - 1); // Remove last ,
+		createString.append(" ) ");
+		createString.append(" VALUES ( ");
+
+		for (int ii = 1; ii < fields.length; ii++) {
+			createString.append(" ?,");
+		}
+		createString.deleteCharAt(createString.length() - 1); // Remove last ,
+		createString.append(" ) ");
+
+		try {
+			//logger.info(createString.toString());
+			//logger.info(values);
+			
+			ret = jdbcTemplate.update(createString.toString(), values);
+		} catch (DataAccessException e) { //RuntimeException
+			logger.error("Error:", e);
+			logger.info("Error, string="+createString.toString());
+			logger.info("debugFieldValue="+debugFieldValue.toString());
+			throw e;
+		}
+		
+		if (ret != 1) {
+			t = null;
+		}
+
+		return t;
+		
+	}
 
 	@Override
 	public void delete(Object id) {

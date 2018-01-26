@@ -109,7 +109,13 @@ public interface GenericDaoService<T> {
 	 * @return created T
 	 */
 	public T create(T t);
-
+	
+	/**
+	 * Forces an Insert without checking duplicates. Some AS400 tables (ref DOK29, DOK36 db-tables) does have duplicate keys.
+	 * @param t
+	 * @return
+	 */
+	public T createWithoutDulicateCheck(T t);
 	/**
 	 * Delete object.
 	 * 
