@@ -69,6 +69,8 @@ public class TestJFirmaltDaoService {
 	@Test
 	public final void testFindAllInFirma() {
 		List<FirmaltDao> list =  firmaltDaoService.findAllInFirma(null, firmaColumnName);
+//		list.forEach(firma -> System.out.println("firma"+firma));
+		assertTrue("Should find only one tuple.", list.size() == 1);
 		assertNotNull(list);
 	}		
 	
@@ -88,6 +90,14 @@ public class TestJFirmaltDaoService {
 		FirmaltDao resultDao = firmaltDaoService.find(dao);
 		assertNotNull(resultDao);
 	}
+	
+	@Test
+	public final void testGet() {
+		FirmaltDao resultDao = firmaltDaoService.get();
+		assertNotNull(resultDao);
+	}	
+	
+	
 	
 	
 }
