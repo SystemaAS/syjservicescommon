@@ -2,8 +2,6 @@ package no.systema.jservices.common.dao.services;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import no.systema.jservices.common.dao.FirmaltDao;
 
 public class FirmaltDaoServiceImpl extends GenericDaoServiceImpl<FirmaltDao> implements FirmaltDaoService{

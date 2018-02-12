@@ -12,7 +12,9 @@ public class FirmaltDao implements IDao {
 	private String aiapi;
 	private String aiuser;
 	private String aiupwd;
-
+	private String aihost;
+	private String aiauur;
+	
 	private Map<String, Object> keys = new HashMap<String, Object>();
 
 
@@ -72,10 +74,28 @@ public class FirmaltDao implements IDao {
 		this.aiupwd = aiupwd;
 	}
 
+
+	public String getAihost() {
+		return aihost;
+	}
+
+	public void setAihost(String aihost) {
+		this.aihost = aihost;
+	}
+
+	public String getAiauur() {
+		return aiauur;
+	}
+
+	public void setAiauur(String aiauur) {
+		this.aiauur = aiauur;
+	}
+
 	@Override
 	public Map<String, Object> getKeys() {
 		keys.put("aifirm", aifirm);
 		return keys;
 	}
-
+	
+	
 }

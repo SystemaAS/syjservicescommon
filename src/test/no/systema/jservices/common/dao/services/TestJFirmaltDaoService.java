@@ -32,18 +32,61 @@ public class TestJFirmaltDaoService {
 			
 	}
 
+
+	//localhost:8080 SY
 	private void createFirmalt() {
 		FirmaltDao dao = new FirmaltDao();
 		dao.setAifirm("SY");
 		dao.setAiorg("810514442");  //BAREK OG YTTERV...
 		dao.setAipwd("KRw16s7XVQuyA3ed"); //BAREK OG YTTERV...
-		dao.setAipath("/usr/local/Cellar/tomcat/8.0.33/libexec/webapps/syjservicestn/WEB-INF/resources/files/");
+		dao.setAipath("/usr/local/Cellar/tomcat/8.0.33/libexec/webapps/altinn-proxy/WEB-INF/resources/files/");
 		dao.setAiapi("D26F6857-3ADF-46D4-81DD-F5C87978C807");  //systema test
 		dao.setAiuser("kalleanka1");  //BAREK OG YTTERV...
 		dao.setAiupwd("kalleanka2");  //BAREK OG YTTERV...
+		dao.setAihost("tt02.altinn.no"); 
+		dao.setAiauur("/api/authentication/authenticatewithpassword");
 		
 		FirmaltDao result = firmaltDaoService.create(dao);
 	}
+	
+	
+/*
+	//gw.systema.no:8080 SY
+	private void createFirmalt() {
+		FirmaltDao dao = new FirmaltDao();
+		dao.setAifirm("SY");
+		dao.setAiorg("810514442");  //BAREK OG YTTERV...
+		dao.setAipwd("KRw16s7XVQuyA3ed"); //BAREK OG YTTERV...
+		dao.setAipath("/SYSPED/ALTINN/DAGSOPPGJOR/"); 
+		dao.setAiapi("D26F6857-3ADF-46D4-81DD-F5C87978C807");  //Systema test
+		dao.setAiuser("kalleanka1");  //BAREK OG YTTERV...
+		dao.setAiupwd("kalleanka2");  //BAREK OG YTTERV...
+		dao.setAihost("tt02.altinn.no"); 
+		dao.setAiauur("/api/authentication/authenticatewithpassword");
+		
+		FirmaltDao result = firmaltDaoService.create(dao);
+	}	
+*/	
+	
+	
+/*
+	//gw.systema.no:8787 
+	private void createFirmalt() {
+		FirmaltDao dao = new FirmaltDao();
+		dao.setAifirm("SS");
+		dao.setAiorg("936809219");   //SYSTEMA AS
+		dao.setAipwd("todo"); 
+		dao.setAipath("/SYSPED/ALTINN/DAGSOPPGJOR/"); 
+		dao.setAiapi("todo");  
+		dao.setAiuser("ECSystemaAS");  
+		dao.setAiupwd("todo");  
+		dao.setAihost("www.altinn.no"); 
+		dao.setAiauur("/api/authentication/authenticatewithpassword");
+		
+		FirmaltDao result = firmaltDaoService.create(dao);
+	}	
+*/	
+	
 
 	@Test
 	public final void testCountAll() {
