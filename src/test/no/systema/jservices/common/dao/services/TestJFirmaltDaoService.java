@@ -32,7 +32,7 @@ public class TestJFirmaltDaoService {
 			
 	}
 
-
+/*
 	//localhost:8080 SY
 	private void createFirmalt() {
 		FirmaltDao dao = new FirmaltDao();
@@ -48,9 +48,9 @@ public class TestJFirmaltDaoService {
 		
 		FirmaltDao result = firmaltDaoService.create(dao);
 	}
+*/	
 	
-	
-/*
+
 	//gw.systema.no:8080 SY
 	private void createFirmalt() {
 		FirmaltDao dao = new FirmaltDao();
@@ -66,7 +66,7 @@ public class TestJFirmaltDaoService {
 		
 		FirmaltDao result = firmaltDaoService.create(dao);
 	}	
-*/	
+	
 	
 	
 /*
