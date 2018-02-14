@@ -23,17 +23,14 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		String sidtFromDate = qDto.getRegistreringsdato() + "0000";
 		String sidtToDate =  qDto.getRegistreringsdato() + "1231";
 		StringBuilder queryString = new StringBuilder();
-		queryString.append( "SELECT  siavd avdeling,  sitdn deklarasjonsnr, sidt registreringsdato, sisg signatur,  siknk mottaker, wvpreg reg_vareposter,  wvpoff off_vareposter, ");
-		queryString.append("  		wie type,  wmerk edim,  sidtg deklarasjonsdato, wsvexr03 inputtype ");
+		queryString.append( "SELECT  siavd avdeling,  sitdn deklarasjonsnr, sidt registreringsdato, sisg signatur,  siknk mottaker, sikns avsender, wvpreg reg_vareposter,  wvpoff off_vareposter, ");
+		queryString.append("  		wie type,  wmerk edim,  sidtg deklarasjonsdato, wsvexr03 inputtype, wextref extern_referanse, wantdag antall_dager, silka avsender_land ");
 		queryString.append(" FROM SADHAN   ");	
 		queryString.append(" WHERE  (:registreringsdato IS NULL OR sidt >="+sidtFromDate+")");
 		queryString.append(" AND    (:registreringsdato IS NULL OR sidt <="+sidtToDate+")");
 		if (!qDto.getAvdelingList().isEmpty()) {
 			queryString.append("    AND  (siavd IN ( :avdelingList ) )");
 		}		
-		if (qDto.getMottaker() > 0) {
-			queryString.append(" 	AND   siknk = "+qDto.getMottaker());	
-		}
 		if (!qDto.getSignaturList().isEmpty()) {
 			queryString.append("    AND  (sisg IN ( :signaturList )) ");
 		}

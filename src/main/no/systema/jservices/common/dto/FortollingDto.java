@@ -23,6 +23,7 @@ public class FortollingDto implements IDao {
 	private String deklarasjonsdato;
 	private String signatur;
 	private int mottaker;
+	private int avsender;	
 	private int reg_vareposter;
 	private int off_vareposter;
 	private String type;
@@ -34,7 +35,10 @@ public class FortollingDto implements IDao {
 	private List avdelingList;
 	@ExludeMapping
 	private List signaturList;
-
+	private String extern_referanse;
+	private int antall_dager;
+	private String avsender_land;
+	
 	public String getInputtype() {
 		return inputtype;
 	}
@@ -157,9 +161,43 @@ public class FortollingDto implements IDao {
 		this.signatur = signatur;
 	}
 
+	public int getAvsender() {
+		return avsender;
+	}
+
+	public void setAvsender(int avsender) {
+		this.avsender = avsender;
+	}
+
 	@Override
 	public Map<String, Object> getKeys() {
 		return null; // Just used as upstreams DTO
 	}
 
+	public String getExtern_referanse() {
+		return extern_referanse;
+	}
+
+	public void setExtern_referanse(String extern_referanse) {
+		this.extern_referanse = extern_referanse;
+	}
+
+	public int getAntall_dager() {
+		return antall_dager;
+	}
+
+	public void setAntall_dager(int antall_dager) {
+		this.antall_dager = antall_dager;
+	}
+
+	public String getAvsender_land() {
+		return avsender_land;
+	}
+
+	public void setAvsender_land(String avsender_land) {
+		this.avsender_land = avsender_land;
+	}
+	
+	
+	
 }
