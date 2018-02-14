@@ -20,8 +20,8 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 	private List<FortollingDto> getImportStatsNew(FortollingDto qDto) {
 		NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getJdbcTemplate().getDataSource());
 		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(qDto);
-		String sidtFromDate = qDto.getRegistreringsdato() + "0000";
-		String sidtToDate =  qDto.getRegistreringsdato() + "1231";
+		String sidtFromDate = qDto.getFradato();
+		String sidtToDate =  qDto.getTildato();
 		StringBuilder queryString = new StringBuilder();
 		queryString.append( "SELECT  siavd avdeling,  sitdn deklarasjonsnr, sidt registreringsdato, sisg signatur,  siknk mottaker, sikns avsender, wvpreg reg_vareposter,  wvpoff off_vareposter, ");
 		queryString.append("  		wie type,  wmerk edim,  sidtg deklarasjonsdato, wsvexr03 inputtype, wextref extern_referanse, wantdag antall_dager, silka avsender_land ");

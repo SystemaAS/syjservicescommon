@@ -20,6 +20,8 @@ public class FortollingDto implements IDao {
 	private String avdelings;
 	private int deklarasjonsnr;
 	private String registreringsdato;
+	private String fradato;
+	private String tildato;
 	private String deklarasjonsdato;
 	private String signatur;
 	private int mottaker;
@@ -196,6 +198,22 @@ public class FortollingDto implements IDao {
 
 	public void setAvsender_land(String avsender_land) {
 		this.avsender_land = avsender_land;
+	}
+
+	public String getFradato() {
+		return fradato;
+	}
+
+	public void setFradato(String fradato) {
+		this.fradato = fradato;
+	}
+
+	public String getTildato() {
+		return tildato;
+	}
+
+	public void setTildato(String tildato) {
+		this.tildato = tildato;
 	}
 	
 	
