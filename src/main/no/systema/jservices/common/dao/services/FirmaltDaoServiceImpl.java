@@ -14,13 +14,8 @@ public class FirmaltDaoServiceImpl extends GenericDaoServiceImpl<FirmaltDao> imp
 	}
 
 	@Override
-	public FirmaltDao get() {
-		List<FirmaltDao> result = findAllInFirma(null, firmaColumnName);
-		if (result.size() > 1) {
-			throw new RuntimeException("Firmalt only supports on tuple. E.i. one orgnr per firmacode.");
-		} else {
-			return result.get(0);
-		}
+	public List<FirmaltDao> get() {
+		return findAllInFirma(null, firmaColumnName);
 
 	}
 	

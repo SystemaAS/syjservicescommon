@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -136,8 +138,9 @@ public class TestJFirmaltDaoService {
 	
 	@Test
 	public final void testGet() {
-		FirmaltDao resultDao = firmaltDaoService.get();
-		assertNotNull(resultDao);
+		List<FirmaltDao> resultDaos = firmaltDaoService.get();
+		resultDaos.forEach(dao -> System.out.println(ReflectionToStringBuilder.toString(dao)));
+		assertNotNull(resultDaos);
 	}	
 	
 	
