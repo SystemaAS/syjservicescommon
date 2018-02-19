@@ -108,6 +108,18 @@ public class DokefimDao implements IDao {
 		keys.put("imlop", imlop);
 		return keys;
 	}
+	
+	//alternative 
+		public void setKeys(int avd, int opd, int lop) {
+			keys.put("imavd", avd);
+			keys.put("imopd", opd);
+			keys.put("imlop", lop);		
+		}
+		//alternative
+		public void setKeys(int avd, int opd) {
+			keys.put("imavd", avd);
+			keys.put("imopd", opd);
+		}
 
 	
 }
