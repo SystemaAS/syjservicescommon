@@ -871,8 +871,21 @@ public class DokefDao implements IDao {
 	public Map<String, Object> getKeys() {
 		keys.put("dfavd", dfavd);
 		keys.put("dfopd", dfopd);
-		keys.put("dffbnr", dflop);
+		keys.put("dflop", dflop);
 		return keys;
 	}
+	
+	//alternative 
+			public void setKeys(int avd, int opd, int lop) {
+				keys.put("dfavd", avd);
+				keys.put("dfopd", opd);
+				keys.put("dflop", lop);		
+			}
+			//alternative
+			public void setKeys(int avd, int opd) {
+				keys.put("dfavd", avd);
+				keys.put("dfopd", opd);
+			}
+
 	 
 }
