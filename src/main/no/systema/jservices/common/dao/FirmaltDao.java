@@ -6,7 +6,7 @@ import java.util.Map;
 public class FirmaltDao implements IDao {
 
 	private String aifirm; // key
-	private String aiorg;
+	private String aiorg;  //key
 	private String aipwd;
 	private String aipath;
 	private String aiapi;
@@ -14,9 +14,10 @@ public class FirmaltDao implements IDao {
 	private String aiupwd;
 	private String aihost;
 	private String aiauur;
-	
-	private Map<String, Object> keys = new HashMap<String, Object>();
+	private int aidato;
+	private int aitid;
 
+	private Map<String, Object> keys = new HashMap<String, Object>();
 
 	public String getAifirm() {
 		return aifirm;
@@ -90,12 +91,29 @@ public class FirmaltDao implements IDao {
 	public void setAiauur(String aiauur) {
 		this.aiauur = aiauur;
 	}
+	
+	public int getAidato() {
+		return aidato;
+	}
+
+	public void setAidato(int aidato) {
+		this.aidato = aidato;
+	}
+
+	public int getAitid() {
+		return aitid;
+	}
+
+	public void setAitid(int aitid) {
+		this.aitid = aitid;
+	}	
 
 	@Override
 	public Map<String, Object> getKeys() {
 		keys.put("aifirm", aifirm);
+		keys.put("aiorg", aiorg);
 		return keys;
 	}
-	
+
 	
 }
