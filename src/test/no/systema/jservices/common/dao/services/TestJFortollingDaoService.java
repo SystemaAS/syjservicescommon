@@ -32,7 +32,7 @@ public class TestJFortollingDaoService {
 		
 		List<FortollingDto> list  =  fortollingDaoService.getStats(qDto);
 		
-		assertEquals(0, list.size());  //no init
+		assertEquals(14, list.size());  //no init
 	}		
 	
 	

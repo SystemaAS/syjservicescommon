@@ -20,7 +20,9 @@ public class FortollingDto implements IDao {
 	private String avdelings;
 	private int deklarasjonsnr;
 	private String registreringsdato;
+	@ExludeMapping
 	private String fradato;
+	@ExludeMapping
 	private String tildato;
 	private String deklarasjonsdato;
 	private String signatur;
@@ -30,9 +32,7 @@ public class FortollingDto implements IDao {
 	private int off_vareposter;
 	private String type;
 	private String edim;
-//	private String avsnitt;
 	private String inputtype;
-//	private String sadkap01;
 	@ExludeMapping
 	private List avdelingList;
 	@ExludeMapping
@@ -40,6 +40,28 @@ public class FortollingDto implements IDao {
 	private String extern_referanse;
 	private int antall_dager;
 	private String avsender_land;
+	private int wai;
+	private int waii;
+	private int waiii;
+	private int waiv;
+	private int wav;
+	private int wavi;
+	private int wavii;
+	private int waviii;
+	private int waix;
+	private int wax;
+	private int waxi;
+	private int waxii;
+	private int waxiii;
+	private int waxiv;
+	private int waxv;
+	private int waxvi;
+	private int waxvii;
+	private int waxviii;
+	private int waxvix;
+	private int waxx;
+	private int waxxi;
+	
 	
 	public String getInputtype() {
 		return inputtype;
@@ -215,7 +237,173 @@ public class FortollingDto implements IDao {
 	public void setTildato(String tildato) {
 		this.tildato = tildato;
 	}
-	
-	
+
+	public int getWai() {
+		return wai;
+	}
+
+	public void setWai(int wai) {
+		this.wai = wai;
+	}
+
+	public int getWaii() {
+		return waii;
+	}
+
+	public void setWaii(int waii) {
+		this.waii = waii;
+	}
+
+	public int getWaiii() {
+		return waiii;
+	}
+
+	public void setWaiii(int waiii) {
+		this.waiii = waiii;
+	}
+
+	public int getWaiv() {
+		return waiv;
+	}
+
+	public void setWaiv(int waiv) {
+		this.waiv = waiv;
+	}
+
+	public int getWav() {
+		return wav;
+	}
+
+	public void setWav(int wav) {
+		this.wav = wav;
+	}
+
+	public int getWavi() {
+		return wavi;
+	}
+
+	public void setWavi(int wavi) {
+		this.wavi = wavi;
+	}
+
+	public int getWavii() {
+		return wavii;
+	}
+
+	public void setWavii(int wavii) {
+		this.wavii = wavii;
+	}
+
+	public int getWaviii() {
+		return waviii;
+	}
+
+	public void setWaviii(int waviii) {
+		this.waviii = waviii;
+	}
+
+	public int getWaix() {
+		return waix;
+	}
+
+	public void setWaix(int waix) {
+		this.waix = waix;
+	}
+
+	public int getWax() {
+		return wax;
+	}
+
+	public void setWax(int wax) {
+		this.wax = wax;
+	}
+
+	public int getWaxi() {
+		return waxi;
+	}
+
+	public void setWaxi(int waxi) {
+		this.waxi = waxi;
+	}
+
+	public int getWaxii() {
+		return waxii;
+	}
+
+	public void setWaxii(int waxii) {
+		this.waxii = waxii;
+	}
+
+	public int getWaxiii() {
+		return waxiii;
+	}
+
+	public void setWaxiii(int waxiii) {
+		this.waxiii = waxiii;
+	}
+
+	public int getWaxiv() {
+		return waxiv;
+	}
+
+	public void setWaxiv(int waxiv) {
+		this.waxiv = waxiv;
+	}
+
+	public int getWaxv() {
+		return waxv;
+	}
+
+	public void setWaxv(int waxv) {
+		this.waxv = waxv;
+	}
+
+	public int getWaxvi() {
+		return waxvi;
+	}
+
+	public void setWaxvi(int waxvi) {
+		this.waxvi = waxvi;
+	}
+
+	public int getWaxvii() {
+		return waxvii;
+	}
+
+	public void setWaxvii(int waxvii) {
+		this.waxvii = waxvii;
+	}
+
+	public int getWaxviii() {
+		return waxviii;
+	}
+
+	public void setWaxviii(int waxviii) {
+		this.waxviii = waxviii;
+	}
+
+	public int getWaxvix() {
+		return waxvix;
+	}
+
+	public void setWaxvix(int waxvix) {
+		this.waxvix = waxvix;
+	}
+
+	public int getWaxx() {
+		return waxx;
+	}
+
+	public void setWaxx(int waxx) {
+		this.waxx = waxx;
+	}
+
+	public int getWaxxi() {
+		return waxxi;
+	}
+
+	public void setWaxxi(int waxxi) {
+		this.waxxi = waxxi;
+	}
 	
 }
