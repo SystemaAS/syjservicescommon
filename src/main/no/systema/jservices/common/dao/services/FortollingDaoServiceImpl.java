@@ -27,10 +27,14 @@ public class FortollingDaoServiceImpl extends GenericDaoServiceImpl<FortollingDt
 		queryString.append("  		waxii, waxiii, waxiv, waxv, waxvi, waxvii, waxviii, waxvix, waxx, waxxi ");
 		queryString.append(" FROM SADHAN   ");	
 		if (!qDto.getAvdelingList().isEmpty()) {
-			queryString.append("    AND  (siavd IN ( :avdelingList ) )");
+			queryString.append("    WHERE  (siavd IN ( :avdelingList ) )");
 		}		
 		if (!qDto.getSignaturList().isEmpty()) {
-			queryString.append("    AND  (sisg IN ( :signaturList )) ");
+			if (!qDto.getAvdelingList().isEmpty()) {
+				queryString.append("    AND  (sisg IN ( :signaturList )) ");
+			} else {
+				queryString.append("    WHERE  (sisg IN ( :signaturList )) ");//if no siavd above			
+			}
 		}
 		
 		logger.info("About to run getImportStats.queryString.toString()="+queryString.toString());	
