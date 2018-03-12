@@ -3,12 +3,14 @@ package no.systema.jservices.common.dao.services;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -142,6 +144,60 @@ public class TestJFirmaltDaoService {
 		resultDaos.forEach(dao -> System.out.println(ReflectionToStringBuilder.toString(dao)));
 		assertNotNull(resultDaos);
 	}	
+	
+	@Test
+	public final void testFindXXX() {	
+    List<String> DHL_ORGNR = Arrays.asList("936972403","972871400", "971959266", "972211222", "810514442");
+    
+    List<FirmaltDao> list =  firmaltDaoService.findAll(null);
+//   String orgnSSS = "810514442";
+//   String orgnSSS = dao.getAiorg().trim();
+	list.forEach(dao -> {
+		 System.out.println("dao="+ReflectionToStringBuilder.toString(dao));
+//	String orgnSSS = dao.getAiorg().trim();
+		 String orgnSSS = "810514442";
+//		 String orgnSSS = dao.getAiorg().trim();
+//		 String orgnSSS = new String(dao.getAiorg().trim());
+		System.out.println("orgnSSS="+orgnSSS);
+		System.out.println("orgnSSD="+dao.getAiorg().trim());
+//		Predicate<String> filterPredicate = filter -> filter == dao.getAiorg().trim();
+		Predicate<String> filterPredicate = filter -> filter == orgnSSS;
+
+		boolean isDHL = DHL_ORGNR.stream().filter(filterPredicate).anyMatch(filterPredicate);		
+		System.out.println("isDHL="+isDHL);
+	});
+	
+	
+
+	}
+	
+	
+	@Test
+	public final void testFindXXXZZZZ() {	
+//    List<String> DHL_ORGNR = Arrays.asList("936972403","972871400", "971959266", "972211222", "810514442");
+    List<String> DHL_ORGNR = Arrays.asList("936972403","972871400", "971959266", "972211222");
+    
+    List<FirmaltDao> list =  firmaltDaoService.findAll(null);
+
+    boolean isDHL = false;
+    for (Iterator iterator = DHL_ORGNR.iterator(); iterator.hasNext();) {
+		String string = (String) iterator.next();
+		for (Iterator iterator2 = list.iterator(); iterator2.hasNext();) {
+			FirmaltDao firmaltDao = (FirmaltDao) iterator2.next();
+			if (firmaltDao.getAiorg().equals(string)) {
+				isDHL = true;
+			}
+		}
+	}
+    
+	System.out.println("isDHL="+isDHL);
+
+    
+	
+	
+
+	}	
+	
 	
 	
 	
