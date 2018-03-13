@@ -107,6 +107,12 @@
 	
 	<bean id="kodtfrDaoService" class="no.systema.jservices.common.dao.services.KodtfrDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>
+	<bean id="kodtflpDaoService" class="no.systema.jservices.common.dao.services.KodtflpDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>	
+	<bean id="kodtfsDaoService" class="no.systema.jservices.common.dao.services.KodtfsDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>	
 	
 	<bean id="kodtsfDaoService" class="no.systema.jservices.common.dao.services.KodtsfDaoServiceImpl">
