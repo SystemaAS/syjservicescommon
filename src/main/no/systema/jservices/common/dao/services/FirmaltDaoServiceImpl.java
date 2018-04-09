@@ -3,6 +3,7 @@ package no.systema.jservices.common.dao.services;
 import java.util.List;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.springframework.dao.DataAccessException;
 
 import no.systema.jservices.common.dao.FirmaltDao;
 
@@ -40,8 +41,9 @@ public class FirmaltDaoServiceImpl extends GenericDaoServiceImpl<FirmaltDao> imp
 			retval = getJdbcTemplate().update(updateString.toString(),
 					new Object[] { dao.getAidato(), dao.getAitid(), dao.getAifirm(), dao.getAiorg(), });
 
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (DataAccessException e) {
+			logger.error("Error updating FIRMALT!", e);
+			throw e;
 		}
 		
 	}
