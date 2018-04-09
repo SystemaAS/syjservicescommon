@@ -141,7 +141,6 @@ public class TestJFirmaltDaoService {
 	@Test
 	public final void testGet() {
 		List<FirmaltDao> resultDaos = firmaltDaoService.get();
-		resultDaos.forEach(dao -> System.out.println(ReflectionToStringBuilder.toString(dao)));
 		assertNotNull(resultDaos);
 	}	
 	

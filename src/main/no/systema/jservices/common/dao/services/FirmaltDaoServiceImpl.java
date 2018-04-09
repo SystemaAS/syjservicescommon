@@ -2,6 +2,8 @@ package no.systema.jservices.common.dao.services;
 
 import java.util.List;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
 import no.systema.jservices.common.dao.FirmaltDao;
 
 public class FirmaltDaoServiceImpl extends GenericDaoServiceImpl<FirmaltDao> implements FirmaltDaoService{
@@ -15,8 +17,33 @@ public class FirmaltDaoServiceImpl extends GenericDaoServiceImpl<FirmaltDao> imp
 
 	@Override
 	public List<FirmaltDao> get() {
-		return findAllInFirma(null, firmaColumnName);
+		List<FirmaltDao> list = null;
+		list = findAllInFirma(null, firmaColumnName);
 
+		String message = String.format(" All %s records in FIRMALT==>", list.size());
+		logger.debug(message);
+		list.forEach((f) -> logger.debug("	"+ReflectionToStringBuilder.toString(f)));
+		
+		return list;
+
+	}
+
+	@Override
+	public void updateAiDatoAndAiTid(FirmaltDao dao) {
+		int retval = 0;
+		try {
+			StringBuilder updateString = new StringBuilder();
+			updateString.append(" UPDATE firmalt SET aidato = ? , aitid = ?  ");
+			updateString.append(" WHERE aifirm = ? ");
+			updateString.append(" AND aiorg = ? ");
+
+			retval = getJdbcTemplate().update(updateString.toString(),
+					new Object[] { dao.getAidato(), dao.getAitid(), dao.getAifirm(), dao.getAiorg(), });
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 }

@@ -13,5 +13,12 @@ public interface FirmaltDaoService extends GenericDaoService<FirmaltDao> {
 	 * @return List<FirmaltDao>
 	 */
 	public List<FirmaltDao> get();
+	
+	/**
+	 * Update aidato and aitid
+	 * 
+	 */
+	public void updateAiDatoAndAiTid(FirmaltDao dao);
+	
 
 }

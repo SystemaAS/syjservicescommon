@@ -1,7 +1,10 @@
 package no.systema.jservices.common.dao;
 
 import java.util.HashMap;
+import java.util.IllegalFormatException;
 import java.util.Map;
+
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 public class FirmaltDao implements IDao {
 
@@ -115,5 +118,22 @@ public class FirmaltDao implements IDao {
 		return keys;
 	}
 
+	/**
+	 * Sanity check on Firmalt records
+	 * 
+	 * throws a RuntimeException if any value is null. aidato and aitid excluded.
+	 * 
+	 */
+	public void hasSaneValues()  {
+		if (aifirm == null || aiorg == null || aipwd == null || aipath == null || aiapi == null || aiuser == null || aiupwd == null || aihost == null || aiauur == null) {
+			throw new RuntimeException("Some, or all columns are null in FIRMALT!, record="+ReflectionToStringBuilder.toString(this));
+		}
+		
+	}
+	
+	@Override
+	public String toString(){
+		return ReflectionToStringBuilder.toString(this);
+	}
 	
 }
