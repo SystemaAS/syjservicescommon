@@ -20,5 +20,13 @@ public interface FirmaltDaoService extends GenericDaoService<FirmaltDao> {
 	 */
 	public void updateAiDatoAndAiTid(FirmaltDao dao);
 	
+	/**
+	 * Get Firmalt on orgnr.
+	 * 
+	 * @param orgnr
+	 * @return FirmaltDao
+	 */
+	public FirmaltDao getFirmaltDao(String orgnr);
+	
 
 }

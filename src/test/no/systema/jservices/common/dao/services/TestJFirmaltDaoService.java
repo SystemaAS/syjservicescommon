@@ -101,13 +101,14 @@ public class TestJFirmaltDaoService {
 	@Test
 	public final void testFindAll() {
 		List<FirmaltDao> list =  firmaltDaoService.findAll(null);
+		list.forEach(firma -> System.out.println("firma"+firma));
 		assertNotNull(list);
 	}		
 	
 	@Test
 	public final void testFindUnique() {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("aifirm", "SY");
+		params.put("aiorg", "810514442");
 		List<FirmaltDao> list =  firmaltDaoService.findAllInFirma(params, firmaColumnName);
 		assertTrue("Should find only one tuple.", list.size() == 1);
 	}		
@@ -116,8 +117,7 @@ public class TestJFirmaltDaoService {
 	@Test
 	public final void testFindAllInFirma() {
 		List<FirmaltDao> list =  firmaltDaoService.findAllInFirma(null, firmaColumnName);
-//		list.forEach(firma -> System.out.println("firma"+firma));
-		assertTrue("Should find only one tuple.", list.size() == 1);
+		list.forEach(firma -> System.out.println("firma"+firma));
 		assertNotNull(list);
 	}		
 	
@@ -125,7 +125,7 @@ public class TestJFirmaltDaoService {
 	@Test
 	public final void testExist() {
 		FirmaltDao dao = new FirmaltDao();
-		dao.setAifirm("SY");
+		dao.setAiorg("810514442");
 		boolean exist = firmaltDaoService.existInFirma(dao, firmaColumnName );
 		assertTrue(dao.getAifirm() + " should exist", exist);
 	}
@@ -133,10 +133,18 @@ public class TestJFirmaltDaoService {
 	@Test
 	public final void testFind() {
 		FirmaltDao dao = new FirmaltDao();
-		dao.setAifirm("SY");
+		dao.setAiorg("810514442");
 		FirmaltDao resultDao = firmaltDaoService.find(dao);
 		assertNotNull(resultDao);
 	}
+	
+	@Test
+	public final void testGetFirmaltDao() {
+		String orgnr = "810514442";
+		FirmaltDao resultDao = firmaltDaoService.getFirmaltDao(orgnr);
+		assertNotNull(resultDao);
+	}	
+	
 	
 	@Test
 	public final void testGet() {

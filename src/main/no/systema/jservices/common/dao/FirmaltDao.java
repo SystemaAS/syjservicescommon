@@ -1,14 +1,13 @@
 package no.systema.jservices.common.dao;
 
 import java.util.HashMap;
-import java.util.IllegalFormatException;
 import java.util.Map;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 public class FirmaltDao implements IDao {
 
-	private String aifirm; // key
+	private String aifirm; 
 	private String aiorg;  //key
 	private String aipwd;
 	private String aipath;
@@ -113,7 +112,6 @@ public class FirmaltDao implements IDao {
 
 	@Override
 	public Map<String, Object> getKeys() {
-		keys.put("aifirm", aifirm);
 		keys.put("aiorg", aiorg);
 		return keys;
 	}

@@ -1,6 +1,8 @@
 package no.systema.jservices.common.dao.services;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.springframework.dao.DataAccessException;
@@ -46,6 +48,13 @@ public class FirmaltDaoServiceImpl extends GenericDaoServiceImpl<FirmaltDao> imp
 			throw e;
 		}
 		
+	}
+
+	@Override
+	public FirmaltDao getFirmaltDao(String orgnr) {
+		FirmaltDao qDao = new FirmaltDao();
+		qDao.setAiorg(orgnr);
+		return find(qDao);
 	}
 	
 }
