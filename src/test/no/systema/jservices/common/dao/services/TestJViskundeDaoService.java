@@ -82,6 +82,12 @@ public class TestJViskundeDaoService {
 	}
 
 	@Test
+	public final void testFindOnKundnr() {
+		ViskundeDao resultDao = viskundeDaoService.find("2010");
+		assertNotNull("Should exist", resultDao);
+	}	
+	
+	@Test
 	public final void testCreateAndDeleteSmall() {
 		ViskundeDao dao = getSmallDao();
 		ViskundeDao resultDao = viskundeDaoService.create(dao);
@@ -108,7 +114,7 @@ public class TestJViskundeDaoService {
 	}	
 	
 	@Test
-	public final void createBigCustomer_2010() {
+	public final void createBigCustomer_10() {
 		ViskundeDao dao = getBigDao();
 		ViskundeDao resultDao = viskundeDaoService.create(dao);
 		assertNotNull("Should exist", resultDao);
@@ -127,8 +133,8 @@ public class TestJViskundeDaoService {
 	private ViskundeDao getBigDao() {
 		ViskundeDao dao = new ViskundeDao();
 		dao.setFirma("SY"); //private String firma;
-		dao.setKundnr(2010); //private int kundnr; //key
-		dao.setAktkod("I");  // private String aktkod;
+		dao.setKundnr(10); //private int kundnr; //key
+		dao.setAktkod("A");  // private String aktkod;
 		dao.setDkund("d"); //private String dkund;
 		dao.setKnavn("knavn"); //;private String knavn;
 		dao.setAdr1("adr1"); //;private String adr1;
@@ -154,7 +160,7 @@ public class TestJViskundeDaoService {
 		dao.setSyopdt("sy"); //private String syopdt;
 		dao.setSyminu(new BigDecimal(1.1)); //;private BigDecimal syminu = new BigDecimal(0);
 		dao.setSyutlp(new BigDecimal(2.2)); //private BigDecimal syutlp = new BigDecimal(0);
-		dao.setSyrg("syrg"); //private String syrg;
+		dao.setSyrg("123456"); //private String syrg;
 		dao.setSypoge("sypoge"); //private String sypoge;
 		dao.setSystat("sys"); //private String systat;
 		dao.setSyland("sy"); //private String syland;

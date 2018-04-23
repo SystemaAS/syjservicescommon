@@ -118,7 +118,7 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 	    queryString.append("where ");
 	    queryString.append(tableAlias).append("."+firmaColumnName+"=").append("f.fifirm ");
 		queryString.append(this.getQueryClausesInFirma(params, null));
-	    
+		logger.info(queryString.toString());
 	    return jdbcTemplate.query(queryString.toString(), mapper);
 	}
 
