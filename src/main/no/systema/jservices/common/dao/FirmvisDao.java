@@ -3,6 +3,12 @@ package no.systema.jservices.common.dao;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class holds configurations for the Visma.net integration
+ * 
+ * @author fredrikmoller
+ *
+ */
 public class FirmvisDao implements IDao {
 
 	private String vifirm;
