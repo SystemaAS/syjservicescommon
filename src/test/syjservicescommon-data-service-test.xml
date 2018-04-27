@@ -358,6 +358,13 @@
 		</property>
 	</bean>
 
+	<bean id="firmvisDaoService"
+		class="no.systema.jservices.common.dao.services.FirmvisDaoServiceImpl">
+		<property name="jdbcTemplate">
+			<ref bean="jdbcTemplate" />
+		</property>
+	</bean>
+
 	<bean id="viskundeDaoService"
 		class="no.systema.jservices.common.dao.services.ViskundeDaoServiceImpl">
 		<property name="jdbcTemplate">
