@@ -11,17 +11,4 @@ public class ViskundeDaoServiceImpl extends GenericDaoServiceImpl<ViskundeDao> i
 		return findInFirma(id, firmaColumnName);
 	}
 
-	@Override
-	public ViskundeDao find(String kundnr) {
-		ViskundeDao qDao = new ViskundeDao();
-		qDao.setKundgr(kundnr);
-		
-		ViskundeDao resultDao = new ViskundeDao();
-		resultDao = findInFirma(qDao, firmaColumnName);
-		if (resultDao == null) {
-			logger.warn("Could not find single tuple on kundnr="+kundnr);
-		}
-		return resultDao;
-	}
-	
 }
