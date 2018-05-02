@@ -111,7 +111,7 @@ public class TestJVissyskunDaoService {
 		VissyskunDao dao = new VissyskunDao();
 		dao.setFirma("SY");
 		dao.setKundnr(11);
-		dao.setVisknr(11111111);
+		dao.setVisknr(11111);
 		VissyskunDao resultDao = vissyskunDaoService.create(dao);
 		assertNotNull("Should exist", resultDao);
 
