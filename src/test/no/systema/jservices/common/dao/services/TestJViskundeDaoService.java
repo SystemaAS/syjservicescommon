@@ -1,10 +1,12 @@
 package no.systema.jservices.common.dao.services;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -99,6 +101,36 @@ public class TestJViskundeDaoService {
 		assertNull("Should not exist", resultDao);
 		
 	}
+	
+	@Test
+	public final void testCreateAndUpdateSmall() {
+		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyyMMdd"); //as defined in Firmalt		
+		ViskundeDao dao = getSmallDao();
+		ViskundeDao resultDao = viskundeDaoService.create(dao);
+		assertNotNull("Should exist", resultDao);
+
+		LocalDateTime now = LocalDateTime.now();
+		String nowDate = now.format(dateFormatter);
+		int syncDa = Integer.valueOf(nowDate);
+		dao.setSyncda(syncDa);
+		dao.setSyerro("Some error in the system");
+
+		viskundeDaoService.updateOnError(dao);
+		
+		resultDao = viskundeDaoService.find(dao);
+		assertEquals(syncDa,resultDao.getSyncda());
+		assertEquals("Some error in the system",resultDao.getSyerro());
+		
+
+		//Cleanup
+		viskundeDaoService.delete(dao);
+		resultDao = viskundeDaoService.find(dao);
+		assertNull("Should not exist", resultDao);		
+		
+		
+	}	
+	
+	
 
 	@Test
 	public final void testCreateAndDeleteBig() {

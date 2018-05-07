@@ -66,6 +66,8 @@ public class ViskundeDao implements IDao {
 	private String eori;
 	private String symvjn;
 	private String symvsp;
+	private int syncda;
+	private String syerro;
 
 	private Map<String, Object> keys = new HashMap<String, Object>();
 
@@ -542,6 +544,22 @@ public class ViskundeDao implements IDao {
 
 	public void setSymvsp(String symvsp) {
 		this.symvsp = symvsp;
+	}
+
+	public int getSyncda() {
+		return syncda;
+	}
+
+	public void setSyncda(int syncda) {
+		this.syncda = syncda;
+	}
+
+	public String getSyerro() {
+		return syerro;
+	}
+
+	public void setSyerro(String syerro) {
+		this.syerro = syerro;
 	}
 
 }
