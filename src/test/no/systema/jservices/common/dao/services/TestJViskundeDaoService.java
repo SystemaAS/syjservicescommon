@@ -104,7 +104,7 @@ public class TestJViskundeDaoService {
 	
 	@Test
 	public final void testCreateAndUpdateSmall() {
-		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyyMMdd"); //as defined in Firmalt		
+		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyyMMdd"); 	
 		ViskundeDao dao = getSmallDao();
 		ViskundeDao resultDao = viskundeDaoService.create(dao);
 		assertNotNull("Should exist", resultDao);

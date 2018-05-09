@@ -284,6 +284,10 @@
 	<bean id="vissyskunDaoService" class="no.systema.jservices.common.dao.services.VissyskunDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>		
+
+	<bean id="viskulogDaoService" class="no.systema.jservices.common.dao.services.ViskulogDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>
 	
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
         <tx:attributes>
