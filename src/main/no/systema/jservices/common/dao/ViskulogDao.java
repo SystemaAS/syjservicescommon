@@ -18,7 +18,7 @@ public class ViskulogDao implements IDao {
 	@Override
 	public Map<String, Object> getKeys() {
 		keys.put("kundnr", kundnr);
-		return null;
+		return keys;
 	}
 
 	public String getFirma() {

@@ -9,8 +9,13 @@ public class BridfDaoServiceImpl extends GenericDaoServiceImpl<BridfDao> impleme
 		BridfDao qDao = new BridfDao();
 		qDao.setBibrid(name);
 		BridfDao resultDao = find(qDao);
+	
+		if (resultDao != null) {
+			return resultDao.getBibrid();	
+		} else {
+			return null;
+		}
 		
-		return resultDao.getBibrid();
 	}
 
 }

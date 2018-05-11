@@ -76,5 +76,25 @@ public class TestJViskulogDaoService {
 		
 	}
 
-	
+	@Test
+	public final void createSome() {
+		ViskulogDao dao = new ViskulogDao();
+		dao.setFirma("SY");
+		dao.setKundnr(110);
+		dao.setKnavn("knavn");
+		dao.setSyerro("some long error text....");
+		
+		viskulogDaoService.create(dao);
+		
+		ViskulogDao dao2 = new ViskulogDao();
+		dao2.setFirma("SY");
+		dao2.setKundnr(210);
+		dao2.setKnavn("knavn 210");
+		dao2.setSyerro("some long even longer, error text....");
+		
+		
+		viskulogDaoService.create(dao2);
+		
+		
+	}
 }
