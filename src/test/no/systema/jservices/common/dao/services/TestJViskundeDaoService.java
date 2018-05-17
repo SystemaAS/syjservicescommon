@@ -66,7 +66,16 @@ public class TestJViskundeDaoService {
 		assertNotNull(list);
 	}		
 	
-
+	@Test
+	public final void testFindAllInFirmaWithParams() {
+		int kundnr = 1;
+		int syncda = 20180530;
+		List<ViskundeDao> list =  viskundeDaoService.findAllInFirma(kundnr, syncda);
+		assertNotNull(list);
+	}	
+	
+	
+	
 	@Test
 	public final void testExist() {
 		ViskundeDao dao = new ViskundeDao();
@@ -157,6 +166,7 @@ public class TestJViskundeDaoService {
 		ViskundeDao dao = new ViskundeDao();
 		dao.setFirma("SY");
 		dao.setKundnr(2010);
+		dao.setSyncda(20180518);
 		
 		return dao;
 		

@@ -40,5 +40,6 @@ public class CundfDaoServiceImpl extends GenericDaoServiceImpl<CundfDao> impleme
 	public CundfDao update(CundfDao dao) {
 		throw new UnsupportedOperationException("Not supported, implemented.");
 	}
+
 	
 }

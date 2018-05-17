@@ -247,11 +247,20 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 					queryString.append(entry.getKey()).append(" = ").append(entry.getValue()).append(" ");
 				} else {
 					if (entry.getValue() instanceof Number) {
-						queryString.append(entry.getKey()).append(" = ").append(entry.getValue());
+						//>
+						if (String.valueOf(entry.getKey()).contains(GREATER_THEN)) {
+							queryString.append(entry.getKey()).append(entry.getValue());
+						} else {
+							queryString.append(entry.getKey()).append(" = ").append(entry.getValue());
+						}
 					} else {
+						//wild card , %
 						if (String.valueOf(entry.getValue()).contains(WILD_CARD)) {
 							queryString.append(entry.getKey()).append(" LIKE '").append(entry.getValue()).append("'");
-						} else {
+						//not null
+						} else if (String.valueOf(entry.getValue()).equals(NOT_NULL)) {
+							 queryString.append("NULLIF(").append(entry.getKey() + ",").append(" '') ").append(" IS NOT NULL");  //NULLIF(<key>, '') IS NOT NULL
+						} else { 
 							queryString.append(entry.getKey()).append(" = '").append(entry.getValue()).append("'");
 						}
 					}

@@ -15,5 +15,4 @@ public interface CundfDaoService extends GenericDaoService<CundfDao> {
 	 */
 	public List<CundfDao> findAllInFirma(Map<String, Object> params);
 	
-	
 }

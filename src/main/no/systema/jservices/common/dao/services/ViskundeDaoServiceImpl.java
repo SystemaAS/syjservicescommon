@@ -1,5 +1,10 @@
 package no.systema.jservices.common.dao.services;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.dao.DataAccessException;
 
 import no.systema.jservices.common.dao.ViskundeDao;
@@ -7,6 +12,27 @@ import no.systema.jservices.common.dao.ViskundeDao;
 public class ViskundeDaoServiceImpl extends GenericDaoServiceImpl<ViskundeDao> implements ViskundeDaoService{
 
 	private String firmaColumnName = "firma";
+	
+	@Override
+	public List<ViskundeDao> findAllInFirma(int kundnr, int syncda) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		List<ViskundeDao> list = new ArrayList<ViskundeDao>();
+
+		if( kundnr > 0 ){
+			params.put("kundnr", kundnr);				
+		}
+		if( syncda > 0 ){
+			params.put("syncda" + GREATER_THEN, syncda );	
+		}			
+		
+		if (params.isEmpty()){
+			list = findAllInFirma(null, firmaColumnName);
+		} else {
+			list = findAllInFirma(params, firmaColumnName);				
+		}
+		
+		return list;
+	}
 	
 	@Override
 	public ViskundeDao find(Object id) {
