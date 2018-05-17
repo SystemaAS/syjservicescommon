@@ -9,7 +9,8 @@ public interface FirmvisDaoService extends GenericDaoService<FirmvisDao> {
 	 * 
 	 * FIRMVIS support only one corporateID
 	 * 
-	 * @return List<FirmvisDao>
+	 * @return FirmvisDao
+	 * @throws RuntimeException if no value found.
 	 */
 	public FirmvisDao get();
 	

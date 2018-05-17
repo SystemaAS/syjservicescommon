@@ -249,7 +249,11 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 					if (entry.getValue() instanceof Number) {
 						queryString.append(entry.getKey()).append(" = ").append(entry.getValue());
 					} else {
-						queryString.append(entry.getKey()).append(" = '").append(entry.getValue()).append("'");
+						if (String.valueOf(entry.getValue()).contains(WILD_CARD)) {
+							queryString.append(entry.getKey()).append(" LIKE '").append(entry.getValue()).append("'");
+						} else {
+							queryString.append(entry.getKey()).append(" = '").append(entry.getValue()).append("'");
+						}
 					}
 				}
 				if (it.hasNext()) {
