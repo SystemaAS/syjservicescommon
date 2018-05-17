@@ -15,6 +15,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import no.systema.jservices.common.dao.ViskulogDao;
+import no.systema.jservices.common.dao.ViskundeDao;
 import no.systema.jservices.common.dao.VissyskunDao;
 
 public class TestJViskulogDaoService {
@@ -50,6 +51,17 @@ public class TestJViskulogDaoService {
 		assertNotNull(list);
 	}		
 	
+	@Test
+	public final void testFindAllInFirmaWithParams() {
+		int kundnr = 1;
+		int syncda = 20180530;
+		List<ViskulogDao> list =  viskulogDaoService.findAllInFirma(kundnr, syncda);
+		assertNotNull(list);
+	}
+	
+	
+	
+	
 	
 	@Test
 	public final void testCreateAndDelete() {
@@ -82,6 +94,8 @@ public class TestJViskulogDaoService {
 		dao.setFirma("SY");
 		dao.setKundnr(110);
 		dao.setKnavn("knavn");
+		dao.setStatus("P");
+		dao.setSyncda(20180518);
 		dao.setSyerro("some long error text....");
 		
 		viskulogDaoService.create(dao);
@@ -90,6 +104,8 @@ public class TestJViskulogDaoService {
 		dao2.setFirma("SY");
 		dao2.setKundnr(210);
 		dao2.setKnavn("knavn 210");
+		dao.setStatus("E");
+		dao.setSyncda(20180518);
 		dao2.setSyerro("some long even longer, error text....");
 		
 		
