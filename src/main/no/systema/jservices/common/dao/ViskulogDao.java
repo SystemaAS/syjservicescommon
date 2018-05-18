@@ -9,8 +9,8 @@ public class ViskulogDao implements IDao {
 	private int kundnr; //key
 	private String knavn;
 	private String status;
-	private int syncda;
-	private int synctm;
+	private int syncda; //key
+	private int synctm; //key
 	private String syerro;
 
 	private Map<String, Object> keys = new HashMap<String, Object>();	
@@ -18,6 +18,8 @@ public class ViskulogDao implements IDao {
 	@Override
 	public Map<String, Object> getKeys() {
 		keys.put("kundnr", kundnr);
+		keys.put("syncda", syncda);
+		keys.put("synctm", synctm);
 		return keys;
 	}
 
