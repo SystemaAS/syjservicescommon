@@ -2,6 +2,7 @@ package no.systema.jservices.common.dao.services;
 
 import no.systema.jservices.common.dao.VissyskunDao;
 
+@Deprecated //remove when visma i setup
 public interface VissyskunDaoService extends GenericDaoService<VissyskunDao> {
 	
 	/**

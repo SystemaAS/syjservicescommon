@@ -9,6 +9,7 @@ import org.springframework.dao.DuplicateKeyException;
 import no.systema.jservices.common.dao.BridfDao;
 import no.systema.jservices.common.dao.VissyskunDao;
 
+@Deprecated //remove when visma i setup
 public class VissyskunDaoServiceImpl extends GenericDaoServiceImpl<VissyskunDao> implements VissyskunDaoService {
 
 	private String firmaColumnName = "firma";
