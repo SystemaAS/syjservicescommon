@@ -296,6 +296,11 @@
 	<bean id="vistranskDaoService" class="no.systema.jservices.common.dao.services.VistranskDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>		
+
+	<bean id="vistrlogkDaoService" class="no.systema.jservices.common.dao.services.VistrlogkDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>
+
 	
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
         <tx:attributes>
