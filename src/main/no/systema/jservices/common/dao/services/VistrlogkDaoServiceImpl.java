@@ -22,7 +22,7 @@ public class VistrlogkDaoServiceImpl extends GenericDaoServiceImpl<VistrlogkDao>
 		List<VistrlogkDao> list = new ArrayList<VistrlogkDao>();
 
 		if( bilnr > 0 ){
-			params.put("kundnr", bilnr);				
+			params.put("bilnr", bilnr);				
 		}
 		if( syncda > 0 ){
 			params.put("syncda" + GREATER_THEN, syncda );	
