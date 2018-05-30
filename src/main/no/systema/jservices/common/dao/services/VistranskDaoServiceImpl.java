@@ -40,6 +40,16 @@ public class VistranskDaoServiceImpl extends GenericDaoServiceImpl<VistranskDao>
 	}
 
 	@Override
+	public void deleteAll(String firma, int bilnr) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("firma", firma);
+		params.put("bilnr", bilnr);
+		deleteAll(params);
+		
+	}
+
+	
+	@Override
 	public void updateOnError(VistranskDao dao) {
 		int retval = 0;
 		try {
@@ -47,16 +57,15 @@ public class VistranskDaoServiceImpl extends GenericDaoServiceImpl<VistranskDao>
 			updateString.append(" UPDATE vistransk SET syncda = ? , syerro = ?  ");
 			updateString.append(" WHERE firma = ? ");
 			updateString.append(" AND recnr = ? ");
-			updateString.append(" AND posnr = ? ");
 
 			retval = getJdbcTemplate().update(updateString.toString(),
-					new Object[] { dao.getSyncda(), dao.getSyerro(), dao.getFirma(), dao.getRecnr(), dao.getPosnr() });
+					new Object[] { dao.getSyncda(), dao.getSyerro(), dao.getFirma(), dao.getRecnr() });
 
 		} catch (DataAccessException e) {
 			logger.error("Error updating VISTRANSK!", e);
 			throw e;
 		}
 		
-	}
-
+	}	
+	
 }

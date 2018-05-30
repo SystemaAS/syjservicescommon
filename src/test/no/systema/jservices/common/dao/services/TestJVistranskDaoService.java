@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -144,15 +145,27 @@ public class TestJVistranskDaoService {
 		assertNull("Should not exist", resultDao);
 		
 	}	
-	
-	@Test
-	public final void createBig() {
-		VistranskDao dao = getBigDao();
-		VistranskDao resultDao = vistranskDaoService.create(dao);
-		assertNotNull("Should exist", resultDao);
 
-	}
-	
+	@Test
+	public final void testCreateAndDeleteOnBilnr() {
+
+		//Clean
+		vistranskDaoService.deleteAll(null);
+		
+		//Create Dao's
+		getList().forEach((vtk) -> {
+			vistranskDaoService.create(vtk);
+		});
+		
+		//Delete on bilnr
+		vistranskDaoService.deleteAll("SY", 100);
+		
+		//Assert on left
+		List<VistranskDao> leftList= vistranskDaoService.findAll(null);
+		assertEquals("Should not 1 left.", 1,leftList.size());
+		
+	}		
+
 	private VistranskDao getSmallDao() {
 		VistranskDao dao = new VistranskDao();
 		dao.setFirma("SY");
@@ -176,6 +189,49 @@ public class TestJVistranskDaoService {
 		return dao;
 		
 	}
+	
+	private List<VistranskDao> getList() {
+		List<VistranskDao> list = new ArrayList<VistranskDao>();
+
+		VistranskDao dao = new VistranskDao();
+		dao.setFirma("SY"); 
+		dao.setBilnr(100);
+		dao.setPosnr(1); 
+		dao.setBiltxt("Byxa");
+		dao.setRecnr(222);
+		dao.setAktkod("A");  
+		dao.setValkod("NOK"); 
+		dao.setSyncda(20180530);	
+	
+		VistranskDao dao2 = new VistranskDao();
+		dao2.setFirma("SY"); 
+		dao2.setBilnr(100);		
+		dao2.setPosnr(2); 
+		dao2.setBiltxt("Sko");		
+		dao2.setRecnr(222);
+		dao2.setAktkod("A");  
+		dao2.setValkod("NOK"); 
+		dao2.setSyncda(20180530);			
+	
+		VistranskDao dao3 = new VistranskDao();
+		dao3.setFirma("SY"); 
+		dao3.setBilnr(140);		
+		dao3.setPosnr(1); 
+		dao3.setBiltxt("Fisk");		
+		dao3.setRecnr(333);
+		dao3.setAktkod("A");  
+		dao3.setValkod("NOK"); 
+		dao3.setSyncda(20180530);	
+		
+		list.add(dao);
+		list.add(dao2);
+		list.add(dao3);
+		
+		return list;
+		
+	}
+	
+	
 	
 	
 }
