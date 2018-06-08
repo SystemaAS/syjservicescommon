@@ -7,13 +7,14 @@ import no.systema.jservices.common.dao.VistranskDao;
 public interface VistranskDaoService extends GenericDaoService<VistranskDao> {
 	
 	/**
-	 * Find all vistransk  in firma on posnr and/or syncda.
+	 * Find all vistransk  in firma on kundnr, bilnr and/or syncda.
 	 * 
-	 * @param posnr
+	 * @param kundnr
+	 * @param bilnr
 	 * @param syncda
 	 * @return List<CundfDao>
 	 */
-	public List<VistranskDao> findAllInFirma(int posnr , int syncda);
+	public List<VistranskDao> findAllInFirma(int kundnr, int bilnr , int syncda);
 	
 	/**
 	 * Delete all vistransk for bilnr in firma. 
@@ -25,7 +26,7 @@ public interface VistranskDaoService extends GenericDaoService<VistranskDao> {
 	public void deleteAll(String firma, int bilnr);
 	
 	/**
-	 * Update Invoice on error, e.i. all rows on firma and bilnr.
+	 * Update Invoice on error, e.i. all rows on firma, recnr and bilnr.
 	 * 
 	 * A bit nasty but Visma does not report error on lines.
 	 * 

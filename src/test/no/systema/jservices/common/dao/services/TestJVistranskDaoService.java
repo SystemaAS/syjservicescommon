@@ -66,8 +66,9 @@ public class TestJVistranskDaoService {
 	@Test
 	public final void testFindAllInFirmaWithParams() {
 		int kundnr = 1;
+		int bilnr = 0;
 		int syncda = 20180530;
-		List<VistranskDao> list =  vistranskDaoService.findAllInFirma(kundnr, syncda);
+		List<VistranskDao> list =  vistranskDaoService.findAllInFirma(kundnr,bilnr, syncda);
 		assertNotNull(list);
 	}	
 	

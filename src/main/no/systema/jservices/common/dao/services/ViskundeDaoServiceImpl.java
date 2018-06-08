@@ -22,7 +22,7 @@ public class ViskundeDaoServiceImpl extends GenericDaoServiceImpl<ViskundeDao> i
 			params.put("kundnr", kundnr);				
 		}
 		if( syncda > 0 ){
-			params.put("syncda" + GREATER_THEN, syncda );	
+			params.put("syncda" + GREATER_AND_EQUALS_THEN, syncda );	
 		}			
 		
 		if (params.isEmpty()){
@@ -53,6 +53,7 @@ public class ViskundeDaoServiceImpl extends GenericDaoServiceImpl<ViskundeDao> i
 
 		} catch (DataAccessException e) {
 			logger.error("Error updating VISKUNDE!", e);
+			logger.error("On kundnr="+dao.getKundnr()+", firma="+dao.getFirma()+", syerro="+dao.getSyerro()+", syncda="+dao.getSyncda());
 			throw e;
 		}
 		

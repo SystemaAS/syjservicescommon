@@ -69,8 +69,12 @@ public class TestJViskundeDaoService {
 	@Test
 	public final void testFindAllInFirmaWithParams() {
 		int kundnr = 1;
-		int syncda = 20180530;
+		int syncda = 20180604;
 		List<ViskundeDao> list =  viskundeDaoService.findAllInFirma(kundnr, syncda);
+		
+
+		list.forEach(vk -> System.out.println(vk));
+		
 		assertNotNull(list);
 	}	
 	
@@ -122,7 +126,9 @@ public class TestJViskundeDaoService {
 		String nowDate = now.format(dateFormatter);
 		int syncDa = Integer.valueOf(nowDate);
 		dao.setSyncda(syncDa);
-		dao.setSyerro("Some error in the system");
+
+		String syerro= "{ message : VismaId: b0727629-4a3b-4860-9e16-763794052c5d. Error inserting the customer. Error: Inserting 'Customer' record raised at least one error. Please review the errors.\r\nError: Terms 'TT' cannot be found in the system.\r\n}";
+		dao.setSyerro(syerro);
 
 		viskundeDaoService.updateOnError(dao);
 		
@@ -138,6 +144,10 @@ public class TestJViskundeDaoService {
 		
 		
 	}	
+	
+	
+	
+	
 	
 	
 

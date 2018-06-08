@@ -25,7 +25,7 @@ public class VistrlogkDaoServiceImpl extends GenericDaoServiceImpl<VistrlogkDao>
 			params.put("bilnr", bilnr);				
 		}
 		if( syncda > 0 ){
-			params.put("syncda" + GREATER_THEN, syncda );	
+			params.put("syncda" + GREATER_AND_EQUALS_THEN, syncda );	
 		}			
 		
 		if (params.isEmpty()){

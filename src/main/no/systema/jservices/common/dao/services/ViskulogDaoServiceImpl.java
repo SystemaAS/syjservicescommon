@@ -25,7 +25,7 @@ public class ViskulogDaoServiceImpl extends GenericDaoServiceImpl<ViskulogDao> i
 			params.put("kundnr", kundnr);				
 		}
 		if( syncda > 0 ){
-			params.put("syncda" + GREATER_THEN, syncda );	
+			params.put("syncda" + GREATER_AND_EQUALS_THEN, syncda );	
 		}			
 		
 		if (params.isEmpty()){
