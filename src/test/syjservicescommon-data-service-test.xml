@@ -408,6 +408,13 @@
 		</property>
 	</bean>		
 
+	<bean id="vistranslDaoService"
+		class="no.systema.jservices.common.dao.services.VistranslDaoServiceImpl">
+		<property name="jdbcTemplate">
+			<ref bean="jdbcTemplate" />
+		</property>
+	</bean>	
+
 	<bean id="vistrlogkDaoService"
 		class="no.systema.jservices.common.dao.services.VistrlogkDaoServiceImpl">
 		<property name="jdbcTemplate">

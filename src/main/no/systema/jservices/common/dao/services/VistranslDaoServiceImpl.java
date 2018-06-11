@@ -8,15 +8,16 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 
 import no.systema.jservices.common.dao.VistranskDao;
+import no.systema.jservices.common.dao.VistranslDao;
 
-public class VistranskDaoServiceImpl extends GenericDaoServiceImpl<VistranskDao> implements VistranskDaoService{
+public class VistranslDaoServiceImpl extends GenericDaoServiceImpl<VistranslDao> implements VistranslDaoService{
 
 	private String firmaColumnName = "firma";
 	
 	@Override
-	public List<VistranskDao> findAllInFirma(int recnr, int bilnr ,int syncda) {
+	public List<VistranslDao> findAllInFirma(int recnr, int bilnr ,int syncda) {
 		Map<String, Object> params = new HashMap<String, Object>();
-		List<VistranskDao> list = new ArrayList<VistranskDao>();
+		List<VistranslDao> list = new ArrayList<VistranslDao>();
 
 		if( recnr > 0 ){
 			params.put("recnr", recnr);				
@@ -38,7 +39,7 @@ public class VistranskDaoServiceImpl extends GenericDaoServiceImpl<VistranskDao>
 	}
 	
 	@Override
-	public VistranskDao find(Object id) {
+	public VistranslDao find(Object id) {
 		return findInFirma(id, firmaColumnName);
 	}
 
@@ -53,11 +54,11 @@ public class VistranskDaoServiceImpl extends GenericDaoServiceImpl<VistranskDao>
 
 	
 	@Override
-	public void updateOnError(VistranskDao dao) {
+	public void updateOnError(VistranslDao dao) {
 		int retval = 0;
 		try {
 			StringBuilder updateString = new StringBuilder();
-			updateString.append(" UPDATE vistransk SET syncda = ? , syerro = ?  ");
+			updateString.append(" UPDATE vistransl SET syncda = ? , syerro = ?  ");
 			updateString.append(" WHERE firma = ? ");
 			updateString.append(" AND recnr = ? ");
 			updateString.append(" AND bilnr = ? ");
@@ -66,7 +67,7 @@ public class VistranskDaoServiceImpl extends GenericDaoServiceImpl<VistranskDao>
 					new Object[] { dao.getSyncda(), dao.getSyerro(), dao.getFirma(), dao.getRecnr(), dao.getBilnr() });
 
 		} catch (DataAccessException e) {
-			logger.error("Error updating VISTRANSK!", e);
+			logger.error("Error updating VISTRANSL!", e);
 			logger.error("On recnr="+dao.getRecnr()+", bilnr="+dao.getBilnr()+", syerro="+dao.getSyerro()+", syncda="+dao.getSyncda());
 			throw e;
 		}
