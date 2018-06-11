@@ -280,6 +280,10 @@
 	<bean id="viskundeDaoService" class="no.systema.jservices.common.dao.services.ViskundeDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>	
+
+	<bean id="visleveDaoService" class="no.systema.jservices.common.dao.services.VisleveDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>	
 	
 	<bean id="vissyskunDaoService" class="no.systema.jservices.common.dao.services.VissyskunDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
