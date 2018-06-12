@@ -35,11 +35,13 @@ public class TestJFirmvisDaoService {
 	private void createFirmalt() {
 		FirmvisDao dao = new FirmvisDao();
 
-		dao.setViacto("81d21509-a23e-40a3-82d4-b101bb681d0f");
-		dao.setViapty("Visma.net Financials");
-		dao.setVibapa("https://integration.visma.net/API");
-		dao.setVicoid("1684147");
 		dao.setVifirm("SY");
+		dao.setVibapa("https://integration.visma.net/API");
+		dao.setViapty("Visma.net Financials");
+//		dao.setViacto(TO BE SET AUTOMAGISKT);  AUTHORIZATION_CODE
+//		dao.setViauco(TO BE SET AUTOMAGISKT);  ACCESSTOKEN
+		dao.setViclid("systema_as_test_hf6sjf9");
+		dao.setViclse("cd81dbac-7bcb-40f1-8f6b-5fd781483250");
 		
 		FirmvisDao result = firmvisDaoService.create(dao);
 	}	
@@ -60,7 +62,7 @@ public class TestJFirmvisDaoService {
 	@Test
 	public final void testFindUnique() {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("vicoid", "1684147");
+//		params.put("vicoid", "1684147");
 		List<FirmvisDao> list =  firmvisDaoService.findAllInFirma(params, firmaColumnName);
 		assertTrue("Should find only one tuple.", list.size() == 1);
 	}		
@@ -77,7 +79,7 @@ public class TestJFirmvisDaoService {
 	@Test
 	public final void testExist() {
 		FirmvisDao dao = new FirmvisDao();
-		dao.setVicoid("1684147");
+//		dao.setVicoid("1684147");
 		boolean exist = firmvisDaoService.existInFirma(dao, firmaColumnName );
 		assertTrue(dao.getVifirm() + " should exist", exist);
 	}
@@ -85,7 +87,7 @@ public class TestJFirmvisDaoService {
 	@Test
 	public final void testFind() {
 		FirmvisDao dao = new FirmvisDao();
-		dao.setVicoid("1684147");
+//		dao.setVicoid("1684147");
 		FirmvisDao resultDao = firmvisDaoService.find(dao);
 		assertNotNull(resultDao);
 	}
