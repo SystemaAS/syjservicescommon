@@ -429,6 +429,13 @@
 		</property>
 	</bean>	
 
+	<bean id="visproDaoService"
+		class="no.systema.jservices.common.dao.services.VisproDaoServiceImpl">
+		<property name="jdbcTemplate">
+			<ref bean="jdbcTemplate" />
+		</property>
+	</bean>		
+	
 	
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource">
