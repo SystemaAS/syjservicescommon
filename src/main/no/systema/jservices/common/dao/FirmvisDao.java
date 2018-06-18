@@ -17,6 +17,7 @@ public class FirmvisDao implements IDao {
 	private String vifirm; //FIRMA I SYSPED	
 	private String vibapa; // BASEPATH
 	private String viapty; // APPTYPE
+	private String vicoid; // COMPANYID
 	private String viacto; // ACCESSTOKEN
 	private String viauco; // AUTHORIZATION_CODE
 	private String viclid; // CLIENT_ID
@@ -26,7 +27,7 @@ public class FirmvisDao implements IDao {
 
 	@Override
 	public Map<String, Object> getKeys() {
-		keys.put("viclid", viclid); //litt overkill, but why not a key
+		keys.put("vicoid", vicoid);
 		return keys;
 	}
 
