@@ -22,6 +22,9 @@ public class FirmvisDao implements IDao {
 	private String viauco; // AUTHORIZATION_CODE
 	private String viclid; // CLIENT_ID
 	private String viclse; // CLIENT_SECRET
+	private String vireur; //REDIRECT URI
+	private int vincda;
+	private int vinctm;
 
 	private Map<String, Object> keys = new HashMap<String, Object>();
 
