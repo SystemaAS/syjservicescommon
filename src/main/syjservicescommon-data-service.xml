@@ -275,7 +275,12 @@
 
 	<bean id="firmvisDaoService" class="no.systema.jservices.common.dao.services.FirmvisDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
-	</bean>	
+	</bean>
+	
+	<bean id="godsjfDaoService" class="no.systema.jservices.common.dao.services.GodsjfDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>		
+		
 
 	<bean id="viskundeDaoService" class="no.systema.jservices.common.dao.services.ViskundeDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
