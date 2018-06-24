@@ -95,6 +95,20 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 	}
 	
 	
+	/**
+	 * In case special order by -clause is required
+	 */
+	@Override
+	public List<T> findAll(Map<String, Object> params, StringBuffer orderByClause) {
+	    StringBuilder queryString = new StringBuilder("SELECT * from ");
+	    queryString.append(tableName);
+		queryString.append(this.getQueryClauses(params, null));
+		queryString.append(" " + orderByClause.toString());
+		logger.info(queryString.toString());
+		return jdbcTemplate.query(queryString.toString(), mapper);
+	}
+	
+	
 	@Override
 	public List<T> findAllDistinct(String columnName) {
 	    StringBuilder queryString = new StringBuilder("SELECT distinct " + columnName + " from ");
