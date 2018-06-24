@@ -1,8 +1,10 @@
 package no.systema.jservices.common.dao.services;
 
-import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 import no.systema.jservices.common.dao.GodsjfDao;
+
 
 /**
  * 
@@ -11,6 +13,6 @@ import no.systema.jservices.common.dao.GodsjfDao;
  */
 public interface GodsjfDaoService extends GenericDaoService<GodsjfDao> {
 	
-	
+	public List<GodsjfDao> findDefault(String currentYear, String fromDay);
 
 }
