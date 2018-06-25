@@ -23,9 +23,5 @@ public class GodsjfDaoServiceImpl extends GenericDaoServiceImpl<GodsjfDao> imple
 		
 	}
 
-	/*
-	private JdbcTemplate jdbcTemplate = null;                                                            
-	public void setJdbcTemplate( JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}          
-	public JdbcTemplate getJdbcTemplate() {return this.jdbcTemplate;}
-	*/
+	
 }
