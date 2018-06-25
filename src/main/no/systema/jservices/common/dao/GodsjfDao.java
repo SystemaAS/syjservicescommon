@@ -13,17 +13,17 @@ public class GodsjfDao implements IDao {
 	private String gobiln; 
 	private String goavg;  
 	private String gotrnr; 
-	private String gotrdt;  
+	private int gotrdt;  
 	private String gorei1;  
 	private String gorei2;  
 	private String gorei3;  
 	private String gorei4;  
 	private String gogren;  
-	private String gogrdt;  
-	private String gogrkl;  
+	private int gogrdt;  
+	private int gogrkl;  
 	private String golsen;  
-	private String golsdt;  
-	private String golskl; 
+	private int golsdt;  
+	private int golskl; 
 	private String gotype; 
 	private String goturn;
 	
