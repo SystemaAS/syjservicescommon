@@ -6,13 +6,13 @@ import java.util.Map;
 import lombok.Data;
 
 /**
- * This class holds transactionlog-value for kundefaktura lines.
+ * This class holds transactionlog-value for leverandorfaktura lines.
  *  
  * @author fredrikmoller
  *
  */
 @Data
-public class VistrlogkDao implements IDao {
+public class VistrloglDao implements IDao {
 
 	private String firma;
 	private int bilnr; //key  fakturanummer

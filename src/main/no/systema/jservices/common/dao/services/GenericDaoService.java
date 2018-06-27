@@ -22,6 +22,13 @@ public interface GenericDaoService<T> {
 	public List<T> findAll(String sql, RowMapper<T> mapper, Object... args);
 	
 	/**
+	 * 
+	 * @param params
+	 * @param orderByClause
+	 * @return
+	 */
+	public List<T> findAll(Map<String, Object> params, StringBuffer orderByClause);
+	/**
 	 * Find all T on delivered args.
 	 * 
 	 * @param params String = columnname, Object = any value. Accepts wildcard %. If params==null, no where-clause is added.
