@@ -422,6 +422,15 @@
 		</property>
 	</bean>	
 
+	<bean id="vistrloglDaoService"
+		class="no.systema.jservices.common.dao.services.VistrloglDaoServiceImpl">
+		<property name="jdbcTemplate">
+			<ref bean="jdbcTemplate" />
+		</property>
+	</bean>	
+
+
+
 	<bean id="visavdDaoService"
 		class="no.systema.jservices.common.dao.services.VisavdDaoServiceImpl">
 		<property name="jdbcTemplate">
@@ -488,8 +497,8 @@
 		<!-- For VALUF : l1dat -->
 		<property name="url" value="jdbc:as400://10.13.3.22;naming=system;socket timeout=15000;libraries=syendre,syendptf,syspedf,sysped,l1dat"/>
 		<!--  property name="url" value="jdbc:as400://10.13.3.22;naming=system;socket timeout=15000;libraries=asssyend,aspsyend,aspsyendpt,asssyspedf,aspsysped,l1dat;translate binary=true"/-->
-		<property name="username" value="xyz" />
-		<property name="password" value="xyz" />
+		<property name="username" value="xxx" />
+		<property name="password" value="yyy" />
 	</bean>
 
 
