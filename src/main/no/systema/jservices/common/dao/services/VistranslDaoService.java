@@ -17,7 +17,7 @@ public interface VistranslDaoService extends GenericDaoService<VistranslDao> {
 	public List<VistranslDao> findAllInFirma(int kundnr, int bilnr , int syncda);
 	
 	/**
-	 * Delete all vistransk for bilnr in firma. 
+	 * Delete all vistransl for bilnr in firma. 
 	 * Bilnr=fakturanummer
 	 * 
 	 * @param firma

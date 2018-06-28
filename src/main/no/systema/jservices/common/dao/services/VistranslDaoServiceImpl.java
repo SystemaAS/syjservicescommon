@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
-import no.systema.jservices.common.dao.VistranskDao;
 import no.systema.jservices.common.dao.VistranslDao;
 
 public class VistranslDaoServiceImpl extends GenericDaoServiceImpl<VistranslDao> implements VistranslDaoService{
