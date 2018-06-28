@@ -87,19 +87,19 @@ public class TestJVistrloglDaoService {
 		dao.setBilnr(110);
 		dao.setBilaar(2018);
 		dao.setStatus("OK");
-		dao.setSyncda(20180528);
+		dao.setSyncda(20180627);
 		
 		vistrloglDaoService.create(dao);
 		
 		VistrloglDao dao2 = new VistrloglDao();
 		dao2.setFirma("SY");
-		dao2.setBilnr(110);
+		dao2.setBilnr(220);
 		dao2.setBilaar(2018);
 		dao2.setBilmnd(5);
 		dao2.setBildag(28);
-		dao.setStatus("EE");
-		dao.setSyncda(20180528);
-		dao2.setSyerro("some long even longer, error text....");
+		dao.setStatus("ER");
+		dao.setSyncda(20180627);
+		dao2.setSyerro("some long even longer, error text in VISTRLOGL....");
 		
 		
 		vistrloglDaoService.create(dao2);

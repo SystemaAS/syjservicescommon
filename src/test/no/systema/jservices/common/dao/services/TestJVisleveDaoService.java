@@ -149,7 +149,7 @@ public class TestJVisleveDaoService {
 	}	
 	
 	@Test
-	public final void createBigCustomer_10() {
+	public final void createBigCustomer() {
 		VisleveDao dao = getBigDao();
 		VisleveDao resultDao = visleveDaoService.create(dao);
 		assertNotNull("Should exist", resultDao);
@@ -169,26 +169,24 @@ public class TestJVisleveDaoService {
 	private VisleveDao getBigDao() {
 		VisleveDao dao = new VisleveDao();
 		dao.setFirma("SY"); //private String firma;
-		dao.setLevnr(1010); //private int kundnr; //key
+		dao.setLevnr(2); //private int kundnr; //key
 		dao.setAktkod("A");  // private String aktkod;
 		dao.setAdr1("adr1"); //;private String adr1;
 		dao.setAdr2("adr2"); //private String adr2;
 		dao.setPostnr(3333);  //private int postnr;
 		dao.setAdr3("adr3"); //private String adr3;
-		dao.setKpers("kpers"); //private String kpers;
-		dao.setTlf("tlf");//private String tlf;
+		dao.setKpers("Fredrik"); //private String kpers;
+		dao.setTlf("1111");//private String tlf;
 		dao.setSonavn("sonavn"); //private String sonavn;
-		dao.setValkod("vkd"); //;private String valkod;
-		dao.setSpraak("s"); //private String spraak;
-		dao.setBankg("bankg");//private String bankg;
-		dao.setPostg("postg"); //private String postg;
-		dao.setBetbet("bt"); //private String betbet;
-		dao.setBetmat("b"); //private String betmat;
-		dao.setTfaxnr("tfaxnr"); //private String tfaxnr;
-		dao.setAdr21("adr21"); //private String adr21;
+		dao.setValkod("NO"); //;private String valkod;
+		dao.setSpraak("N"); //private String spraak;
+		dao.setBankg("100");//private String bankg;
+		dao.setPostg("200"); //private String postg;
+		dao.setBetbet("14"); //private String betbet;
+		dao.setBetmat("1"); //private String betmat;
+		dao.setTfaxnr("9876"); //private String tfaxnr;
+		dao.setAdr21("Gamle by"); //private String adr21;
 
-		//TODO add more columns to dao
-		
 		return dao;
 		
 	}
