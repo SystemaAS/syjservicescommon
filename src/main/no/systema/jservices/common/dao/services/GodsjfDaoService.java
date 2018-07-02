@@ -13,6 +13,6 @@ import no.systema.jservices.common.dao.GodsjfDao;
  */
 public interface GodsjfDaoService extends GenericDaoService<GodsjfDao> {
 	
-	public List<GodsjfDao> findDefault(String currentYear, String fromDay);
+	public List<GodsjfDao> findDefault(String currentYear, String fromDay, GodsjfDao dao);
 
 }
