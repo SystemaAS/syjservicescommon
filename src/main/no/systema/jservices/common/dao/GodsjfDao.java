@@ -19,10 +19,10 @@ public class GodsjfDao implements IDao {
 	private String gorei3;  	//20 VARCHAR
 	private String gorei4;  	//20 VARCHAR
 	private String gogren;  	//20 VARCHAR
-	private int gogrdt;  		//8 SONET
+	private String gogrdt;  		//8 SONET
 	private int gogrkl;  		//4 SONET
 	private String golsen;  	//20 VARCHAR
-	private int golsdt;  		//8 SONET
+	private String golsdt;  		//8 SONET
 	private int golskl; 		//4 SONET
 	private String gotype; 		//20 VARCHAR
 	private String goturn;		//17 VARCHAR
