@@ -67,6 +67,16 @@ public class GenericObjectMapper implements RowMapper {
 						logger.info(e.getMessage() + e.toString() + "name="+name);
 						continue;
 					}
+				} else if (field.getType() == Integer.class) {		
+					try {
+						field.setAccessible(true);
+						intValue = rs.getInt(name);
+						field.set(dao, intValue);
+					} catch (Exception e) {
+						// Usually when no column matches the JavaBean property...
+						logger.info(e.getMessage() + e.toString() + "name="+name);
+						continue;
+					}	
 				} else if (field.getType() == int.class) {		
 					try {
 						field.setAccessible(true);

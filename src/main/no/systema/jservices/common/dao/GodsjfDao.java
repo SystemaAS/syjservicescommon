@@ -1,6 +1,7 @@
 package no.systema.jservices.common.dao;
 import java.util.HashMap;
 import java.util.Map;
+import java.math.BigDecimal;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import lombok.Data;
@@ -13,17 +14,17 @@ public class GodsjfDao implements IDao {
 	private String gobiln; 		//13 VARCHAR
 	private String goavg;  		//15 VARCHAR
 	private String gotrnr; 		//20 VARCHAR
-	private Integer gotrdt;  		//8 SONET
+	private Integer gotrdt = 0;  		//8 SONET
 	private String gorei1;  	//20 VARCHAR
 	private String gorei2;  	//20 VARCHAR
 	private String gorei3;  	//20 VARCHAR
 	private String gorei4;  	//20 VARCHAR
 	private String gogren;  	//20 VARCHAR
 	private String gogrdt;  		//8 SONET
-	private Integer gogrkl;  		//4 SONET
+	private Integer gogrkl = 0;  		//4 SONET
 	private String golsen;  	//20 VARCHAR
 	private String golsdt;  		//8 SONET
-	private Integer golskl; 		//4 SONET
+	private Integer golskl = 0; 		//4 SONET
 	private String gotype; 		//20 VARCHAR
 	private String goturn;		//17 VARCHAR
 	
