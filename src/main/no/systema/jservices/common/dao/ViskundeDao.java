@@ -74,6 +74,7 @@ public class ViskundeDao implements IDao {
 	@Override
 	public Map<String, Object> getKeys() {
 		keys.put("kundnr", kundnr);
+		keys.put("firma", firma);
 		return keys;
 	}
 	

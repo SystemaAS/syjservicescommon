@@ -1,5 +1,6 @@
 package no.systema.jservices.common.dao;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -71,6 +72,7 @@ public class CundfDao implements IDao {
 	@Override
 	public Map<String, Object> getKeys() {
 		keys.put("kundnr", kundnr);
+		keys.put("firma", firma);
 		return keys;
 	}
 
