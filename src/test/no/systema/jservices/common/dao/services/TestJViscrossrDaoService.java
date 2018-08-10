@@ -10,6 +10,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import no.systema.jservices.common.dao.ViscrossrDao;
+import no.systema.jservices.common.values.ViscrossrKoder;
 
 public class TestJViscrossrDaoService {
 
@@ -29,12 +30,18 @@ public class TestJViscrossrDaoService {
 
 	private void createViscrossr() {
 		ViscrossrDao dao = new ViscrossrDao();
-		dao.setSvsysp("1");
-		dao.setSvvism("3");
-		dao.setSvtype("CODE");
+		dao.setSvsysp("0");
+		dao.setSvvism("0");
+		dao.setSvtype(ViscrossrKoder.MOMSK.toString());
 
 		
-		ViscrossrDao result = viscrossrDaoService.create(dao);
+		viscrossrDaoService.create(dao);
+	
+		dao.setSvsysp("1");
+		dao.setSvvism("1");
+		dao.setSvtype(ViscrossrKoder.MOMSK.toString());	
+		
+		viscrossrDaoService.create(dao);
 	}	
 	
 	@Test
@@ -55,12 +62,19 @@ public class TestJViscrossrDaoService {
 	public final void testFind() {
 		ViscrossrDao qDao = new ViscrossrDao();
 		qDao.setSvsysp("1");
-		qDao.setSvtype("CODE");
+		qDao.setSvtype(ViscrossrKoder.MOMSK.toString());
 		ViscrossrDao result =  viscrossrDaoService.find(qDao);
 		assertNotNull(result);
 	}		
 	
-
+	@Test
+	public final void testGetVismaCodeId() {
+		ViscrossrDao qDao = new ViscrossrDao();
+		qDao.setSvsysp("1");
+		qDao.setSvtype(ViscrossrKoder.MOMSK.toString());
+		String result =  viscrossrDaoService.getVismaCodeId("1", ViscrossrKoder.MOMSK);
+		assertNotNull(result);
+	}	
 
 	
 }
