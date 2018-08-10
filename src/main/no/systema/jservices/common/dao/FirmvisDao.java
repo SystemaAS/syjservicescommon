@@ -23,6 +23,7 @@ public class FirmvisDao implements IDao {
 	private String viclid; // CLIENT_ID
 	private String viclse; // CLIENT_SECRET
 	private String vireur; //REDIRECT URI
+	private int viepost;
 	private int vincda;
 	private int vinctm;
 
