@@ -52,7 +52,7 @@ public class TestJVistranslDaoService {
 	public final void testFindAll() {
 		List<VistranslDao> list =  vistranslDaoService.findAll(null);
 		
-		list.forEach(vt -> Logger.getRootLogger().info("vt recnr"+vt.getRecnr()));
+		list.forEach(vt -> Logger.getRootLogger().info("vt resnr"+vt.getResnr()));
 		
 		assertNotNull(list);
 	}		
@@ -171,7 +171,7 @@ public class TestJVistranslDaoService {
 	private VistranslDao getSmallDao() {
 		VistranslDao dao = new VistranslDao();
 		dao.setFirma("SY");
-		dao.setRecnr(111);
+		dao.setResnr(111);
 		dao.setPosnr(1);
 		dao.setSyncda(20180611);
 		
@@ -182,7 +182,7 @@ public class TestJVistranslDaoService {
 	private VistranslDao getBigDao() {
 		VistranslDao dao = new VistranslDao();
 		dao.setFirma("SY"); 
-		dao.setRecnr(222);
+		dao.setResnr(222);
 		dao.setPosnr(1); 
 		dao.setAktkod("A");  
 		dao.setValkod("vkd"); 
@@ -200,7 +200,7 @@ public class TestJVistranslDaoService {
 		dao.setBilnr(100);
 		dao.setPosnr(1); 
 		dao.setBiltxt("Byxa");
-		dao.setRecnr(222);
+		dao.setResnr(222);
 		dao.setAktkod("A");  
 		dao.setValkod("NOK"); 
 		dao.setSyncda(20180611);	
@@ -210,7 +210,7 @@ public class TestJVistranslDaoService {
 		dao2.setBilnr(100);		
 		dao2.setPosnr(2); 
 		dao2.setBiltxt("Sko");		
-		dao2.setRecnr(222);
+		dao2.setResnr(222);
 		dao2.setAktkod("A");  
 		dao2.setValkod("NOK"); 
 		dao2.setSyncda(20180530);			
@@ -220,7 +220,7 @@ public class TestJVistranslDaoService {
 		dao3.setBilnr(140);		
 		dao3.setPosnr(1); 
 		dao3.setBiltxt("Fisk");		
-		dao3.setRecnr(333);
+		dao3.setResnr(333);
 		dao3.setAktkod("A");  
 		dao3.setValkod("NOK"); 
 		dao3.setSyncda(20180530);	

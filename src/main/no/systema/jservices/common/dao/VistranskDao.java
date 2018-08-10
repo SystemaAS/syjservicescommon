@@ -31,7 +31,6 @@ public class VistranskDao implements IDao {
 	private BigDecimal valku1 = new BigDecimal(0);
 	private String bilkod;
 	private String biltxt;
-	private int resnr;
 	private int konto;
 	private int ksted;
 	private int kbarer;
@@ -56,7 +55,7 @@ public class VistranskDao implements IDao {
 	private String attest;
 	private String kryss;
 	private String opdkod;
-	private int recnr; //key
+	private int resnr; //key
 	private int bilnre;
 	private String nokkel;
 	private String agio;
@@ -102,6 +101,7 @@ public class VistranskDao implements IDao {
 	private int pktopo;
 	private String blkppo;
 	private String pekdpo;
+	private String lkid;
 	private int syncda;
 	private String syerro;
 	
@@ -109,7 +109,7 @@ public class VistranskDao implements IDao {
 	
 	@Override
 	public Map<String, Object> getKeys() {
-		keys.put("recnr", recnr);  //kundnr
+		keys.put("resnr", resnr);  //kundnr
 		keys.put("bilnr", bilnr);  //fakturanr
 		keys.put("posnr", posnr);  //radnr
 		return keys;
