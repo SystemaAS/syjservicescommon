@@ -22,9 +22,9 @@ public class TestJViscrossrDaoService {
 		context = new ClassPathXmlApplicationContext("syjservicescommon-data-service-test.xml");
 		viscrossrDaoService = (ViscrossrDaoService) context.getBean("viscrossrDaoService");
 		
-		if (viscrossrDaoService.countAll() == 0) {
-			createViscrossr();
-		}
+		viscrossrDaoService.deleteAll(null);
+		
+		createViscrossr();
 			
 	}
 
@@ -42,6 +42,13 @@ public class TestJViscrossrDaoService {
 		dao.setSvtype(ViscrossrKoder.MOMSK.toString());	
 		
 		viscrossrDaoService.create(dao);
+		
+		dao.setSvsysp("3");
+		dao.setSvvism("3");
+		dao.setSvtype(ViscrossrKoder.MOMSK.toString());	
+		
+		viscrossrDaoService.create(dao);		
+		
 	}	
 	
 	@Test
