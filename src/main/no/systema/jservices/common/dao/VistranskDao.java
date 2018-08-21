@@ -102,6 +102,8 @@ public class VistranskDao implements IDao {
 	private String blkppo;
 	private String pekdpo;
 	private String lkid;
+	private String fakkre;
+	private String path;
 	private int syncda;
 	private String syerro;
 	

@@ -102,6 +102,7 @@ public class VistranslDao implements IDao {
 	private String blkppo;
 	private String pekdpo;
 	private String lkid;
+	private String path;
 	private int syncda;
 	private String syerro;
 	
