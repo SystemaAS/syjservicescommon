@@ -32,7 +32,7 @@ public class VistranslDao implements IDao {
 	private String bilkod;
 	private String biltxt;
 	private int resnr;  //key
-	private int konto;
+	private int kontov;
 	private int ksted;
 	private int kbarer;
 	private int niv1po;

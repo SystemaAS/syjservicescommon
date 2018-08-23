@@ -31,7 +31,7 @@ public class VistranskDao implements IDao {
 	private BigDecimal valku1 = new BigDecimal(0);
 	private String bilkod;
 	private String biltxt;
-	private int konto;
+	private int kontov;
 	private int ksted;
 	private int kbarer;
 	private int niv1po;
