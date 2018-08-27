@@ -17,7 +17,14 @@ import no.systema.jservices.common.dao.ViscrossrDao;
  */
 public enum ViscrossrKoder implements Serializable{
 
-	MOMSK;
+	/**
+	 * Moms salg
+	 */
+	MVA_S,
+	/**
+	 * Moms , kjop
+	 */
+	MVA_K;
 	
 	
 }
