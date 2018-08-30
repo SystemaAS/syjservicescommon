@@ -332,6 +332,9 @@
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>
 
+	<bean id="vistrloghDaoService" class="no.systema.jservices.common.dao.services.VistrloghDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>
 
 	<bean id="visavdDaoService" class="no.systema.jservices.common.dao.services.VisavdDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
