@@ -52,7 +52,7 @@ public class VistranshDao implements IDao {
 	private String attest;
 	private String kryss;
 	private String opdkod;
-	private int resnr; //key
+	private int resnr;
 	private int bilnre;
 	private String nokkel;
 	private String agio;
@@ -108,7 +108,6 @@ public class VistranshDao implements IDao {
 	
 	@Override
 	public Map<String, Object> getKeys() {
-		keys.put("resnr", resnr);  //kundnr
 		keys.put("bilnr", bilnr);  //fakturanr
 		keys.put("posnr", posnr);  //radnr
 		return keys;
