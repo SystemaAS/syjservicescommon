@@ -52,7 +52,7 @@ public class TestJVistranshDaoService {
 	public final void testFindAll() {
 		List<VistranshDao> list =  vistranshDaoService.findAll(null);
 		
-		list.forEach(vt -> Logger.getRootLogger().info("vt resnr"+vt.getResnr()));
+		list.forEach(vt -> Logger.getRootLogger().info("vt bilnr"+vt.getBilnr()));
 		
 		assertNotNull(list);
 	}		
@@ -66,10 +66,9 @@ public class TestJVistranshDaoService {
 	
 	@Test
 	public final void testFindAllInFirmaWithParams() {
-		int levnr = 1;
 		int bilnr = 0;
 		int syncda = 20180530;
-		List<VistranshDao> list =  vistranshDaoService.findAllInFirma(levnr,bilnr, syncda);
+		List<VistranshDao> list =  vistranshDaoService.findAllInFirma(bilnr, syncda);
 		assertNotNull(list);
 	}	
 	

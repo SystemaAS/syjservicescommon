@@ -14,13 +14,10 @@ public class VistranshDaoServiceImpl extends GenericDaoServiceImpl<VistranshDao>
 	private String firmaColumnName = "firma";
 	
 	@Override
-	public List<VistranshDao> findAllInFirma(int resnr, int bilnr ,int syncda) {
+	public List<VistranshDao> findAllInFirma(int bilnr ,int syncda) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		List<VistranshDao> list = new ArrayList<VistranshDao>();
 
-		if( resnr > 0 ){
-			params.put("resnr", resnr);				
-		}
 		if( bilnr > 0 ){
 			params.put("bilnr", bilnr);				
 		}		
@@ -59,15 +56,14 @@ public class VistranshDaoServiceImpl extends GenericDaoServiceImpl<VistranshDao>
 			StringBuilder updateString = new StringBuilder();
 			updateString.append(" UPDATE vistransh SET syncda = ? , syerro = ?  ");
 			updateString.append(" WHERE firma = ? ");
-			updateString.append(" AND resnr = ? ");
 			updateString.append(" AND bilnr = ? ");
 
 			retval = getJdbcTemplate().update(updateString.toString(),
-					new Object[] { dao.getSyncda(), dao.getSyerro(), dao.getFirma(), dao.getResnr(), dao.getBilnr() });
+					new Object[] { dao.getSyncda(), dao.getSyerro(), dao.getFirma(), dao.getBilnr() });
 
 		} catch (DataAccessException e) {
 			logger.error("Error updating VISTRANSH!", e);
-			logger.error("On resnr="+dao.getResnr()+", bilnr="+dao.getBilnr()+", syerro="+dao.getSyerro()+", syncda="+dao.getSyncda());
+			logger.error("On bilnr="+dao.getBilnr()+", syerro="+dao.getSyerro()+", syncda="+dao.getSyncda());
 			throw e;
 		}
 		

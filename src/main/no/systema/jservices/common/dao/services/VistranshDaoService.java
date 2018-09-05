@@ -7,14 +7,13 @@ import no.systema.jservices.common.dao.VistranshDao;
 public interface VistranshDaoService extends GenericDaoService<VistranshDao> {
 	
 	/**
-	 * Find all vistransl  in firma on levnr, bilnr and/or syncda.
+	 * Find all vistransl  in firma on bilnr and/or syncda.
 	 * 
-	 * @param kundnr
 	 * @param bilnr
 	 * @param syncda
 	 * @return List<CundfDao>
 	 */
-	public List<VistranshDao> findAllInFirma(int kundnr, int bilnr , int syncda);
+	public List<VistranshDao> findAllInFirma(int bilnr , int syncda);
 	
 	/**
 	 * Delete all vistransl for bilnr in firma. 
