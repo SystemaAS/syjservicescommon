@@ -78,8 +78,6 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 	    queryString.append(tableName);
 		queryString.append(this.getQueryClauses(params, null));
 		logger.info(queryString.toString());
-		logger.info(mapper);
-		logger.info(jdbcTemplate);
 		
 		return jdbcTemplate.query(queryString.toString(), mapper);
 	}
