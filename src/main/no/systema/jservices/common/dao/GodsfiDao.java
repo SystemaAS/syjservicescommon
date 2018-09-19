@@ -24,6 +24,7 @@ public class GodsfiDao implements IDao {
 	@Override
 	public Map<String, Object> getKeys() {
 		keys.put("gflbko", gflbko);
+		keys.put("gflbs1", gflbs1);
 		return keys;
 	}
 	
