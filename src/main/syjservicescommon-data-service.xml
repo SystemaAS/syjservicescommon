@@ -352,6 +352,10 @@
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>
 
+	<bean id="kostalogDaoService" class="no.systema.jservices.common.dao.services.KostaDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>
+
 
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
         <tx:attributes>
