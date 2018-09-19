@@ -20,7 +20,7 @@ public class KostaDao implements IDao {
 	private BigDecimal kabl = new BigDecimal(0);
 	private BigDecimal kablm = new BigDecimal(0);
 	private String kablst;
-	private int kabnr; //key  BILAGSNUMMER
+	private int kabnr; //key  BILAGSNUMMER //TODO teller fra KOSTT. TA KTNR och sedan uppdatera
 	private int kabnr2;
 	private int kadte;
 	private BigDecimal kadtr = new BigDecimal(0);
