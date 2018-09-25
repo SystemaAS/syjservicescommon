@@ -34,7 +34,7 @@ public class KostaDao implements IDao {
 	private int kaoavd;
 	private BigDecimal kaomrf = new BigDecimal(0);
 	private int kaopd;
-	private int kapår;
+	private int KAPÅR;
 	private int kapcc;
 	private int kapmn;
 	private BigDecimal karnr = new BigDecimal(0);
