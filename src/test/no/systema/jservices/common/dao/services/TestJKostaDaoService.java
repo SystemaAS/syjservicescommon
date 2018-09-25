@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -47,6 +48,7 @@ public class TestJKostaDaoService {
 		KostaDao qDao = new KostaDao();
 		qDao.setKabnr(2000972);
 		KostaDao resultDao = kostaDaoService.find(qDao);
+		System.out.println("resultDao="+ReflectionToStringBuilder.toString(resultDao));
 		assertEquals("kabnr should be the same.",2000972, resultDao.getKabnr());
 	}		
 	
