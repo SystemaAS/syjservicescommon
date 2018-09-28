@@ -33,6 +33,50 @@ public class GodsjfDaoServiceImpl extends GenericDaoServiceImpl<GodsjfDao> imple
 		return super.getJdbcTemplate().query( queryString.toString(), new Object[] { currentYear, fromDay  }, new GenericObjectMapper(new GodsjfDao()));
 		
 	}
+	/**
+	 * 
+	 */
+	public int deleteSpecialCase(GodsjfDao dao){
+		StringBuilder queryString = new StringBuilder("UPDATE godsjf SET gotrnr = '*SLETTET'");
+		//where clause
+		queryString.append(" where gogn = '" + dao.getGogn() + "'");
+		if(StringUtils.hasValue(dao.getGotrnr())){
+			queryString.append(" and gotrnr =  '" + dao.getGotrnr() + "'" );
+		}
+		logger.info(queryString.toString());
+		return super.getJdbcTemplate().update(queryString.toString());
+	}
 
-	
+	/**
+	 * 
+	 * @param dao
+	 * @param gotrnrOrig
+	 * @return
+	 */
+	public int updateTransittSpecialCase(GodsjfDao dao, String gotrnrOrig){
+		StringBuilder queryString = new StringBuilder("UPDATE godsjf SET gotrnr = '" + dao.getGotrnr() + "'");
+		queryString.append(", gobiln = '" + StringUtils.nvl(dao.getGobiln()) + "'");
+		queryString.append(", goavg = '" + StringUtils.nvl(dao.getGoavg()) + "'");
+		queryString.append(", gotrdt = '" + dao.getGotrdt() + "'");
+		queryString.append(", gorei1 = '" + StringUtils.nvl(dao.getGorei1()) + "'");
+		queryString.append(", gorei2 = '" + StringUtils.nvl(dao.getGorei2()) + "'");
+		queryString.append(", gorei3 = '" + StringUtils.nvl(dao.getGorei3()) + "'");
+		queryString.append(", gorei4 = '" + StringUtils.nvl(dao.getGorei4()) + "'");
+		queryString.append(", gogren = '" + StringUtils.nvl(dao.getGogren()) + "'");
+		queryString.append(", gogrdt = '" + StringUtils.nvl(dao.getGogrdt()) + "'");
+		queryString.append(", gogrkl = '" + dao.getGogrkl() + "'");
+		queryString.append(", golsen = '" + StringUtils.nvl(dao.getGolsen()) + "'");
+		queryString.append(", golsdt = '" + StringUtils.nvl(dao.getGolsdt()) + "'");
+		queryString.append(", golskl = '" + dao.getGolskl() + "'");
+		queryString.append(", gotype = '" + StringUtils.nvl(dao.getGotype()) + "'");
+		queryString.append(", goturn = '" + StringUtils.nvl(dao.getGoturn()) + "'");
+		//where clause
+		queryString.append(" where gogn = '" + dao.getGogn() + "'");
+		if(StringUtils.hasValue(dao.getGotrnr())){
+			queryString.append(" and gotrnr =  '" + gotrnrOrig + "'" );
+		}
+		logger.info(queryString.toString());
+		return super.getJdbcTemplate().update(queryString.toString());
+	}
+
 }

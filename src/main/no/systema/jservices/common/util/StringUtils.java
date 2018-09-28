@@ -83,5 +83,17 @@ public class StringUtils {
 			return dbValue.toString().replace(".", ",");
 		}
 	}
+	/**
+	 * Usually used to replace null with "" (in db-updates)
+	 * @param value
+	 * @return
+	 */
+	public static String nvl(String value){
+		String retval = "";
+		if(value!=null){
+			retval = value;
+		}
+		return retval;
+	}
 	
 }

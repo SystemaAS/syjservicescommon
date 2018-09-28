@@ -33,6 +33,7 @@ public class GodsjfDao implements IDao {
 	@Override
 	public Map<String, Object> getKeys() {
 		keys.put("gogn", gogn);
+		keys.put("gotrnr", gotrnr);
 		return keys;
 	}
 	
