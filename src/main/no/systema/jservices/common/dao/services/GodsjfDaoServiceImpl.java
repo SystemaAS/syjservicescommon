@@ -63,10 +63,10 @@ public class GodsjfDaoServiceImpl extends GenericDaoServiceImpl<GodsjfDao> imple
 		queryString.append(", gorei3 = '" + StringUtils.nvl(dao.getGorei3()) + "'");
 		queryString.append(", gorei4 = '" + StringUtils.nvl(dao.getGorei4()) + "'");
 		queryString.append(", gogren = '" + StringUtils.nvl(dao.getGogren()) + "'");
-		queryString.append(", gogrdt = '" + StringUtils.nvl(dao.getGogrdt()) + "'");
+		queryString.append(", gogrdt = '" + dao.getGogrdt() + "'");
 		queryString.append(", gogrkl = '" + dao.getGogrkl() + "'");
 		queryString.append(", golsen = '" + StringUtils.nvl(dao.getGolsen()) + "'");
-		queryString.append(", golsdt = '" + StringUtils.nvl(dao.getGolsdt()) + "'");
+		queryString.append(", golsdt = '" + dao.getGolsdt() + "'");
 		queryString.append(", golskl = '" + dao.getGolskl() + "'");
 		queryString.append(", gotype = '" + StringUtils.nvl(dao.getGotype()) + "'");
 		queryString.append(", goturn = '" + StringUtils.nvl(dao.getGoturn()) + "'");
