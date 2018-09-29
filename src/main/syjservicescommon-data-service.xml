@@ -291,6 +291,9 @@
 	<bean id="godsgfDaoService" class="no.systema.jservices.common.dao.services.GodsgfDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>
+	<bean id="godshfDaoService" class="no.systema.jservices.common.dao.services.GodshfDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>
 
 	<bean id="viskundeDaoService" class="no.systema.jservices.common.dao.services.ViskundeDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
