@@ -12,8 +12,8 @@ public class GodshfDao implements IDao {
 	private String gogn; 		//15 VARCHAR
 	private String gotrnr; 		//20 VARCHAR
 	private String gohpgm; 		//8 VARCHAR
-	private Integer gohdat; 		//8 SONET
-	private Integer gohtim; 		//8 SONET
+	private Integer gohdat = 0; 		//8 SONET
+	private Integer gohtim = 0; 		//8 SONET
 	private String gohusr; 		//10 VARCHAR
 	private String gohkod; 		//1 VARCHAR (E=Endret, N=ny)
 	
