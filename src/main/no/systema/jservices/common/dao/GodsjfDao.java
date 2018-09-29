@@ -14,7 +14,7 @@ public class GodsjfDao implements IDao {
 	private String gobiln; 		//13 VARCHAR
 	private String goavg;  		//15 VARCHAR
 	private String gotrnr; 		//20 VARCHAR
-	private Integer gotrdt = 0;  		//8 SONET
+	private String gotrdt;  		//8 SONET
 	private String gorei1;  	//20 VARCHAR
 	private String gorei2;  	//20 VARCHAR
 	private String gorei3;  	//20 VARCHAR
