@@ -13,7 +13,7 @@ public class GodshfDaoServiceImpl extends GenericDaoServiceImpl<GodshfDao> imple
 	
 	@Override
 	public List<GodshfDao> findDefault(String currentYear, String fromDay, GodshfDao dao) {
-		StringBuilder queryString = new StringBuilder("SELECT * from godsjf ");
+		StringBuilder queryString = new StringBuilder("SELECT * from godshf ");
 		queryString.append(" where substr(GOGN,1,4) = ? and substr(GOGN,10,3) > ? ");
 		
 		if(StringUtils.hasValue(dao.getGotrnr())){
@@ -22,12 +22,14 @@ public class GodshfDaoServiceImpl extends GenericDaoServiceImpl<GodshfDao> imple
 		if(StringUtils.hasValue(dao.getGohpgm())){
 			queryString.append(" and gohpgm =  '" + dao.getGohpgm() + "'" );
 		}
+		
 		if(dao.getGohdat()>0){
 			queryString.append(" and gohdat =  '" + dao.getGohdat() + "'" );
 		}
 		if(dao.getGohtim()>0){
 			queryString.append(" and gohtim =  '" + dao.getGohtim() + "'" );
 		}
+		
 		if(StringUtils.hasValue(dao.getGohusr())){
 			queryString.append(" and gohusr =  '" + dao.getGohusr() + "'" );
 		}
