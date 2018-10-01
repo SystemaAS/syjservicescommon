@@ -359,6 +359,10 @@
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>
 
+	<bean id="kostblogDaoService" class="no.systema.jservices.common.dao.services.KostDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>
+
 	<bean id="kosttlogDaoService" class="no.systema.jservices.common.dao.services.KosttDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>

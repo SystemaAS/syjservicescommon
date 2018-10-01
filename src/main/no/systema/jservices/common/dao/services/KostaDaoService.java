@@ -19,8 +19,10 @@ public interface KostaDaoService extends GenericDaoService<KostaDao> {
 	 * @param fradato (greater than)
 	 * @param frapermnd 
 	 * @param fraperaar 
+	 * @param reklamasjon 
+	 * @param status 
 	 * @return a List of {@linkplain KostaDao}
 	 */
-	public List<KostaDao> findAll(String bilagsnr, String innregnr, String faktnr, String levnr, String attkode, String komment,  Number fradato, Number fraperaar, Number frapermnd);
+	public List<KostaDao> findAll(String bilagsnr, String innregnr, String faktnr, String levnr, String attkode, String komment,  Number fradato, Number fraperaar, Number frapermnd, String reklamasjon, String status);
 	
 }

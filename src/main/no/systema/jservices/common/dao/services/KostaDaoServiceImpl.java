@@ -9,7 +9,9 @@ import no.systema.jservices.common.dao.KostaDao;
 public class KostaDaoServiceImpl extends GenericDaoServiceImpl<KostaDao> implements KostaDaoService{
 
 	@Override
-	public List<KostaDao> findAll(String bilagsnr, String innregnr, String faktnr, String levnr, String attkode, String komment, Number fradato, Number fraperaar, Number frapermnd) {
+	public List<KostaDao> findAll(String bilagsnr, String innregnr, String faktnr, String levnr, String attkode,
+			String komment, Number fradato, Number fraperaar, Number frapermnd, String reklamasjon, String status) {
+
 		Map<String, Object> params = new HashMap<String, Object>();
 		if (innregnr != null) {
 			params.put("kabnr", innregnr);
@@ -37,6 +39,13 @@ public class KostaDaoServiceImpl extends GenericDaoServiceImpl<KostaDao> impleme
 		}
 		if (frapermnd != null) {
 			params.put("kapmn" + GREATER_AND_EQUALS_THEN, frapermnd);
+		}
+		//TODO, kolla KOSTB: KBREKL
+//		if (reklamasjon != null) {
+//			params.put("??", reklamasjon);
+//		}		
+		if (status != null) {
+			params.put("kast", status);
 		}
 		
 		
