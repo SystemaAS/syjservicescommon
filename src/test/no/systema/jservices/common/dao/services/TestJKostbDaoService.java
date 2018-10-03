@@ -50,6 +50,7 @@ public class TestJKostbDaoService {
 		KostbDao qDao = new KostbDao();
 		qDao.setKbbnr(2001068);
 		KostbDao resultDao = kostbDaoService.find(qDao);
+		assertNotNull(resultDao);
 		System.out.println("resultDao="+ReflectionToStringBuilder.toString(resultDao));
 		assertEquals("kbbnr should be the same.",2001068, resultDao.getKbbnr());
 	}		

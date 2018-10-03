@@ -1,7 +1,8 @@
 package no.systema.jservices.common.dao.services;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import no.systema.jservices.common.dao.KostaDao;
+import no.systema.jservices.common.dto.KostaDto;
 
 public class TestJKostaDaoService {
 
@@ -46,10 +48,26 @@ public class TestJKostaDaoService {
 	@Test
 	public final void testFind() {
 		KostaDao qDao = new KostaDao();
-		qDao.setKabnr(2000972);
+		qDao.setKabnr(2001072);
 		KostaDao resultDao = kostaDaoService.find(qDao);
 		System.out.println("resultDao="+ReflectionToStringBuilder.toString(resultDao));
-		assertEquals("kabnr should be the same.",2000972, resultDao.getKabnr());
+		assertEquals("kabnr should be the same.",Integer.valueOf(2001072), resultDao.getKabnr());
 	}		
+
+	@Test
+	public final void testFindAllComplex() {
+		KostaDto qDto = new KostaDto();
+		qDto.setKabnr(2001072);
+		qDto.setKbrekl("");
+		List<KostaDao> resultList = kostaDaoService.findAllComplex(qDto);
+		resultList.forEach(dao -> {
+			System.out.println("resultDao="+ReflectionToStringBuilder.toString(dao));
+		});
+		assertEquals("Should be size 2",2, resultList.size());
+		assertEquals("kabnr should be the same.",Integer.valueOf(2001072), resultList.get(0).getKabnr());
+		
+	}	
+	
+	
 	
 }

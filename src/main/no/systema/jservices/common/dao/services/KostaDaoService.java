@@ -3,6 +3,7 @@ package no.systema.jservices.common.dao.services;
 import java.util.List;
 
 import no.systema.jservices.common.dao.KostaDao;
+import no.systema.jservices.common.dto.KostaDto;
 
 public interface KostaDaoService extends GenericDaoService<KostaDao> {
 	
@@ -23,6 +24,18 @@ public interface KostaDaoService extends GenericDaoService<KostaDao> {
 	 * @param status 
 	 * @return a List of {@linkplain KostaDao}
 	 */
-	public List<KostaDao> findAll(String bilagsnr, String innregnr, String faktnr, String levnr, String attkode, String komment,  Number fradato, Number fraperaar, Number frapermnd, String reklamasjon, String status);
+	public List<KostaDao> findAll(Integer bilagsnr, Integer innregnr, String faktnr, Integer levnr, String attkode,
+			String komment, Integer fradato, Integer fraperaar, Integer frapermnd, String status);
+
+	
+	/**
+	 * Complex search. Stretching outside {@linkplain KostaDao}.
+	 * 
+	 * 
+	 * @param qDto prepared with query params.
+	 * @return a List of {@linkplain KostaDto}
+	 */
+	public List<KostaDao> findAllComplex(KostaDto qDto);
+	
 	
 }
