@@ -21,7 +21,7 @@ public class MerknfDao implements IDao {
 	private String gomerb; 		//20 VARCHAR
 	private String gomerc; 		//20 VARCHAR
 	private String gomerd; 		//20 VARCHAR
-	private String gomer; 		//19 VARCHAR
+	private String gomer1; 		//19 VARCHAR
 	private String gomkod;		//2 VARCHAR
 	
 	
@@ -31,6 +31,8 @@ public class MerknfDao implements IDao {
 	public Map<String, Object> getKeys() {
 		keys.put("gogn", gogn);
 		keys.put("gotrnr", gotrnr);
+		keys.put("gopos", gopos);
+		
 		
 		return keys;
 	}
