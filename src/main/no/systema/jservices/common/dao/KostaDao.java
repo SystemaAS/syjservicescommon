@@ -16,7 +16,7 @@ import lombok.Data;
 public class KostaDao implements IDao {
 
 	private String kabb;
-	private int kabdt;
+	private Integer kabdt;
 	private BigDecimal kabl = new BigDecimal(0);
 	private BigDecimal kablm = new BigDecimal(0);
 	private String kablst;

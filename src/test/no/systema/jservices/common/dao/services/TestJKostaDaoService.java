@@ -57,17 +57,22 @@ public class TestJKostaDaoService {
 	@Test
 	public final void testFindAllComplex() {
 		KostaDto qDto = new KostaDto();
-		qDto.setKabnr(2001072);
+		qDto.setKabnr(2001073);
+		qDto.setKabnr2(0);
 		qDto.setKbrekl("");
+		qDto.setFskode("URG");
+		qDto.setFssok("FREDRIK");
+		qDto.setKasg("FM");
+		qDto.setKafnr("12345689");
+		qDto.setKabdt(20181004);
 		List<KostaDao> resultList = kostaDaoService.findAllComplex(qDto);
 		resultList.forEach(dao -> {
 			System.out.println("resultDao="+ReflectionToStringBuilder.toString(dao));
 		});
-		assertEquals("Should be size 2",2, resultList.size());
+		assertEquals("Should be size 1",1, resultList.size());
 		assertEquals("kabnr should be the same.",Integer.valueOf(2001072), resultList.get(0).getKabnr());
 		
 	}	
-	
 	
 	
 }

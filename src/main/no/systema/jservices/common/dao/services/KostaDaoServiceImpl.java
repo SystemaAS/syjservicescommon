@@ -4,9 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import no.systema.jservices.common.dao.GenericObjectMapper;
 import no.systema.jservices.common.dao.KostaDao;
@@ -55,39 +53,120 @@ public class KostaDaoServiceImpl extends GenericDaoServiceImpl<KostaDao> impleme
 		return findAll(params);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<KostaDao> findAllComplex(KostaDto qDto) {
-		NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getJdbcTemplate().getDataSource());
-		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(qDto);
+			logger.info("KostaDto="+ReflectionToStringBuilder.toString(qDto));
+			boolean hasWhere = false;
+			StringBuilder queryString = new StringBuilder(" select distinct ka.* from kosta ka");
+			if (qDto.getKbrekl() != null) {
+				queryString.append(" left join kostb kb on ka.kabnr = kb.kbbnr ");
+			}
+			if (qDto.getFskode() != null || qDto.getFssok() != null) {
+				queryString.append(" left join friskk fs on ka.kabnr = fs.fsbnr ");
+			}
+			if (qDto.getKabnr() != null) {
+				queryString.append(" where ");
+				hasWhere = true;
+				queryString.append(" ka.kabnr = ").append(qDto.getKabnr());
+			}
+			if (qDto.getKabnr2() != null) {
+				if (hasWhere) {
+					queryString.append(" and ");
+				} else {
+					queryString.append(" where ");
+					hasWhere = true;
+				}
+				queryString.append(" ka.kabnr2 = ").append(qDto.getKabnr2());
+			}
+			if (qDto.getKalnr() != null) {
+				if (hasWhere) {
+					queryString.append(" and ");
+				} else {
+					queryString.append(" where ");
+					hasWhere = true;
+				}
+				queryString.append(" ka.kalnr = ").append(qDto.getKalnr());
+			}
+			if (qDto.getKabdt() != null) {
+				if (hasWhere) {
+					queryString.append(" and ");
+				} else {
+					queryString.append(" where ");
+					hasWhere = true;
+				}
+				queryString.append(" ka.kabdt >= ").append(qDto.getKabdt());
+			}			
+			if (qDto.getKafnr() != null) {
+				if (hasWhere) {
+					queryString.append(" and ");
+				} else {
+					queryString.append(" where ");
+					hasWhere = true;
+				}
+				queryString.append(" ka.kafnr = ").append("\'"+qDto.getKafnr()+"\'");
+			}			
+			if (qDto.getKasg() != null) {
+				if (hasWhere) {
+					queryString.append(" and ");
+				} else {
+					queryString.append(" where ");
+					hasWhere = true;
+				}
+				queryString.append(" ka.kasg = ").append("\'"+qDto.getKasg()+"\'");
+			}			
+			if (qDto.getKast() != null) {
+				if (hasWhere) {
+					queryString.append(" and ");
+				} else {
+					queryString.append(" where ");
+					hasWhere = true;
+				}
+				queryString.append(" ka.kast = ").append("\'"+qDto.getKast()+"\'");
+			}			
+			if (qDto.getKatxt() != null) {
+				if (hasWhere) {
+					queryString.append(" and ");
+				} else {
+					queryString.append(" where ");
+					hasWhere = true;
+				}
+				queryString.append(" ka.katxt = ").append("\'"+qDto.getKatxt()+"\'");
+			}			
+			if (qDto.getKbrekl() != null) {
+				if (hasWhere) {
+					queryString.append(" and ");
+				} else {
+					queryString.append(" where ");
+					hasWhere = true;
+				}
+				queryString.append(" kb.kbrekl = ").append("\'"+qDto.getKbrekl()+"\'");
+			}			
+			if (qDto.getFskode() != null) {
+				if (hasWhere) {
+					queryString.append(" and ");
+				} else {
+					queryString.append(" where ");
+					hasWhere = true;
+				}
+				queryString.append(" fs.fskode = ").append("\'"+qDto.getFskode()+"\'");
+			}			
+			if (qDto.getFssok() != null) {
+				if (hasWhere) {
+					queryString.append(" and ");
+				} else {
+					queryString.append(" where ");
+					hasWhere = true;
+				}
+				queryString.append(" fs.fssok = ").append("\'"+qDto.getFssok()+"\'");
+			}			
 
-		if (qDto.getKbrekl() == null && qDto.getFskode() == null && qDto.getFssok() == null) {
-			return findAll(qDto.getKabnr2(), qDto.getKabnr(), qDto.getKafnr(), qDto.getKalnr(), qDto.getKasg(), qDto.getKatxt(), qDto.getKabdt(), 
-					qDto.getKAPÅR(), qDto.getKapmn(), qDto.getKast());
-		} else {
-			//Search on kun reklamasjon
-			
-			StringBuilder queryString = new StringBuilder("select ka.* ");
-			queryString.append(" from  kosta ka, kostb kb");
-			queryString.append(" where ka.kabnr = kb.kbbnr ");
-//		queryString.append(" and f.faavd  = h.heavd ");
-//		queryString.append(" and   f.faopd = heopd ");
-//		queryString.append(" and   h.hedtop >= ").append(hedtopFromDate);
-//		queryString.append(" and   h.hedtop <= ").append(hedtopToDate);
-//		queryString.append(" and   f.faavd > 0 ");
-//		queryString.append(" and   f.faopd > 0  ");
-//		queryString.append(" and   f.faopko = 'O' "); 
-			queryString.append(" and   (:kbrekl = '' OR kb.kbrekl = :kbrekl )");
-			
 			logger.info("About to run queryString.toString()="+queryString.toString());
-			List<KostaDao> list = null;
-			list=  namedParameterJdbcTemplate.query(queryString.toString(), namedParameters, new GenericObjectMapper(new KostaDao()));
-			logger.info("returning list with size="+list.size());
-			
-			return list;
-		}
-		
+
+			return findAll(queryString.toString(), new GenericObjectMapper(new KostaDao()));
 	
 	
 	}
 
+	
 }
