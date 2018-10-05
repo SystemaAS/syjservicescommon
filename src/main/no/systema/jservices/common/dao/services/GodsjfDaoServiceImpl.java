@@ -16,7 +16,7 @@ public class GodsjfDaoServiceImpl extends GenericDaoServiceImpl<GodsjfDao> imple
 		StringBuilder queryString = new StringBuilder("SELECT * from godsjf ");
 		queryString.append(" where substr(GOGN,1,4) = ? and substr(GOGN,10,3) > ? ");
 		
-		if(StringUtils.hasValue(dao.getGotrnr())){
+		if(dao.getGotrnr()!=null){ //we must allow 'blank'
 			queryString.append(" and gotrnr =  '" + dao.getGotrnr() + "'" );
 		}
 		if(StringUtils.hasValue(dao.getGobiln())){
@@ -40,7 +40,7 @@ public class GodsjfDaoServiceImpl extends GenericDaoServiceImpl<GodsjfDao> imple
 		StringBuilder queryString = new StringBuilder("UPDATE godsjf SET gotrnr = '*SLETTET'");
 		//where clause
 		queryString.append(" where gogn = '" + dao.getGogn() + "'");
-		if(StringUtils.hasValue(dao.getGotrnr())){
+		if(dao.getGotrnr()!=null){ //we must allow 'blank'
 			queryString.append(" and gotrnr =  '" + dao.getGotrnr() + "'" );
 		}
 		logger.info(queryString.toString());
@@ -72,7 +72,7 @@ public class GodsjfDaoServiceImpl extends GenericDaoServiceImpl<GodsjfDao> imple
 		queryString.append(", goturn = '" + StringUtils.nvl(dao.getGoturn()) + "'");
 		//where clause
 		queryString.append(" where gogn = '" + dao.getGogn() + "'");
-		if(StringUtils.hasValue(dao.getGotrnr())){
+		if(dao.getGotrnr()!=null){
 			queryString.append(" and gotrnr =  '" + gotrnrOrig + "'" );
 		}
 		logger.info(queryString.toString());

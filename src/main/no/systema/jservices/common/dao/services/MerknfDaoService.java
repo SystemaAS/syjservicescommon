@@ -12,5 +12,5 @@ import no.systema.jservices.common.dao.MerknfDao;
  * @date Okt-2018
  */
 public interface MerknfDaoService extends GenericDaoService<MerknfDao> {
-	
+	public int findById (String gogn, String gotrnr);
 }
