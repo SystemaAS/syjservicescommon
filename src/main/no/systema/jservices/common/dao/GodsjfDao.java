@@ -27,6 +27,11 @@ public class GodsjfDao implements IDao {
 	private Integer golskl = 0; 		//4 SONET
 	private String gotype; 		//20 VARCHAR
 	private String goturn;		//17 VARCHAR
+	private String gotrty;		//5 VARCHAR
+	private String goortn;		//?
+	private String goorty;		//?
+	
+	
 	
 	private Map<String, Object> keys = new HashMap<String, Object>();
 	
