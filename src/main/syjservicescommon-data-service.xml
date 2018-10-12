@@ -300,6 +300,9 @@
 	<bean id="llmrfDaoService" class="no.systema.jservices.common.dao.services.LlmrfDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>
+	<bean id="turerDaoService" class="no.systema.jservices.common.dao.services.TurerDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>
 
 	<bean id="viskundeDaoService" class="no.systema.jservices.common.dao.services.ViskundeDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
