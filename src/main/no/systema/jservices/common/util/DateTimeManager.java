@@ -3,6 +3,7 @@
  */
 package no.systema.jservices.common.util;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -446,4 +447,35 @@ public class DateTimeManager {
 		}
 		return retval;
 	}
+
+	/**
+	 * Concat date and time into single unit.
+	 * 
+	 * @param date Systema date
+	 * @param time Systema time
+	 * @return String date
+	 */
+	public static String getDateTime(int date, int time) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(date).append(time);
+		
+		return sb.toString();
+		
+	}
+
+	/**
+	 * Concat date and time into single unit.
+	 * 
+	 * @param date Systema date
+	 * @param time Systema time
+	 * @return String date
+	 */
+	public static String getDateTime(BigDecimal date, BigDecimal time) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(date).append(time);
+		
+		return sb.toString();
+		
+	}	
+
 }
