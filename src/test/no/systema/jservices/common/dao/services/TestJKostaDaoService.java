@@ -3,7 +3,9 @@ package no.systema.jservices.common.dao.services;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,9 +72,66 @@ public class TestJKostaDaoService {
 			System.out.println("resultDao="+ReflectionToStringBuilder.toString(dao));
 		});
 		assertEquals("Should be size 1",1, resultList.size());
-		assertEquals("kabnr should be the same.",Integer.valueOf(2001072), resultList.get(0).getKabnr());
+		assertEquals("kabnr should be the same.",Integer.valueOf(2001073), resultList.get(0).getKabnr());
 		
+	}
+	
+
+	@Test
+	public final void testUpdate() {
+		KostaDao qDao = new KostaDao();
+		qDao.setKabnr(2001072);
+		KostaDao resultDao = kostaDaoService.find(qDao);
+		System.out.println("resultDao="+ReflectionToStringBuilder.toString(resultDao));
+		assertEquals("kabnr should be the same.",Integer.valueOf(2001072), resultDao.getKabnr());
+		
+		KostaDao updateDao = resultDao; 
+		updateDao.setKAPÅR(99);
+		kostaDaoService.update(updateDao);
+		
+		resultDao = kostaDaoService.find(qDao);
+		assertEquals("KAPÅR should be the same.",Integer.valueOf(99), resultDao.getKAPÅR());
+		
+	}		
+
+	@Test
+	public final void testtestDelete() {
+		KostaDao dao = new KostaDao();
+		dao.setKabnr(999);
+		kostaDaoService.delete(dao);
 	}	
+	
+	
+	@Test
+	public final void testCreateAndDelete() {
+		KostaDao dao = new KostaDao();
+		dao.setKabnr(999);
+		KostaDao resultDao = kostaDaoService.create(dao);
+		System.out.println("resultDao="+ReflectionToStringBuilder.toString(resultDao));
+		assertEquals("kabnr should be the same.",Integer.valueOf(999), resultDao.getKabnr());
+		
+		KostaDao updateDao = resultDao; 
+		updateDao.setKAPÅR(99);
+		updateDao.setKamva("x");
+		updateDao.setKabl(new BigDecimal(-12.0));
+		kostaDaoService.update(updateDao);
+		
+		resultDao = kostaDaoService.find(updateDao);
+		assertEquals("KAPÅR should be the same.",Integer.valueOf(99), updateDao.getKAPÅR());
+		
+		//cleanup
+		kostaDaoService.delete(updateDao);
+		try {
+			resultDao = kostaDaoService.find(updateDao);
+			if (resultDao != null) {
+				fail("Should have been deleted.");
+			}
+		} catch (Exception e) {
+			// expected
+		}
+		
+	}		
+	
 	
 	
 }

@@ -327,7 +327,7 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 			String getter = method.getName();
 			if (getter.startsWith("get")) {
 				returnType = method.getReturnType();
-				String field = method.getName().replace("get", "").toLowerCase();
+				String field = method.getName().replace("get", "");
 				if (returnType.equals(String.class) || returnType.equals(Integer.class) || returnType.equals(int.class) || returnType.equals(BigDecimal.class) ) {
 					if (!"keys".equals(field)) {
 						createString.append(field + ",");
@@ -402,7 +402,7 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 			String getter = method.getName();
 			if (getter.startsWith("get")) {
 				returnType = method.getReturnType();
-				String field = method.getName().replace("get", "").toLowerCase();
+				String field = method.getName().replace("get", "");
 				if (returnType.equals(String.class) || returnType.equals(Integer.class) || returnType.equals(int.class) || returnType.equals(BigDecimal.class) ) {
 					if (!"keys".equals(field)) {
 						createString.append(field + ",");
@@ -525,7 +525,7 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 			String getter = method.getName();
 			if (getter.startsWith("get")) {
 				returnType = method.getReturnType();
-				String field = method.getName().replace("get", "").toLowerCase();
+				String field = method.getName().replace("get", "");
 				if (returnType.equals(String.class) || returnType.equals(Integer.class) || returnType.equals(int.class) || returnType.equals(BigDecimal.class)) {
 					if (!"keys".equals(field)) {
 						updateString.append(field + " = ? ,");

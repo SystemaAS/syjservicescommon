@@ -16,6 +16,8 @@ public class KostaDto extends KostaDao {
 	private String kbrekl; //Kun reklamsjon
 	private String fskode; 
 	private String fssok;
+	private String opp_dato;
+	private String reg_dato;
 
 	
 }

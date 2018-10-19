@@ -16,34 +16,33 @@ import lombok.Data;
 public class KostaDao implements IDao {
 
 	private String kabb;
-	private Integer kabdt;
+	private Integer kabdt = new Integer(0);
 	private BigDecimal kabl = new BigDecimal(0);
 	private BigDecimal kablm = new BigDecimal(0);
-	private String kablst;
-	private Integer kabnr; //key  BILAGSNUMMER //TODO teller fra KOSTT. TA KTNR och sedan uppdatera
-	private Integer kabnr2;
-	private Integer kadte;
+	private Integer kabnr = new Integer(0); //key  BILAGSNUMMER //TODO teller fra KOSTT. TA KTNR och sedan uppdatera
+	private Integer kabnr2 = new Integer(0);
+	private Integer kadte = new Integer(0);
 	private BigDecimal kadtr = new BigDecimal(0);
 	private BigDecimal kafdt = new BigDecimal(0);
 	private BigDecimal kaffdt = new BigDecimal(0);
 	private String kafnr;
-	private Integer kajour;
+	private Integer kajour = new Integer(0);
 	private String kalkid;
-	private Integer kalnr;
+	private Integer kalnr = new Integer(0);
 	private String kamva;
-	private Integer kaoavd;
+	private Integer kaoavd = new Integer(0);
 	private BigDecimal kaomrf = new BigDecimal(0);
-	private Integer kaopd;
-	private Integer KAPÅR;
-	private Integer kapcc;
-	private Integer kapmn;
+	private Integer kaopd = new Integer(0);
+	private Integer KAPÅR = new Integer(0);
+	private Integer kapcc = new Integer(0);
+	private Integer kapmn = new Integer(0);
 	private BigDecimal karnr = new BigDecimal(0);
 	private String kasg;
 	private String kast;
-	private Integer katavd;
+	private Integer katavd = new Integer(0);
 	private BigDecimal katdr = new BigDecimal(0);
-	private Integer katme;
-	private Integer katunr;
+	private Integer katme = new Integer(0);
+	private Integer katunr = new Integer(0);
 	private String katxt;
 	private String kauser;
 	private String kaval;
