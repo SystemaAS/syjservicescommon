@@ -12,6 +12,33 @@ public class GodsjfDaoServiceImpl extends GenericDaoServiceImpl<GodsjfDao> imple
 	private static final Logger logger = Logger.getLogger(GodsjfDaoServiceImpl.class.getName());
 	
 	@Override
+	public List<GodsjfDao> findGognInterval(String gogn2, GodsjfDao dao) {
+		StringBuilder queryString = new StringBuilder("SELECT * from godsjf ");
+		queryString.append(" where GOGN >= ? and GOGN <= ? ");
+		
+		
+		if(dao.getGotrnr()!=null){ //we must allow 'blank'
+			queryString.append(" and gotrnr =  '" + dao.getGotrnr() + "'" );
+		}
+		if(StringUtils.hasValue(dao.getGobiln())){
+			queryString.append(" and gobiln =  '" + dao.getGobiln() + "'" );
+		}
+		if(StringUtils.hasValue(dao.getGomott())){
+			queryString.append(" and gomott =  '" + dao.getGomott() + "%'" );
+		}
+		if(StringUtils.hasValue(dao.getGoturn())){
+			queryString.append(" and goturn =  '" + dao.getGoturn() + "'" );
+		}
+
+		queryString.append(" order by GOGN desc ");
+		logger.info(queryString.toString());
+		logger.info("PARAMS gogn:" + dao.getGogn() + " gogn2:" + gogn2);
+		
+		return super.getJdbcTemplate().query( queryString.toString(), new Object[] { dao.getGogn(), gogn2  }, new GenericObjectMapper(new GodsjfDao()));
+		
+	}
+	
+	@Override
 	public List<GodsjfDao> findDefault(String currentYear, String fromDay, GodsjfDao dao) {
 		StringBuilder queryString = new StringBuilder("SELECT * from godsjf ");
 		queryString.append(" where substr(GOGN,1,4) = ? and substr(GOGN,10,3) > ? ");
