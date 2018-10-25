@@ -19,8 +19,12 @@ public class KostaDao implements IDao {
 	private Integer kabdt = new Integer(0);
 	private BigDecimal kabl = new BigDecimal(0);
 	private BigDecimal kablm = new BigDecimal(0);
-	private Integer kabnr = new Integer(0); //key  BILAGSNUMMER //TODO teller fra KOSTT. TA KTNR och sedan uppdatera
-	private Integer kabnr2 = new Integer(0);
+	/**
+	 * Kabnr er ikke bilagsnummer men kun et unikt nummer som matcher KBBNR i KOSTB Vi kaller det innregistreringsnummer.
+	 * Bilagsnummer kan tildeles posten på et sent tidspunkt og vil legge seg i KABNR
+	 * */
+	private Integer kabnr = new Integer(0); //key  innregistreringsnummer
+	private Integer kabnr2 = new Integer(0);  //BILAGSNUMMER //TODO teller fra KOSTT. TA KTNR och sedan uppdatera
 	private Integer kadte = new Integer(0);
 	private BigDecimal kadtr = new BigDecimal(0);
 	private BigDecimal kafdt = new BigDecimal(0);

@@ -54,5 +54,14 @@ public class TestJKostbDaoService {
 		System.out.println("resultDao="+ReflectionToStringBuilder.toString(resultDao));
 		assertEquals("kbbnr should be the same.",2001068, resultDao.getKbbnr());
 	}		
+
+	@Test
+	public final void testFindByKabnr() {
+		List<KostbDao> resultDao = kostbDaoService.findByKabnr(2001075);
+		assertNotNull(resultDao);
+		System.out.println("resultDao="+ReflectionToStringBuilder.toString(resultDao));
+	}		
+	
+	
 	
 }

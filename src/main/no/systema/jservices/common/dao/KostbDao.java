@@ -19,20 +19,20 @@ public class KostbDao implements IDao {
 	private String kbbilt;
 	private BigDecimal kbblf = new BigDecimal(0);
 	private BigDecimal kbblhb = new BigDecimal(0);
-	private int kbbnr; //key
+	private int kbbnr; //key, ref to kabnr in KOSTA
 	private BigDecimal kbbuds = new BigDecimal(0);
 	private String kbbval;
 	private String kbfree;
 	private int kbgeby;
 	private String kbgod;
-	private int kbkavd;
+	private int kbkavd;  //key ?
 	private int kbkdm;
 	private String kbkdmv;
 	private String kbkdpf;
 	private String kbkkey;
 	private int kbkn;
 	private int KBNØKK;
-	private int kbopd;
+	private int kbopd; //key ?
 	private int KBPÅR; 
 	private int kbpcc;
 	private int kbpmn;
@@ -49,6 +49,8 @@ public class KostbDao implements IDao {
 	@Override
 	public Map<String, Object> getKeys() {
 		keys.put("kbbnr", kbbnr);
+		keys.put("kbkavd", kbkavd);
+		keys.put("kbopd", kbopd);
 		return keys;
 	}
 
