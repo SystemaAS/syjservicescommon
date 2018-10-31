@@ -41,7 +41,7 @@ public class GodsjfDaoServiceImpl extends GenericDaoServiceImpl<GodsjfDao> imple
 	@Override
 	public List<GodsjfDao> findDefault(String currentYear, String fromDay, GodsjfDao dao) {
 		StringBuilder queryString = new StringBuilder("SELECT * from godsjf ");
-		queryString.append(" where substr(GOGN,1,4) = ? and substr(GOGN,10,3) > ? ");
+		queryString.append(" where substr(GOGN,1,4) = ? and substr(GOGN,10,3) >= ? ");
 		
 		if(dao.getGotrnr()!=null){ //we must allow 'blank'
 			queryString.append(" and gotrnr =  '" + dao.getGotrnr() + "'" );
