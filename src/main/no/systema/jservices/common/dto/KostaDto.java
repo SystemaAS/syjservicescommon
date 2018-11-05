@@ -13,6 +13,7 @@ import no.systema.jservices.common.dao.KostaDao;
 @Data
 public class KostaDto extends KostaDao {
 	
+	private String kttyp;
 	private String kbrekl; //Kun reklamsjon
 	private String fskode; 
 	private String fssok;
