@@ -9,9 +9,9 @@ import no.systema.jservices.common.dao.KostbDao;
 public class KostbDaoServiceImpl extends GenericDaoServiceImpl<KostbDao> implements KostbDaoService{
 
 	@Override
-	public List<KostbDao> findByKabnr(Integer innregnr) {
+	public List<KostbDao> findByKbbnr(Integer kbbnr) {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("kbbnr", innregnr);
+		params.put("kbbnr", kbbnr);
 		return findAll(params);	
 	}
 

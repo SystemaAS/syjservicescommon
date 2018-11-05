@@ -57,7 +57,7 @@ public class TestJKostbDaoService {
 
 	@Test
 	public final void testFindByKabnr() {
-		List<KostbDao> resultDao = kostbDaoService.findByKabnr(2001075);
+		List<KostbDao> resultDao = kostbDaoService.findByKbbnr(2001075);
 		assertNotNull(resultDao);
 		System.out.println("resultDao="+ReflectionToStringBuilder.toString(resultDao));
 	}		

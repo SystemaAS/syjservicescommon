@@ -3,6 +3,9 @@ package no.systema.jservices.common.dao.services;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -39,19 +42,36 @@ public class TestJKosttDaoService {
 		qDao.setKttyp(KosttTyper.Ø.toString());
 		KosttDao resultDao =  kosttDaoService.find(qDao);
 		
-		int ktnr = kosttDaoService.getExistingKtnrAndIncrement(KosttTyper.Ø.toString());
+		Integer ktnr = kosttDaoService.getExistingKtnrAndIncrement(KosttTyper.Ø.toString());
+		System.out.println("ktnr existing="+ktnr);
 		assertEquals("Should be the same", ktnr, resultDao.getKtnr());
 
 		resultDao =  kosttDaoService.find(qDao);
-		assertEquals("Should have been incremented with 1", ktnr + 1, resultDao.getKtnr());
+		System.out.println("ktnr incremented="+resultDao.getKtnr());
+		Integer incrementedKtnr  = ktnr + 1;
+		assertEquals("Should have been incremented with 1", incrementedKtnr, resultDao.getKtnr());
 		
 		//Clean db
 		kosttDaoService.substractKtnr(KosttTyper.Ø.toString());
 		resultDao =  kosttDaoService.find(qDao);
-		assertEquals("Should have been substracted with 1", ktnr, resultDao.getKtnr());
+		System.out.println("ktnr substracted="+resultDao.getKtnr());
+		
+		Integer substractedKtnr = ktnr;
+		assertEquals("Should have been substracted with 1", substractedKtnr, resultDao.getKtnr());
 		
 	}
 
+	@Test
+	public final void testFindByLike() {
+		String ktna = "REserVERT";
+		List<KosttDao> resultList =  kosttDaoService.findByLike(ktna);	
+		
+//		resultList.forEach(dao -> {
+//			System.out.println(ReflectionToStringBuilder.toString(dao));
+//		});
+		
+	}
+	
 
 	
 }

@@ -219,8 +219,9 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 					} else {
 						//wild card , %
 						if (String.valueOf(entry.getValue()).contains(WILD_CARD)) {
-							queryString.append(entry.getKey()).append(" LIKE '").append(entry.getValue()).append("'");
-						//not null
+//							queryString.append(entry.getKey()).append(" LIKE '").append(entry.getValue()).append("'");
+							queryString.append("LOWER("+ entry.getKey()+")").append(" LIKE LOWER('").append(entry.getValue()).append("')");
+							//not null
 						} else if (String.valueOf(entry.getValue()).equals(NOT_NULL)) {
 							 queryString.append("NULLIF(").append(entry.getKey() + ",").append(" '') ").append(" IS NOT NULL");  //NULLIF(<key>, '') IS NOT NULL
 						} else { 

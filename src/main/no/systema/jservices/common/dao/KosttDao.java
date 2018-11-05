@@ -15,7 +15,7 @@ import lombok.Data;
 public class KosttDao implements IDao {
 
 	private String ktna;
-	private int ktnr;
+	private Integer ktnr;
 	private String kttyp; //key
 	
 	private Map<String, Object> keys = new HashMap<String, Object>();	

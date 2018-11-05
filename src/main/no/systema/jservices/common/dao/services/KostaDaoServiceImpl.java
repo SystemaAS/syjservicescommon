@@ -8,6 +8,7 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import no.systema.jservices.common.dao.GenericObjectMapper;
 import no.systema.jservices.common.dao.KostaDao;
+import no.systema.jservices.common.dao.KosttDao;
 import no.systema.jservices.common.dto.KostaDto;
 
 public class KostaDaoServiceImpl extends GenericDaoServiceImpl<KostaDao> implements KostaDaoService{
@@ -168,5 +169,22 @@ public class KostaDaoServiceImpl extends GenericDaoServiceImpl<KostaDao> impleme
 	
 	}
 
+	@Override
+	public KostaDao create(KostaDao kostaDao, String kttyp) {
+		int ktnr = kosttDaoService.getExistingKtnrAndIncrement(kttyp);
+		kostaDao.setKabnr(ktnr); 
+		return super.create(kostaDao);
+	}	
+
+	@Override
+	public KostaDao create(KostaDao dao) {
+		throw new UnsupportedOperationException("::generic create is invalid. Use create(KostaDao dao, String kttyp).");
+	}	
+	
+
+	private KosttDaoService kosttDaoService = null;                                                            
+	public void setKosttDaoService( KosttDaoService kosttDaoService) {this.kosttDaoService = kosttDaoService;}          
+	public KosttDaoService getKosttDaoService() {return this.kosttDaoService;}	
+	
 	
 }

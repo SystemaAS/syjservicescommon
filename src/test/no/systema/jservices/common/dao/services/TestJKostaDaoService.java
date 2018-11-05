@@ -1,6 +1,7 @@
 package no.systema.jservices.common.dao.services;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -17,17 +18,21 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import no.systema.jservices.common.dao.KostaDao;
+import no.systema.jservices.common.dao.KosttDao;
 import no.systema.jservices.common.dto.KostaDto;
 
 public class TestJKostaDaoService {
 
 	ApplicationContext context = null;
 	KostaDaoService kostaDaoService = null;
+	KosttDaoService kosttDaoService = null;
 
+	
 	@Before
 	public void setUp() throws Exception {
 		context = new ClassPathXmlApplicationContext("syjservicescommon-data-service-test.xml");
 		kostaDaoService = (KostaDaoService) context.getBean("kostaDaoService");
+		kosttDaoService = (KosttDaoService) context.getBean("kosttDaoService");
 	}
 
 
@@ -105,11 +110,17 @@ public class TestJKostaDaoService {
 	@Test
 	public final void testCreateAndDelete() {
 		KostaDao dao = new KostaDao();
-		dao.setKabnr(999);
-		KostaDao resultDao = kostaDaoService.create(dao);
+		KosttDao qDao = new KosttDao();
+		qDao.setKttyp("Å");
+		KosttDao kosttDao = kosttDaoService.find(qDao);
+		KostaDao resultDao = kostaDaoService.create(dao, kosttDao.getKttyp());
+		System.out.println("kosttDao="+ReflectionToStringBuilder.toString(kosttDao));
 		System.out.println("resultDao="+ReflectionToStringBuilder.toString(resultDao));
-		assertEquals("kabnr should be the same.",Integer.valueOf(999), resultDao.getKabnr());
-		
+		//Sanity check, also tested in TestJKosttDaoService
+		kosttDao = kosttDaoService.find(qDao);
+		assertNotEquals("kabnr should NOT be the same.",resultDao.getKabnr(), kosttDao.getKtnr());
+		//
+
 		KostaDao updateDao = resultDao; 
 		updateDao.setKAPÅR(99);
 		updateDao.setKamva("x");

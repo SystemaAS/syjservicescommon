@@ -36,6 +36,14 @@ public interface KostaDaoService extends GenericDaoService<KostaDao> {
 	 * @return a List of {@linkplain KostaDto}
 	 */
 	public List<KostaDao> findAllComplex(KostaDto qDto);
-	
+
+	/**
+	 * Create dao, using kttyp för finding next key, e.g. kabnr.
+	 * 
+	 * @param dao
+	 * @param kttyp
+	 * @return  KostaDao
+	 */
+	public KostaDao create(KostaDao dao, String kttyp);
 	
 }

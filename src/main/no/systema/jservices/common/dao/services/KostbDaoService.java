@@ -7,11 +7,11 @@ import no.systema.jservices.common.dao.KostbDao;
 public interface KostbDaoService extends GenericDaoService<KostbDao> {
 
 	/**
-	 * Find all KostbDao on kabnr
+	 * Find all KostbDao on kbbnr
 	 * 
-	 * @param innregnr
+	 * @param kbbnr
 	 * @return list of KostbDao
 	 */
-	List<KostbDao> findByKabnr(Integer innregnr);
+	List<KostbDao> findByKbbnr(Integer kbbnr);
 	
 }

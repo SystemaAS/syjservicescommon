@@ -1,21 +1,24 @@
 package no.systema.jservices.common.dao.services;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import no.systema.jservices.common.dao.KosttDao;
 
 public class KosttDaoServiceImpl extends GenericDaoServiceImpl<KosttDao> implements KosttDaoService{
 
-
 	@Override
 	public int getExistingKtnrAndIncrement(String kttyp) {
-		int existingKtnr, incrementedKtnr, scaffoldingKtnr;
+		int existingKtnr, scaffoldingKtnr;
 		KosttDao qDao = new KosttDao();
 		qDao.setKttyp(kttyp);
 		KosttDao dao = find(qDao);
 		existingKtnr = dao.getKtnr();
+
 		scaffoldingKtnr = existingKtnr;
 		dao.setKtnr(++scaffoldingKtnr);
-		KosttDao resultDao = update(dao);
-		incrementedKtnr = resultDao.getKtnr();
+		update(dao);
 		
 		return existingKtnr;
 	}
@@ -29,6 +32,14 @@ public class KosttDaoServiceImpl extends GenericDaoServiceImpl<KosttDao> impleme
 		existingKtnr = dao.getKtnr();
 		dao.setKtnr(--existingKtnr);
 		update(dao);
+		
+	}
+
+	@Override
+	public List<KosttDao> findByLike(String ktna) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("ktna", WILD_CARD + ktna + WILD_CARD);
+		return findAll(params);
 		
 	}
 
