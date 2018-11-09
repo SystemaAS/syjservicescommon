@@ -55,29 +55,35 @@ public class TestJKostaDaoService {
 	@Test
 	public final void testFind() {
 		KostaDao qDao = new KostaDao();
-		qDao.setKabnr(2001072);
+		qDao.setKabnr(2001068);
 		KostaDao resultDao = kostaDaoService.find(qDao);
 		System.out.println("resultDao="+ReflectionToStringBuilder.toString(resultDao));
-		assertEquals("kabnr should be the same.",Integer.valueOf(2001072), resultDao.getKabnr());
+		System.out.println("kast="+ resultDao.getKast());
+
+		assertEquals("kabnr should be the same.",Integer.valueOf(2001068), resultDao.getKabnr());
 	}		
 
 	@Test
 	public final void testFindAllComplex() {
 		KostaDto qDto = new KostaDto();
-		qDto.setKabnr(2001073);
-		qDto.setKabnr2(0);
-		qDto.setKbrekl("");
-		qDto.setFskode("URG");
-		qDto.setFssok("FREDRIK");
-		qDto.setKasg("FM");
-		qDto.setKafnr("12345689");
-		qDto.setKabdt(20181004);
+		Integer kabnr = new Integer(2001087);
+		qDto.setKabnr(kabnr);
+		qDto.setKabnr2(null);
+		qDto.setKafnr(null);
+		qDto.setKalnr(null);
+		qDto.setKasg(null);
+		qDto.setKatxt(null);
+		qDto.setKabdt(null);
+		qDto.setKbrekl(null);
+		qDto.setKast(null);
+		qDto.setFskode(null);
+		qDto.setFssok(null);
 		List<KostaDao> resultList = kostaDaoService.findAllComplex(qDto);
 		resultList.forEach(dao -> {
 			System.out.println("resultDao="+ReflectionToStringBuilder.toString(dao));
 		});
 		assertEquals("Should be size 1",1, resultList.size());
-		assertEquals("kabnr should be the same.",Integer.valueOf(2001073), resultList.get(0).getKabnr());
+		assertEquals("kabnr should be the same.",kabnr, resultList.get(0).getKabnr());
 		
 	}
 	

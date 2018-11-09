@@ -116,7 +116,7 @@ public class KostaDaoServiceImpl extends GenericDaoServiceImpl<KostaDao> impleme
 				}
 				queryString.append(" ka.kasg = ").append("\'"+qDto.getKasg()+"\'");
 			}			
-			if (qDto.getKast() != null) {
+			if (qDto.getKast() != null && !qDto.getKast().equals("*")) {  //* representing all, from JSP.
 				if (hasWhere) {
 					queryString.append(" and ");
 				} else {
@@ -124,7 +124,15 @@ public class KostaDaoServiceImpl extends GenericDaoServiceImpl<KostaDao> impleme
 					hasWhere = true;
 				}
 				queryString.append(" ka.kast = ").append("\'"+qDto.getKast()+"\'");
-			}			
+			} else if (qDto.getKast() == null ) {
+				if (hasWhere) {
+					queryString.append(" and ");
+				} else {
+					queryString.append(" where ");
+					hasWhere = true;
+				}
+				queryString.append(" NULLIF(ka.kast, '') IS NULL ");
+			}
 			if (qDto.getKatxt() != null) {
 				if (hasWhere) {
 					queryString.append(" and ");

@@ -219,7 +219,6 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 					} else {
 						//wild card , %
 						if (String.valueOf(entry.getValue()).contains(WILD_CARD)) {
-//							queryString.append(entry.getKey()).append(" LIKE '").append(entry.getValue()).append("'");
 							queryString.append("LOWER("+ entry.getKey()+")").append(" LIKE LOWER('").append(entry.getValue()).append("')");
 							//not null
 						} else if (String.valueOf(entry.getValue()).equals(NOT_NULL)) {
@@ -358,10 +357,10 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		createString.append(" ) ");
 
 		try {
-			//logger.info(createString.toString());
-			//logger.info(values);
 			
 			ret = jdbcTemplate.update(createString.toString(), values);
+			logger.debug("create executed. createString="+createString+" on params="+keys);
+			
 		} catch (DataAccessException e) { //RuntimeException
 			logger.error("Error:", e);
 			logger.info("Error, string="+createString.toString());
@@ -432,11 +431,14 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		createString.deleteCharAt(createString.length() - 1); // Remove last ,
 		createString.append(" ) ");
 
+		logger.debug(createString.toString());
+		logger.debug(values);
+		
+		
 		try {
-			//logger.info(createString.toString());
-			//logger.info(values);
-			
+	
 			ret = jdbcTemplate.update(createString.toString(), values);
+
 		} catch (DataAccessException e) { //RuntimeException
 			logger.error("Error:", e);
 			logger.info("Error, string="+createString.toString());
@@ -498,7 +500,7 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		
 		if (ret == 0) {
 			logger.info("Rows not found for DELETE");
-			logger.info("Inof, string=" + deleteString.toString());
+			logger.info("Info, string=" + deleteString.toString());
 		}			
 
 	}	
