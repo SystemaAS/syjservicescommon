@@ -1,6 +1,6 @@
 package no.systema.jservices.common.dao.services;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -51,5 +51,20 @@ public class TestJKodtsfDaoService {
 		KodtsfDao resultDao = kodtsfDaoService.find(dao);
 		assertNotNull(resultDao);
 	}
+
+	@Test
+	public final void testFindByLike() {
+//		String kosfnv = "sVein";
+		String kosfnv = "A2";
+
+		List<KodtsfDao> resultList = kodtsfDaoService.findByLike(kosfnv);
+		
+		resultList.forEach(dao -> System.out.println("dao.getKosfnv()="+dao.getKosfnv()));
+		
+		assertFalse(resultList.isEmpty());
+	}
+	
+	
+	
 	
 }
