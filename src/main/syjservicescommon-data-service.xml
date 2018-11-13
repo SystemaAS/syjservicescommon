@@ -381,6 +381,10 @@
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>
 
+	<bean id="levefDaoService" class="no.systema.jservices.common.dao.services.LevefDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>
+
 
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
         <tx:attributes>
