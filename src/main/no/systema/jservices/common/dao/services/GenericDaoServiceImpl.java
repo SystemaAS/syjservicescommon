@@ -256,26 +256,32 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 			queryString.append(" and ");
 			for (final Iterator<Map.Entry<String, Object>> it = params.entrySet().iterator(); it.hasNext();) {
 				final Map.Entry<String, Object> entry = it.next();
-				queryString.append(tableAlias).append(".");
+//				queryString.append(tableAlias).append(".");
 
 				if (entry.getValue() instanceof Boolean) {
+					queryString.append(tableAlias).append(".");
 					queryString.append(entry.getKey()).append(" = ").append(entry.getValue()).append(" ");
 				} else {
 					if (entry.getValue() instanceof Number) {
 						//> or =>
 						if (String.valueOf(entry.getKey()).contains(GREATER_THEN) || String.valueOf(entry.getKey()).contains(GREATER_AND_EQUALS_THEN)) {
+							queryString.append(tableAlias).append(".");
 							queryString.append(entry.getKey()).append(entry.getValue());
 						} else {
+							queryString.append(tableAlias).append(".");
 							queryString.append(entry.getKey()).append(" = ").append(entry.getValue());
 						}
 					} else {
 						//wild card , %
 						if (String.valueOf(entry.getValue()).contains(WILD_CARD)) {
-							queryString.append(entry.getKey()).append(" LIKE '").append(entry.getValue()).append("'");
-						//not null
+							queryString.append("LOWER(").append(tableAlias).append(".").append(entry.getKey()+")");
+							queryString.append(" LIKE LOWER('").append(entry.getValue()).append("')");
+							//not null
 						} else if (String.valueOf(entry.getValue()).equals(NOT_NULL)) {
-							 queryString.append("NULLIF(").append(entry.getKey() + ",").append(" '') ").append(" IS NOT NULL");  //NULLIF(<key>, '') IS NOT NULL
+							queryString.append(tableAlias).append(".");
+							queryString.append("NULLIF(").append(entry.getKey() + ",").append(" '') ").append(" IS NOT NULL");  //NULLIF(<key>, '') IS NOT NULL
 						} else { 
+							queryString.append(tableAlias).append(".");
 							queryString.append(entry.getKey()).append(" = '").append(entry.getValue()).append("'");
 						}
 					}

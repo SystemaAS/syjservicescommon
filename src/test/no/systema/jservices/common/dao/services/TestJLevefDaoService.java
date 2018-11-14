@@ -1,5 +1,6 @@
 package no.systema.jservices.common.dao.services;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -12,6 +13,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import no.systema.jservices.common.dao.KodtsfDao;
 import no.systema.jservices.common.dao.LevefDao;
 
 public class TestJLevefDaoService {
@@ -82,4 +84,17 @@ public class TestJLevefDaoService {
 		assertNotNull("Should exist", resultDao);
 	}
 
+	@Test
+	public final void testFindByLike() {
+		String lnavn = "transport";
+
+		List<LevefDao> resultList = levefDaoService.findByLike(lnavn);
+		
+		resultList.forEach(dao -> System.out.println("dao.getLnavn()="+dao.getLnavn()));
+		
+		assertFalse(resultList.isEmpty());
+	}	
+	
+	
+	
 }

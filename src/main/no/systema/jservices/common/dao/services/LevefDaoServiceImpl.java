@@ -19,4 +19,9 @@ public class LevefDaoServiceImpl extends GenericDaoServiceImpl<LevefDao> impleme
 		return findInFirma(id, firmaColumnName);
 	}
 
+	@Override
+	public List<LevefDao> findByLike(String lnavn) {
+		params.put("lnavn", WILD_CARD + lnavn + WILD_CARD);
+		return findAllInFirma(params, firmaColumnName);	}
+
 }
