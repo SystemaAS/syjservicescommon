@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Utility class to manage date issues
@@ -476,6 +477,40 @@ public class DateTimeManager {
 		
 		return sb.toString();
 		
-	}	
+	}
+	
+	/**
+	 * Send -10 or 10 if you want to get a new date after a date operation 
+	 * @param days
+	 * @return
+	 */
+	public String getNewDateFromNow( int days){
+		String retval = "";
+		
+		Calendar cal = GregorianCalendar.getInstance();
+		cal.add( Calendar.DAY_OF_YEAR, days);
+		Date daysAgoOrAhead = cal.getTime();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+		retval = formatter.format(daysAgoOrAhead);
+		
+		return retval;
+	}
+	/**
+	 * 
+	 * @param formatMask
+	 * @param days
+	 * @return
+	 */
+	public String getNewDateFromNow( String formatMask, int days){
+		String retval = "";
+		
+		Calendar cal = GregorianCalendar.getInstance();
+		cal.add( Calendar.DAY_OF_YEAR, days);
+		Date daysAgoOrAhead = cal.getTime();
+		SimpleDateFormat formatter = new SimpleDateFormat(formatMask);
+		retval = formatter.format(daysAgoOrAhead);
+		
+		return retval;
+	}
 
 }
