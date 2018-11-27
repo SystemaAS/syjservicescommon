@@ -39,13 +39,13 @@ public class TestJViscrossrDaoService {
 	
 		dao.setSvsysp("1");
 		dao.setSvvism("1");
-		dao.setSvtype(ViscrossrKoder.MVA_K.toString());	
+		dao.setSvtype(ViscrossrKoder.MK_NO.toString());	
 		
 		viscrossrDaoService.create(dao);
 		
 		dao.setSvsysp("3");
 		dao.setSvvism("3");
-		dao.setSvtype(ViscrossrKoder.MVA_K.toString());	
+		dao.setSvtype(ViscrossrKoder.MK.toString());	
 		
 		viscrossrDaoService.create(dao);		
 		
@@ -76,7 +76,7 @@ public class TestJViscrossrDaoService {
 	
 	@Test
 	public final void testGetVismaCodeId() {
-		String result =  viscrossrDaoService.getVismaCodeId("0", ViscrossrKoder.MVA_K);
+		String result =  viscrossrDaoService.getVismaCodeId("0", ViscrossrKoder.MK_NO);
 		assertNotNull(result);
 	}	
 

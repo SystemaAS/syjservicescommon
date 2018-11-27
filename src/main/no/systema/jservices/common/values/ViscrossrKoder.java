@@ -21,10 +21,15 @@ public enum ViscrossrKoder implements Serializable{
 	 * Moms salg
 	 */
 	MVA_S,
+
 	/**
-	 * Moms , kjop
+	 * Moms , kjop Norsk
 	 */
-	MVA_K;
-	
+	MK_NO,
+
+	/**
+	 * Moms , kjop IKKE Norsk
+	 */	
+	MK;
 	
 }
