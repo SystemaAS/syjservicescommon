@@ -32,7 +32,7 @@ public class TestJViscrossrDaoService {
 		ViscrossrDao dao = new ViscrossrDao();
 		dao.setSvsysp("0");
 		dao.setSvvism("0");
-		dao.setSvtype(ViscrossrKoder.MVA_S.toString());
+		dao.setSvtype(ViscrossrKoder.MS.toString());
 
 		
 		viscrossrDaoService.create(dao);
@@ -69,7 +69,7 @@ public class TestJViscrossrDaoService {
 	public final void testFind() {
 		ViscrossrDao qDao = new ViscrossrDao();
 		qDao.setSvsysp("1");
-		qDao.setSvtype(ViscrossrKoder.MVA_S.toString());
+		qDao.setSvtype(ViscrossrKoder.MS.toString());
 		ViscrossrDao result =  viscrossrDaoService.find(qDao);
 		assertNotNull(result);
 	}		
