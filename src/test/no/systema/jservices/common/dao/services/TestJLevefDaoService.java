@@ -87,7 +87,8 @@ public class TestJLevefDaoService {
 	@Test
 	public final void testFindByLike() {
 		Integer levnr = 60; 
-		String lnavn = "transport";
+//		String lnavn = "transport";
+		String lnavn = null;
 
 		List<LevefDao> resultList = levefDaoService.findByLike(levnr,lnavn);
 		

@@ -16,10 +16,10 @@ public interface LevefDaoService extends GenericDaoService<LevefDao> {
 	public List<LevefDao> findAllInFirma(Map<String, Object> params);	
 	
 	/**
-	 * Retrieves all KodtsfDao where lnavn LIKE arg.
+	 * Retrieves all LevefDao where levnr and lnavn LIKE arg.
 	 * 
-	 * @param levnr with LIKE search
-	 * @param lnavn with LIKE search, ignoring case.
+	 * @param levnr with LIKE search, can be null
+	 * @param lnavn with LIKE search, ignoring case. Can be null
 	 * @return a list with LevefDao
 	 */
 	public List<LevefDao> findByLike(Integer levnr, String lnavn);		
