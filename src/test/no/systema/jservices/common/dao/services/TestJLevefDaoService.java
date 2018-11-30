@@ -86,11 +86,16 @@ public class TestJLevefDaoService {
 
 	@Test
 	public final void testFindByLike() {
+		Integer levnr = 60; 
 		String lnavn = "transport";
 
-		List<LevefDao> resultList = levefDaoService.findByLike(lnavn);
+		List<LevefDao> resultList = levefDaoService.findByLike(levnr,lnavn);
 		
-		resultList.forEach(dao -> System.out.println("dao.getLnavn()="+dao.getLnavn()));
+		resultList.forEach(dao -> {
+			System.out.print("dao.getLevnr()="+dao.getLevnr());
+			System.out.println(", dao.getLnavn()="+dao.getLnavn());
+			
+		});
 		
 		assertFalse(resultList.isEmpty());
 	}	

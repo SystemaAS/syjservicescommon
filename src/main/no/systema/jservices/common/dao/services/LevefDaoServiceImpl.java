@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import no.systema.jservices.common.dao.LevefDao;
+import no.systema.jservices.common.util.StringUtils;
 
 public class LevefDaoServiceImpl extends GenericDaoServiceImpl<LevefDao> implements LevefDaoService{
 
@@ -20,8 +21,14 @@ public class LevefDaoServiceImpl extends GenericDaoServiceImpl<LevefDao> impleme
 	}
 
 	@Override
-	public List<LevefDao> findByLike(String lnavn) {
-		params.put("lnavn", WILD_CARD + lnavn + WILD_CARD);
+	public List<LevefDao> findByLike(Integer levnr ,String lnavn) {
+		if (levnr != null) {
+			params.put("levnr", WILD_CARD + String.valueOf(levnr) + WILD_CARD);			
+		}
+		if (StringUtils.hasValue(lnavn)) {
+			params.put("lnavn", WILD_CARD + lnavn + WILD_CARD);		
+		}
+
 		return findAllInFirma(params, firmaColumnName);	}
 
 }

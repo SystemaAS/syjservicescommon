@@ -56,7 +56,7 @@ public class LevefDao implements IDao {
 	private BigDecimal ledtid = new BigDecimal(0);	//DECIMAL	3	0
 	private String levbet;//	CHAR	2	-
 	private String levmat;//	CHAR	2	-
-	private int levnr;//	NUMERIC	8	0
+	private Integer levnr;//	NUMERIC	8	0
 	private String levtyp;//	CHAR	1	-
 	private String lnavn;//	CHAR	30	-
 	private BigDecimal lomkpr = new BigDecimal(0);//DECIMAL	5	2
