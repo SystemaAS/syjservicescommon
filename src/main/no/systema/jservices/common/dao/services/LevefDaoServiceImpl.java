@@ -1,5 +1,6 @@
 package no.systema.jservices.common.dao.services;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,7 @@ public class LevefDaoServiceImpl extends GenericDaoServiceImpl<LevefDao> impleme
 
 	@Override
 	public List<LevefDao> findByLike(Integer levnr ,String lnavn) {
+		Map<String, Object> params = new HashMap<String, Object>();
 		if (levnr != null) {
 			params.put("levnr", WILD_CARD + String.valueOf(levnr) + WILD_CARD);			
 		}

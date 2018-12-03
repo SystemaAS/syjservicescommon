@@ -86,7 +86,7 @@ public class TestJLevefDaoService {
 
 	@Test
 	public final void testFindByLike() {
-		Integer levnr = 60; 
+		Integer levnr = null; 
 //		String lnavn = "transport";
 		String lnavn = null;
 
