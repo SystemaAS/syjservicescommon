@@ -67,12 +67,14 @@ public class TestJKostaDaoService {
 	public final void testFindAllComplex() {
 		KostaDto qDto = new KostaDto();
 		Integer kabnr = new Integer(2001087);
+		Integer kabnr2 = new Integer(0);
+		Integer kalnr = new Integer(1);
 		qDto.setKabnr(kabnr);
-		qDto.setKabnr2(null);
-		qDto.setKafnr(null);
-		qDto.setKalnr(null);
+		qDto.setKabnr2(kabnr2);
+		qDto.setKafnr("123");
+		qDto.setKalnr(kalnr);
 		qDto.setKasg(null);
-		qDto.setKatxt(null);
+		qDto.setKatxt("gr");
 		qDto.setKabdt(null);
 		qDto.setKbrekl(null);
 		qDto.setKast(null);

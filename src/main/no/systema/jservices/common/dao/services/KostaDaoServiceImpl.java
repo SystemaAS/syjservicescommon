@@ -8,7 +8,6 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import no.systema.jservices.common.dao.GenericObjectMapper;
 import no.systema.jservices.common.dao.KostaDao;
-import no.systema.jservices.common.dao.KosttDao;
 import no.systema.jservices.common.dto.KostaDto;
 
 public class KostaDaoServiceImpl extends GenericDaoServiceImpl<KostaDao> implements KostaDaoService{
@@ -69,7 +68,9 @@ public class KostaDaoServiceImpl extends GenericDaoServiceImpl<KostaDao> impleme
 			if (qDto.getKabnr() != null) {
 				queryString.append(" where ");
 				hasWhere = true;
-				queryString.append(" ka.kabnr = ").append(qDto.getKabnr());
+//				queryString.append(" ka.kabnr = ").append(qDto.getKabnr());
+				queryString.append(" LOWER(ka.kabnr) LIKE ").append("LOWER(\'"+WILD_CARD+qDto.getKabnr()+WILD_CARD+"\')");
+				
 			}
 			if (qDto.getKabnr2() != null) {
 				if (hasWhere) {
@@ -78,7 +79,8 @@ public class KostaDaoServiceImpl extends GenericDaoServiceImpl<KostaDao> impleme
 					queryString.append(" where ");
 					hasWhere = true;
 				}
-				queryString.append(" ka.kabnr2 = ").append(qDto.getKabnr2());
+//				queryString.append(" ka.kabnr2 = ").append(qDto.getKabnr2());
+				queryString.append(" LOWER(ka.kabnr2) LIKE ").append("LOWER(\'"+WILD_CARD+qDto.getKabnr2()+WILD_CARD+"\')");
 			}
 			if (qDto.getKalnr() != null) {
 				if (hasWhere) {
@@ -87,7 +89,8 @@ public class KostaDaoServiceImpl extends GenericDaoServiceImpl<KostaDao> impleme
 					queryString.append(" where ");
 					hasWhere = true;
 				}
-				queryString.append(" ka.kalnr = ").append(qDto.getKalnr());
+//				queryString.append(" ka.kalnr = ").append(qDto.getKalnr());
+				queryString.append(" LOWER(ka.kalnr) LIKE ").append("LOWER(\'"+WILD_CARD+qDto.getKalnr()+WILD_CARD+"\')");
 			}
 			if (qDto.getKabdt() != null) {
 				if (hasWhere) {
@@ -105,7 +108,9 @@ public class KostaDaoServiceImpl extends GenericDaoServiceImpl<KostaDao> impleme
 					queryString.append(" where ");
 					hasWhere = true;
 				}
-				queryString.append(" ka.kafnr = ").append("\'"+qDto.getKafnr()+"\'");
+//				queryString.append(" ka.kafnr = ").append("\'"+qDto.getKafnr()+"\'");
+				queryString.append(" LOWER(ka.kafnr) LIKE ").append("LOWER(\'"+WILD_CARD+qDto.getKafnr()+WILD_CARD+"\')");
+
 			}			
 			if (qDto.getKasg() != null) {
 				if (hasWhere) {
@@ -124,6 +129,7 @@ public class KostaDaoServiceImpl extends GenericDaoServiceImpl<KostaDao> impleme
 					hasWhere = true;
 				}
 				queryString.append(" ka.kast = ").append("\'"+qDto.getKast()+"\'");
+	
 			} else if (qDto.getKast() == null ) {
 				if (hasWhere) {
 					queryString.append(" and ");
@@ -140,7 +146,8 @@ public class KostaDaoServiceImpl extends GenericDaoServiceImpl<KostaDao> impleme
 					queryString.append(" where ");
 					hasWhere = true;
 				}
-				queryString.append(" ka.katxt = ").append("\'"+qDto.getKatxt()+"\'");
+//				queryString.append(" ka.katxt = ").append("\'"+qDto.getKatxt()+"\'");
+				queryString.append(" LOWER(ka.katxt) LIKE ").append("LOWER(\'"+WILD_CARD+qDto.getKatxt()+WILD_CARD+"\')");
 			}			
 			if (qDto.getKbrekl() != null) {
 				if (hasWhere) {
@@ -167,7 +174,9 @@ public class KostaDaoServiceImpl extends GenericDaoServiceImpl<KostaDao> impleme
 					queryString.append(" where ");
 					hasWhere = true;
 				}
-				queryString.append(" fs.fssok = ").append("\'"+qDto.getFssok()+"\'");
+//				queryString.append(" fs.fssok = ").append("\'"+qDto.getFssok()+"\'");
+				queryString.append(" LOWER(fs.fssok) LIKE ").append("LOWER(\'"+WILD_CARD+qDto.getFssok()+WILD_CARD+"\')");
+
 			}			
 
 			logger.info("About to run queryString.toString()="+queryString.toString());
