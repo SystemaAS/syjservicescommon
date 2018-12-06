@@ -20,6 +20,8 @@ public class GodsjtDao implements IDao {
 	public Map<String, Object> getKeys() {
 		keys.put("gtgn", gtgn);
 		keys.put("gttrnr", gttrnr);
+		keys.put("gtpos1", gtpos1);
+		
 		return keys;
 	}
 	
