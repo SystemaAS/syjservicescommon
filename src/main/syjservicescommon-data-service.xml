@@ -280,6 +280,10 @@
 	<bean id="godsjfDaoService" class="no.systema.jservices.common.dao.services.GodsjfDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>		
+	
+	<bean id="godsjtDaoService" class="no.systema.jservices.common.dao.services.GodsjtDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>		
 		
 	<bean id="godsafDaoService" class="no.systema.jservices.common.dao.services.GodsafDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
