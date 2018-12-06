@@ -22,10 +22,12 @@ public class HeadfDaoServiceImpl extends GenericDaoServiceImpl<HeadfDao> impleme
 		NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getJdbcTemplate().getDataSource());
 		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(qDto);
 		int fromDate = fromDate(qDto.getHedtop(), qDto.getDftdg());
-		StringBuilder queryString = new StringBuilder(
-							"SELECT heavd, heopd , hedtop ,hedtr, henas , henak, hesg , hent , hevkt , hem3 , helks ,  hepns , helkk , hepnk, heot, heur, hepro, hegn, hest, hepk3, hepk4 FROM headf");
-		queryString.append(" WHERE (:heavd = 0 OR heavd = :heavd )");
-		queryString.append(" AND   (:heopd = 0 OR heopd = :heopd )");
+		StringBuilder queryString = new StringBuilder();
+		queryString.append(" SELECT heavd, heopd , hedtop ,hedtr, henas , henak, hesg , hent , hevkt , hem3 , helks ,  hepns , helkk , hepnk, ");
+		queryString.append(" heot, heur, hepro, hegn, hest, hepk3, hepk4, hepos1, hepos2");
+		queryString.append(" FROM headf ");
+		queryString.append(" WHERE (:heavd = 0 OR heavd = :heavd ) ");
+		queryString.append(" AND   (:heopd = 0 OR heopd = :heopd ) ");
 		
 		if (qDto.getHeavd() > 0 && qDto.getHeopd() > 0) {
 			logger.info("heavd and heopd delivered, no more in where-clause");
@@ -41,6 +43,9 @@ public class HeadfDaoServiceImpl extends GenericDaoServiceImpl<HeadfDao> impleme
 			queryString.append(" AND   (:hest IS NULL OR hest = :hest ) ");
 			queryString.append(" AND   (:heur IS NULL OR heur = :heur ) ");
 			queryString.append(" AND   (:hegn IS NULL OR hegn like :hegn ) ");
+			//queryString.append(" AND   (:hepos1 IS NULL OR hepos1 like :hepos1 ) ");
+			//queryString.append(" AND   (:hepos2 = 0 OR hepos2 >= :hepos2 )");
+			
 			
 			if(qDto.getHedtop() == 0) {  //Only if date not delivered
 				queryString.append(" AND  hedtop >= "+fromDate);
