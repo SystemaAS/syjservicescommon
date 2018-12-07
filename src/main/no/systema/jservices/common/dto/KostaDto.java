@@ -50,6 +50,7 @@ public class KostaDto extends KostaDao {
 		dto.setKatme(dao.getKatme());
 		dto.setKatxt(dao.getKatxt());
 		dto.setKauser(dao.getKauser());
+		dto.setKamva(dao.getKamva());
 		
 		return dto;
 		
