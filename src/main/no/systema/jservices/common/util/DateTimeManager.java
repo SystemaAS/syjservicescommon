@@ -3,11 +3,14 @@
  */
 package no.systema.jservices.common.util;
 
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+
+import org.apache.log4j.Logger;
 
 /**
  * Utility class to manage date issues
@@ -17,10 +20,18 @@ import java.util.GregorianCalendar;
  * 
  */
 public class DateTimeManager {
+	
+	private static Logger logger = Logger.getLogger(DateTimeManager.class.getName());
+
 	public static final String ISO_FORMAT = "yyyyMMdd";
 	public static final String NO_FORMAT = "ddMMyy";
 
 	public static final String DB_FORMAT = "yyyy-MM-dd";
+	
+	
+//	private static DateTimeFormatter dateFormatterNO = DateTimeFormatter.ofPattern("NO_FORMAT"); 
+//	private static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmmss");
+	
 	/**
 	 * Gets the current ISO date
 	 * @return
@@ -449,35 +460,35 @@ public class DateTimeManager {
 		return retval;
 	}
 
-	/**
-	 * Concat date and time into single unit.
-	 * 
-	 * @param date Systema date
-	 * @param time Systema time
-	 * @return String date
-	 */
-	public static String getDateTime(int date, int time) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(date).append(time);
-		
-		return sb.toString();
-		
-	}
-
-	/**
-	 * Concat date and time into single unit.
-	 * 
-	 * @param date Systema date
-	 * @param time Systema time
-	 * @return String date
-	 */
-	public static String getDateTime(BigDecimal date, BigDecimal time) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(date).append(time);
-		
-		return sb.toString();
-		
-	}
+//	/**
+//	 * Concat date and time into single unit.
+//	 * 
+//	 * @param date Systema date
+//	 * @param time Systema time
+//	 * @return String date
+//	 */
+//	public static String getDateTime(int date, int time) {
+//		StringBuilder sb = new StringBuilder();
+//		sb.append(date).append(time);
+//		
+//		return sb.toString();
+//		
+//	}
+//
+//	/**
+//	 * Concat date and time into single unit.
+//	 * 
+//	 * @param date Systema date
+//	 * @param time Systema time
+//	 * @return String date
+//	 */
+//	public static String getDateTime(BigDecimal date, BigDecimal time) {
+//		StringBuilder sb = new StringBuilder();
+//		sb.append(date).append(time);
+//		
+//		return sb.toString();
+//		
+//	}
 	
 	/**
 	 * Send -10 or 10 if you want to get a new date after a date operation 
@@ -513,4 +524,29 @@ public class DateTimeManager {
 		return retval;
 	}
 
+	/**
+	 * Transform SYSPED date, i.e. YYYYMMDD into norwegian format.
+	 * 
+	 * @param date, 20181212
+	 * @return 12.12.18 , if invalid date, return null.
+	 */
+	public static String getDate(int date) {
+		DateTimeFormatter dateFormatterNO = DateTimeFormatter.ofPattern("yyyyMMdd"); 
+		DateTimeFormatter dateFormatterNOOutput = DateTimeFormatter.ofPattern("dd.MM.yy"); 
+		if (date == 0) {
+			return null;
+		}
+		String stringDate = String.valueOf(date);
+		String returnDate;
+		try {
+			LocalDate parsedDate = LocalDate.parse(stringDate, dateFormatterNO);
+			returnDate = parsedDate.format(dateFormatterNOOutput);
+		} catch (Exception e) {
+			returnDate = null;
+		}
+		
+		return returnDate;
+		
+	}
+	
 }

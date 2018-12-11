@@ -20,6 +20,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import no.systema.jservices.common.dao.KostaDao;
 import no.systema.jservices.common.dao.KosttDao;
 import no.systema.jservices.common.dto.KostaDto;
+import no.systema.jservices.common.util.DateTimeManager;
 
 public class TestJKostaDaoService {
 
@@ -65,22 +66,31 @@ public class TestJKostaDaoService {
 
 	@Test
 	public final void testFindAllComplex() {
-		KostaDto qDto = new KostaDto();
+		KostaDao qDao = new KostaDao();
 		Integer kabnr = new Integer(2001087);
 		Integer kabnr2 = new Integer(0);
 		Integer kalnr = new Integer(1);
-		qDto.setKabnr(kabnr);
-		qDto.setKabnr2(kabnr2);
-		qDto.setKafnr("123");
-		qDto.setKalnr(kalnr);
-		qDto.setKasg(null);
-		qDto.setKatxt("gr");
-		qDto.setKabdt(null);
-		qDto.setKbrekl(null);
-		qDto.setKast(null);
-		qDto.setFskode(null);
-		qDto.setFssok(null);
-		List<KostaDao> resultList = kostaDaoService.findAllComplex(qDto);
+	
+//		String kabnr = "2001087";
+//		String kabnr2 = null;
+//		String kalnr = "1";
+
+		
+		qDao.setKabnr(kabnr);
+		qDao.setKabnr2(kabnr2);
+		qDao.setKafnr("123");
+		qDao.setKalnr(kalnr);
+		qDao.setKasg(null);
+		qDao.setKatxt("gr");
+		qDao.setKabdt(null);
+//		qDao.setKbrekl(null);
+		String reklamsjon = null;
+		qDao.setKast(null);
+//		qDao.setFskode(null);
+		String fskode = null;
+//		qDao.setFssok(null);
+		String fssok = null;
+		List<KostaDao> resultList = kostaDaoService.findAllComplex(qDao, reklamsjon, fskode, fssok);
 		resultList.forEach(dao -> {
 			System.out.println("resultDao="+ReflectionToStringBuilder.toString(dao));
 		});
@@ -151,6 +161,17 @@ public class TestJKostaDaoService {
 		
 	}		
 	
-	
-	
+	@Test
+	public final void testGetKosta() {
+		KostaDao qDao = new KostaDao();
+		qDao.setKabnr(2001072);
+		KostaDao resultDao = kostaDaoService.find(qDao);
+		
+		System.out.println("resultDao.getKadte()="+resultDao.getKadte());
+		
+		KostaDto dto = KostaDto.get(resultDao);
+		
+	}
+		
+		
 }

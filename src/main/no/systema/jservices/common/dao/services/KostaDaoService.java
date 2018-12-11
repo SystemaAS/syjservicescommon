@@ -32,10 +32,13 @@ public interface KostaDaoService extends GenericDaoService<KostaDao> {
 	 * Complex search. Stretching outside {@linkplain KostaDao}.
 	 * 
 	 * 
-	 * @param qDto prepared with query params.
-	 * @return a List of {@linkplain KostaDto}
+	 * @param qDao prepared with query params.
+	 * @param fssok 
+	 * @param fskode 
+	 * @param reklamasjon 
+	 * @return a List of {@linkplain KostaDao}
 	 */
-	public List<KostaDao> findAllComplex(KostaDto qDto);
+	public List<KostaDao> findAllComplex(KostaDao qDto, String reklamasjon, String fskode, String fssok);
 
 	/**
 	 * Create dao, using kttyp för finding next key, e.g. kabnr.

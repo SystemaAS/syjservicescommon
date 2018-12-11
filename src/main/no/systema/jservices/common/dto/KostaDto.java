@@ -1,7 +1,13 @@
 package no.systema.jservices.common.dto;
 
+import java.math.BigDecimal;
+
+import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
+
 import lombok.Data;
 import no.systema.jservices.common.dao.KostaDao;
+import no.systema.jservices.common.util.DateTimeManager;
 
 /**
  * This is the query Data Transfer Object between service and UI for Kostnadsforing - Arbete med bilag.
@@ -11,48 +17,79 @@ import no.systema.jservices.common.dao.KostaDao;
  *
  */
 @Data
-public class KostaDto extends KostaDao {
+public class KostaDto  {
 	
+	private String kabb;
+	private String kabdt;
+	private String kabl;
+	private String kablm ;
+	private String kabnr; 
+	private String kabnr2;  
+	private String kadte;
+	private String kadtr;
+	private String kafdt;
+	private BigDecimal kaffdt;
+	private String kafnr;
+	private String kajour;
+	private String kalkid;
+	private String kalnr;
+	private String kamva;
+	private String kaoavd;
+	private String kaomrf;
+	private String kaopd;
+	private Integer KAPÅR;
+	private Integer kapcc;
+	private Integer kapmn;
+	private String karnr;
+	private String kasg;
+	private String kast;
+	private String katavd;
+	private String katdr;
+	private String katme ;
+	private String katunr;
+	private String katxt;
+	private String kauser;
+	private String kaval;
+	private String kavk;
+	private String kavku;
+
+	//non-dao
 	private String kttyp;
-	private String kbrekl; //Kun reklamsjon
 	private String fskode; 
 	private String fssok;
 	private String opp_dato;
 	private String reg_dato;
 	private String levnavn;
 
+
+
+	
 	/**
+	 * 
+	 * 
 	 * Convenience method for transforming Dao to Dto.
 	 * 
 	 * @param dao
 	 * @return KostaDto
 	 */
 	static public KostaDto get(KostaDao dao) {
-		KostaDto dto = new KostaDto();
+		ModelMapper modelMapper = new ModelMapper();
 		
-		dto.setKabb(dao.getKabb());
-		dto.setKabdt(dao.getKabdt());
-		dto.setKabl(dao.getKabl());
-		dto.setKabnr(dao.getKabnr());
-		dto.setKabnr2(dao.getKabnr2());
-		dto.setKadte(dao.getKadte());
-		dto.setKadtr(dao.getKadtr());
-		dto.setKafdt(dao.getKafdt());
-		dto.setKaffdt(dao.getKaffdt());
-		dto.setKafnr(dao.getKafnr());
-		dto.setKalkid(dao.getKalkid());
-		dto.setKalnr(dao.getKalnr());
-		dto.setKapmn(dao.getKapmn());
-		dto.setKAPÅR(dao.getKAPÅR());
-		dto.setKasg(dao.getKasg());
-		dto.setKast(dao.getKast());
-		dto.setKatdr(dao.getKatdr());
-		dto.setKatme(dao.getKatme());
-		dto.setKatxt(dao.getKatxt());
-		dto.setKauser(dao.getKauser());
-		dto.setKamva(dao.getKamva());
+		PropertyMap<KostaDao, KostaDto> kostaMap = new PropertyMap<KostaDao, KostaDto>() {
+			protected void configure() {
+//				map().setOpp_dato(source.getKadte().toString());
+				map().setOpp_dato(DateTimeManager.getDate(source.getKadte()));
+				
+				//				map().setReg_dato(DateTimeManager.getDateTime(source.getKadtr(),source.getKatdr()));					
+			}
+		};
 		
-		return dto;
+		modelMapper.addMappings(kostaMap);
+		
+		KostaDto dto2 = modelMapper.map(dao, KostaDto.class);	
+		
+		
+		return dto2;
 		
 		
 	}

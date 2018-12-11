@@ -25,7 +25,7 @@ public class FaktDaoServiceImpl extends GenericDaoServiceImpl<FaktDao> implement
 	TTTURER
 	TTKOSBU 
 	 */
-	DateTimeManager dm = new DateTimeManager();
+//	DateTimeManager dm = new DateTimeManager();
 	
 	
 	@Override
