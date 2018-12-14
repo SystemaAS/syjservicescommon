@@ -192,8 +192,6 @@ public class KostaDaoServiceImpl extends GenericDaoServiceImpl<KostaDao> impleme
 		int ktnr = kosttDaoService.getExistingKtnrAndIncrement(kttyp);
 		kostaDao.setKabnr(ktnr); 
 		
-		logger.info("kostaDao="+ReflectionToStringBuilder.toString(kostaDao, ToStringStyle.MULTI_LINE_STYLE));
-		
 		return super.create(kostaDao);
 	}	
 

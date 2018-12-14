@@ -1,10 +1,7 @@
 package no.systema.jservices.common.brreg.proxy.entities;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.annotation.Generated;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -13,441 +10,226 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-
-
-
-//@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Generated("org.jsonschema2pojo")
-@JsonPropertyOrder({ "organisasjonsnummer", "navn", "registreringsdatoEnhetsregisteret", "organisasjonsform",
-		"hjemmeside", "registrertIFrivillighetsregisteret", "registrertIMvaregisteret", "registrertIForetaksregisteret",
-		"registrertIStiftelsesregisteret", "antallAnsatte", "institusjonellSektorkode", "naeringskode1", "postadresse",
-		"forretningsadresse", "konkurs", "underAvvikling", "underTvangsavviklingEllerTvangsopplosning",
-		"overordnetEnhet", "links" })
+@JsonPropertyOrder({ "organisasjonsnummer", "navn", "organisasjonsform", "postadresse",
+		"registreringsdatoEnhetsregisteret", "registrertIMvaregisteret", "naeringskode1", "antallAnsatte",
+		"forretningsadresse", "stiftelsesdato", "registrertIForetaksregisteret", "registrertIStiftelsesregisteret",
+		"registrertIFrivillighetsregisteret", "konkurs", "underAvvikling", "underTvangsavviklingEllerTvangsopplosning",
+		"maalform" })
 
 /**
  * 
- * GENERATED on http://data.brreg.no/enhetsregisteret/enhet/974760673.json using
- * http://www.jsonschema2pojo.org/
- * 
- * Sourcetype : JSON Annotation style: Jackson 1.x
- * 
- * Preferred to be generated from json-schema, but delivered schema seems corrupt.
- * 
- * 
- * @author Fredrik Möller
- * @date Sep 21, 2016
- *
+ * GENERATED using http://www.jsonschema2pojo.org/
  */
-public class Enhet implements Serializable{
+public class Enhet implements IEnhet{
 
 	@JsonProperty("organisasjonsnummer")
-	private Integer organisasjonsnummer;
+	private String organisasjonsnummer;
 	@JsonProperty("navn")
 	private String navn;
-	@JsonProperty("registreringsdatoEnhetsregisteret")
-	private String registreringsdatoEnhetsregisteret;
 	@JsonProperty("organisasjonsform")
-	private String organisasjonsform;
-	@JsonProperty("hjemmeside")
-	private String hjemmeside;
-	@JsonProperty("registrertIFrivillighetsregisteret")
-	private String registrertIFrivillighetsregisteret;
-	@JsonProperty("registrertIMvaregisteret")
-	private String registrertIMvaregisteret;
-	@JsonProperty("registrertIForetaksregisteret")
-	private String registrertIForetaksregisteret;
-	@JsonProperty("registrertIStiftelsesregisteret")
-	private String registrertIStiftelsesregisteret;
-	@JsonProperty("antallAnsatte")
-	private Integer antallAnsatte;
-	@JsonProperty("institusjonellSektorkode")
-	private InstitusjonellSektorkode institusjonellSektorkode;
-	@JsonProperty("naeringskode1")
-	private Naeringskode1 naeringskode1;
+	private Organisasjonsform organisasjonsform;
 	@JsonProperty("postadresse")
 	private Postadresse postadresse;
+	@JsonProperty("registreringsdatoEnhetsregisteret")
+	private String registreringsdatoEnhetsregisteret;
+	@JsonProperty("registrertIMvaregisteret")
+	private Boolean registrertIMvaregisteret;
+	@JsonProperty("naeringskode1")
+	private Naeringskode1 naeringskode1;
+	@JsonProperty("antallAnsatte")
+	private Integer antallAnsatte;
 	@JsonProperty("forretningsadresse")
 	private Forretningsadresse forretningsadresse;
+	@JsonProperty("stiftelsesdato")
+	private String stiftelsesdato;
+	@JsonProperty("registrertIForetaksregisteret")
+	private Boolean registrertIForetaksregisteret;
+	@JsonProperty("registrertIStiftelsesregisteret")
+	private Boolean registrertIStiftelsesregisteret;
+	@JsonProperty("registrertIFrivillighetsregisteret")
+	private Boolean registrertIFrivillighetsregisteret;
 	@JsonProperty("konkurs")
-	private String konkurs;
+	private Boolean konkurs;
 	@JsonProperty("underAvvikling")
-	private String underAvvikling;
+	private Boolean underAvvikling;
 	@JsonProperty("underTvangsavviklingEllerTvangsopplosning")
-	private String underTvangsavviklingEllerTvangsopplosning;
-	@JsonProperty("overordnetEnhet")
-	private Integer overordnetEnhet;
-/*	@JsonProperty("links")
-	private List<Link> links = new ArrayList<Link>();
-*/	
+	private Boolean underTvangsavviklingEllerTvangsopplosning;
+	@JsonProperty("maalform")
+	private String maalform;
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-	public Enhet() {
-		// for jackson
-	}
-	
-	/**
-	 * 
-	 * @return The organisasjonsnummer
-	 */
 	@JsonProperty("organisasjonsnummer")
-	public Integer getOrganisasjonsnummer() {
+	public String getOrganisasjonsnummer() {
 		return organisasjonsnummer;
 	}
 
-	/**
-	 * 
-	 * @param organisasjonsnummer
-	 *            The organisasjonsnummer
-	 */
 	@JsonProperty("organisasjonsnummer")
-	public void setOrganisasjonsnummer(Integer organisasjonsnummer) {
+	public void setOrganisasjonsnummer(String organisasjonsnummer) {
 		this.organisasjonsnummer = organisasjonsnummer;
 	}
 
-	/**
-	 * 
-	 * @return The navn
-	 */
 	@JsonProperty("navn")
 	public String getNavn() {
 		return navn;
 	}
 
-	/**
-	 * 
-	 * @param navn
-	 *            The navn
-	 */
 	@JsonProperty("navn")
 	public void setNavn(String navn) {
 		this.navn = navn;
 	}
 
-	/**
-	 * 
-	 * @return The registreringsdatoEnhetsregisteret
-	 */
-	@JsonProperty("registreringsdatoEnhetsregisteret")
-	public String getRegistreringsdatoEnhetsregisteret() {
-		return registreringsdatoEnhetsregisteret;
-	}
-
-	/**
-	 * 
-	 * @param registreringsdatoEnhetsregisteret
-	 *            The registreringsdatoEnhetsregisteret
-	 */
-	@JsonProperty("registreringsdatoEnhetsregisteret")
-	public void setRegistreringsdatoEnhetsregisteret(String registreringsdatoEnhetsregisteret) {
-		this.registreringsdatoEnhetsregisteret = registreringsdatoEnhetsregisteret;
-	}
-
-	/**
-	 * 
-	 * @return The organisasjonsform
-	 */
 	@JsonProperty("organisasjonsform")
-	public String getOrganisasjonsform() {
+	public Organisasjonsform getOrganisasjonsform() {
 		return organisasjonsform;
 	}
 
-	/**
-	 * 
-	 * @param organisasjonsform
-	 *            The organisasjonsform
-	 */
 	@JsonProperty("organisasjonsform")
-	public void setOrganisasjonsform(String organisasjonsform) {
+	public void setOrganisasjonsform(Organisasjonsform organisasjonsform) {
 		this.organisasjonsform = organisasjonsform;
 	}
 
-	/**
-	 * 
-	 * @return The hjemmeside
-	 */
-	@JsonProperty("hjemmeside")
-	public String getHjemmeside() {
-		return hjemmeside;
-	}
-
-	/**
-	 * 
-	 * @param hjemmeside
-	 *            The hjemmeside
-	 */
-	@JsonProperty("hjemmeside")
-	public void setHjemmeside(String hjemmeside) {
-		this.hjemmeside = hjemmeside;
-	}
-
-	/**
-	 * 
-	 * @return The registrertIFrivillighetsregisteret
-	 */
-	@JsonProperty("registrertIFrivillighetsregisteret")
-	public String getRegistrertIFrivillighetsregisteret() {
-		return registrertIFrivillighetsregisteret;
-	}
-
-	/**
-	 * 
-	 * @param registrertIFrivillighetsregisteret
-	 *            The registrertIFrivillighetsregisteret
-	 */
-	@JsonProperty("registrertIFrivillighetsregisteret")
-	public void setRegistrertIFrivillighetsregisteret(String registrertIFrivillighetsregisteret) {
-		this.registrertIFrivillighetsregisteret = registrertIFrivillighetsregisteret;
-	}
-
-	/**
-	 * 
-	 * @return The registrertIMvaregisteret
-	 */
-	@JsonProperty("registrertIMvaregisteret")
-	public String getRegistrertIMvaregisteret() {
-		return registrertIMvaregisteret;
-	}
-
-	/**
-	 * 
-	 * @param registrertIMvaregisteret
-	 *            The registrertIMvaregisteret
-	 */
-	@JsonProperty("registrertIMvaregisteret")
-	public void setRegistrertIMvaregisteret(String registrertIMvaregisteret) {
-		this.registrertIMvaregisteret = registrertIMvaregisteret;
-	}
-
-	/**
-	 * 
-	 * @return The registrertIForetaksregisteret
-	 */
-	@JsonProperty("registrertIForetaksregisteret")
-	public String getRegistrertIForetaksregisteret() {
-		return registrertIForetaksregisteret;
-	}
-
-	/**
-	 * 
-	 * @param registrertIForetaksregisteret
-	 *            The registrertIForetaksregisteret
-	 */
-	@JsonProperty("registrertIForetaksregisteret")
-	public void setRegistrertIForetaksregisteret(String registrertIForetaksregisteret) {
-		this.registrertIForetaksregisteret = registrertIForetaksregisteret;
-	}
-
-	/**
-	 * 
-	 * @return The registrertIStiftelsesregisteret
-	 */
-	@JsonProperty("registrertIStiftelsesregisteret")
-	public String getRegistrertIStiftelsesregisteret() {
-		return registrertIStiftelsesregisteret;
-	}
-
-	/**
-	 * 
-	 * @param registrertIStiftelsesregisteret
-	 *            The registrertIStiftelsesregisteret
-	 */
-	@JsonProperty("registrertIStiftelsesregisteret")
-	public void setRegistrertIStiftelsesregisteret(String registrertIStiftelsesregisteret) {
-		this.registrertIStiftelsesregisteret = registrertIStiftelsesregisteret;
-	}
-
-	/**
-	 * 
-	 * @return The antallAnsatte
-	 */
-	@JsonProperty("antallAnsatte")
-	public Integer getAntallAnsatte() {
-		return antallAnsatte;
-	}
-
-	/**
-	 * 
-	 * @param antallAnsatte
-	 *            The antallAnsatte
-	 */
-	@JsonProperty("antallAnsatte")
-	public void setAntallAnsatte(Integer antallAnsatte) {
-		this.antallAnsatte = antallAnsatte;
-	}
-
-	/**
-	 * 
-	 * @return The institusjonellSektorkode
-	 */
-	@JsonProperty("institusjonellSektorkode")
-	public InstitusjonellSektorkode getInstitusjonellSektorkode() {
-		return institusjonellSektorkode;
-	}
-
-	/**
-	 * 
-	 * @param institusjonellSektorkode
-	 *            The institusjonellSektorkode
-	 */
-	@JsonProperty("institusjonellSektorkode")
-	public void setInstitusjonellSektorkode(InstitusjonellSektorkode institusjonellSektorkode) {
-		this.institusjonellSektorkode = institusjonellSektorkode;
-	}
-
-	/**
-	 * 
-	 * @return The naeringskode1
-	 */
-	@JsonProperty("naeringskode1")
-	public Naeringskode1 getNaeringskode1() {
-		return naeringskode1;
-	}
-
-	/**
-	 * 
-	 * @param naeringskode1
-	 *            The naeringskode1
-	 */
-	@JsonProperty("naeringskode1")
-	public void setNaeringskode1(Naeringskode1 naeringskode1) {
-		this.naeringskode1 = naeringskode1;
-	}
-
-	/**
-	 * 
-	 * @return The postadresse
-	 */
 	@JsonProperty("postadresse")
 	public Postadresse getPostadresse() {
 		return postadresse;
 	}
 
-	/**
-	 * 
-	 * @param postadresse
-	 *            The postadresse
-	 */
 	@JsonProperty("postadresse")
 	public void setPostadresse(Postadresse postadresse) {
 		this.postadresse = postadresse;
 	}
 
-	/**
-	 * 
-	 * @return The forretningsadresse
-	 */
+	@JsonProperty("registreringsdatoEnhetsregisteret")
+	public String getRegistreringsdatoEnhetsregisteret() {
+		return registreringsdatoEnhetsregisteret;
+	}
+
+	@JsonProperty("registreringsdatoEnhetsregisteret")
+	public void setRegistreringsdatoEnhetsregisteret(String registreringsdatoEnhetsregisteret) {
+		this.registreringsdatoEnhetsregisteret = registreringsdatoEnhetsregisteret;
+	}
+
+	@JsonProperty("registrertIMvaregisteret")
+	public Boolean getRegistrertIMvaregisteret() {
+		return registrertIMvaregisteret;
+	}
+
+	@JsonProperty("registrertIMvaregisteret")
+	public void setRegistrertIMvaregisteret(Boolean registrertIMvaregisteret) {
+		this.registrertIMvaregisteret = registrertIMvaregisteret;
+	}
+
+	@JsonProperty("naeringskode1")
+	public Naeringskode1 getNaeringskode1() {
+		return naeringskode1;
+	}
+
+	@JsonProperty("naeringskode1")
+	public void setNaeringskode1(Naeringskode1 naeringskode1) {
+		this.naeringskode1 = naeringskode1;
+	}
+
+	@JsonProperty("antallAnsatte")
+	public Integer getAntallAnsatte() {
+		return antallAnsatte;
+	}
+
+	@JsonProperty("antallAnsatte")
+	public void setAntallAnsatte(Integer antallAnsatte) {
+		this.antallAnsatte = antallAnsatte;
+	}
+
 	@JsonProperty("forretningsadresse")
 	public Forretningsadresse getForretningsadresse() {
 		return forretningsadresse;
 	}
 
-	/**
-	 * 
-	 * @param forretningsadresse
-	 *            The forretningsadresse
-	 */
 	@JsonProperty("forretningsadresse")
 	public void setForretningsadresse(Forretningsadresse forretningsadresse) {
 		this.forretningsadresse = forretningsadresse;
 	}
 
-	/**
-	 * 
-	 * @return The konkurs
-	 */
+	@JsonProperty("stiftelsesdato")
+	public String getStiftelsesdato() {
+		return stiftelsesdato;
+	}
+
+	@JsonProperty("stiftelsesdato")
+	public void setStiftelsesdato(String stiftelsesdato) {
+		this.stiftelsesdato = stiftelsesdato;
+	}
+
+	@JsonProperty("registrertIForetaksregisteret")
+	public Boolean getRegistrertIForetaksregisteret() {
+		return registrertIForetaksregisteret;
+	}
+
+	@JsonProperty("registrertIForetaksregisteret")
+	public void setRegistrertIForetaksregisteret(Boolean registrertIForetaksregisteret) {
+		this.registrertIForetaksregisteret = registrertIForetaksregisteret;
+	}
+
+	@JsonProperty("registrertIStiftelsesregisteret")
+	public Boolean getRegistrertIStiftelsesregisteret() {
+		return registrertIStiftelsesregisteret;
+	}
+
+	@JsonProperty("registrertIStiftelsesregisteret")
+	public void setRegistrertIStiftelsesregisteret(Boolean registrertIStiftelsesregisteret) {
+		this.registrertIStiftelsesregisteret = registrertIStiftelsesregisteret;
+	}
+
+	@JsonProperty("registrertIFrivillighetsregisteret")
+	public Boolean getRegistrertIFrivillighetsregisteret() {
+		return registrertIFrivillighetsregisteret;
+	}
+
+	@JsonProperty("registrertIFrivillighetsregisteret")
+	public void setRegistrertIFrivillighetsregisteret(Boolean registrertIFrivillighetsregisteret) {
+		this.registrertIFrivillighetsregisteret = registrertIFrivillighetsregisteret;
+	}
+
 	@JsonProperty("konkurs")
-	public String getKonkurs() {
+	public Boolean getKonkurs() {
 		return konkurs;
 	}
 
-	/**
-	 * 
-	 * @param konkurs
-	 *            The konkurs
-	 */
 	@JsonProperty("konkurs")
-	public void setKonkurs(String konkurs) {
+	public void setKonkurs(Boolean konkurs) {
 		this.konkurs = konkurs;
 	}
 
-	/**
-	 * 
-	 * @return The underAvvikling
-	 */
 	@JsonProperty("underAvvikling")
-	public String getUnderAvvikling() {
+	public Boolean getUnderAvvikling() {
 		return underAvvikling;
 	}
 
-	/**
-	 * 
-	 * @param underAvvikling
-	 *            The underAvvikling
-	 */
 	@JsonProperty("underAvvikling")
-	public void setUnderAvvikling(String underAvvikling) {
+	public void setUnderAvvikling(Boolean underAvvikling) {
 		this.underAvvikling = underAvvikling;
 	}
 
-	/**
-	 * 
-	 * @return The underTvangsavviklingEllerTvangsopplosning
-	 */
 	@JsonProperty("underTvangsavviklingEllerTvangsopplosning")
-	public String getUnderTvangsavviklingEllerTvangsopplosning() {
+	public Boolean getUnderTvangsavviklingEllerTvangsopplosning() {
 		return underTvangsavviklingEllerTvangsopplosning;
 	}
 
-	/**
-	 * 
-	 * @param underTvangsavviklingEllerTvangsopplosning
-	 *            The underTvangsavviklingEllerTvangsopplosning
-	 */
 	@JsonProperty("underTvangsavviklingEllerTvangsopplosning")
-	public void setUnderTvangsavviklingEllerTvangsopplosning(String underTvangsavviklingEllerTvangsopplosning) {
+	public void setUnderTvangsavviklingEllerTvangsopplosning(Boolean underTvangsavviklingEllerTvangsopplosning) {
 		this.underTvangsavviklingEllerTvangsopplosning = underTvangsavviklingEllerTvangsopplosning;
 	}
 
-	/**
-	 * 
-	 * @return The overordnetEnhet
-	 */
-	@JsonProperty("overordnetEnhet")
-	public Integer getOverordnetEnhet() {
-		return overordnetEnhet;
+	@JsonProperty("maalform")
+	public String getMaalform() {
+		return maalform;
 	}
 
-	/**
-	 * 
-	 * @param overordnetEnhet
-	 *            The overordnetEnhet
-	 */
-	@JsonProperty("overordnetEnhet")
-	public void setOverordnetEnhet(Integer overordnetEnhet) {
-		this.overordnetEnhet = overordnetEnhet;
+	@JsonProperty("maalform")
+	public void setMaalform(String maalform) {
+		this.maalform = maalform;
 	}
 
-/*	*//**
-	 * 
-	 * @return The links
-	 *//*
-	@JsonProperty("links")
-	public List<Link> getLinks() {
-		return links;
-	}
-
-	*//**
-	 * 
-	 * @param links
-	 *            The links
-	 *//*
-	@JsonProperty("links")
-	public void setLinks(List<Link> links) {
-		this.links = links;
-	}
-*/
 	@JsonAnyGetter
 	public Map<String, Object> getAdditionalProperties() {
 		return this.additionalProperties;
@@ -456,6 +238,12 @@ public class Enhet implements Serializable{
 	@JsonAnySetter
 	public void setAdditionalProperty(String name, Object value) {
 		this.additionalProperties.put(name, value);
+	}
+
+	@Override
+	public String getOverordnetEnhet() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

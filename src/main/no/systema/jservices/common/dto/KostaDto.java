@@ -77,10 +77,8 @@ public class KostaDto  {
 		
 		PropertyMap<KostaDao, KostaDto> kostaMap = new PropertyMap<KostaDao, KostaDto>() {
 			protected void configure() {
-//				map().setOpp_dato(source.getKadte().toString());
 				map().setOpp_dato(DateTimeManager.getDate(source.getKadte()));
-				
-				//				map().setReg_dato(DateTimeManager.getDateTime(source.getKadtr(),source.getKatdr()));					
+				//map().setReg_dato(DateTimeManager.getDateTime(source.getKadtr(),source.getKatdr()));		//TODO			
 			}
 		};
 		

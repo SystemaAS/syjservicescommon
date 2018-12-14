@@ -13,65 +13,48 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-//@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Generated("org.jsonschema2pojo")
-@JsonPropertyOrder({ "kode", "beskrivelse" })
+@JsonPropertyOrder({
+    "beskrivelse",
+    "kode"
+})
 public class Naeringskode1 implements Serializable{
 
-	@JsonProperty("kode")
-	private String kode;
-	@JsonProperty("beskrivelse")
-	private String beskrivelse;
-	@JsonIgnore
-	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    @JsonProperty("beskrivelse")
+    private String beskrivelse;
+    @JsonProperty("kode")
+    private String kode;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-	/**
-	 * 
-	 * @return The kode
-	 */
-	@JsonProperty("kode")
-	public String getKode() {
-		return kode;
-	}
+    @JsonProperty("beskrivelse")
+    public String getBeskrivelse() {
+        return beskrivelse;
+    }
 
-	/**
-	 * 
-	 * @param kode
-	 *            The kode
-	 */
-	@JsonProperty("kode")
-	public void setKode(String kode) {
-		this.kode = kode;
-	}
+    @JsonProperty("beskrivelse")
+    public void setBeskrivelse(String beskrivelse) {
+        this.beskrivelse = beskrivelse;
+    }
 
-	/**
-	 * 
-	 * @return The beskrivelse
-	 */
-	@JsonProperty("beskrivelse")
-	public String getBeskrivelse() {
-		return beskrivelse;
-	}
+    @JsonProperty("kode")
+    public String getKode() {
+        return kode;
+    }
 
-	/**
-	 * 
-	 * @param beskrivelse
-	 *            The beskrivelse
-	 */
-	@JsonProperty("beskrivelse")
-	public void setBeskrivelse(String beskrivelse) {
-		this.beskrivelse = beskrivelse;
-	}
+    @JsonProperty("kode")
+    public void setKode(String kode) {
+        this.kode = kode;
+    }
 
-	@JsonAnyGetter
-	public Map<String, Object> getAdditionalProperties() {
-		return this.additionalProperties;
-	}
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
 
-	@JsonAnySetter
-	public void setAdditionalProperty(String name, Object value) {
-		this.additionalProperties.put(name, value);
-	}
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
 
 }

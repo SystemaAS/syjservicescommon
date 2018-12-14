@@ -1,6 +1,5 @@
 package no.systema.jservices.common.brreg.proxy.entities;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "land", "landkode", "postnummer", "poststed", "adresse", "kommune", "kommunenummer" })
-public class Forretningsadresse implements Serializable {
+public class Beliggenhetsadresse {
 
 	@JsonProperty("land")
 	private String land;
