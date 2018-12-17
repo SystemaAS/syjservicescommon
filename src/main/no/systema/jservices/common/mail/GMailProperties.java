@@ -41,21 +41,16 @@ public class GMailProperties {
      * smtp
      */
     public static final String MAIL_PROTOCOL="smtp";
+    public static final String MAIL_USERNAME="";
+    public static final String MAIL_PASSWORD="";
+
     /**
      * fredrik@systema.no
      */
-    public static final String MAIL_USERNAME="fredrik@systema.no";
-    /**
-     * fredrik10121
-     */
-    public static final String MAIL_PASSWORD="fredrik10121";
-    /**
-     * fredrik@systema.no
-     */
-    public static final String MAIL_BOX_SUPPORT="fredrik@systema.no";
+    public static final String MAIL_BOX_SUPPORT="";
     /**
      * true
      */
-    public static final boolean SEND_MAIL_TO_SUPPORT_BOX=true;
+    public static final boolean SEND_MAIL_TO_SUPPORT_BOX=false;
 
 }
