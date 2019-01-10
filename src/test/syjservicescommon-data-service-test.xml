@@ -287,7 +287,14 @@
 			<ref bean="jdbcTemplate" />
 		</property>
 	</bean>
-	
+
+	<bean id="firkuDaoService"
+		class="no.systema.jservices.common.dao.services.FirkuDaoServiceImpl">
+		<property name="jdbcTemplate">
+			<ref bean="jdbcTemplate" />
+		</property>
+	</bean>
+
 	<bean id="kunkoDaoService"
 		class="no.systema.jservices.common.dao.services.KunkoDaoServiceImpl">
 		<property name="jdbcTemplate">
