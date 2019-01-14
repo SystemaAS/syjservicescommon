@@ -33,7 +33,7 @@ public class HeadfDto implements IDao {
 	private String heot;
 	private String heur;
 	private int hepro;
-	private String hegn;
+	private String hegn="";
 	private String hest;
 	private String hepk3;
 	private String hepk4;
