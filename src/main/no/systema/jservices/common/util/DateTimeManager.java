@@ -5,11 +5,13 @@ package no.systema.jservices.common.util;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 /**
@@ -548,5 +550,49 @@ public class DateTimeManager {
 		return returnDate;
 		
 	}
+	
+	/**
+	 * Transform SYSPED date and time
+	 * 
+	 * @param date, e.g 20181212
+	 * @param, time, e.g 91713
+	 * @return 12.12.18 09:17:13, if invalid date or time, return null.
+	 */
+	public static String getDateTime(int date, int time) {
+		DateTimeFormatter dateFormatterNO = DateTimeFormatter.ofPattern("yyyyMMdd"); 
+		DateTimeFormatter dateFormatterNOOutput = DateTimeFormatter.ofPattern("dd.MM.yy"); 
+	
+		DateTimeFormatter dateTimeFormatterNO = DateTimeFormatter.ofPattern("HHmmss"); 
+		DateTimeFormatter dateTimeFormatterNOOutput = DateTimeFormatter.ofPattern("HH:mm:ss"); 
+
+		if (date == 0 || time == 0) {
+			return null;
+		}
+
+		String stringDate = String.valueOf(date);
+		String stringTime = StringUtils.leftPad(String.valueOf(time), 6, '0');
+		
+		String returnDate, returnTime;
+		StringBuilder returnDateTime = new StringBuilder();
+		try {
+
+			LocalDate parsedDate = LocalDate.parse(stringDate, dateFormatterNO);
+			returnDate = parsedDate.format(dateFormatterNOOutput);
+
+			LocalTime parsedTime = LocalTime.parse(stringTime, dateTimeFormatterNO);
+			returnTime = parsedTime.format(dateTimeFormatterNOOutput);
+			
+		
+		} catch (Exception e) {
+			returnDate = null;
+			returnTime = null;
+		}
+		
+		return returnDateTime.append(returnDate).append(" ").append(returnTime).toString();
+		
+	}	
+	
+	
+	
 	
 }

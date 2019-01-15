@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -164,12 +165,19 @@ public class TestJKostaDaoService {
 	@Test
 	public final void testGetKosta() {
 		KostaDao qDao = new KostaDao();
-		qDao.setKabnr(2001072);
+		qDao.setKabnr(2001102);
 		KostaDao resultDao = kostaDaoService.find(qDao);
-		
 		System.out.println("resultDao.getKadte()="+resultDao.getKadte());
+		System.out.println("resultDao.getKatxt()="+resultDao.getKatxt());
 		
 		KostaDto dto = KostaDto.get(resultDao);
+		System.out.println("dto.getOpp_dato()="+dto.getOpp_dato());
+		System.out.println("dto.getKatxt()="+dto.getKatxt());
+
+		
+		Assert.assertEquals(dto.getOpp_dato(), resultDao.getKadte());
+		
+		
 		
 	}
 		

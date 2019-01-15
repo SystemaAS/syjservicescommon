@@ -81,6 +81,7 @@ public class LevefDao implements IDao {
 	private String spraak;//	CHAR	1	-
 	private String tfaxnr;//	CHAR	15	-
 	private String tlf;//	CHAR	15	-
+	private String valkod; //	CHAR
 
 	private Map<String, Object> keys = new HashMap<String, Object>();	
 	

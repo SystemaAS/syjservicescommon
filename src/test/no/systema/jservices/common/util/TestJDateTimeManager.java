@@ -13,4 +13,18 @@ public class TestJDateTimeManager {
 		Assert.assertTrue("", dateOutput.equals("10.12.18"));
 		
 	}
+	
+	@Test
+	public final void testGetDateTime() {
+		int date = 20181210;
+		int time = 91223;
+		String dateTimeOutput = DateTimeManager.getDateTime(date, time);
+		System.out.println("dateTimeOutput="+dateTimeOutput);
+		Assert.assertTrue("Should look like this 10.12.18 09:12:23", dateTimeOutput.equals("10.12.18 09:12:23"));
+		
+	}	
+	
+	
+	
+	
 }

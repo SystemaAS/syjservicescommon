@@ -14,6 +14,9 @@ public class KosttDaoServiceImpl extends GenericDaoServiceImpl<KosttDao> impleme
 		KosttDao qDao = new KosttDao();
 		qDao.setKttyp(kttyp);
 		KosttDao dao = find(qDao);
+		if (dao == null) {
+			throw new RuntimeException("Something is wrong with KOSTT. Can not find unique record for kttyp="+kttyp);
+		}
 		existingKtnr = dao.getKtnr();
 
 		scaffoldingKtnr = existingKtnr;

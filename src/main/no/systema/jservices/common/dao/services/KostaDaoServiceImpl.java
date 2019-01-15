@@ -1,5 +1,7 @@
 package no.systema.jservices.common.dao.services;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -190,8 +192,18 @@ public class KostaDaoServiceImpl extends GenericDaoServiceImpl<KostaDao> impleme
 	@Override
 	public KostaDao create(KostaDao kostaDao, String kttyp) {
 		int ktnr = kosttDaoService.getExistingKtnrAndIncrement(kttyp);
-		kostaDao.setKabnr(ktnr); 
+		kostaDao.setKabnr(ktnr);
+	
+		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyyMMdd"); 
+		DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmmss");
 		
+		LocalDateTime now = LocalDateTime.now();
+		String nowDate = now.format(dateFormatter);
+		String nowTime = now.format(timeFormatter);
+
+		kostaDao.setKadtr(Integer.valueOf(nowDate));
+		kostaDao.setKatdr(Integer.valueOf(nowTime));
+
 		return super.create(kostaDao);
 	}	
 

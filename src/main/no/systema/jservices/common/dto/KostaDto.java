@@ -2,8 +2,8 @@ package no.systema.jservices.common.dto;
 
 import java.math.BigDecimal;
 
+import org.apache.log4j.Logger;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 
 import lombok.Data;
 import no.systema.jservices.common.dao.KostaDao;
@@ -18,6 +18,8 @@ import no.systema.jservices.common.util.DateTimeManager;
  */
 @Data
 public class KostaDto  {
+	
+	private static Logger logger = Logger.getLogger(KostaDto.class.getName());
 	
 	private String kabb;
 	private String kabdt;
@@ -61,11 +63,7 @@ public class KostaDto  {
 	private String reg_dato;
 	private String levnavn;
 
-
-
-	
 	/**
-	 * 
 	 * 
 	 * Convenience method for transforming Dao to Dto.
 	 * 
@@ -74,21 +72,12 @@ public class KostaDto  {
 	 */
 	static public KostaDto get(KostaDao dao) {
 		ModelMapper modelMapper = new ModelMapper();
+		KostaDto dto = modelMapper.map(dao, KostaDto.class);	
 		
-		PropertyMap<KostaDao, KostaDto> kostaMap = new PropertyMap<KostaDao, KostaDto>() {
-			protected void configure() {
-				map().setOpp_dato(DateTimeManager.getDate(source.getKadte()));
-				//map().setReg_dato(DateTimeManager.getDateTime(source.getKadtr(),source.getKatdr()));		//TODO			
-			}
-		};
+		dto.setOpp_dato(DateTimeManager.getDateTime(dao.getKadte(), dao.getKatme()));
+		dto.setReg_dato(DateTimeManager.getDateTime(dao.getKadtr(), dao.getKatdr()));
 		
-		modelMapper.addMappings(kostaMap);
-		
-		KostaDto dto2 = modelMapper.map(dao, KostaDto.class);	
-		
-		
-		return dto2;
-		
+		return dto;
 		
 	}
 }
