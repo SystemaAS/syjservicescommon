@@ -11,5 +11,11 @@ public interface FirkuDaoService extends GenericDaoService<FirkuDao> {
 	 */
 	public FirkuDao get();
 	
+	/**
+	 * Check if customer is adresscustomer
+	 * @param kundnr
+	 * @return true if adresscustomer, else false.
+	 */
+	public boolean isAdressCustomer(int kundnr);
 	
 }

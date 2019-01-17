@@ -21,6 +21,18 @@ public class FirkuDaoServiceImpl extends GenericDaoServiceImpl<FirkuDao> impleme
 		} else {
 			return daoList.get(0);
 		}
+	}
+
+	@Override
+	public boolean isAdressCustomer(int kundnr) {
+		FirkuDao dao = get();
+		
+		if(kundnr >= dao.getFikufr() && kundnr <= dao.getFikuti()) {
+			return true;
+		} else {
+			return false;
+		}	
+
 	}	
 	
 }
