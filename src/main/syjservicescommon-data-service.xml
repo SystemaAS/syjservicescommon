@@ -393,6 +393,10 @@
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>
 
+	<bean id="vispnrDaoService" class="no.systema.jservices.common.dao.services.VispnrDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>
+
 
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
         <tx:attributes>

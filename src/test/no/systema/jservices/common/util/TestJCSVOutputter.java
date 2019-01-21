@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import no.systema.jservices.common.dao.FaktDao;
+import no.systema.jservices.common.dto.SingleValueDto;
 
 public class TestJCSVOutputter {
 	
@@ -47,6 +48,29 @@ public class TestJCSVOutputter {
 		csvOutput =cvsFilePrinter.writeAsString(faktDaoList);
 		assertNotNull("message",csvOutput);
 	}	
+
+	
+	@Test
+	public void testWriteToCVSString() {
+		CSVOutputter<SingleValueDto> cvsFilePrinter = new CSVOutputter<SingleValueDto>();
+		String csvOutput = null;
+
+		SingleValueDto dto = new SingleValueDto();
+		dto.setValue("kalle");
+		SingleValueDto dto2 = new SingleValueDto();
+		dto2.setValue("kajsa");		
+		
+
+		List<SingleValueDto> dtoList = new ArrayList<SingleValueDto>();		
+		dtoList.add(dto);
+		dtoList.add(dto2);
+		
+		csvOutput =cvsFilePrinter.writeAsString(dtoList);
+		assertNotNull("message",csvOutput);
+		
+		System.out.println(csvOutput);
+	}		
+	
 	
 
 }
