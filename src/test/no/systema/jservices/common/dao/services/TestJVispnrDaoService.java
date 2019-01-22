@@ -1,6 +1,5 @@
 package no.systema.jservices.common.dao.services;
 
-import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
@@ -9,6 +8,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import static org.junit.Assert.*;
 import no.systema.jservices.common.dao.VispnrDao;
 
 public class TestJVispnrDaoService {
@@ -44,6 +44,17 @@ public class TestJVispnrDaoService {
 		VispnrDao resultDao =  vispnrDaoService.find(qDao);
 		assertNotNull(resultDao);
 	}	
+	
+	@Test
+	public final void testLandKodeExist() {
+		boolean exist =  vispnrDaoService.landKodeExist("SE");
+		assertTrue(exist);
+		
+		exist =  vispnrDaoService.landKodeExist("XX");
+		assertFalse(exist);
+		
+	}	
+	
 	
 	
 }
