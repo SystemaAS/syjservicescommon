@@ -73,5 +73,13 @@ public class TestJValufDaoService {
 		assertTrue("KALLE should not exist",!exist);
 		
 	}		
+
+	
+	@Test
+	public final void testCurrencyCodeExist() {
+		boolean exist  = valufDaoService.exist("NOK");
+		assertTrue(exist);
+	}	
+	
 	
 }

@@ -15,6 +15,12 @@ public class ValufDaoServiceImpl extends GenericDaoServiceImpl<ValufDao> impleme
 	public ValufDao find(Object id) {
 		return findInFirma(id,firmaColumnName);
 	}
-	
+
+	@Override
+	public boolean exist(String currencyCode) {
+		ValufDao qDao = new ValufDao();
+		qDao.setValkod(currencyCode);
+		return  exist(qDao);
+	}
 	
 }
