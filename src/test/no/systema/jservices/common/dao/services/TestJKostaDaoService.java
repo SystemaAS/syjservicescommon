@@ -227,7 +227,7 @@ public class TestJKostaDaoService {
 		dao.setKabnr2(222);
 		dao.setKabdt(20190123);
 		dao.setKafnr("");
-		dao.setKasg("OT");
+		dao.setKasg("FM");
 		dao.setKast(null);
 		dao.setKatxt("");
 		dao.setKabb("14");
@@ -249,7 +249,7 @@ public class TestJKostaDaoService {
 		dao.setKatavd(0);
 		dao.setKatme(155831);
 		dao.setKatunr(0);
-		dao.setKauser("OSCAR");
+		dao.setKauser("FREDRIK");
 		dao.setKaval("NOK");
 		dao.setKavk("fra");
 		
@@ -257,5 +257,6 @@ public class TestJKostaDaoService {
 		
 		
 	}
+
 	
 }
