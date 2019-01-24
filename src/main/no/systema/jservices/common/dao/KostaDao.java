@@ -26,13 +26,13 @@ public class KostaDao implements IDao {
 	private Integer kabnr = new Integer(0); //key  innregistreringsnummer
 	private Integer kabnr2 = new Integer(0);  //BILAGSNUMMER //TODO teller fra KOSTT. TA KTNR och sedan uppdatera
 	private Integer kadte = new Integer(0);
-	private Integer kadtr = new Integer(0);
+	private BigDecimal kadtr = new BigDecimal(0);
 	private BigDecimal kafdt = new BigDecimal(0);
-	private Integer kaffdt = new Integer(0);
+	private BigDecimal kaffdt = new BigDecimal(0);
 	private String kafnr;
 	private Integer kajour = new Integer(0);
 	private String kalkid;
-	private Integer kalnr = new Integer(0);
+	private BigDecimal kalnr = new BigDecimal(0);
 	private String kamva;
 	private Integer kaoavd = new Integer(0);
 	private BigDecimal kaomrf = new BigDecimal(0);
@@ -44,7 +44,7 @@ public class KostaDao implements IDao {
 	private String kasg;
 	private String kast;
 	private Integer katavd = new Integer(0);
-	private Integer katdr = new Integer(0);
+	private BigDecimal katdr = new BigDecimal(0);
 	private Integer katme = new Integer(0);
 	private Integer katunr = new Integer(0);
 	private String katxt;

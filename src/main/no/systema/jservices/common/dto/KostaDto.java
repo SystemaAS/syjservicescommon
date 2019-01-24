@@ -75,7 +75,7 @@ public class KostaDto  {
 		KostaDto dto = modelMapper.map(dao, KostaDto.class);	
 		
 		dto.setOpp_dato(DateTimeManager.getDateTime(dao.getKadte(), dao.getKatme()));
-		dto.setReg_dato(DateTimeManager.getDateTime(dao.getKadtr(), dao.getKatdr()));
+		dto.setReg_dato(DateTimeManager.getDateTime(dao.getKadtr().intValue(), dao.getKatdr().intValue()));
 		
 		return dto;
 		

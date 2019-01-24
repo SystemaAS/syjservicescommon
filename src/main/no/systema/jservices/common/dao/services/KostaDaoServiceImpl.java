@@ -1,5 +1,6 @@
 package no.systema.jservices.common.dao.services;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -7,11 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 
 import no.systema.jservices.common.dao.GenericObjectMapper;
 import no.systema.jservices.common.dao.KostaDao;
-import no.systema.jservices.common.dto.KostaDto;
 
 public class KostaDaoServiceImpl extends GenericDaoServiceImpl<KostaDao> implements KostaDaoService{
 
@@ -201,8 +200,11 @@ public class KostaDaoServiceImpl extends GenericDaoServiceImpl<KostaDao> impleme
 		String nowDate = now.format(dateFormatter);
 		String nowTime = now.format(timeFormatter);
 
-		kostaDao.setKadtr(Integer.valueOf(nowDate));
-		kostaDao.setKatdr(Integer.valueOf(nowTime));
+		BigDecimal nd = new BigDecimal(nowDate);
+		BigDecimal nt = new BigDecimal(nowTime);
+		
+		kostaDao.setKadtr(nd);
+		kostaDao.setKatdr(nt);
 
 		return super.create(kostaDao);
 	}	

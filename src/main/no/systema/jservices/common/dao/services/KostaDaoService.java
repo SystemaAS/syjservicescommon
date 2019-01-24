@@ -43,6 +43,8 @@ public interface KostaDaoService extends GenericDaoService<KostaDao> {
 	/**
 	 * Create dao, using kttyp för finding next key, e.g. kabnr.
 	 * 
+	 * using {@linkplain KosttDaoService}.getExistingKtnrAndIncrement(kttyp);
+	 * 
 	 * @param dao
 	 * @param kttyp
 	 * @return  KostaDao

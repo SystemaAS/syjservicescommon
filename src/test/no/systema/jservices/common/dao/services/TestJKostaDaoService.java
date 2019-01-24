@@ -70,7 +70,7 @@ public class TestJKostaDaoService {
 		KostaDao qDao = new KostaDao();
 		Integer kabnr = new Integer(2001087);
 		Integer kabnr2 = new Integer(0);
-		Integer kalnr = new Integer(1);
+		BigDecimal kalnr = new BigDecimal(1);
 	
 //		String kabnr = "2001087";
 //		String kabnr2 = null;
@@ -181,5 +181,81 @@ public class TestJKostaDaoService {
 		
 	}
 		
+	@Test
+	public final void testCreateBig() {
+		KostaDao dao = getKosta();
+		KosttDao qDao = new KosttDao();
+		qDao.setKttyp("Å");
+		KosttDao kosttDao = kosttDaoService.find(qDao);
+		KostaDao resultDao = kostaDaoService.create(dao, kosttDao.getKttyp());
+		System.out.println("kosttDao="+ReflectionToStringBuilder.toString(kosttDao));
+		System.out.println("resultDao="+ReflectionToStringBuilder.toString(resultDao));
+		//Sanity check, also tested in TestJKosttDaoService
+		kosttDao = kosttDaoService.find(qDao);
+		assertNotEquals("kabnr should NOT be the same.",resultDao.getKabnr(), kosttDao.getKtnr());
+		//
+
+		KostaDao updateDao = resultDao; 
+		updateDao.setKAPÅR(99);
+		updateDao.setKamva("x");
+		updateDao.setKabl(new BigDecimal(-12.0));
+		kostaDaoService.update(updateDao);
 		
+		resultDao = kostaDaoService.find(updateDao);
+		assertEquals("KAPÅR should be the same.",Integer.valueOf(99), updateDao.getKAPÅR());
+		
+		//cleanup
+		kostaDaoService.delete(updateDao);
+		try {
+			resultDao = kostaDaoService.find(updateDao);
+			if (resultDao != null) {
+				fail("Should have been deleted.");
+			}
+		} catch (Exception e) {
+			// expected
+		}
+		
+	} 
+	
+	private KostaDao getKosta() {
+		KostaDao dao = new KostaDao();
+		
+		dao.setKalnr(new BigDecimal(2));
+		dao.setKaffdt(new BigDecimal(20190123));
+		dao.setKajour(0);
+		dao.setKamva("");
+		dao.setKabnr2(222);
+		dao.setKabdt(20190123);
+		dao.setKafnr("");
+		dao.setKasg("OT");
+		dao.setKast(null);
+		dao.setKatxt("");
+		dao.setKabb("14");
+		dao.setKabl(new BigDecimal(234));
+		dao.setKAPÅR(19);
+		dao.setKapcc(0);
+		dao.setKapmn(1);
+		dao.setKarnr(new BigDecimal(0));
+		dao.setKatdr(new BigDecimal(155833));
+		dao.setKablm(null);  
+		dao.setKadte(20190123);
+		dao.setKadtr(new BigDecimal(20190123));
+		dao.setKafdt(new BigDecimal(0));
+		dao.setKaopd(0);
+		dao.setKavku(null);
+		dao.setKalkid("");
+		dao.setKaoavd(0);
+		dao.setKaomrf(new BigDecimal(0));
+		dao.setKatavd(0);
+		dao.setKatme(155831);
+		dao.setKatunr(0);
+		dao.setKauser("OSCAR");
+		dao.setKaval("NOK");
+		dao.setKavk("fra");
+		
+		return dao ;
+		
+		
+	}
+	
 }
