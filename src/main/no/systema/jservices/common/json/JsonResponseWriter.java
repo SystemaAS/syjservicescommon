@@ -1,16 +1,15 @@
 package no.systema.jservices.common.json;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.lang.reflect.Method;
-import java.util.*;
-
+import java.util.List;
 
 import org.apache.log4j.Logger;
-import no.systema.jservices.common.json.reflection.JsonWriterReflectionManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import no.systema.jservices.common.dao.IDao;
-import no.systema.jservices.common.util.JsonSpecialCharactersManager;
+import no.systema.jservices.common.json.reflection.JsonWriterReflectionManager;
 import no.systema.jservices.common.util.JsonConstants;
+import no.systema.jservices.common.util.JsonSpecialCharactersManager;
 
 /**
  * JSON outputter
@@ -19,8 +18,11 @@ import no.systema.jservices.common.util.JsonConstants;
  * @date Okt 20, 2017
  * 
  */
+@Service
 public class JsonResponseWriter {
-	private static JsonSpecialCharactersManager jsonFixMgr = new JsonSpecialCharactersManager();
+	
+	@Autowired
+	private JsonSpecialCharactersManager jsonFixMgr;
 	private static Logger logger = Logger.getLogger(JsonResponseWriter.class.getName());
 	
 	/**

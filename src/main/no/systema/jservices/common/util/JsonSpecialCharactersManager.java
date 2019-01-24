@@ -1,11 +1,14 @@
 package no.systema.jservices.common.util;
 
+import org.springframework.stereotype.Service;
+
 /**
  * 
  * @author oscardelatorre
  * @date Okt 20, 2017
  * 
  */
+@Service
 public class JsonSpecialCharactersManager {
 	
 	public String cleanRecord(String value){
