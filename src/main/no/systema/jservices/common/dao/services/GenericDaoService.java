@@ -112,6 +112,16 @@ public interface GenericDaoService<T> {
 	/**
 	 * Insert delivered T into corresponding table.
 	 * 
+	 * Supporting types in {@link IDao}: <br> 
+	 * <li>{@link String}
+	 * <li>{@link Integer}</li>
+	 * <li>{@link BigDecimal}</li>
+	 * <li>int</li>
+	 * <br>
+	 * 
+	 * If value == null in type {@linkplain String}, "" is delivered to database.
+	 * If value == null in type {@linkplain BigDecimal}, 0 is delivered to database.
+	 * 
 	 * @param t populated IDao
 	 * @return created T
 	 */
@@ -160,7 +170,16 @@ public interface GenericDaoService<T> {
 
 	/**
 	 * A full update on delivered IDao.
-	 * Respecting all fields
+	 * Respecting all fields <br>
+	 * Supporting types in {@link IDao}: <br> 
+	 * <li>{@link String}
+	 * <li>{@link Integer}</li>
+	 * <li>{@link BigDecimal}</li>
+	 * <li>int</li>
+	 * <br>
+	 * 
+	 * If value == null in type {@linkplain String}, "" is delivered to database.
+	 * If value == null in type {@linkplain BigDecimal}, 0 is delivered to database.
 	 * 
 	 * @param t populated IDao
 	 * @return the updated IDao

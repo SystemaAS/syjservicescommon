@@ -339,7 +339,13 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 						createString.append(field + ",");
 						try {
 							value = (Object) method.invoke(t);
-							values[i++] = (value == null) ? "" : value;
+
+							if (returnType.equals(String.class) ) {
+								values[i++] = (value == null) ? "" : value;
+							} else {
+								values[i++] = (value == null) ? 0 : value;
+							}
+							
 							debugFieldValue.append(field + ":{"+value+"}"+'\n');
 							//logger.info(field + " " + value);
 						} catch (Exception e) {
@@ -540,7 +546,13 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 						updateString.append(field + " = ? ,");
 						try {
 							value = (Object) method.invoke(t);
-							values[i++] = (value == null) ? "" : value;
+
+							if (returnType.equals(String.class) ) {
+								values[i++] = (value == null) ? "" : value;
+							} else {
+								values[i++] = (value == null) ? 0 : value;
+							}
+							
 							debugFieldValue.append(field + ":{"+value+"}"+'\n');
 						} catch (Exception e) {
 							logger.error("Error:", e);
