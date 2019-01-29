@@ -16,28 +16,28 @@ import lombok.Data;
 @Data
 public class Ffr00fDao implements IDao {
 	
-	private String f00rec; 		//9,0 PAKKET - Rec.no/Trans ID.  
-	private String f0211; 		//3,0 PAKKET - Airline prefix
-	private String f0213; 		//8,0 PAKKET - AWB serial no
+	private Integer f00rec = 0; 		//9,0 PAKKET - Rec.no/Trans ID.  
+	private Integer f0211 = 0; 		//3,0 PAKKET - Airline prefix
+	private Integer f0213 = 0; 		//8,0 PAKKET - AWB serial no
 	private String f0221;  		//3 VARCHAR - Origin airport
 	
 	private String f0222;  		//3 VARCHAR - Dest. airport
 	private String f0232;  		//1 VARCHAR - Ship. desc. code
-	private String f0233;  		//4,0 PAKKET - No. of Pieces
+	private Integer f0233 = 0;  		//4,0 PAKKET - No. of Pieces
 	private String f0234;  		//1 VARCHAR - Weight code
-	private String f0235;  		//8,1 PAKKET - Weight
+	private BigDecimal f0235 = new BigDecimal(0);  		//8,1 PAKKET - Weight
 	private String f0241;  		//2 VARCHAR - Volume code
-	private String f0242;  		//11,2 PAKKET - Volume amount
+	private BigDecimal f0242  = new BigDecimal(0); //11,2 PAKKET - Volume amount
 	private String f0251;  		//2 VARCHAR - Density ind.
 	
-	private String f0252;  		//2,0 PAKKET - Density group
-	private String f0262;  		//4,0 PAKKET - Tot. no. of pieces
+	private Integer f0252 = 0;  		//2,0 PAKKET - Density group
+	private Integer f0262 = 0;  		//4,0 PAKKET - Tot. no. of pieces
 	private String f0272;  		//15 VARCHAR - Manif.desc.of goods 
 	
 	private String f0282;  		//3 VARCHAR - Spes. handl. code-1
 	private String f0283;  		//3 VARCHAR - Spes. handl. code-2
 	
-	private String f043;  		//2,0 PAKKET - No. of ULDs
+	private Integer f043 = 0;  		//2,0 PAKKET - No. of ULDs
 	private String f0522;  		//65 VARCHAR - Spes. service req.1
 	private String f0532;  		//65 VARCHAR - Spes. service req.2
 	private String f0622;  		//65 VARCHAR - Other service inf.1 
@@ -53,11 +53,11 @@ public class Ffr00fDao implements IDao {
 	
 	private String f093;  		//1 VARCHAR - Service Code
 	private String f0951;  		//3 VARCHAR - Rate class code 
-	private String f0953A;  	//7,0 PAKKET - Commodity item no
-	private String f0953B;  	//2 VARCHAR - ULD rate class type (Unit-Load-Device)
+	private Integer f0953a = 0;  	//7,0 PAKKET - Commodity item no
+	private String f0953b;  	//2 VARCHAR - ULD rate class type (Unit-Load-Device)
 	
-	private String f0953C;  	//1 VARCHAR - Rate class code
-	private String f0953D;  	//3,0 PAKKET - Class rate perc
+	private String f0953c;  	//1 VARCHAR - Rate class code
+	private Integer f0953d = 0;  	//3,0 PAKKET - Class rate perc
 	private String f1022;  		//14 VARCHAR - Shipper acc. no.
 	private String f1042;  		//35 VARCHAR - Shipper name
 	
@@ -76,8 +76,8 @@ public class Ffr00fDao implements IDao {
 	private String f1174;  		//9 VARCHAR - Shipper postal code
 	
 	private String f1222;  		//14 VARCHAR - Acc.number
-	private String f1224;  		//7,0 PAKKET - IATA Agent code 
-	private String f1226;  		//4,0 PAKKET - Agent CASS addr
+	private Integer f1224 = 0;  		//7,0 PAKKET - IATA Agent code 
+	private Integer f1226 = 0;  		//4,0 PAKKET - Agent CASS addr
 	private String f1228;  		//3 VARCHAR - Part id.
 	
 	private String f1242;  		//35 VARCHAR - Customer name
