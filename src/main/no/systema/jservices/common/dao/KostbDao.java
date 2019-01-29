@@ -42,6 +42,8 @@ public class KostbDao implements IDao {
 	private String kbrekl;
 	private String kbsg;
 	private String kbsgg;
+	private String kbvk;
+
 	
 	private Map<String, Object> keys = new HashMap<String, Object>();
 	
