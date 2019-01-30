@@ -62,6 +62,7 @@ public class KostaDto  {
 	private String opp_dato;
 	private String reg_dato;
 	private String levnavn;
+	private String fordelt;
 
 	/**
 	 * 

@@ -62,6 +62,17 @@ public class TestJKostbDaoService {
 		System.out.println("resultDao="+ReflectionToStringBuilder.toString(resultDao));
 	}		
 	
-	
+
+	@Test
+	public final void testCalcFordelt() {
+		List<KostbDao> resultDao = kostbDaoService.findByKbbnr(2001114);
+		assertNotNull(resultDao);
+		System.out.println("resultDao="+ReflectionToStringBuilder.toString(resultDao));
+		
+		double fordelt  = kostbDaoService.getFordelt(2001114);
+
+		System.out.println("fordelt="+fordelt);
+		
+	}	
 	
 }
