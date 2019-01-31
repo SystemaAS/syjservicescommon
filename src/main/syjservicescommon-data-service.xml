@@ -295,8 +295,7 @@
 		
 	<bean id="godsafDaoService" class="no.systema.jservices.common.dao.services.GodsafDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
-	</bean>
-	
+	</bean>	
 	<bean id="godsfiDaoService" class="no.systema.jservices.common.dao.services.GodsfiDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>
@@ -306,6 +305,25 @@
 	<bean id="godshfDaoService" class="no.systema.jservices.common.dao.services.GodshfDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>
+	<bean id="ffr00fDaoService" class="no.systema.jservices.common.dao.services.Ffr00fDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>
+	<bean id="ffr03fDaoService" class="no.systema.jservices.common.dao.services.Ffr03fDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>
+	<bean id="ffr04fDaoService" class="no.systema.jservices.common.dao.services.Ffr04fDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>
+	<bean id="ffr08fDaoService" class="no.systema.jservices.common.dao.services.Ffr08fDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>
+	<bean id="ffr10fDaoService" class="no.systema.jservices.common.dao.services.Ffr10fDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>
+	<bean id="ffr11fDaoService" class="no.systema.jservices.common.dao.services.Ffr11fDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>
+	
 	<bean id="merknfDaoService" class="no.systema.jservices.common.dao.services.MerknfDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>
