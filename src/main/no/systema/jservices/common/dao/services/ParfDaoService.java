@@ -1,8 +1,8 @@
 package no.systema.jservices.common.dao.services;
 
-import no.systema.jservices.common.dao.CnffDao;
+import no.systema.jservices.common.dao.ParfDao;
 
-public interface ParfDaoService extends GenericDaoService<CnffDao> {
+public interface ParfDaoService extends GenericDaoService<ParfDao> {
 	
 
 }
