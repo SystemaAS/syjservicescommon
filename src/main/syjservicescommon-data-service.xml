@@ -216,7 +216,9 @@
 	<bean id="logfDaoService" class="no.systema.jservices.common.dao.services.LogfDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>
-
+	<bean id="cnffDaoService" class="no.systema.jservices.common.dao.services.cnffDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>
 	
 	<bean id="dok29DaoService" class="no.systema.jservices.common.dao.services.Dok29DaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
