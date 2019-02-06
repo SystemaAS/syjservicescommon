@@ -1,9 +1,9 @@
 package no.systema.jservices.common.dao.services;
 
 
-import no.systema.jservices.common.dao.LogfDao;
+import no.systema.jservices.common.dao.CnffDao;
 
-public class CnffDaoServiceImpl extends GenericDaoServiceImpl<LogfDao> implements LogfDaoService{
+public class CnffDaoServiceImpl extends GenericDaoServiceImpl<CnffDao> implements CnffDaoService{
 
 	
 }
