@@ -1,6 +1,6 @@
 package no.systema.jservices.common.dao.services;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -48,7 +48,7 @@ public class TestJKostbDaoService {
 	@Test
 	public final void testFind() {
 		KostbDao qDao = new KostbDao();
-		qDao.setKbbnr(2001068);
+		qDao.setRrn(2);
 		KostbDao resultDao = kostbDaoService.find(qDao);
 		assertNotNull(resultDao);
 		System.out.println("resultDao="+ReflectionToStringBuilder.toString(resultDao));
@@ -59,10 +59,42 @@ public class TestJKostbDaoService {
 	public final void testFindByKabnr() {
 		List<KostbDao> resultDao = kostbDaoService.findByKbbnr(2001075);
 		assertNotNull(resultDao);
+
+		resultDao.forEach(kb -> {
+			assertNotNull(kb.getRrn());
+			System.out.println("rrn="+kb.getRrn());
+			
+		});
+		
+	}		
+
+	
+	@Test
+	public final void testFindByRNN() {
+		KostbDao resultDao = kostbDaoService.findByRRN(2);
+		assertNotNull(resultDao);
 		System.out.println("resultDao="+ReflectionToStringBuilder.toString(resultDao));
 	}		
 	
+	@Test
+	public final void testFindKbbnrAndByRNN() {
+		List<KostbDao> resultDaoList = kostbDaoService.findByKbbnr(2001075);
+		assertNotNull(resultDaoList);	
 
+		resultDaoList.forEach(kb -> {
+			assertNotNull(kb.getRrn());
+	
+			KostbDao resultDao = kostbDaoService.findByRRN(kb.getRrn());
+			assertNotNull(resultDao);
+			
+			assertEquals(kb.getKbblhb(), resultDao.getKbblhb());
+			assertEquals(kb.getKbavd(), resultDao.getKbavd());
+			assertEquals(kb.getKbkkey(), resultDao.getKbkkey());
+			
+		});		
+		
+	}		
+	
 	@Test
 	public final void testCalcFordelt() {
 		List<KostbDao> resultDao = kostbDaoService.findByKbbnr(2001114);

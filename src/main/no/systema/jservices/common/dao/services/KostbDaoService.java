@@ -9,6 +9,8 @@ public interface KostbDaoService extends GenericDaoService<KostbDao> {
 	/**
 	 * Find all KostbDao on kbbnr
 	 * 
+	 * Note: Using RRN, since no keys in KOSTB
+	 * 
 	 * @param kbbnr
 	 * @return list of KostbDao
 	 */

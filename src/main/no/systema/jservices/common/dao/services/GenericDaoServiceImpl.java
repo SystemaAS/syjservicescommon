@@ -83,6 +83,17 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 	}
 	
 	@Override
+	public List<T> findAllRRN(Map<String, Object> params) {
+		StringBuilder queryString = new StringBuilder();
+	    queryString.append("SELECT RRN(").append(tableName).append(") rrn ,").append(tableName).append(".* FROM ");
+	    queryString.append(tableName);
+		queryString.append(this.getQueryClauses(params, null));
+		logger.info(queryString.toString());
+		
+		return jdbcTemplate.query(queryString.toString(), mapper);
+	}
+	
+	@Override
 	public List<T> findAll(Map<String, Object> params, String numberOfRows) {
 	    StringBuilder queryString = new StringBuilder("SELECT * from ");
 	    queryString.append(tableName);
@@ -91,7 +102,6 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		logger.info(queryString.toString());
 		return jdbcTemplate.query(queryString.toString(), mapper);
 	}
-	
 	
 	/**
 	 * In case special order by -clause is required
@@ -111,7 +121,6 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 	public List<T> findAllDistinct(String columnName) {
 	    StringBuilder queryString = new StringBuilder("SELECT distinct " + columnName + " from ");
 	    queryString.append(tableName);
-		//queryString.append(this.getQueryClauses(params, null));
 		logger.info(queryString.toString());
 		return jdbcTemplate.query(queryString.toString(), mapper);
 	}
@@ -161,6 +170,17 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		
 	}
 	
+	
+	@Override
+	public T findByRRN(int rrn) {
+	    StringBuilder queryString = new StringBuilder();
+	    queryString.append("SELECT RRN(").append(tableName).append(") rrn ,").append(tableName).append(".* FROM ");
+	    queryString.append(tableName);
+	    queryString.append(" where RRN(").append(tableName).append(") =").append(rrn) ;	
+		logger.info(queryString.toString());
+		return (T) jdbcTemplate.queryForObject(queryString.toString(), mapper);	    	
+		
+	}	
 	
 	@Override
 	public boolean existInFirma(Object id, String firmaColumnName) {

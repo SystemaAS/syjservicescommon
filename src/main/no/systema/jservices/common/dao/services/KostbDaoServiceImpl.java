@@ -14,7 +14,7 @@ public class KostbDaoServiceImpl extends GenericDaoServiceImpl<KostbDao> impleme
 	public List<KostbDao> findByKbbnr(Integer kbbnr) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("kbbnr", kbbnr);
-		return findAll(params);	
+		return findAllRRN(params);	
 	}
 
 	@Override

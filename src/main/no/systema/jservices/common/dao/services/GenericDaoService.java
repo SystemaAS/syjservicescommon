@@ -28,6 +28,7 @@ public interface GenericDaoService<T> {
 	 * @return
 	 */
 	public List<T> findAll(Map<String, Object> params, StringBuffer orderByClause);
+
 	/**
 	 * Find all T on delivered args.
 	 * 
@@ -35,6 +36,16 @@ public interface GenericDaoService<T> {
 	 * @return a List of T
 	 */
 	public List<T> findAll(Map<String, Object> params);
+	
+	/**
+	 * Find all T on delivered args.
+	 * 
+	 * Note: adding RRN(<rrn>) to field string.
+	 * 
+	 * @param params String = columnname, Object = any value. Accepts wildcard %. If params==null, no where-clause is added.
+	 * @return a List of T
+	 */
+	public List<T> findAllRRN(Map<String, Object> params);	
 	
 	/**
 	 * Find all T on delivered args.
@@ -156,6 +167,14 @@ public interface GenericDaoService<T> {
 	public T find(Object id);
 
 
+	/**
+	 * Find T on provided relative record number.
+	 * 
+	 * @param rrn, the relative record number
+	 * @return T, if found, else null
+	 */
+	public T findByRRN(int rrn);	
+	
 	/**
 	 * Find T on delivered id.
 	 * 
