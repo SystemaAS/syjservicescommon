@@ -98,6 +98,12 @@ public class Ffr00fDao implements IDao {
 		
 		return keys;
 	}
+	public Map<String, Object> getKeysAwb() {
+		keys.put("f0211", f0211);
+		keys.put("f0213", f0213);
+		
+		return keys;
+	}
 	
 	@Override
 	public String toString(){

@@ -53,7 +53,11 @@ public class LogfDao implements IDao {
 	@Override
 	public Map<String, Object> getKeys() {
 		keys.put("lgid", lgid);
-		
+		return keys;
+	}
+	
+	public Map<String, Object> getKeysLgRecn() {
+		keys.put("lgrecn", lgrecn);
 		return keys;
 	}
 	
