@@ -1,6 +1,7 @@
 package no.systema.jservices.common.dao;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.Map;
 
 import lombok.Data;
@@ -20,7 +21,7 @@ public class KostbDao implements IDao {
 	private String kbbilt;
 	private BigDecimal kbblf = new BigDecimal(0);
 	private BigDecimal kbblhb = new BigDecimal(0);
-	private int kbbnr; //ref to kabnr in KOSTA
+	private int kbbnr; 
 	private BigDecimal kbbuds = new BigDecimal(0);
 	private String kbbval;
 	private String kbfree;
@@ -45,11 +46,14 @@ public class KostbDao implements IDao {
 	private String kbsgg;
 	private String kbvk;
 	
-	private int rrn;
+	private int rrn; //key
+	
+	private Map<String, Object> keys = new HashMap<String, Object>();
 	
 	@Override
 	public Map<String, Object> getKeys() {
-		throw new IllegalArgumentException("This dao does not contain keys, Use RRN.");
+		keys.put("rrn", rrn);
+		return keys;
 	}
 
 }

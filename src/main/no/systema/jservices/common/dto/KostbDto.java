@@ -43,6 +43,8 @@ public class KostbDto  {
 	private String kbsg;
 	private String kbsgg;
 	private String kbvk;
+	
+	private String rrn;
 
 	//non-dao
 	private String ot;

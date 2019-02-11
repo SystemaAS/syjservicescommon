@@ -26,5 +26,4 @@ public interface KostbDaoService extends GenericDaoService<KostbDao> {
 	 */
 	double getFordelt(Integer kbbnr);
 	
-	
 }
