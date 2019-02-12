@@ -55,7 +55,11 @@ public class LogfDao implements IDao {
 		keys.put("lgid", lgid);
 		return keys;
 	}
-	
+	//AWBnr in format 123-81140743 (with hyphen ...)
+	public Map<String, Object> getKeysLgref2() {
+		keys.put("lgref2", lgref2);
+		return keys;
+	}
 	public Map<String, Object> getKeysLgRecn() {
 		keys.put("lgrecn", lgrecn);
 		return keys;
