@@ -337,6 +337,9 @@
 	<bean id="ffr11fDaoService" class="no.systema.jservices.common.dao.services.Ffr11fDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>
+	<bean id="ratcdfDaoService" class="no.systema.jservices.common.dao.services.RatcdfDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>
 	
 	<bean id="merknfDaoService" class="no.systema.jservices.common.dao.services.MerknfDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
