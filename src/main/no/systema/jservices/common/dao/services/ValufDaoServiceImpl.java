@@ -1,10 +1,14 @@
 package no.systema.jservices.common.dao.services;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import no.systema.jservices.common.dao.ValufDao;
 
 public class ValufDaoServiceImpl extends GenericDaoServiceImpl<ValufDao> implements ValufDaoService{
 
-	private String firmaColumnName = "firma";
+//	static String firmaColumnName = "firma";
 	
 	@Override
 	public boolean exist(Object id) {
@@ -22,5 +26,15 @@ public class ValufDaoServiceImpl extends GenericDaoServiceImpl<ValufDao> impleme
 		qDao.setValkod(currencyCode);
 		return  exist(qDao);
 	}
+	
+	@Override
+	public List<ValufDao> findByLike(String currencyCode) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("valkod", WILD_CARD + currencyCode + WILD_CARD);
+		return findAllInFirma(params, firmaColumnName);
+		
+	}	
+	
+	
 	
 }

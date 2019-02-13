@@ -80,6 +80,20 @@ public class TestJValufDaoService {
 		boolean exist  = valufDaoService.exist("NOK");
 		assertTrue(exist);
 	}	
+
+	@Test
+	public final void testFindByLikeInFirma() {
+		ValufDao qDao = new ValufDao();
+		qDao.setValkod("EUR");
+		boolean exist =  valufDaoService.exist(qDao);
+		assertTrue("EUR should exist",exist);
+		
+		List<ValufDao> dao  =  valufDaoService.findByLike("OK");
+		assertNotNull(dao);
+		
+	}		
+	
+	
 	
 	
 }
