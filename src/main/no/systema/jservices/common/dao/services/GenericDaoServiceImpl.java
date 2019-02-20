@@ -25,6 +25,8 @@ import no.systema.jservices.common.dao.IDao;
  * This class is taking a {@link IDao} as argument. Delivering some convenience methods on Dao, just extend this class for your use case.
  * Dao must represent table and columnname as-is in database.
  * 
+ * Does not support 2FC, hence the trailing WITH NONE is jdbc create/update.
+ * 
  * @author Fredrik Möller
  * @date Jan 18, 2017
  *
@@ -387,9 +389,8 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		}
 		createString.deleteCharAt(createString.length() - 1); // Remove last ,
 		createString.append(" ) ");
-
-		
-		createString.append(" WITH NONE ");  //TODO Verify
+		//https://www-01.ibm.com/support/docview.wss?uid=swg21676715
+		createString.append(" WITH NONE ");
 		
 		try {
 			
@@ -416,12 +417,6 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		IDao dao = (IDao) t;
 		logger.debug("create:IDao="+ReflectionToStringBuilder.toString(dao));
 		Map<String, Object> keys = dao.getKeys();
-		/* REMOVED
-		if (exist(dao)) {
-			String errMsg = "::create::Record already exist in " + tableName + " on keys=" + keys;
-			logger.error(errMsg);
-			throw new DuplicateKeyException(errMsg);
-		}*/
 		Object[] values = new Object[fields.length-1];
 		StringBuilder debugFieldValue = new StringBuilder();
 		int ret = 0;
@@ -465,7 +460,8 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		}
 		createString.deleteCharAt(createString.length() - 1); // Remove last ,
 		createString.append(" ) ");
-
+		//https://www-01.ibm.com/support/docview.wss?uid=swg21676715
+		createString.append(" WITH NONE ");
 		logger.debug(createString.toString());
 		logger.debug(values);
 		
@@ -591,8 +587,8 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 
 		updateString.deleteCharAt(updateString.length() - 1); // Remove last ,
 		updateString.append(addKeys(keys));
-		
-		updateString.append(" WITH NONE ");  //TODO Verify
+		//https://www-01.ibm.com/support/docview.wss?uid=swg21676715
+		updateString.append(" WITH NONE ");
 		
 		logger.debug("updateString="+updateString.toString());
 		logger.debug("debugFieldValue="+debugFieldValue.toString());
