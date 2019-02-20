@@ -388,6 +388,9 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		createString.deleteCharAt(createString.length() - 1); // Remove last ,
 		createString.append(" ) ");
 
+		
+		createString.append(" WITH NONE ");  //TODO Verify
+		
 		try {
 			
 			ret = jdbcTemplate.update(createString.toString(), values);
@@ -588,6 +591,8 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 
 		updateString.deleteCharAt(updateString.length() - 1); // Remove last ,
 		updateString.append(addKeys(keys));
+		
+		updateString.append(" WITH NONE ");  //TODO Verify
 		
 		logger.debug("updateString="+updateString.toString());
 		logger.debug("debugFieldValue="+debugFieldValue.toString());
