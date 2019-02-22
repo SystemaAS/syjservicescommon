@@ -13,62 +13,57 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import no.systema.jservices.common.dao.FriskkDao;
+import no.systema.jservices.common.dao.KodfriDao;
 
-public class TestJFriskkDaoService {
+public class TestJKodfriDaoService {
 
 	ApplicationContext context = null;
-	FriskkDaoService friskkDaoService = null;
+	KodfriDaoService kodfriDaoService = null;
 
 	
 	@Before
 	public void setUp() throws Exception {
 			context = new ClassPathXmlApplicationContext("syjservicescommon-data-service-test.xml");
-			friskkDaoService = (FriskkDaoService) context.getBean("friskkDaoService");
+			kodfriDaoService = (KodfriDaoService) context.getBean("kodfriDaoService");
 	}
 
 	@Test
 	public final void testCountAll() {
-		int count  =  friskkDaoService.countAll();
+		int count  =  kodfriDaoService.countAll();
 		assertNotNull(count);
 	}	
 	
 	@Test
 	public final void testCountAllWithParams() {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("fskode", "CON");  
+		params.put("kfsoko", "CON");  
 		
-		int count  =  friskkDaoService.countAll(params);
+		int count  =  kodfriDaoService.countAll(params);
 		assertNotNull(count);
 	}		
 	
 	@Test
 	public final void testFindAllWithParams() {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("fskode", "FRI");
-		List<FriskkDao> list =  friskkDaoService.findAll(params);
+		params.put("kfsoko", "FRI");
+		List<KodfriDao> list =  kodfriDaoService.findAll(params);
 		assertNotNull(list);
 	}		
 	
 	
 	@Test
 	public final void testExist() {
-		FriskkDao qDao = new FriskkDao();
-		qDao.setFsbnr(600);
-		qDao.setFskode("FAV");
-		qDao.setFssok("TEST");
+		KodfriDao qDao = new KodfriDao();
+		qDao.setKfsoko("MOD");
 		
-		boolean exist =  friskkDaoService.exist(qDao);
-		assertTrue(qDao.getFsbnr() +" should exist",exist);
-		
-		qDao.setFsbnr(0);
-		exist =  friskkDaoService.exist(qDao);
-		assertTrue(qDao.getFsbnr() +" should not exist",!exist);
+		boolean exist =  kodfriDaoService.exist(qDao);
+		assertTrue(qDao.getKfsoko() +" should exist",exist);
 		
 	}
 
 	@Test
 	public final void testFindByLike() {
-		List<FriskkDao> list =  friskkDaoService.findByLike("MO");
+		List<KodfriDao> list =  kodfriDaoService.findByLike("MO");
 		assertNotNull(list);
 	}	
 	
