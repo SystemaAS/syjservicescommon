@@ -66,5 +66,12 @@ public class TestJFriskkDaoService {
 		assertTrue(qDao.getFsbnr() +" should not exist",!exist);
 		
 	}
+
+	@Test
+	public final void testFindByLike() {
+		List<FriskkDao> list =  friskkDaoService.findByLike("MO");
+		assertNotNull(list);
+	}	
+	
 	
 }
