@@ -10,7 +10,7 @@ public class FriskkDao implements IDao {
 
 	private int fsbnr; //key
 	private String fskode; //key
-	private String fssok; //key
+	private String fssok; 
 	private int fsdato;
 	
 	private Map<String, Object> keys = new HashMap<String, Object>();	
@@ -19,7 +19,6 @@ public class FriskkDao implements IDao {
 	public Map<String, Object> getKeys() {
 		keys.put("fsbnr", fsbnr);
 		keys.put("fskode", fskode);
-		keys.put("fssok", fssok);
 		return keys;
 	}
 

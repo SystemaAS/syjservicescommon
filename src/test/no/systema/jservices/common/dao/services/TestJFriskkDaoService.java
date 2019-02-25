@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.log4j.net.SyslogAppender;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -71,6 +73,19 @@ public class TestJFriskkDaoService {
 		List<FriskkDao> list =  friskkDaoService.findByLike("MO");
 		assertNotNull(list);
 	}	
+
+	
+	@Test
+	public final void testFindByFskode() {
+		List<FriskkDao> list =  friskkDaoService.findByFsbnr(2001116);
+		assertNotNull(list);
+		
+		list.forEach(dao -> {
+			System.out.println("dao="+ReflectionToStringBuilder.toString(dao));
+		});
+		
+		
+	}		
 	
 	
 }

@@ -15,4 +15,11 @@ public class FriskkDaoServiceImpl extends GenericDaoServiceImpl<FriskkDao> imple
 		return findAll(params);
 	}
 	
+	@Override
+	public List<FriskkDao> findByFsbnr(int fsbnr) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("fsbnr", fsbnr);
+		return findAll(params);
+	}
+	
 }
