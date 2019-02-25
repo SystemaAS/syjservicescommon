@@ -639,6 +639,48 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 	public List<T> findAll(String sql, RowMapper<T> mapper, Object... args) {
 		return jdbcTemplate.query(sql, mapper, args);
 	}
+	
+	/** 
+	 * Special case to avoid all columns been updated. Only the counter.
+	 * The special case of this method is that the counter column to increase is also the key to the table.
+	 * The counter returned will be ready to use in a specific target table...
+	 * 
+	 * @param idName the column of id field
+	 * @param value	the original value (before adding the value of 1)
+	 * @return
+	 */
+	public int updateCounterColumn(String idName, Integer value) {
+		int ret = 0;
+		int newSeed = value+1;
+		//IDao dao = (IDao) t;
+		//logger.debug("update:IDao="+ReflectionToStringBuilder.toString(dao));
+		
+		StringBuilder debugFieldValue = new StringBuilder();
+		StringBuilder updateString = new StringBuilder("UPDATE ");
+		updateString.append(tableName);
+		updateString.append(" SET " + idName + "= " + newSeed);
+		updateString.append(" WHERE " + idName + " = " + value );
+		System.out.println(updateString.toString());
+		logger.debug("updateString="+updateString.toString());
+		//logger.debug("debugFieldValue="+debugFieldValue.toString());
+		
+		try {
+			ret = jdbcTemplate.update(updateString.toString());
+		} catch (DataAccessException e) { //RuntimeException
+			//e.printStackTrace();
+			logger.error("Error:", e);
+			logger.error("Error, string="+updateString.toString());
+			logger.error("debugFieldValue="+debugFieldValue.toString());
+			throw e;
+		}
+		
+		if (ret != 1) {
+			ret = -1;
+		}		
+		
+		return ret;
+
+	}
 
 
 	private JdbcTemplate jdbcTemplate = null;                                                            

@@ -27,7 +27,7 @@ public class CnffDao implements IDao {
 	private String cntftr;  	//5,0 PAKKET - Time out FTR;in sec.
 	private String cntfvr;  	//5,0 PAKKET - Time out FVR;in sec.
 	private String cntisr;  	//5,0 PAKKET - Time out ISR;in sec.
-	private String cnsfwr;  	//1 VARCHAR - Retrans. strat. FWB
+	private String cnsfwb;  	//1 VARCHAR - Retrans. strat. FWB
 	
 	private String cnsfsr;  	//1 VARCHAR - Retrans. strat. FSR
 	private String cnsffr;  	//1 VARCHAR - Retrans. strat. FFR
@@ -60,7 +60,7 @@ public class CnffDao implements IDao {
 	
 	private String cnctck;  	//1 VARCHAR - Chk Valid City Codes (Y/N)
 	private String cnprt;  	//10 VARCHAR - Printer Id
-	private String cnanda;  	//1 VARCHAR - Print function NOA
+	private String cnanoa;  	//1 VARCHAR - Print function NOA
 	
 	private String cnpre1;  	//14 VARCHAR - Prefix PIMA
 	private String cnpre2;  	//14 VARCHAR - Prefix SITA
