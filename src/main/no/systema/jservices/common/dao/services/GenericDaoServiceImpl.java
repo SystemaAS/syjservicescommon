@@ -660,8 +660,8 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		updateString.append(tableName);
 		updateString.append(" SET " + idName + "= " + newSeed);
 		updateString.append(" WHERE " + idName + " = " + value );
-		System.out.println(updateString.toString());
-		logger.debug("updateString="+updateString.toString());
+		//System.out.println(updateString.toString());
+		logger.debug("updateString CNFF counter="+updateString.toString());
 		//logger.debug("debugFieldValue="+debugFieldValue.toString());
 		
 		try {
