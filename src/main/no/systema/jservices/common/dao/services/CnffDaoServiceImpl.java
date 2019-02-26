@@ -12,7 +12,7 @@ public class CnffDaoServiceImpl extends GenericDaoServiceImpl<CnffDao> implement
 	 * @return
 	 */
 	
-	public int getCnrecnAndIncrement(){
+	public int getCnrecnAfterIncrement(){
 		int counter = 0;
 		int update = 0;
 		
