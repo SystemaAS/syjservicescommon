@@ -20,10 +20,13 @@ public class Ffr00fDaoServiceImpl extends GenericDaoServiceImpl<Ffr00fDao> imple
 		modelMapper.addConverter(daoConverter.doInteger());
 		//handover to all DAOs
 		Ffr00fDao daoParent = modelMapper.map(dto, Ffr00fDao.class);
-		//Ffr03fDao daoChild_1 = modelMapper.map(dto, Ffr03fDao.class);
-		//
+		//03
+		Ffr03fDao daoChild_1 = modelMapper.map(dto, Ffr03fDao.class);
+		daoChild_1.setF03rec(daoParent.getF00rec());
+		
+		//Create cascade
 		Ffr00fDao rDaoParent = super.create(daoParent);
-		//Ffr03fDao rDaoChild_1 = ffr03fDaoServiceCascade.create(daoChild_1);
+		Ffr03fDao rDaoChild_1 = ffr03fDaoService.create(daoChild_1);
 		
 		return rDaoParent;
 	}
