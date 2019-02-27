@@ -88,4 +88,49 @@ public class Ffr00fDto {
 	private String f137;  		//12 VARCHAR - Suppl.Shp.Inf.
 	
 	
+	//==================================
+	//Child tables' fields from now on
+	//==================================
+	//FFR03F
+	private String f0311; 		//2 VARCHAR - Carrier Code
+	private String f0312; 		//5 VARCHAR - Comp NE
+	private String f0314;  		//2,0 PAKKET - Sced. dep. Day
+	private String f0315;  		//3 VARCHAR - Sced. dep. Month
+	private String f0331;  		//3 VARCHAR - Dep. Airport code
+	private String f0332;  		//3 VARCHAR - Arr. Airport code
+	private String f035;  		//2 VARCHAR - Space alloc. code
+	private String f0362;  		//14 VARCHAR - Allotment ID.
+	//FFR04F
+	private String f0451a; 		//3 VARCHAR - ULD Type
+	private String f0452a; 		//4 VARCHAR - ULD serial no.
+	private String f0453a;  	//2 VARCHAR - ULD Owner code
+	private String f0462a;  	//1 VARCHAR - ULD Loading ind.
+	private String f0472a;  	//1 VARCHAR - ULD Weight code
+	private String f0473a ;  	//8,1 PAKKET - ULD Weight
+	//FFR08F
+	private String f0831; 		//1 VARCHAR - Weight Code
+	private String f0832; 		//8,1 PAKKET - Weight
+	private String f0851;  		//3 VARCHAR - Measurem. Unit code 
+	private String f0852;  		//5,0 PAKKET -  Lenght Dim.
+	private String f0854;  		//5,0 PAKKET -  Width Dim.
+	private String f0856;  		//5,0 PAKKET -  Height Dim.
+	private String f0857;  		//4,0 PAKKET -  No. of Pieces
+	//FFR10F
+	private String f1082; 		//3 VARCHAR - Contact ID
+	private String f1084; 		//25 VARCHAR - Contact No
+	//FFR11F
+	private String f1182; 		//3 VARCHAR - Contact ID
+	private String f1184; 		//25 VARCHAR - Contact No
+	
+	//Foreign-keys for automatic modelmapper handover
+	//FFR03F,FFR04F,FFR08F,FFR10F,FFR11F
+	private String f03rec = this.f00rec; 
+	private String f04rec = this.f00rec; 
+	private String f08rec = this.f00rec; 
+	private String f10rec = this.f00rec; 
+	private String f11rec = this.f00rec; 
+	
+	//=======================
+	//END Child tables' fields
+	//=======================
 }

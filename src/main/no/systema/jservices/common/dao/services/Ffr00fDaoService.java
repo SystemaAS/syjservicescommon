@@ -15,6 +15,7 @@ import no.systema.jservices.common.dto.Ffr00fDto;
 public interface Ffr00fDaoService extends GenericDaoService<Ffr00fDao> {
 	
 	public Ffr00fDao create(Ffr00fDto t);
-	
+	public Ffr00fDao update(Ffr00fDto t);
+	public void delete(Ffr00fDto t);
 	
 }
