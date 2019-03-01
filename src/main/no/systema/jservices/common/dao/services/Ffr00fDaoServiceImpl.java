@@ -1,47 +1,25 @@
 package no.systema.jservices.common.dao.services;
 
-import org.modelmapper.ModelMapper;
-
-import no.systema.jservices.common.dao.Ffr00fDao;
-import no.systema.jservices.common.dao.Ffr03fDao;
-import no.systema.jservices.common.dao.Ffr04fDao;
-import no.systema.jservices.common.dao.Ffr08fDao;
-import no.systema.jservices.common.dao.Ffr10fDao;
-import no.systema.jservices.common.dao.Ffr11fDao;
-
 import no.systema.jservices.common.dto.Ffr00fDto;
-import no.systema.jservices.common.dao.modelmapper.converter.DaoConverter;
+import no.systema.jservices.common.dao.facade.Ffr00fDaoFacade;
+import no.systema.jservices.common.dao.Ffr00fDao;
 
 public class Ffr00fDaoServiceImpl extends GenericDaoServiceImpl<Ffr00fDao> implements Ffr00fDaoService{
 	
-	
 	/**
+	 *
 	 * CREATE NEW
 	 * CRUD-cascade on several child-tables
 	 */
-	public Ffr00fDao create(Ffr00fDto dto){
-		ModelMapper modelMapper = new ModelMapper();
-		DaoConverter daoConverter = new DaoConverter();
-		//Converters
-		modelMapper.addConverter(daoConverter.doBigDecimal());
-		modelMapper.addConverter(daoConverter.doInteger());
-		//handover to all DAOs
-		//PARENT
-		Ffr00fDao daoParent = modelMapper.map(dto, Ffr00fDao.class);
-		//CHILD tables
-		Ffr03fDao daoChild_1 = modelMapper.map(dto, Ffr03fDao.class);daoChild_1.setF03rec(daoParent.getF00rec());
-		Ffr04fDao daoChild_2 = modelMapper.map(dto, Ffr04fDao.class);daoChild_2.setF04rec(daoParent.getF00rec());
-		Ffr08fDao daoChild_3 = modelMapper.map(dto, Ffr08fDao.class);daoChild_3.setF08rec(daoParent.getF00rec());
-		Ffr10fDao daoChild_4 = modelMapper.map(dto, Ffr10fDao.class);daoChild_4.setF10rec(daoParent.getF00rec());
-		Ffr11fDao daoChild_5 = modelMapper.map(dto, Ffr11fDao.class);daoChild_5.setF11rec(daoParent.getF00rec());
-		
+	 
+	public Ffr00fDao create(Ffr00fDto dto, Ffr00fDaoFacade facade){
 		//Create cascade
-		Ffr00fDao rDaoParent = super.create(daoParent);
-		ffr03fDaoService.create(daoChild_1);
-		/*ffr04fDaoService.create(daoChild_2);
-		ffr08fDaoService.create(daoChild_3);
-		ffr10fDaoService.create(daoChild_4);
-		ffr11fDaoService.create(daoChild_5);
+		Ffr00fDao rDaoParent = super.create(facade.getFfr00fDao());
+		ffr03fDaoService.create(facade.getFfr03fDao());
+		/*ffr04fDaoService.create(facade.getFfr04fDao());
+		ffr08fDaoService.create(facade.getFfr08fDao());
+		ffr10fDaoService.create(facade.getFfr10fDao());
+		ffr11fDaoService.create(facade.getFfr11fDao());
 		*/
 		return rDaoParent;
 	}
@@ -50,30 +28,15 @@ public class Ffr00fDaoServiceImpl extends GenericDaoServiceImpl<Ffr00fDao> imple
 	 * UPDATE
 	 * CRUD-cascade on several child-tables
 	 */
-	public Ffr00fDao update(Ffr00fDto dto){
-		ModelMapper modelMapper = new ModelMapper();
-		DaoConverter daoConverter = new DaoConverter();
-		//Converters
-		modelMapper.addConverter(daoConverter.doBigDecimal());
-		modelMapper.addConverter(daoConverter.doInteger());
-		//handover to all DAOs
-		//PARENT
-		Ffr00fDao daoParent = modelMapper.map(dto, Ffr00fDao.class);
-		//CHILD tables
-		Ffr03fDao daoChild_1 = modelMapper.map(dto, Ffr03fDao.class);daoChild_1.setF03rec(daoParent.getF00rec());
-		Ffr04fDao daoChild_2 = modelMapper.map(dto, Ffr04fDao.class);daoChild_2.setF04rec(daoParent.getF00rec());
-		Ffr08fDao daoChild_3 = modelMapper.map(dto, Ffr08fDao.class);daoChild_3.setF08rec(daoParent.getF00rec());
-		Ffr10fDao daoChild_4 = modelMapper.map(dto, Ffr10fDao.class);daoChild_4.setF10rec(daoParent.getF00rec());
-		Ffr11fDao daoChild_5 = modelMapper.map(dto, Ffr11fDao.class);daoChild_5.setF11rec(daoParent.getF00rec());
-		
-		//Update cascade
-		Ffr00fDao rDaoParent = super.update(daoParent);
-		ffr03fDaoService.update(daoChild_1);
-		/*ffr04fDaoService.update(daoChild_2);
-		ffr08fDaoService.update(daoChild_3);
-		ffr10fDaoService.update(daoChild_4);
-		ffr11fDaoService.update(daoChild_5);
+	public Ffr00fDao update(Ffr00fDto dto, Ffr00fDaoFacade facade){
+		Ffr00fDao rDaoParent = super.update(facade.getFfr00fDao());
+		ffr03fDaoService.update(facade.getFfr03fDao());
+		/*ffr04fDaoService.update(facade.getFfr04fDao());
+		ffr08fDaoService.update(facade.getFfr08fDao());
+		ffr10fDaoService.update(facade.getFfr10fDao());
+		ffr11fDaoService.update(facade.getFfr11fDao());
 		*/
+		
 		return rDaoParent;
 	}
 	
@@ -82,30 +45,13 @@ public class Ffr00fDaoServiceImpl extends GenericDaoServiceImpl<Ffr00fDao> imple
 	 * CRUD-cascade
 	 * 
 	 */
-	public void delete(Ffr00fDto dto){
-		ModelMapper modelMapper = new ModelMapper();
-		DaoConverter daoConverter = new DaoConverter();
-		//Converters
-		modelMapper.addConverter(daoConverter.doBigDecimal());
-		modelMapper.addConverter(daoConverter.doInteger());
-		//handover to all DAOs
-		
-		//PARENT
-		Ffr00fDao daoParent = modelMapper.map(dto, Ffr00fDao.class);
-		//CHILD tables
-		Ffr03fDao daoChild_1 = modelMapper.map(dto, Ffr03fDao.class);daoChild_1.setF03rec(daoParent.getF00rec());
-		Ffr04fDao daoChild_2 = modelMapper.map(dto, Ffr04fDao.class);daoChild_2.setF04rec(daoParent.getF00rec());
-		Ffr08fDao daoChild_3 = modelMapper.map(dto, Ffr08fDao.class);daoChild_3.setF08rec(daoParent.getF00rec());
-		Ffr10fDao daoChild_4 = modelMapper.map(dto, Ffr10fDao.class);daoChild_4.setF10rec(daoParent.getF00rec());
-		Ffr11fDao daoChild_5 = modelMapper.map(dto, Ffr11fDao.class);daoChild_5.setF11rec(daoParent.getF00rec());
-		
-		//Delete cascade
-		super.delete(daoParent);
-		ffr03fDaoService.delete(daoChild_1);
-		/*ffr04fDaoService.delete(daoChild_2);
-		ffr08fDaoService.delete(daoChild_3);
-		ffr10fDaoService.delete(daoChild_4);
-		ffr11fDaoService.delete(daoChild_5);
+	public void delete(Ffr00fDto dto, Ffr00fDaoFacade facade ){
+		super.delete(facade.getFfr00fDao());
+		ffr03fDaoService.delete(facade.getFfr03fDao());
+		/*ffr04fDaoService.delete(facade.getFfr04fDao());
+		ffr08fDaoService.delete(facade.getFfr08fDao());
+		ffr10fDaoService.delete(facade.getFfr10fDao());
+		ffr11fDaoService.delete(facade.getFfr11fDao());
 		*/
 	}
 	

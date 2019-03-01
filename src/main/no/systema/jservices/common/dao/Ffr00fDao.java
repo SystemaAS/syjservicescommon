@@ -20,7 +20,6 @@ public class Ffr00fDao implements IDao {
 	private Integer f0211 = 0; 		//3,0 PAKKET - Airline prefix
 	private Integer f0213 = 0; 		//8,0 PAKKET - AWB serial no
 	private String f0221;  		//3 VARCHAR - Origin airport
-	
 	private String f0222;  		//3 VARCHAR - Dest. airport
 	private String f0232;  		//1 VARCHAR - Ship. desc. code
 	private Integer f0233 = 0;  		//4,0 PAKKET - No. of Pieces
