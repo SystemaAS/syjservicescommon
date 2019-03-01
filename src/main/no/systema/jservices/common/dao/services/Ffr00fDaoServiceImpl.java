@@ -109,8 +109,6 @@ public class Ffr00fDaoServiceImpl extends GenericDaoServiceImpl<Ffr00fDao> imple
 		*/
 	}
 	
-	
-	
 	//Wired
 	private Ffr03fDaoService ffr03fDaoService = null;
 	public void setFfr03fDaoService (Ffr03fDaoService ffr03fDaoService) {this.ffr03fDaoService = ffr03fDaoService;}
