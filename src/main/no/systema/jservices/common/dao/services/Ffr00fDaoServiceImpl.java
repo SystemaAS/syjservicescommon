@@ -2,9 +2,56 @@ package no.systema.jservices.common.dao.services;
 
 import no.systema.jservices.common.dto.Ffr00fDto;
 import no.systema.jservices.common.dao.facade.Ffr00fDaoFacade;
+
+import java.util.*;
+
+import org.modelmapper.ModelMapper;
+
 import no.systema.jservices.common.dao.Ffr00fDao;
+import no.systema.jservices.common.dao.Ffr03fDao;
+import no.systema.jservices.common.dao.Ffr04fDao;
+
 
 public class Ffr00fDaoServiceImpl extends GenericDaoServiceImpl<Ffr00fDao> implements Ffr00fDaoService{
+	
+	/**
+	 * The method returns a complete dto (cascade of all dao's in a parent-child retaltionship)
+	 * In this way the result will be used in a single view element based on this dto
+	 *  
+	 */
+	
+	public List<Ffr00fDto> findAll(Map<String, Object> params, Ffr00fDaoFacade f){
+		Ffr00fDto dto = f.getDto();
+		
+		List<Ffr00fDto> listDto = new ArrayList<Ffr00fDto>();
+		List<Ffr00fDao> listDao = super.findAll(params);
+		
+		for (Ffr00fDao record: listDao){
+			//parent record
+			f.setDto(record);
+			
+			//03
+			Ffr03fDao dao03 = new Ffr03fDao();
+			dao03.setF03rec(record.getF00rec());
+			dao03 = ffr03fDaoService.find(dao03);
+			if(dao03!=null){
+				f.setDto(dao03);
+			}
+			//04
+			Ffr04fDao dao04 = new Ffr04fDao();
+			dao04.setF04rec(record.getF00rec());
+			dao04 = ffr04fDaoService.find(dao04);
+			if(dao04!=null){
+				f.setDto(dao04);
+			}
+	
+			//set final list with complete dto
+			listDto.add(f.getDto());
+		}
+		
+		return listDto;
+	}
+	
 	
 	/**
 	 *

@@ -43,6 +43,7 @@ public class Ffr00fDaoFacade {
 	 * 
 	 */
 	public Ffr00fDaoFacade(Ffr00fDto dto){
+		//init modelmapper with converters
 		modelMapper.addConverter(daoConverter.doBigDecimal());
 		modelMapper.addConverter(daoConverter.doInteger());
 		this.dto = dto;
@@ -56,6 +57,7 @@ public class Ffr00fDaoFacade {
 	}
 
 	/**
+	 * Maps dto to a specific dao
 	 * 
 	 * @param dto
 	 * @param dao
@@ -65,5 +67,16 @@ public class Ffr00fDaoFacade {
 		Object resultDao = modelMapper.map(this.dto, dao);
 		return resultDao;
 	}
+	
+	/**
+	 * Maps a specific dao to the dto
+	 * (The inverse of the method: getDao(Class<?> dao)...)
+	 * @param dao
+	 */
+	public void setDto(Object dao){
+		modelMapper.map(dao, this.dto);
+	}
+	
+	
 	
 }
