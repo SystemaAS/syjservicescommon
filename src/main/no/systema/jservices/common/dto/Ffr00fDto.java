@@ -1,9 +1,9 @@
 package no.systema.jservices.common.dto;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.math.BigDecimal;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import no.systema.jservices.common.dao.Ffr03fDao;
 import lombok.Data;
 
 /**
@@ -133,4 +133,7 @@ public class Ffr00fDto {
 	//=======================
 	//END Child tables' fields
 	//=======================
+	
+	private List<Ffr03fDao> listFfr03fDao;
+	
 }
