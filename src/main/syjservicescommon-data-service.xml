@@ -321,6 +321,11 @@
 	</bean>
 	<bean id="ffr00fDaoService" class="no.systema.jservices.common.dao.services.Ffr00fDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+		<property name="ffr03fDaoService"> <ref bean="ffr03fDaoService" /></property>
+		<property name="ffr04fDaoService"> <ref bean="ffr04fDaoService" /></property>
+		<property name="ffr08fDaoService"> <ref bean="ffr08fDaoService" /></property>
+		<property name="ffr10fDaoService"> <ref bean="ffr10fDaoService" /></property>
+		<property name="ffr11fDaoService"> <ref bean="ffr11fDaoService" /></property>
 		
 	</bean>
 	<bean id="ffr03fDaoService" class="no.systema.jservices.common.dao.services.Ffr03fDaoServiceImpl">
