@@ -2,25 +2,33 @@ package no.systema.jservices.common.dao.services;
 
 import no.systema.jservices.common.dto.Ffr00fDto;
 import no.systema.jservices.common.dao.facade.Ffr00fDaoFacade;
-
 import java.util.*;
-
-import org.modelmapper.ModelMapper;
-
 import no.systema.jservices.common.dao.Ffr00fDao;
 import no.systema.jservices.common.dao.Ffr03fDao;
-import no.systema.jservices.common.dao.Ffr04fDao;
+import no.systema.jservices.common.util.StringUtils;
 
 
+/**
+ * This class deals with the CRUD of a parent-record AND
+ * the CRUD of those single-child-records present in the same GUI as the parent record.
+ * 
+ * @author oscardelatorre
+ * Feb 2019
+ *
+ */
 public class Ffr00fDaoServiceImpl extends GenericDaoServiceImpl<Ffr00fDao> implements Ffr00fDaoService{
 	
-	
-	
-	 
+	/**
+	 * 
+	 */
 	public Ffr00fDao create(Ffr00fDto dto, Ffr00fDaoFacade facade){
-		//Create cascade
+		//Create parent
 		Ffr00fDao rDaoParent = super.create(facade.getFfr00fDao());
+		//Create child 03
+		Ffr03fDao daoLocal = facade.getFfr03fDao();
+		daoLocal.setF03rec(Integer.valueOf(dto.getF00rec()));
 		ffr03fDaoService.create(facade.getFfr03fDao());
+		//Create child 04
 		/*ffr04fDaoService.create(facade.getFfr04fDao());
 		ffr08fDaoService.create(facade.getFfr08fDao());
 		ffr10fDaoService.create(facade.getFfr10fDao());
@@ -29,22 +37,37 @@ public class Ffr00fDaoServiceImpl extends GenericDaoServiceImpl<Ffr00fDao> imple
 		return rDaoParent;
 	}
 	
-	
+	/**
+	 * 
+	 */
 	public Ffr00fDao update(Ffr00fDto dto, Ffr00fDaoFacade facade){
+		//Parent table
 		Ffr00fDao rDaoParent = super.update(facade.getFfr00fDao());
-		ffr03fDaoService.update(facade.getFfr03fDao());
+		
+		//Child tables cascade
+		if(StringUtils.hasValue(facade.getDto().getF03rec())){
+			ffr03fDaoService.update(facade.getFfr03fDao());
+		}else{
+			Ffr03fDao daoLocal = facade.getFfr03fDao();
+			daoLocal.setF03rec(Integer.valueOf(dto.getF00rec()));
+			ffr03fDaoService.createWithoutDulicateCheck(daoLocal);
+		}
 		/*ffr04fDaoService.update(facade.getFfr04fDao());
 		ffr08fDaoService.update(facade.getFfr08fDao());
 		ffr10fDaoService.update(facade.getFfr10fDao());
 		ffr11fDaoService.update(facade.getFfr11fDao());
 		*/
-		
 		return rDaoParent;
 	}
 	
 	public void delete(Ffr00fDto dto, Ffr00fDaoFacade facade ){
+		//Parent table
 		super.delete(facade.getFfr00fDao());
-		ffr03fDaoService.delete(facade.getFfr03fDao());
+		
+		//Child tables cascade
+		if(ffr03fDaoService.find(facade.getFfr03fDao())!=null){
+			ffr03fDaoService.delete(facade.getFfr03fDao());
+		}
 		/*ffr04fDaoService.delete(facade.getFfr04fDao());
 		ffr08fDaoService.delete(facade.getFfr08fDao());
 		ffr10fDaoService.delete(facade.getFfr10fDao());

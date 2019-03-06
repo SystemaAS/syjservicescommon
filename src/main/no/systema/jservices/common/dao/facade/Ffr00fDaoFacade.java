@@ -15,7 +15,7 @@ import no.systema.jservices.common.dao.Ffr04fDao;
 import no.systema.jservices.common.dao.Ffr08fDao;
 import no.systema.jservices.common.dao.Ffr10fDao;
 import no.systema.jservices.common.dao.Ffr11fDao;
-
+import no.systema.jservices.common.util.StringUtils;
 
 
 /**
@@ -48,11 +48,13 @@ public class Ffr00fDaoFacade {
 		modelMapper.addConverter(daoConverter.doInteger());
 		this.dto = dto;
 		//populate all child-tables' foreign keys
-		this.dto.setF03rec(this.dto.getF00rec());
-		this.dto.setF04rec(this.dto.getF00rec());
-		this.dto.setF08rec(this.dto.getF00rec());
-		this.dto.setF10rec(this.dto.getF00rec());
-		this.dto.setF11rec(this.dto.getF00rec());
+		if(StringUtils.hasValue(dto.getF03rec())){
+			this.dto.setF03rec(dto.getF03rec());
+		}
+		this.dto.setF04rec(dto.getF00rec());
+		this.dto.setF08rec(dto.getF00rec());
+		this.dto.setF10rec(dto.getF00rec());
+		this.dto.setF11rec(dto.getF00rec());
 
 	}
 
