@@ -1,6 +1,6 @@
 package no.systema.jservices.common.dao.services;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
@@ -64,6 +64,12 @@ public class TestJKodafDaoService {
 		dao.setBetbet("14");
 		boolean exist = kodafDaoService.existInFirma(dao, firmaColumnName );
 		assertTrue(dao.getBetbet() + " should exist", exist);
+		
+		dao.setBetbet("XX");
+		exist = kodafDaoService.existInFirma(dao, firmaColumnName );
+		assertFalse(dao.getBetbet() + " should NOT exist", exist);
+
+		
 	}
 
 	@Test
