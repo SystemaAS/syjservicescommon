@@ -20,6 +20,7 @@ public class TestJVispnrDaoService {
 	public void setUp() throws Exception {
 		context = new ClassPathXmlApplicationContext("syjservicescommon-data-service-test.xml");
 		vispnrDaoService = (VispnrDaoService) context.getBean("vispnrDaoService");
+
 		
 	}
 
@@ -55,6 +56,17 @@ public class TestJVispnrDaoService {
 		
 	}	
 	
+	@Test
+	public final void testExist() {
+		VispnrDao qDao = new VispnrDao();
+		qDao.setVilk("SE");
+		qDao.setViponr("41871");
+		
+		boolean exist =  vispnrDaoService.exist(qDao);
+		assertTrue(exist);
+		
+	}	
+
 	
 	
 }

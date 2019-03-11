@@ -521,6 +521,10 @@
 		<property name="jdbcTemplate">
 			<ref bean="jdbcTemplate" />
 		</property>
+		<property name="firmvisDaoService">
+			<ref bean="firmvisDaoService" />
+		</property>
+
 	</bean>	
 
 	<bean id="kodfriDaoService"

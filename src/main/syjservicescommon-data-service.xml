@@ -441,6 +441,7 @@
 
 	<bean id="vispnrDaoService" class="no.systema.jservices.common.dao.services.VispnrDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+      	<property name="firmvisDaoService"><ref bean="firmvisDaoService"/></property>
 	</bean>
 
 	<bean id="kodfriDaoService" class="no.systema.jservices.common.dao.services.KodfriDaoServiceImpl">

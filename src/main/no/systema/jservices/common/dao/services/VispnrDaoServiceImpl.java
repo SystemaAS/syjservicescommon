@@ -10,6 +10,25 @@ public class VispnrDaoServiceImpl extends GenericDaoServiceImpl<VispnrDao> imple
 
 	@Override
 	public boolean landKodeExist(String vilk) {
+		if (firmvisDaoService.countAll() > 0) {
+			//has Visma.net integration, validate downstreams.
+			return validateLandKodeExist(vilk);
+		} else {
+			return true;
+		}
+	}
+	
+	@Override
+	public boolean exist(Object id) {
+		if (firmvisDaoService.countAll() > 0) {
+			//has Visma.net integration, validate downstreams.
+			return super.exist(id);
+		} else {
+			return true;
+		}
+	}
+	
+	private boolean validateLandKodeExist(String vilk) {
 		StringBuilder queryString = new StringBuilder("SELECT DISTINCT vilk AS value FROM VISPNR ");
 		List<SingleValueDto> list = findAll(queryString.toString(), new GenericObjectMapper(new SingleValueDto()));		
 	
@@ -18,7 +37,13 @@ public class VispnrDaoServiceImpl extends GenericDaoServiceImpl<VispnrDao> imple
 				  .findAny()
 				  .isPresent();
 		
-		return exist;
+		return exist;		
+		
 	}
+	
+	private FirmvisDaoService firmvisDaoService = null;                                                            
+	public void setFirmvisDaoService( FirmvisDaoService firmvisDaoService) {this.firmvisDaoService = firmvisDaoService;}          
+	public FirmvisDaoService getFirmvisDaoService() {return this.firmvisDaoService;}	
+	
 	
 }
