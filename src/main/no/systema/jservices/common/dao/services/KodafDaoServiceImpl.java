@@ -21,7 +21,6 @@ public class KodafDaoServiceImpl extends GenericDaoServiceImpl<KodafDao> impleme
 
 	@Override
 	public List<KodafDao> findAll(Map<String, Object> params) {
-		logger.info("overrided findAll");
 		return findAllInFirma(params, firmaColumnName);
 	}
 	
