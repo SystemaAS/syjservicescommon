@@ -64,6 +64,16 @@ public class TestJVispnrDaoService {
 		
 		boolean exist =  vispnrDaoService.exist(qDao);
 		assertTrue(exist);
+
+		qDao.setVilk("NO");
+		qDao.setViponr("4373");
+
+		exist =  vispnrDaoService.exist(qDao);
+		assertTrue(exist);
+		
+		
+		
+		
 		
 	}	
 

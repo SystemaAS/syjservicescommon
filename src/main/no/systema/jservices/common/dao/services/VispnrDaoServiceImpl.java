@@ -8,10 +8,20 @@ import no.systema.jservices.common.dto.SingleValueDto;
 
 public class VispnrDaoServiceImpl extends GenericDaoServiceImpl<VispnrDao> implements VispnrDaoService{
 
+
+	@Override
+	public boolean hasVismaIntegration() {
+		if (firmvisDaoService.countAll() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}		
+	
+	
 	@Override
 	public boolean landKodeExist(String vilk) {
-		if (firmvisDaoService.countAll() > 0) {
-			//has Visma.net integration, validate downstreams.
+		if (hasVismaIntegration()) {
 			return validateLandKodeExist(vilk);
 		} else {
 			return true;
@@ -20,8 +30,7 @@ public class VispnrDaoServiceImpl extends GenericDaoServiceImpl<VispnrDao> imple
 	
 	@Override
 	public boolean exist(Object id) {
-		if (firmvisDaoService.countAll() > 0) {
-			//has Visma.net integration, validate downstreams.
+		if (hasVismaIntegration()) {
 			return super.exist(id);
 		} else {
 			return true;
@@ -43,7 +52,7 @@ public class VispnrDaoServiceImpl extends GenericDaoServiceImpl<VispnrDao> imple
 	
 	private FirmvisDaoService firmvisDaoService = null;                                                            
 	public void setFirmvisDaoService( FirmvisDaoService firmvisDaoService) {this.firmvisDaoService = firmvisDaoService;}          
-	public FirmvisDaoService getFirmvisDaoService() {return this.firmvisDaoService;}	
-	
+	public FirmvisDaoService getFirmvisDaoService() {return this.firmvisDaoService;}
+
 	
 }

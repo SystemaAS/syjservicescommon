@@ -1,5 +1,6 @@
 package no.systema.jservices.common.dao.services;
 
+import no.systema.jservices.common.dao.FirmvisDao;
 import no.systema.jservices.common.dao.VispnrDao;
 
 public interface VispnrDaoService extends GenericDaoService<VispnrDao> {
@@ -18,5 +19,13 @@ public interface VispnrDaoService extends GenericDaoService<VispnrDao> {
 	 */
 	@Override
 	boolean exist(Object id);
+	
+	/**
+	 * Check if values exists in {@linkplain FirmvisDao}
+	 * 
+	 * 
+	 * @return true if exist, false otherwise
+	 */
+	boolean hasVismaIntegration();
 
 }

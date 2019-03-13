@@ -3,8 +3,6 @@ package no.systema.jservices.common.elma.proxy;
 import java.net.URI;
 import java.util.Arrays;
 
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
@@ -14,27 +12,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import no.systema.jservices.common.elma.entities.Entries;
 import no.systema.jservices.common.elma.entities.Entry;
-import no.systema.jservices.common.util.ApplicationPropertiesUtil;
 import no.systema.jservices.common.util.CommonClientHttpRequestInterceptor;
 import no.systema.jservices.common.util.CommonResponseErrorHandler;
 
 @Service
 public class EntryRequest {
-
-	private static Logger logger = Logger.getLogger(EntryRequest.class.getName());
-	
-	
-//    @Value("${no.difi.host}")
-//    String host2;	
-//	
-//    @Value("${no.difi.path.elma}")
-//    String path2;		
-	
-	
-//	String host = ApplicationPropertiesUtil.getProperty("no.difi.host");
-//	String path = ApplicationPropertiesUtil.getProperty("no.difi.path.elma");
-	
-	
 	String host = "hotell.difi.no";
 	String path = "api/json/difi/elma/participants";
 	
