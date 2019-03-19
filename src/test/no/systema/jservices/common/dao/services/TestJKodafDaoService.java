@@ -12,7 +12,9 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import lombok.extern.slf4j.Slf4j;
 import no.systema.jservices.common.dao.KodafDao;
+
 
 public class TestJKodafDaoService {
 
@@ -83,6 +85,13 @@ public class TestJKodafDaoService {
 	@Test
 	public final void testFindAll() {
 		List<KodafDao> list =  kodafDaoService.findAll(null);
+
+		list.forEach(dao -> {
+			System.out.println("dao="+dao.getBetbet());
+		});
+		
+		
+		
 		assertNotNull(list);
 	}		
 	
