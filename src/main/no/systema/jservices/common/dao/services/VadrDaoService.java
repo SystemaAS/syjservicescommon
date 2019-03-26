@@ -17,5 +17,13 @@ public interface VadrDaoService extends GenericDaoService<VadrDao> {
 	public List<VadrDao> getList(int kundnr, String firma);
 	public List<VadrDao> getList(int kundnr, int vadrnr, String firma);
 	
+	/**
+	 * Update a subset of fields for vadrnr=1
+	 * 
+	 * @param dao
+	 * @return a decimated dao, recommeded not to use.
+	 */
+	public VadrDao updateNr1(VadrDao dao);
+	
 	
 }
