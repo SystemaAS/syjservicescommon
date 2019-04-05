@@ -1,7 +1,10 @@
 package no.systema.jservices.common.dao;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -45,9 +48,12 @@ public class SvlthDao implements IDao {
 	private String svlth_uti;
 	private String svlth_utx;
 	
+	private Map<String, Object> keys = null;
+	
 	@Override
+	@JsonIgnore
 	public Map<String, Object> getKeys() {
-		throw new IllegalAccessError("SVLTH do not have normalized keys. Do not use getKeys!");
+		return keys;
 	}
 
 }

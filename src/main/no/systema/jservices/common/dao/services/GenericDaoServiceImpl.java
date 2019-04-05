@@ -335,7 +335,7 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		IDao dao = (IDao) t;
 		logger.debug("create:IDao="+ReflectionToStringBuilder.toString(dao));
 		Map<String, Object> keys = dao.getKeys();
-		if (exist(dao)) {
+		if (keys != null && exist(dao)) {
 			String errMsg = "::create::Record already exist in " + tableName + " on keys=" + keys;
 			logger.error(errMsg);
 			throw new DuplicateKeyException(errMsg);
@@ -375,7 +375,7 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 						}
 					}
 				} else  {
-					logger.info("returnType not handled, field="+field);
+					//logger.info("returnType not handled, field="+field);
 				}
 			}
 		}
@@ -395,7 +395,7 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 		try {
 			
 			ret = jdbcTemplate.update(createString.toString(), values);
-			logger.debug("create executed. createString="+createString+" on params="+keys);
+			//logger.info("create executed. createString="+createString+" on params="+keys);
 			
 		} catch (DataAccessException e) { //RuntimeException
 			logger.error("Error:", e);
