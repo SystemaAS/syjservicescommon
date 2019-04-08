@@ -21,9 +21,9 @@ import lombok.Data;
 public class SvlthDao implements IDao {
 
 	private String svlth_h; 
-	private BigDecimal svlth_ibr= new BigDecimal(0);
-	private int svlth_id1;
-	private int svlth_id2;
+	private BigDecimal svlth_ibr;
+	private Integer svlth_id1;
+	private Integer svlth_id2;
 	private String svlth_iex; 
 	private String svlth_igl;
 	private String svlth_ign;
@@ -32,19 +32,19 @@ public class SvlthDao implements IDao {
 	private String svlth_ih3;
 	private String svlth_ih4;
 	private String svlth_ih5;
-	private int svlth_im1;
-	private int svlth_int;
+	private Integer svlth_im1;
+	private Integer svlth_int;
 	private String svlth_irn;
 	private String svlth_isl;
 	private String svlth_itx;
 	private String svlth_ivb;
-	private int svlth_rnt;
+	private Integer svlth_rnt;
 	private String svlth_rtx;
 	private String svlth_rty;
-	private int svlth_ud1;
+	private Integer svlth_ud1;
 	private String svlth_uex;
-	private int svlth_um1;
-	private int svlth_unt;
+	private Integer svlth_um1;
+	private Integer svlth_unt;
 	private String svlth_uti;
 	private String svlth_utx;
 	
