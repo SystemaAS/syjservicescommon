@@ -3,6 +3,9 @@ package no.systema.jservices.common.elma.proxy;
 import java.net.URI;
 import java.util.Arrays;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
@@ -10,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import no.systema.jservices.common.dao.services.GenericDaoServiceImpl;
 import no.systema.jservices.common.elma.entities.Entries;
 import no.systema.jservices.common.elma.entities.Entry;
 import no.systema.jservices.common.util.CommonClientHttpRequestInterceptor;
@@ -17,6 +21,8 @@ import no.systema.jservices.common.util.CommonResponseErrorHandler;
 
 @Service
 public class EntryRequest {
+	protected static final Logger logger = Logger.getLogger(EntryRequest.class.getName());
+	
 	String host = "hotell.difi.no";
 	String path = "api/json/difi/elma/participants";
 	
@@ -39,17 +45,19 @@ public class EntryRequest {
 	}	
 	
     /**
-     * Get elma entity
+     * Get the first elma entity.
+     * 
+     * Note: It could be more than one occurrences for one orgnr.
      * 
      * @param orgnr
-     * @return the elma Entity is exist, else return null
+     * @return the first Elma Entity if exist, else return null
      */
-    public Entry getElmaEntry(String orgnr) {
+	public Entry getElmaEntry(String orgnr) {
     	Entries entries;
     	
     	entries = restTemplate.getForObject(ehf(orgnr), Entries.class);
     	
-    	if (entries.getPosts() == 1) {
+    	if (entries.getPosts() > 0) {
     		return entries.getEntries().get(0);
     	} else {
     		return null;
