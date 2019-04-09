@@ -12,6 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import no.systema.jservices.common.dao.SvlthDao;
+import no.systema.jservices.common.dto.SvlthDto;
 import no.systema.jservices.common.values.EventTypeEnum;
 
 public class TestJSvlthDaoService {
@@ -53,7 +54,7 @@ public class TestJSvlthDaoService {
 		Integer arrivalDate = 20190401;
 		
 		
-		List<SvlthDao> list = svlthDaoService.findAll("I", mrn , arrivalDate);
+		List<SvlthDto> list = svlthDaoService.findAll("I", mrn , arrivalDate);
 		assertNotNull(list);
 
 		list = svlthDaoService.findAll("I", mrn , null);
@@ -92,6 +93,17 @@ public class TestJSvlthDaoService {
 		dao.setSvlth_irn("1NO444");
 		SvlthDao resultDao = svlthDaoService.create(dao);
 	}	
+
+	@Test
+	public final void testCalculateSaldo() {
+		String mrn = "1NO123456789012345";
+		Integer arrivalDate = 20190401;
+		
+		
+		List<SvlthDto> list = svlthDaoService.findAll("I", mrn , arrivalDate);
+		assertTrue(!list.isEmpty());
+	}		
+	
 	
 	
 }

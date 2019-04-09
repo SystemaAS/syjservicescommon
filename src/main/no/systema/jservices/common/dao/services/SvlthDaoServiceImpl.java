@@ -1,14 +1,16 @@
 package no.systema.jservices.common.dao.services;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 import no.systema.jservices.common.dao.SvlthDao;
+import no.systema.jservices.common.dto.SvlthDto;
 import no.systema.jservices.common.values.EventTypeEnum;
 
 public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> implements SvlthDaoService{
-
 
 	@Override
 	public boolean exist(EventTypeEnum typeEnum, String mrn, int arrivalDate) {
@@ -35,8 +37,11 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 	}
 	
 	@Override
-	public List<SvlthDao> findAll(String svlth_h, String svlth_irn, Integer svlth_id2) {
+	public List<SvlthDto> findAll(String svlth_h, String svlth_irn, Integer svlth_id2) {
 		Map<String, Object> params = new HashMap<String, Object>();
+		List<SvlthDao> daoList;
+		List<SvlthDto> dtoList = new ArrayList<SvlthDto>();
+		
 		if (svlth_h != null) {
 			params.put("svlth_h", svlth_h);
 		}
@@ -47,10 +52,34 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 			params.put("svlth_id2", svlth_id2);
 		}
 		
+		daoList = findAll(params);
 		
-		return findAll(params);
+		daoList.forEach(dao -> {
+			SvlthDto dto = SvlthDto.get(dao);
+			if (svlth_h != null && svlth_h.equals(EventTypeEnum.INLAGG.getValue())) {
+				dto.setSaldo(calculateSaldo(dao.getSvlth_int(), svlth_irn, svlth_id2));
+			}
+			dtoList.add(dto);
+		});
+		
+		return dtoList;
 
 	}	
+
+	@Override
+	public Integer calculateSaldo(Integer inlaggAntal, String svlth_irn, Integer svlth_id2) {
+		List<SvlthDto> uttagList = findAll(EventTypeEnum.UTTAG.getValue(), svlth_irn, svlth_id2);
+
+		Function<SvlthDto, Integer> totalMapper = uttag -> uttag.getSvlth_unt();
+		Integer uttagAntal = uttagList.stream()
+		        .map(totalMapper)
+		        .reduce(0, Integer::sum);		
+		
+		return inlaggAntal - uttagAntal;
+		
+	}	
+	
+	
 	
 	@Override
 	public SvlthDao update(SvlthDao t) {
@@ -78,5 +107,7 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 	public boolean exist(Object id) {
 		throw new IllegalAccessError("SVLTH do not have keys, hence exist does not work!");
 	}
+
+
 
 }
