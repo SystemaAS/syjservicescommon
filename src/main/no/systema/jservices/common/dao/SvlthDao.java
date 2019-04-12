@@ -1,17 +1,20 @@
 package no.systema.jservices.common.dao;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Setter;
 
 /**
  * For Tillfälligt lager.
  * 
- * Note: No keys.
+ * Note: No keys. 
+ * 
+ * Conversion of svlth_ibr is done explicit in setSvlth_ibr. E.g 23,4 -> 23.4
  * 
  * 
  * @author fredrikmoller
@@ -21,7 +24,7 @@ import lombok.Data;
 public class SvlthDao implements IDao {
 
 	private String svlth_h; 
-	private BigDecimal svlth_ibr;
+	@Setter(AccessLevel.NONE) private BigDecimal svlth_ibr;
 	private Integer svlth_id1;
 	private Integer svlth_id2;
 	private String svlth_iex; 
@@ -49,11 +52,16 @@ public class SvlthDao implements IDao {
 	private String svlth_utx;
 	
 	private Map<String, Object> keys = null;
+
+	public void setSvlth_ibr(String svlth_ibr) {
+		this.svlth_ibr = new BigDecimal(svlth_ibr.replace(",", "."));
+	}
 	
 	@Override
 	@JsonIgnore
 	public Map<String, Object> getKeys() {
 		return keys;
 	}
+
 
 }

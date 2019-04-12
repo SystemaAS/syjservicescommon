@@ -24,23 +24,34 @@ public interface SvlthDaoService extends GenericDaoService<SvlthDao> {
 	 * Find all {@linkplain SvltDto} on provided search-criteria. <br>
 	 * param can be null.
 	 * 
+	 * If svlth_h is {@linkplain EventTypeEnum}.INLAGG saldo is calculated.
+	 * 
 	 * @param svlth_h
 	 * @param svlth_irn
 	 * @param svlth_id2
 	 * @return a List of {@linkplain SvlthDto}
 	 */
-	List<SvlthDto> findAll(String svlth_h, String svlth_irn, Integer svlth_id2);
+	List<SvlthDto> getAll(String svlth_h, String svlth_irn, Integer svlth_id2);
 	
 	
 	/**
 	 * Calculate remaining saldo of INLAGG minus UTAGG
 	 * 
-	 * @param inlaggAntal
 	 * @param svlth_irn
 	 * @param svlth_id2
 	 * @return current saldo
 	 */
-	Integer calculateSaldo(Integer inlaggAntal, String svlth_irn, Integer svlth_id2 );
+	Integer calculateSaldo(String svlth_irn, Integer svlth_id2 );
+
+	/**
+	 * Is uttag quantity valid.
+	 * 
+	 * 
+	 * @param svlth_unt
+	 * @param svlth_irn
+	 * @param svlth_id2
+	 */
+	boolean validUttagQuantity(Integer uttagAntal, String svlth_irn, Integer svlth_id2);
 	
 	
 }
