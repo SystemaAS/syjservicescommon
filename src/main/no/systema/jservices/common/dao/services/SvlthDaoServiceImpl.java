@@ -39,7 +39,7 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 	}
 	
 	@Override
-	public List<SvlthDto> getAll(String svlth_h, String svlth_irn, Integer svlth_id2) {
+	public List<SvlthDto> getAll(String svlth_h, String svlth_ign, String svlth_irn, Integer svlth_id2) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		List<SvlthDao> daoList;
 		List<SvlthDto> dtoList = new ArrayList<SvlthDto>();
@@ -47,12 +47,16 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 		if (svlth_h != null) {
 			params.put("svlth_h", svlth_h);
 		}
+		if (svlth_ign != null) {
+			params.put("svlth_ign", svlth_ign);
+		}
 		if (svlth_irn != null) {
 			params.put("svlth_irn", svlth_irn);
 		}
+	
 		if (svlth_id2 != null) {
-			params.put("svlth_id2", svlth_id2);
-		}
+			params.put("svlth_id2" + GREATER_AND_EQUALS_THEN, svlth_id2);
+		}		
 		
 		daoList = findAll(params);
 		
@@ -120,7 +124,7 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 	
 	
 	private Integer getCurrentUttagAntal(String svlth_irn, Integer svlth_id2) {
-		List<SvlthDto> uttagList = getAll(EventTypeEnum.UTTAG.getValue(), svlth_irn, svlth_id2);
+		List<SvlthDto> uttagList = getAll(EventTypeEnum.UTTAG.getValue(), null, svlth_irn, svlth_id2);
 		Function<SvlthDto, Integer> totalMapper = uttag -> uttag.getSvlth_unt();
 		Integer currentUttagAntal = uttagList.stream()
 		        .map(totalMapper)
@@ -130,7 +134,7 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 	}
 	
 	private Integer getInlaggAntal(String svlth_irn, Integer svlth_id2) {
-		List<SvlthDto> uttagList = getAll(EventTypeEnum.INLAGG.getValue(), svlth_irn, svlth_id2);
+		List<SvlthDto> uttagList = getAll(EventTypeEnum.INLAGG.getValue(), null ,svlth_irn, svlth_id2);
 		return uttagList.get(0).getSvlth_int();
 	}
 	

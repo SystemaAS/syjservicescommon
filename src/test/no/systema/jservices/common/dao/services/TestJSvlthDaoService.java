@@ -54,10 +54,10 @@ public class TestJSvlthDaoService {
 		Integer arrivalDate = 20190401;
 		
 		
-		List<SvlthDto> list = svlthDaoService.getAll("I", mrn , arrivalDate);
+		List<SvlthDto> list = svlthDaoService.getAll("I", null, mrn , arrivalDate);
 		assertNotNull(list);
 
-		list = svlthDaoService.getAll("I", mrn , null);
+		list = svlthDaoService.getAll("I", null ,mrn , null);
 		assertNotNull(list);		
 		
 	
@@ -116,7 +116,7 @@ public class TestJSvlthDaoService {
 		
 //		List<SvlthDto> list= svlthDaoService.getAll(EventTypeEnum.INLAGG.getValue(),mrn , arrivalDate);
 
-		List<SvlthDto> list= svlthDaoService.getAll(EventTypeEnum.INLAGG.getValue(),null , null);
+		List<SvlthDto> list= svlthDaoService.getAll(EventTypeEnum.INLAGG.getValue(),null,null , null);
 		
 		
 		list.forEach(dto -> {

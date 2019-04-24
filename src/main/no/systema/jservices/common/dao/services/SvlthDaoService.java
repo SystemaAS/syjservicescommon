@@ -26,12 +26,13 @@ public interface SvlthDaoService extends GenericDaoService<SvlthDao> {
 	 * 
 	 * If svlth_h is {@linkplain EventTypeEnum}.INLAGG saldo is calculated.
 	 * 
-	 * @param svlth_h
-	 * @param svlth_irn
-	 * @param svlth_id2
+	 * @param svlth_h, type
+	 * @param svlth_ign godsnummer
+	 * @param svlth_irn mrn
+	 * @param svlth_id2 arrival
 	 * @return a List of {@linkplain SvlthDto}
 	 */
-	List<SvlthDto> getAll(String svlth_h, String svlth_irn, Integer svlth_id2);
+	List<SvlthDto> getAll(String svlth_h, String svlth_ign, String svlth_irn , Integer svlth_id2);
 	
 	
 	/**
