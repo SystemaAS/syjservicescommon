@@ -29,10 +29,12 @@ public interface SvlthDaoService extends GenericDaoService<SvlthDao> {
 	 * @param svlth_h, type
 	 * @param svlth_ign godsnummer
 	 * @param svlth_irn mrn
-	 * @param svlth_id2 arrival
+	 * @param svlth_id2 ankomstdate
+	 * @param svlth_ud1 uttagsdate
+	 * @param svlth_um1 uttagstime
 	 * @return a List of {@linkplain SvlthDto}
 	 */
-	List<SvlthDto> getAll(String svlth_h, String svlth_ign, String svlth_irn , Integer svlth_id2);
+	List<SvlthDto> getAll(String svlth_h, String svlth_ign, String svlth_irn , Integer svlth_id2, Integer svlth_ud1, Integer svlth_um1);
 	
 	
 	/**
@@ -50,9 +52,8 @@ public interface SvlthDaoService extends GenericDaoService<SvlthDao> {
 	 * 
 	 * @param svlth_unt
 	 * @param svlth_irn
-	 * @param svlth_id2
 	 */
-	boolean validUttagQuantity(Integer uttagAntal, String svlth_irn, Integer svlth_id2);
+	boolean validUttagQuantity(Integer uttagAntal, String svlth_irn);
 	
 	
 }

@@ -7,9 +7,12 @@ package no.systema.jservices.common.values;
  */
 public enum EventTypeEnum {
 
+	/** I */
 	INLAGG("I"),
+	/** U*/
 	UTTAG("U"),
-	OVRIG("H");
+	/** H */
+	RATTELSE("R");
 
 	private String value;
 

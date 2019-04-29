@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-
 import no.systema.jservices.common.dao.SvlthDao;
 import no.systema.jservices.common.dto.SvlthDto;
 import no.systema.jservices.common.values.EventTypeEnum;
@@ -39,7 +37,7 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 	}
 	
 	@Override
-	public List<SvlthDto> getAll(String svlth_h, String svlth_ign, String svlth_irn, Integer svlth_id2) {
+	public List<SvlthDto> getAll(String svlth_h, String svlth_ign, String svlth_irn,  Integer svlth_id2, Integer svlth_ud1, Integer svlth_um1) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		List<SvlthDao> daoList;
 		List<SvlthDto> dtoList = new ArrayList<SvlthDto>();
@@ -53,9 +51,14 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 		if (svlth_irn != null) {
 			params.put("svlth_irn", svlth_irn);
 		}
-	
 		if (svlth_id2 != null) {
 			params.put("svlth_id2" + GREATER_AND_EQUALS_THEN, svlth_id2);
+		}
+		
+		if (svlth_ud1 != null) {
+			params.put("svlth_ud1" , svlth_ud1);
+			params.put("svlth_um1" , svlth_um1);
+
 		}		
 		
 		daoList = findAll(params);
@@ -64,7 +67,7 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 			SvlthDto dto = SvlthDto.get(dao);
 			
 			if (dto.getSvlth_h().equals(EventTypeEnum.INLAGG.getValue())) {
-				dto.setSaldo(calculateSaldo(dto.getSvlth_int(), dto.getSvlth_irn(), dto.getSvlth_id2()));
+				dto.setSaldo(calculateSaldo(dto.getSvlth_int(), dto.getSvlth_irn()));
 			}
 			
 			dtoList.add(dto);
@@ -76,15 +79,15 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 
 	@Override
 	public Integer calculateSaldo(String svlth_irn, Integer svlth_id2) {
-		Integer inlaggAntal = getInlaggAntal(svlth_irn, svlth_id2);
-		Integer currentUttagAntal = getCurrentUttagAntal(svlth_irn, svlth_id2);
+		Integer inlaggAntal = getInlaggAntal(svlth_irn);
+		Integer currentUttagAntal = getCurrentUttagAntal(svlth_irn);
 		return inlaggAntal - currentUttagAntal;
 	}	
 	
 	@Override
-	public boolean validUttagQuantity(Integer uttagAntal, String svlth_irn, Integer svlth_id2) {
-		Integer currentUttagAntal = getCurrentUttagAntal(svlth_irn, svlth_id2);
-		Integer inlaggAntal = getInlaggAntal(svlth_irn, svlth_id2);
+	public boolean validUttagQuantity(Integer uttagAntal, String svlth_irn) {
+		Integer currentUttagAntal = getCurrentUttagAntal(svlth_irn);
+		Integer inlaggAntal = getInlaggAntal(svlth_irn);
 		Integer toDoTotalUttagAntal = currentUttagAntal + uttagAntal;
 		
 		return inlaggAntal - toDoTotalUttagAntal >= 0;
@@ -117,14 +120,14 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 		throw new IllegalAccessError("SVLTH do not have keys, hence exist does not work!");
 	}
 
-	private Integer calculateSaldo(Integer inlaggAntal, String svlth_irn, Integer svlth_id2) {
-		Integer currentUttagAntal = getCurrentUttagAntal(svlth_irn, svlth_id2);
+	private Integer calculateSaldo(Integer inlaggAntal, String svlth_irn) {
+		Integer currentUttagAntal = getCurrentUttagAntal(svlth_irn);
 		return inlaggAntal - currentUttagAntal;
 	}		
 	
 	
-	private Integer getCurrentUttagAntal(String svlth_irn, Integer svlth_id2) {
-		List<SvlthDto> uttagList = getAll(EventTypeEnum.UTTAG.getValue(), null, svlth_irn, svlth_id2);
+	private Integer getCurrentUttagAntal(String svlth_irn) {
+		List<SvlthDto> uttagList = getAll(EventTypeEnum.UTTAG.getValue(), null, svlth_irn, null, null, null);
 		Function<SvlthDto, Integer> totalMapper = uttag -> uttag.getSvlth_unt();
 		Integer currentUttagAntal = uttagList.stream()
 		        .map(totalMapper)
@@ -133,8 +136,8 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 		return currentUttagAntal;
 	}
 	
-	private Integer getInlaggAntal(String svlth_irn, Integer svlth_id2) {
-		List<SvlthDto> uttagList = getAll(EventTypeEnum.INLAGG.getValue(), null ,svlth_irn, svlth_id2);
+	private Integer getInlaggAntal(String svlth_irn) {
+		List<SvlthDto> uttagList = getAll(EventTypeEnum.INLAGG.getValue(), null ,svlth_irn, null, null, null);
 		return uttagList.get(0).getSvlth_int();
 	}
 	
