@@ -101,13 +101,32 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 	
 	private Integer calculateSaldo(String svlth_irn) {
 		Integer inlaggAntal = getRattelseInlaggAntal(svlth_irn);
+		logger.info("getRattelseInlaggAntal :"+inlaggAntal);
 		if (inlaggAntal == 0) {
 			inlaggAntal = getInlaggAntal(svlth_irn);
+			logger.info("rattelse == 0, getInlaggAntal :"+inlaggAntal);
+			
 		}
-		Integer uttagAntal = getRattelseUttagAntal(svlth_irn);
-		uttagAntal =+ getUttagAntal(svlth_irn);
+//		Integer uttagAntal = getRattelseUttagAntal(svlth_irn);
+//		logger.info("getRattelseUttagAntal :"+uttagAntal);
+//		logger.info("getUttagAntal :"+getUttagAntal(svlth_irn));
+//		uttagAntal =+ getUttagAntal(svlth_irn);
+//		logger.info("uttagAntal :"+uttagAntal);
 
-		return inlaggAntal - uttagAntal;
+		Integer uttagAntal = getUttagAntal(svlth_irn);
+		logger.info("uttagAntal :"+uttagAntal);
+	
+		Integer rattelseUttagAntal = getRattelseUttagAntal(svlth_irn);
+		logger.info("rattelseUttagAntal :"+rattelseUttagAntal);
+
+		Integer justeratUttagAntal = uttagAntal - rattelseUttagAntal;
+		
+//		uttagAntal =-rattelseUttagAntal;
+		logger.info("justeratUttagAntal="+justeratUttagAntal);
+		
+		
+		
+		return inlaggAntal - justeratUttagAntal;
 		
 	}
 	

@@ -35,7 +35,7 @@ public class SvlthDto  {
 	private String svlth_isl;
 	private String svlth_itx;
 	private String svlth_ivb;
-	private Integer svlth_rnt;
+	private String svlth_rnt;
 	private String svlth_rtx;
 	private String svlth_rty;
 	private String svlth_ud1;
@@ -47,6 +47,23 @@ public class SvlthDto  {
 	
 	private Integer saldo;
 
+	public String getSvlth_ud1() {
+		if ("0".equals(svlth_ud1)) {
+			return null;	
+		} else {
+			return svlth_ud1;
+		}
+	}
+
+	public String getSvlth_rnt() {
+		if ("0".equals(svlth_rnt)) {
+			return null;	
+		} else {
+			return svlth_rnt;
+		}
+	}	
+	
+	
 	
 	/**
 	 * 

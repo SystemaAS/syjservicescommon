@@ -100,7 +100,7 @@ public class TestJSvlthDaoService {
 
 	@Test
 	public final void testCalculateSaldo() {
-		String mrn = "123412341234234123";
+		String mrn = "123412341234123412";
 		//Integer arrivalDate = 20190429;
 		
 		
