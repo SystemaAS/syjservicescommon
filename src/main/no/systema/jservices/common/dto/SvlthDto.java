@@ -47,14 +47,6 @@ public class SvlthDto  {
 	
 	private Integer saldo;
 
-	public String getSvlth_ud1() {
-		if ("0".equals(svlth_ud1)) {
-			return null;	
-		} else {
-			return svlth_ud1;
-		}
-	}
-
 	public String getSvlth_rnt() {
 		if ("0".equals(svlth_rnt)) {
 			return null;	
@@ -62,8 +54,6 @@ public class SvlthDto  {
 			return svlth_rnt;
 		}
 	}	
-	
-	
 	
 	/**
 	 * 
