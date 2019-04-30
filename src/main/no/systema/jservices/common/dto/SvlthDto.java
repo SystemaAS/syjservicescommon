@@ -38,7 +38,7 @@ public class SvlthDto  {
 	private Integer svlth_rnt;
 	private String svlth_rtx;
 	private String svlth_rty;
-	private Integer svlth_ud1;
+	private String svlth_ud1;
 	private String svlth_uex;
 	private Integer svlth_um1;
 	private Integer svlth_unt;

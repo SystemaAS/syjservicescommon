@@ -100,11 +100,11 @@ public class TestJSvlthDaoService {
 
 	@Test
 	public final void testCalculateSaldo() {
-		String mrn = "1234567890123456yy";
-		Integer arrivalDate = 20190411;
+		String mrn = "123412341234234123";
+		//Integer arrivalDate = 20190429;
 		
 		
-		Integer saldo = svlthDaoService.calculateSaldo(mrn , arrivalDate);
+		Integer saldo = svlthDaoService.calculateSaldo(mrn , null);
 		System.out.println("saldo="+saldo);
 	}		
 
