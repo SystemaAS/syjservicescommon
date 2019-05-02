@@ -36,8 +36,8 @@ public class TestJSvlthDaoService {
 	
 	@Test
 	public final void testExist() {
-		String mrn = "1NO123456789012345";
-		int arrivalDate = 20190401;
+		String mrn = "123456789012345678";
+		int arrivalDate = 20190501;
 		
 		boolean exist = svlthDaoService.exist(EventTypeEnum.INLAGG, mrn , arrivalDate);
 		assertTrue(exist);
@@ -50,15 +50,15 @@ public class TestJSvlthDaoService {
 	
 	@Test
 	public final void testFindAll() {
-		String mrn = "1NO123456789012345";
+		String mrn = "123456789012345678";
 		Integer arrivalDate = 20190401;
 		
 		
-		List<SvlthDto> list = svlthDaoService.getAll("I", null, mrn ,null ,null, arrivalDate);
+		List<SvlthDto> list = svlthDaoService.getAll("I", null, mrn ,null ,null, null, null);
 		assertNotNull(list);
 
-		list = svlthDaoService.getAll("I", null ,mrn , null, null, null);
-		assertNotNull(list);		
+//		list = svlthDaoService.getAll("I", null ,mrn , null, null, null, null);
+//		assertNotNull(list);		
 		
 	
 	}		
@@ -100,8 +100,7 @@ public class TestJSvlthDaoService {
 
 	@Test
 	public final void testCalculateSaldo() {
-		String mrn = "123412341234123412";
-		//Integer arrivalDate = 20190429;
+		String mrn = "123456789012345678";
 		
 		
 		Integer saldo = svlthDaoService.calculateSaldo(mrn , null);
@@ -111,12 +110,8 @@ public class TestJSvlthDaoService {
 	@Test
 	public final void testGetAllAndCalcSaldo() {
 		String mrn = "1234567890123456yy";
-		Integer arrivalDate = 20190411;
-		
-		
-//		List<SvlthDto> list= svlthDaoService.getAll(EventTypeEnum.INLAGG.getValue(),mrn , arrivalDate);
 
-		List<SvlthDto> list= svlthDaoService.getAll(EventTypeEnum.INLAGG.getValue(),null,null, null, null , null);
+		List<SvlthDto> list= svlthDaoService.getAll(EventTypeEnum.INLAGG.getValue(),null,null, null, null , null, null);
 		
 		
 		list.forEach(dto -> {
@@ -124,11 +119,7 @@ public class TestJSvlthDaoService {
 			
 		});
 		
-		
-		
 	}	
-	
-	
 	
 	@Test
 	public final void testValidUttagQuanty() {

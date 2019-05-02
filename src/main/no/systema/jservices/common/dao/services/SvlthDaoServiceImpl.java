@@ -14,6 +14,10 @@ import no.systema.jservices.common.values.EventTypeEnum;
 
 public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> implements SvlthDaoService{
 
+	Comparator<SvlthDao> comparator = Comparator.comparing(SvlthDao::getSvlth_id1 )
+			.thenComparing(SvlthDao::getSvlth_im1); 
+	
+	
 	@Override
 	public boolean exist(EventTypeEnum typeEnum, String mrn, int arrivalDate) {
 		boolean exist = false;
@@ -39,7 +43,7 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 	}
 	
 	@Override
-	public List<SvlthDto> getAll(String svlth_h, String svlth_ign, String svlth_irn,  Integer svlth_id2, Integer svlth_ud1, Integer svlth_um1) {
+	public List<SvlthDto> getAll(String svlth_h, String svlth_ign, String svlth_irn,  Integer svlth_id2, Integer svlth_id1, Integer svlth_im1, String svlth_rty) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		List<SvlthDao> daoList;
 		List<SvlthDto> dtoList = new ArrayList<SvlthDto>();
@@ -56,11 +60,13 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 		if (svlth_id2 != null) {
 			params.put("svlth_id2" + GREATER_AND_EQUALS_THEN, svlth_id2);
 		}
-		
-		if (svlth_ud1 != null) {
-			params.put("svlth_ud1" , svlth_ud1);
-			params.put("svlth_um1" , svlth_um1);
+		if (svlth_id1 != null) {
+			params.put("svlth_id1" , svlth_id1);
+			params.put("svlth_im1" , svlth_im1);
 
+		}	
+		if (svlth_rty != null) {
+			params.put("svlth_rty", svlth_rty);
 		}		
 		
 		daoList = findAll(params);
@@ -101,30 +107,12 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 	
 	private Integer calculateSaldo(String svlth_irn) {
 		Integer inlaggAntal = getRattelseInlaggAntal(svlth_irn);
-		logger.info("getRattelseInlaggAntal :"+inlaggAntal);
 		if (inlaggAntal == 0) {
 			inlaggAntal = getInlaggAntal(svlth_irn);
-			logger.info("rattelse == 0, getInlaggAntal :"+inlaggAntal);
-			
 		}
-//		Integer uttagAntal = getRattelseUttagAntal(svlth_irn);
-//		logger.info("getRattelseUttagAntal :"+uttagAntal);
-//		logger.info("getUttagAntal :"+getUttagAntal(svlth_irn));
-//		uttagAntal =+ getUttagAntal(svlth_irn);
-//		logger.info("uttagAntal :"+uttagAntal);
-
 		Integer uttagAntal = getUttagAntal(svlth_irn);
-		logger.info("uttagAntal :"+uttagAntal);
-	
 		Integer rattelseUttagAntal = getRattelseUttagAntal(svlth_irn);
-		logger.info("rattelseUttagAntal :"+rattelseUttagAntal);
-
 		Integer justeratUttagAntal = uttagAntal - rattelseUttagAntal;
-		
-//		uttagAntal =-rattelseUttagAntal;
-		logger.info("justeratUttagAntal="+justeratUttagAntal);
-		
-		
 		
 		return inlaggAntal - justeratUttagAntal;
 		
@@ -152,7 +140,6 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 			return 0;
 		}
 		
-		Comparator<SvlthDao> comparator = Comparator.comparing(SvlthDao::getSvlth_id1 );  //TODO need a date/time on RATTELSE
 		SvlthDao maxRattelseUttagDto = inlaggList.stream()
                 .max( comparator )
                 .get();	
@@ -166,7 +153,6 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 			return 0;
 		}
 		
-		Comparator<SvlthDao> comparator = Comparator.comparing(SvlthDao::getSvlth_ud1 );
 		SvlthDao maxRattelseUttagDto = uttagList.stream()
                 .max( comparator )
                 .get();	

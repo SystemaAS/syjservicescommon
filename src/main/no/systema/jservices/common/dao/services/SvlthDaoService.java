@@ -2,7 +2,6 @@ package no.systema.jservices.common.dao.services;
 
 import java.util.List;
 
-import no.systema.jservices.common.dao.KostaDao;
 import no.systema.jservices.common.dao.SvlthDao;
 import no.systema.jservices.common.dto.SvlthDto;
 import no.systema.jservices.common.values.EventTypeEnum;
@@ -30,12 +29,12 @@ public interface SvlthDaoService extends GenericDaoService<SvlthDao> {
 	 * @param svlth_ign godsnummer
 	 * @param svlth_irn mrn
 	 * @param svlth_id2 ankomstdate
-	 * @param svlth_ud1 uttagsdate
-	 * @param svlth_um1 uttagstime
+	 * @param svlth_id1 arkiveringsdate
+	 * @param svlth_im1 arkiveringstime
+	 * @param svlth_rty rattningstyp, I el. U
 	 * @return a List of {@linkplain SvlthDto}
 	 */
-	List<SvlthDto> getAll(String svlth_h, String svlth_ign, String svlth_irn , Integer svlth_id2, Integer svlth_ud1, Integer svlth_um1);
-	
+	List<SvlthDto> getAll(String svlth_h, String svlth_ign, String svlth_irn , Integer svlth_id2, Integer svlth_id1,  Integer svlth_im1, String svlth_rty );
 	
 	/**
 	 * Calculate remaining saldo of INLAGG minus UTAGG
