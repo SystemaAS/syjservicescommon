@@ -6,6 +6,7 @@ import org.modelmapper.ModelMapper;
 
 import lombok.Data;
 import no.systema.jservices.common.dao.SvlthDao;
+import no.systema.jservices.common.util.DateTimeManager;
 
 /**
  * This is the query Data Transfer Object between service and UI for Tillfällig lagring.
@@ -46,6 +47,13 @@ public class SvlthDto  {
 	private String svlth_utx;
 	
 	private Integer saldo;
+	
+	private String timestamp;
+	
+	
+	public String getTimestamp(){
+		return DateTimeManager.getDateTime(svlth_id1, svlth_im1);
+	}
 
 	public String getSvlth_rnt() {
 		if ("0".equals(svlth_rnt)) {
