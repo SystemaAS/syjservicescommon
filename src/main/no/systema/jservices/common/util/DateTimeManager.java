@@ -622,5 +622,27 @@ public class DateTimeManager {
 		
 	}	
 	
+	/**
+	 * Validate date String according to @link{DateTimeFormatter.ofPattern("yyyyMMdd")}
+	 * 
+	 * 
+	 * @param value e.g 20190506
+	 * @return true if valid
+	 */
+	public static boolean isValidDate(String value) {
+		boolean valid = false;
+		DateTimeFormatter dateFormatterNO = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+		try {
+			LocalDate.parse(value, dateFormatterNO);
+			valid = true;
+		} catch (Exception e) {
+			valid = false;
+		}
+
+		return valid;
+	}
+	
+	
 	
 }

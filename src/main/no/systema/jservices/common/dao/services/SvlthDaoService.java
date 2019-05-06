@@ -16,7 +16,7 @@ public interface SvlthDaoService extends GenericDaoService<SvlthDao> {
 	 * @param arrivalDate svlth_id2
 	 * @return
 	 */
-	boolean exist(EventTypeEnum typeEnum, String mrn, int arrivalDate);
+	boolean exist(EventTypeEnum typeEnum, String mrn);
 	
 	
 	 /**
@@ -26,6 +26,7 @@ public interface SvlthDaoService extends GenericDaoService<SvlthDao> {
 	 * If svlth_h is {@linkplain EventTypeEnum}.INLAGG saldo is calculated.
 	 * 
 	 * @param svlth_h, type
+	 * @param svlth_igl, godslokalkod
 	 * @param svlth_ign godsnummer
 	 * @param svlth_irn mrn
 	 * @param svlth_id2 ankomstdate
@@ -34,7 +35,7 @@ public interface SvlthDaoService extends GenericDaoService<SvlthDao> {
 	 * @param svlth_rty rattningstyp, I el. U
 	 * @return a List of {@linkplain SvlthDto}
 	 */
-	List<SvlthDto> getAll(String svlth_h, String svlth_ign, String svlth_irn , Integer svlth_id2, Integer svlth_id1,  Integer svlth_im1, String svlth_rty );
+	List<SvlthDto> getAll(String svlth_h, String svlth_igl, String svlth_ign, String svlth_irn , Integer svlth_id2, Integer svlth_id1,  Integer svlth_im1, String svlth_rty );
 	
 	/**
 	 * Calculate remaining saldo of INLAGG minus UTAGG

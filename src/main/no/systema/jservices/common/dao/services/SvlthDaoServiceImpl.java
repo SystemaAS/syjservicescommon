@@ -19,11 +19,10 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 	
 	
 	@Override
-	public boolean exist(EventTypeEnum typeEnum, String mrn, int arrivalDate) {
+	public boolean exist(EventTypeEnum typeEnum, String mrn) {
 		boolean exist = false;
 		params.put("svlth_h", typeEnum.getValue());
 		params.put("svlth_irn", mrn);
-		params.put("svlth_id2", arrivalDate);
 		int count  = countAll(params);
 		
 		if (count == 1) {
@@ -43,7 +42,7 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 	}
 	
 	@Override
-	public List<SvlthDto> getAll(String svlth_h, String svlth_ign, String svlth_irn,  Integer svlth_id2, Integer svlth_id1, Integer svlth_im1, String svlth_rty) {
+	public List<SvlthDto> getAll(String svlth_h, String svlth_igl, String svlth_ign, String svlth_irn,  Integer svlth_id2, Integer svlth_id1, Integer svlth_im1, String svlth_rty) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		List<SvlthDao> daoList;
 		List<SvlthDto> dtoList = new ArrayList<SvlthDto>();
@@ -51,9 +50,13 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 		if (svlth_h != null) {
 			params.put("svlth_h", svlth_h);
 		}
+		if (svlth_igl != null) {
+			params.put("svlth_igl", svlth_igl);
+		}
 		if (svlth_ign != null) {
 			params.put("svlth_ign", svlth_ign);
 		}
+
 		if (svlth_irn != null) {
 			params.put("svlth_irn", svlth_irn);
 		}

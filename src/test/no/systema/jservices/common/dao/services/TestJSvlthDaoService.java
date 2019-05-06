@@ -37,13 +37,12 @@ public class TestJSvlthDaoService {
 	@Test
 	public final void testExist() {
 		String mrn = "123456789012345678";
-		int arrivalDate = 20190501;
 		
-		boolean exist = svlthDaoService.exist(EventTypeEnum.INLAGG, mrn , arrivalDate);
+		boolean exist = svlthDaoService.exist(EventTypeEnum.INLAGG, mrn);
 		assertTrue(exist);
 	
 		mrn = "xyz";
-		exist = svlthDaoService.exist(EventTypeEnum.INLAGG,mrn , arrivalDate);
+		exist = svlthDaoService.exist(EventTypeEnum.INLAGG,mrn);
 		assertFalse(exist);	
 	
 	}	
@@ -54,7 +53,7 @@ public class TestJSvlthDaoService {
 		Integer arrivalDate = 20190401;
 		
 		
-		List<SvlthDto> list = svlthDaoService.getAll("I", null, mrn ,null ,null, null, null);
+		List<SvlthDto> list = svlthDaoService.getAll("I", null,null, mrn ,null ,null, null, null);
 		assertNotNull(list);
 
 //		list = svlthDaoService.getAll("I", null ,mrn , null, null, null, null);
@@ -111,7 +110,7 @@ public class TestJSvlthDaoService {
 	public final void testGetAllAndCalcSaldo() {
 		String mrn = "1234567890123456yy";
 
-		List<SvlthDto> list= svlthDaoService.getAll(EventTypeEnum.INLAGG.getValue(),null,null, null, null , null, null);
+		List<SvlthDto> list= svlthDaoService.getAll(EventTypeEnum.INLAGG.getValue(),null,null,null, null, null , null, null);
 		
 		
 		list.forEach(dto -> {
