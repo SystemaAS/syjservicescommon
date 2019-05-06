@@ -3,8 +3,6 @@ package no.systema.jservices.common.elma.proxy;
 import java.net.URI;
 import java.util.Arrays;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -13,7 +11,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import no.systema.jservices.common.dao.services.GenericDaoServiceImpl;
 import no.systema.jservices.common.elma.entities.Entries;
 import no.systema.jservices.common.elma.entities.Entry;
 import no.systema.jservices.common.util.CommonClientHttpRequestInterceptor;

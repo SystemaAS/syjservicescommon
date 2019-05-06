@@ -48,15 +48,19 @@ public class TestJEntryRequest {
 		Entry entry = entryRequest.getElmaEntry(orgnr_exist);
 		Assert.assertNotNull(entry);
 		
-//		System.out.println("entry="+ReflectionToStringBuilder.toString(entry, ToStringStyle.MULTI_LINE_STYLE));
+		System.out.println("entry="+ReflectionToStringBuilder.toString(entry, ToStringStyle.MULTI_LINE_STYLE));
+
 		
 	}
 	
 	
 	@Test
 	public final void testEntryRequestOrgnrNOTExist() {
-		Entry entry = entryRequest.getElmaEntry(orgnr_not_exist);
+		Entry entry = entryRequest.getElmaEntry("orgnr_not_exist");
 		Assert.assertNull(entry);
+
+		System.out.println("entry="+ReflectionToStringBuilder.toString(entry, ToStringStyle.MULTI_LINE_STYLE));
+		
 		
 	}	
 	
