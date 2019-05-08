@@ -7,7 +7,6 @@ import java.lang.reflect.Method;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +26,8 @@ import org.apache.log4j.Logger;
 public class CSVReader<T> {
 	private static final Logger logger = Logger.getLogger(CSVReader.class.getName());
 	
-	Map<String, String> mappedNames;
+	private Map<String, String> mappedNames;
+	private CSVFormat format;
 	
 	/**
 	 * Default constructor, mapping between cvs and object need to be same.
@@ -38,11 +38,28 @@ public class CSVReader<T> {
 	 * If cvs-labels do not correspond to record object <T>
 	 * a Map with other name can be provided.
 	 * 
+	 * {@linkplain CSVFormat} is DEFAULT
+	 * 
 	 * @param mappedNames
 	 */
 	public CSVReader(Map<String, String> mappedNames) {
 		this.mappedNames = mappedNames;
 	}	
+
+	/**
+	 * If cvs-labels do not correspond to record object <T>
+	 * a Map with other name can be provided. <br>
+	 * 
+	 * {@linkplain CSVFormat} can be set
+	 * 
+	 * @param mappedNames
+	 * @param format 
+	 */
+	public CSVReader(Map<String, String> mappedNames, CSVFormat format) {
+		this.mappedNames = mappedNames;
+		this.format = format;
+	}	
+	
 	
 	/**
 	 * On a provide Reader, e.g referencing a file and the target object a List of target objects is created.
@@ -59,7 +76,7 @@ public class CSVReader<T> {
 
         try {
 
-			csvParser = new CSVParser(reader, CSVFormat.DEFAULT
+			csvParser = new CSVParser(reader, format
 	                .withFirstRecordAsHeader()
 	                .withIgnoreHeaderCase()
 	                .withTrim());

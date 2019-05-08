@@ -35,17 +35,33 @@ public class TestJSvlthDaoService {
 
 	
 	@Test
-	public final void testExist() {
+	public final void testExistMrn() {
 		String mrn = "123456789012345678";
 		
-		boolean exist = svlthDaoService.exist(EventTypeEnum.INLAGG, mrn);
+		boolean exist = svlthDaoService.existMrn(EventTypeEnum.INLAGG, mrn);
 		assertTrue(exist);
 	
 		mrn = "xyz";
-		exist = svlthDaoService.exist(EventTypeEnum.INLAGG,mrn);
+		exist = svlthDaoService.existMrn(EventTypeEnum.INLAGG,mrn);
 		assertFalse(exist);	
 	
 	}	
+
+	@Test
+	public final void testExist() {
+		String godsnummer = "BJO18-323";
+		
+		boolean exist = svlthDaoService.exist(EventTypeEnum.INLAGG, godsnummer);
+		assertTrue(exist);
+	
+		godsnummer = "xyz";
+		exist = svlthDaoService.existMrn(EventTypeEnum.INLAGG,godsnummer);
+		assertFalse(exist);	
+	
+	}		
+	
+	
+	
 	
 	@Test
 	public final void testFindAll() {

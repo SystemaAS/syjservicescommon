@@ -17,10 +17,34 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 	Comparator<SvlthDao> comparator = Comparator.comparing(SvlthDao::getSvlth_id1 )
 			.thenComparing(SvlthDao::getSvlth_im1); 
 	
+	@Override
+	public boolean exist(EventTypeEnum typeEnum, String godsnummer) {
+		boolean exist = false;
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("svlth_h", typeEnum.getValue());
+		params.put("svlth_ign", godsnummer);
+		int count  = countAll(params);
+		
+		if (count == 1) {
+			exist = true;
+		} else if (count == 0){
+			exist = false;
+			
+		} else {
+			String errMsg = "Found invalid count:"+count+" in SVLTH on param:"+params;
+			logger.error(errMsg);
+			throw new IllegalStateException(errMsg);
+			
+		}
+		
+		return exist;
+	}		
+	
 	
 	@Override
-	public boolean exist(EventTypeEnum typeEnum, String mrn) {
+	public boolean existMrn(EventTypeEnum typeEnum, String mrn) {
 		boolean exist = false;
+		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("svlth_h", typeEnum.getValue());
 		params.put("svlth_irn", mrn);
 		int count  = countAll(params);
@@ -214,6 +238,7 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 	@Override
 	public boolean exist(Object id) {
 		throw new IllegalAccessError("SVLTH do not have keys, hence exist does not work!");
-	}	
+	}
+
 	
 }

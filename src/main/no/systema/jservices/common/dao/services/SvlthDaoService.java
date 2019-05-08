@@ -9,14 +9,22 @@ import no.systema.jservices.common.values.EventTypeEnum;
 public interface SvlthDaoService extends GenericDaoService<SvlthDao> {
 	
 	/**
-	 * Exist controll. Typically used when EventTypeEnum is INLAGG
+	 * Exist controll on godsnummer. Typically used when EventTypeEnum is INLAGG
+	 * 
+	 * @param event svlth_h
+	 * @param mrn svlth_igl
+	 * @return
+	 */
+	boolean exist(EventTypeEnum typeEnum, String godsnummer);
+	
+	/**
+	 * Exist controll on mrn. Typically used when EventTypeEnum is INLAGG
 	 * 
 	 * @param event svlth_h
 	 * @param mrn svlth_irn
-	 * @param arrivalDate svlth_id2
 	 * @return
 	 */
-	boolean exist(EventTypeEnum typeEnum, String mrn);
+	boolean existMrn(EventTypeEnum typeEnum, String mrn);
 	
 	
 	 /**
