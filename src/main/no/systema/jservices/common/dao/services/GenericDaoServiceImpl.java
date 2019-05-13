@@ -49,9 +49,11 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 	protected static String GREATER_THEN = " > ";
 	/** <  */
 	protected static String LESS_THEN = " < ";
-	/** =>  */
+	/** >=  */
 	protected static String GREATER_AND_EQUALS_THEN = " >= ";
-
+	/** <=  */
+	protected static String LESS_AND_EQUALS_THEN = " <= ";
+	
 	/** map for query params, used in implementing classes.*/
 	protected Map<String, Object> params = new HashMap<String, Object>();
 	
@@ -232,8 +234,8 @@ public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
 					queryString.append(entry.getKey()).append(" = ").append(entry.getValue()).append(" ");
 				} else {
 					if (entry.getValue() instanceof Number) {
-						//> or =>
-						if (String.valueOf(entry.getKey()).contains(GREATER_THEN) || String.valueOf(entry.getKey()).contains(GREATER_AND_EQUALS_THEN)) {
+						//> or => or <=
+						if (String.valueOf(entry.getKey()).contains(GREATER_THEN) || String.valueOf(entry.getKey()).contains(GREATER_AND_EQUALS_THEN) || String.valueOf(entry.getKey()).contains(LESS_AND_EQUALS_THEN)) {
 							queryString.append(entry.getKey()).append(entry.getValue());
 						} else {
 							queryString.append(entry.getKey()).append(" = ").append(entry.getValue());

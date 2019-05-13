@@ -37,31 +37,23 @@ public interface SvlthDaoService extends GenericDaoService<SvlthDao> {
 	 * @param svlth_igl, godslokalkod
 	 * @param svlth_ign godsnummer
 	 * @param svlth_irn mrn
-	 * @param svlth_id2 ankomstdate
+	 * @param svlth_id2F from ankomstdate
+	 * @param svlth_id2T to ankomstdate
 	 * @param svlth_id1 arkiveringsdate
 	 * @param svlth_im1 arkiveringstime
 	 * @param svlth_rty rattningstyp, I el. U
 	 * @return a List of {@linkplain SvlthDto}
 	 */
-	List<SvlthDto> getAll(String svlth_h, String svlth_igl, String svlth_ign, String svlth_irn , Integer svlth_id2, Integer svlth_id1,  Integer svlth_im1, String svlth_rty );
+	List<SvlthDto> getAll(String svlth_h, String svlth_igl, String svlth_ign, String svlth_irn , Integer svlth_id2F,Integer svlth_id2T, Integer svlth_id1,  Integer svlth_im1, String svlth_rty );
 	
-	/**
-	 * Calculate remaining saldo of INLAGG minus UTAGG
-	 * 
-	 * @param svlth_irn
-	 * @param svlth_id2
-	 * @return current saldo
-	 */
-	Integer calculateSaldo(String svlth_irn, Integer svlth_id2 );
-
 	/**
 	 * Is uttag quantity valid.
 	 * 
 	 * 
 	 * @param svlth_unt
-	 * @param svlth_irn
+	 * @param svlth_ign
 	 */
-	boolean validUttagQuantity(Integer uttagAntal, String svlth_irn);
+	boolean validUttagQuantity(Integer uttagAntal, String svlth_ign);
 	
 	
 }

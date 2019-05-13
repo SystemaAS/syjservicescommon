@@ -69,7 +69,7 @@ public class TestJSvlthDaoService {
 		Integer arrivalDate = 20190401;
 		
 		
-		List<SvlthDto> list = svlthDaoService.getAll("I", null,null, mrn ,null ,null, null, null);
+		List<SvlthDto> list = svlthDaoService.getAll("I", null,null, mrn ,null ,null,null, null, null);
 		assertNotNull(list);
 
 //		list = svlthDaoService.getAll("I", null ,mrn , null, null, null, null);
@@ -113,36 +113,40 @@ public class TestJSvlthDaoService {
 		assertNotNull(resultDao);
 	}	
 
-	@Test
-	public final void testCalculateSaldo() {
-		String mrn = "123456789012345678";
-		
-		
-		Integer saldo = svlthDaoService.calculateSaldo(mrn , null);
-		System.out.println("saldo="+saldo);
-	}		
 
 	@Test
 	public final void testGetAllAndCalcSaldo() {
-		String mrn = "1234567890123456yy";
+		String godsLokalkod = "BJO";
+		String godsNummer = "BJO19-389";
 
-		List<SvlthDto> list= svlthDaoService.getAll(EventTypeEnum.INLAGG.getValue(),null,null,null, null, null , null, null);
+		Integer id2F = 20190502;
+		Integer id2T = 20190502;
 		
+		List<SvlthDto> list= svlthDaoService.getAll(EventTypeEnum.INLAGG.getValue(),godsLokalkod,godsNummer,null, id2F,id2T, null , null, null);
+		assertTrue(list.isEmpty());
+		
+		list= svlthDaoService.getAll(EventTypeEnum.INLAGG.getValue(),godsLokalkod,godsNummer,null, id2F,id2T, null , null, null);
+
+		id2F = 20190509;
+		id2T = 20190509;
+		
+		list= svlthDaoService.getAll(EventTypeEnum.INLAGG.getValue(),godsLokalkod,godsNummer,null, id2F,id2T, null , null, null);
+		assertFalse(list.isEmpty());
 		
 		list.forEach(dto -> {
 			System.out.println("dto.getSaldo="+dto.getSaldo());
 			
 		});
 		
+		
 	}	
 	
 	@Test
 	public final void testValidUttagQuanty() {
-		String mrn = "123456789012345678";
-		Integer arrivalDate = 20190410;
-		Integer uttagAntal = 100;
-		
-		boolean valid = svlthDaoService.validUttagQuantity(uttagAntal,  mrn );
+		Integer uttagAntal = 1;
+		String godsNummer = "BJO19-389";
+
+		boolean valid = svlthDaoService.validUttagQuantity(uttagAntal,  godsNummer );
 		System.out.println("valid="+valid);
 
 		assertTrue(valid);
