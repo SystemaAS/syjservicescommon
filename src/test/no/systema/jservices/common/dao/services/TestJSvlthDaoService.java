@@ -117,7 +117,7 @@ public class TestJSvlthDaoService {
 	@Test
 	public final void testGetAllAndCalcSaldo() {
 		String godsLokalkod = "BJO";
-		String godsNummer = "BJO19-389";
+		String godsNummer = "BJO18-323"; //BJO18-323, BJO19-389
 
 		Integer id2F = 20190502;
 		Integer id2T = 20190502;
@@ -127,8 +127,9 @@ public class TestJSvlthDaoService {
 		
 		list= svlthDaoService.getAll(EventTypeEnum.INLAGG.getValue(),godsLokalkod,godsNummer,null, id2F,id2T, null , null, null);
 
-		id2F = 20190509;
-		id2T = 20190509;
+
+		id2F = null;
+		id2T = null;
 		
 		list= svlthDaoService.getAll(EventTypeEnum.INLAGG.getValue(),godsLokalkod,godsNummer,null, id2F,id2T, null , null, null);
 		assertFalse(list.isEmpty());
@@ -144,7 +145,7 @@ public class TestJSvlthDaoService {
 	@Test
 	public final void testValidUttagQuanty() {
 		Integer uttagAntal = 1;
-		String godsNummer = "BJO19-389";
+		String godsNummer = "BJO19-389"; //BJO18-323
 
 		boolean valid = svlthDaoService.validUttagQuantity(uttagAntal,  godsNummer );
 		System.out.println("valid="+valid);
