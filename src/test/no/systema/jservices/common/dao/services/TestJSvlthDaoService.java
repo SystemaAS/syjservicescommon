@@ -50,8 +50,9 @@ public class TestJSvlthDaoService {
 	@Test
 	public final void testExist() {
 		String godsnummer = "BJO18-323";
+		String position = "1";
 		
-		boolean exist = svlthDaoService.exist(EventTypeEnum.INLAGG, godsnummer);
+		boolean exist = svlthDaoService.exist(EventTypeEnum.INLAGG, godsnummer, position);
 		assertTrue(exist);
 	
 		godsnummer = "xyz";
@@ -59,9 +60,6 @@ public class TestJSvlthDaoService {
 		assertFalse(exist);	
 	
 	}		
-	
-	
-	
 	
 	@Test
 	public final void testFindAll() {
@@ -146,8 +144,9 @@ public class TestJSvlthDaoService {
 	public final void testValidUttagQuanty() {
 		Integer uttagAntal = 1;
 		String godsNummer = "BJO19-389"; //BJO18-323
+		String position = "1";
 
-		boolean valid = svlthDaoService.validUttagQuantity(uttagAntal,  godsNummer );
+		boolean valid = svlthDaoService.validUttagQuantity(uttagAntal,  godsNummer, position );
 		System.out.println("valid="+valid);
 
 		assertTrue(valid);

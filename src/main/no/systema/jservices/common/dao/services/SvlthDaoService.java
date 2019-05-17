@@ -9,13 +9,14 @@ import no.systema.jservices.common.values.EventTypeEnum;
 public interface SvlthDaoService extends GenericDaoService<SvlthDao> {
 	
 	/**
-	 * Exist controll on godsnummer. Typically used when EventTypeEnum is INLAGG
+	 * Exist controll on godsnummer/position. Typically used when EventTypeEnum is INLAGG
 	 * 
 	 * @param event svlth_h
-	 * @param mrn svlth_igl
+	 * @param godsnummer svlth_ign
+	 * @param position svlth_pos
 	 * @return
 	 */
-	boolean exist(EventTypeEnum typeEnum, String godsnummer);
+	boolean exist(EventTypeEnum typeEnum, String godsnummer, String position);
 	
 	/**
 	 * Exist controll on mrn. Typically used when EventTypeEnum is INLAGG
@@ -52,8 +53,9 @@ public interface SvlthDaoService extends GenericDaoService<SvlthDao> {
 	 * 
 	 * @param svlth_unt
 	 * @param svlth_ign
+	 * @param svlth_pos
 	 */
-	boolean validUttagQuantity(Integer uttagAntal, String svlth_ign);
+	boolean validUttagQuantity(Integer uttagAntal, String svlth_ign, String svlth_pos);
 	
 	
 }
