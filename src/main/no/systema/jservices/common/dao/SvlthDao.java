@@ -42,6 +42,10 @@ public class SvlthDao implements IDao {
 	private String svlth_isl;
 	private String svlth_itx;
 	private String svlth_ivb;
+	private String svlth_ivb2;
+	private String svlth_ivb3;
+	private String svlth_ivb4;
+	private String svlth_ivb5;
 	private Integer svlth_rnt;
 	private String svlth_rtx;
 	private String svlth_rty;
