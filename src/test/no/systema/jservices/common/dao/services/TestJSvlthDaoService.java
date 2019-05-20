@@ -67,7 +67,7 @@ public class TestJSvlthDaoService {
 		Integer arrivalDate = 20190401;
 		
 		
-		List<SvlthDto> list = svlthDaoService.getAll("I", null,null, mrn ,null ,null,null, null, null);
+		List<SvlthDto> list = svlthDaoService.getAll("I", null,null, mrn ,null,null ,null,null, null, null);
 		assertNotNull(list);
 
 //		list = svlthDaoService.getAll("I", null ,mrn , null, null, null, null);
@@ -116,20 +116,21 @@ public class TestJSvlthDaoService {
 	public final void testGetAllAndCalcSaldo() {
 		String godsLokalkod = "BJO";
 		String godsNummer = "BJO18-323"; //BJO18-323, BJO19-389
+		String position = "1";
 
 		Integer id2F = 20190502;
 		Integer id2T = 20190502;
 		
-		List<SvlthDto> list= svlthDaoService.getAll(EventTypeEnum.INLAGG.getValue(),godsLokalkod,godsNummer,null, id2F,id2T, null , null, null);
+		List<SvlthDto> list= svlthDaoService.getAll(EventTypeEnum.INLAGG.getValue(),godsLokalkod,godsNummer,position, null, id2F,id2T, null , null, null);
 		assertTrue(list.isEmpty());
 		
-		list= svlthDaoService.getAll(EventTypeEnum.INLAGG.getValue(),godsLokalkod,godsNummer,null, id2F,id2T, null , null, null);
+		list= svlthDaoService.getAll(EventTypeEnum.INLAGG.getValue(),godsLokalkod,godsNummer,position,null, id2F,id2T, null , null, null);
 
 
 		id2F = null;
 		id2T = null;
 		
-		list= svlthDaoService.getAll(EventTypeEnum.INLAGG.getValue(),godsLokalkod,godsNummer,null, id2F,id2T, null , null, null);
+		list= svlthDaoService.getAll(EventTypeEnum.INLAGG.getValue(),godsLokalkod,godsNummer,position,null, id2F,id2T, null , null, null);
 		assertFalse(list.isEmpty());
 		
 		list.forEach(dto -> {

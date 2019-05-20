@@ -55,6 +55,7 @@ public class SvlthDao implements IDao {
 	private Integer svlth_unt;
 	private String svlth_uti;
 	private String svlth_utx;
+	private String svlth_ius;
 	
 	private Map<String, Object> keys = null;
 

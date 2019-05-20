@@ -50,6 +50,7 @@ public class SvlthDto  {
 	private Integer svlth_unt;
 	private String svlth_uti;
 	private String svlth_utx;
+	private String svlth_ius;
 	
 	private Integer saldo;
 	

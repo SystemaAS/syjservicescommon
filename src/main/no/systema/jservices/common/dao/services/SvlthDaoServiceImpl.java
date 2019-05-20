@@ -67,7 +67,7 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 	}
 	
 	@Override
-	public List<SvlthDto> getAll(String svlth_h, String svlth_igl, String svlth_ign, String svlth_irn,  Integer svlth_id2F,Integer svlth_id2T, Integer svlth_id1, Integer svlth_im1, String svlth_rty) {
+	public List<SvlthDto> getAll(String svlth_h, String svlth_igl, String svlth_ign,String svlth_pos, String svlth_irn,  Integer svlth_id2F,Integer svlth_id2T, Integer svlth_id1, Integer svlth_im1, String svlth_rty) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		List<SvlthDao> daoList;
 		List<SvlthDto> dtoList = new ArrayList<SvlthDto>();
@@ -81,7 +81,9 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 		if (svlth_ign != null) {
 			params.put("svlth_ign", svlth_ign);
 		}
-
+		if (svlth_pos != null) {
+			params.put("svlth_pos", svlth_pos);
+		}
 		if (svlth_irn != null) {
 			params.put("svlth_irn", svlth_irn);
 		}

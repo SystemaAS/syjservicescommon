@@ -37,6 +37,7 @@ public interface SvlthDaoService extends GenericDaoService<SvlthDao> {
 	 * @param svlth_h, type
 	 * @param svlth_igl, godslokalkod
 	 * @param svlth_ign godsnummer
+	 * @param svlth_pos position
 	 * @param svlth_irn mrn
 	 * @param svlth_id2F from ankomstdate
 	 * @param svlth_id2T to ankomstdate
@@ -45,7 +46,7 @@ public interface SvlthDaoService extends GenericDaoService<SvlthDao> {
 	 * @param svlth_rty rattningstyp, I el. U
 	 * @return a List of {@linkplain SvlthDto}
 	 */
-	List<SvlthDto> getAll(String svlth_h, String svlth_igl, String svlth_ign, String svlth_irn , Integer svlth_id2F,Integer svlth_id2T, Integer svlth_id1,  Integer svlth_im1, String svlth_rty );
+	List<SvlthDto> getAll(String svlth_h, String svlth_igl, String svlth_ign,String svlth_pos, String svlth_irn , Integer svlth_id2F,Integer svlth_id2T, Integer svlth_id1,  Integer svlth_im1, String svlth_rty );
 	
 	/**
 	 * Is uttag quantity valid.
