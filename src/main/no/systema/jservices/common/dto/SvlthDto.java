@@ -46,6 +46,17 @@ public class SvlthDto  {
 	private String svlth_rty;
 	private String svlth_ud1;
 	private String svlth_uex;
+	private String svlth_uex2;
+	private String svlth_uex3;
+	private String svlth_uex4;
+	private String svlth_uex5;
+	private String svlth_uex6;
+	private String svlth_uex7;
+	private String svlth_uex8;
+	private String svlth_uex9;
+	private String svlth_uex10;
+	private String svlth_uex11;
+
 	private Integer svlth_um1;
 	private Integer svlth_unt;
 	private String svlth_uti;
@@ -84,7 +95,20 @@ public class SvlthDto  {
 		
 	}		
 	
-	
+	/**
+	 * 
+	 * Convenience method for transforming Dto to Dao.
+	 * 
+	 * @param dao
+	 * @return SvlthDao
+	 */
+	static public SvlthDao get(SvlthDto dto) {
+		ModelMapper modelMapper = new ModelMapper();
+		SvlthDao dao = modelMapper.map(dto, SvlthDao.class);	
+		
+		return dao;
+		
+	}		
 	
 
 }

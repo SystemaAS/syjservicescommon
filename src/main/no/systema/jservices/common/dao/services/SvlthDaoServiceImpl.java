@@ -166,7 +166,6 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 		if (inlaggList.isEmpty()) {
 			return 0;
 		}
-		//TODO secure
 		SvlthDao inlagg = inlaggList.get(0);
 		
 		List<SvlthDao> inlaggRattelseList = getInlaggRattelse(inlagg.getSvlth_ign(),inlagg.getSvlth_pos());
@@ -185,19 +184,30 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 
 	private Integer getUttagAntal2(String svlth_ign,String svlth_pos) {	
 		List<SvlthDao> uttagList = getAll(EventTypeEnum.UTTAG.getValue(),svlth_ign, svlth_pos);
-		Integer uttagAntal;
-		Integer sumUttagAntal = 0;;
+		Integer uttagAntal = 0;
+		Integer sumUttagAntal = 0;
+		
+		logger.info("uttagList.size()="+uttagList.size());
 		
 		for (SvlthDao uttagDao : uttagList) {
-//			logger.info("uttagDao="+uttagDao);
-			SvlthDao uttagRattelseDao = getLatestUttagRattelse(uttagDao.getSvlth_ign(),uttagDao.getSvlth_pos());
+//			logger.info("uttagDao.getSvlth_unt()="+uttagDao.getSvlth_unt());
+			SvlthDao uttagRattelseDao = getLatestUttagRattelse(uttagDao.getSvlth_ign(),uttagDao.getSvlth_pos(), uttagDao.getSvlth_ud1(), uttagDao.getSvlth_um1());
 			if (uttagRattelseDao != null) {
 				uttagAntal = uttagRattelseDao.getSvlth_rnt(); 
+//				logger.info("uttagRattelseDao.getSvlth_rnt()="+uttagAntal);
+
 			} else {
 				uttagAntal = uttagDao.getSvlth_unt(); 
+//				logger.info("uttagDao.getSvlth_unt()="+uttagAntal);				
 			}
+
 			
-			sumUttagAntal = sumUttagAntal + uttagAntal;
+//			logger.info("Adding :"+uttagAntal);
+			
+			sumUttagAntal += uttagAntal;
+			
+//			logger.info("Sum :"+sumUttagAntal);
+			
 			
 		}
 
@@ -341,11 +351,13 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 
 	}		
 	
-	private SvlthDao getLatestUttagRattelse(@NonNull String svlth_ign, @NonNull String svlth_pos ) {
+	private SvlthDao getLatestUttagRattelse(@NonNull String svlth_ign, @NonNull String svlth_pos, @NonNull Integer svlth_ud1, @NonNull Integer svlth_um1 ) {
 		Map<String, Object> params = new HashMap<String, Object>();
 			params.put("svlth_h", EventTypeEnum.RATTELSE.getValue());
 			params.put("svlth_ign", svlth_ign);
 			params.put("svlth_pos", svlth_pos);
+			params.put("svlth_ud1", svlth_ud1);
+			params.put("svlth_um1", svlth_um1);
 
 			params.put("svlth_rty", EventTypeEnum.UTTAG.getValue());
 		
