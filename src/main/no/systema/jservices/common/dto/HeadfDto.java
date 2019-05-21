@@ -39,6 +39,7 @@ public class HeadfDto implements IDao {
 	private String hepk4;
 	private String hepos1;
 	private int hepos2;
+	private int hekna;
 	/* days to view in list */
 	@ExludeMapping
 	private int dftdg;
