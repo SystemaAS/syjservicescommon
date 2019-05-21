@@ -119,30 +119,93 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 
 	@Override
 	public boolean validUttagQuantity(Integer uttagAntal, String svlth_ign, String svlth_pos) {
+
+		logger.info("::validUttagQuantity::uttagAntal="+uttagAntal);
+		logger.info("::validUttagQuantity::svlth_ign="+svlth_ign+", svlth_pos="+svlth_pos);
+		logger.info("::validUttagQuantity::calculateSaldo(svlth_ign, svlth_pos)="+ calculateSaldo(svlth_ign, svlth_pos));
 		return uttagAntal <= calculateSaldo(svlth_ign, svlth_pos);
 		
 	}	
 	
-	private Integer calculateSaldo(String svlth_ign, String svlth_pos) {
-		Integer inlaggAntal = getLatestRattelseInlaggAntal(svlth_ign,svlth_pos);
-		if (inlaggAntal == 0) {
-			inlaggAntal = getInlaggAntal(svlth_ign,svlth_pos);
-		}
+//	private Integer calculateSaldo(String svlth_ign, String svlth_pos) {
+//		Integer inlaggAntal = getLatestRattelseInlaggAntal(svlth_ign,svlth_pos);
+//		if (inlaggAntal == 0) {
+//			inlaggAntal = getInlaggAntal(svlth_ign,svlth_pos);
+//		}
 //		logger.info("inlaggAntal="+inlaggAntal);
-		
-		Integer latestRattelseUttagAntal = getLatestRattelseUttagAntal(svlth_ign,svlth_pos);
+//		
+//		Integer latestRattelseUttagAntal = getLatestRattelseUttagAntal(svlth_ign,svlth_pos);
 //		logger.info("latestRattelseUttagAntal="+latestRattelseUttagAntal);
-
-		Integer uttagAntal = getUttagAntal(svlth_ign,svlth_pos);
+//
+//		Integer uttagAntal = getUttagAntal(svlth_ign,svlth_pos);
 //		logger.info("uttagAntal="+uttagAntal);
-		
-		Integer justeratUttagAntal = latestRattelseUttagAntal + uttagAntal;
+//		
+//		Integer justeratUttagAntal = latestRattelseUttagAntal + uttagAntal;
 //		logger.info("justeratUttagAntal="+justeratUttagAntal);
+//
+//		
+//		return inlaggAntal - justeratUttagAntal;
+//		
+//	}
+	
+
+	private Integer calculateSaldo(String svlth_ign, String svlth_pos) {
+		Integer inlaggAntal = getInlaggAntal2(svlth_ign, svlth_pos);
+		logger.info("inlaggAntal="+inlaggAntal);
+		
+		Integer uttagAntal = getUttagAntal2(svlth_ign, svlth_pos);
+		logger.info("uttagAntal="+uttagAntal);
+		
+		return inlaggAntal - uttagAntal;
+		
+	}	
+	
+	
+	private Integer getInlaggAntal2(String svlth_ign,String svlth_pos) {
+		List<SvlthDao> inlaggList = getAll(EventTypeEnum.INLAGG.getValue(),svlth_ign, svlth_pos);
+		if (inlaggList.isEmpty()) {
+			return 0;
+		}
+		//TODO secure
+		SvlthDao inlagg = inlaggList.get(0);
+		
+		List<SvlthDao> inlaggRattelseList = getInlaggRattelse(inlagg.getSvlth_ign(),inlagg.getSvlth_pos());
+		if (inlaggRattelseList.isEmpty()) {
+			return 0;
+		}
+		
+		SvlthDao latestInlaggDto = inlaggRattelseList.stream()
+                .max( timestampComparator )
+                .get();		
+		
+		
+		return latestInlaggDto.getSvlth_rnt();
+	}	
+	
+
+	private Integer getUttagAntal2(String svlth_ign,String svlth_pos) {	
+		List<SvlthDao> uttagList = getAll(EventTypeEnum.UTTAG.getValue(),svlth_ign, svlth_pos);
+		Integer uttagAntal;
+		Integer sumUttagAntal = 0;;
+		
+		for (SvlthDao uttagDao : uttagList) {
+//			logger.info("uttagDao="+uttagDao);
+			SvlthDao uttagRattelseDao = getLatestUttagRattelse(uttagDao.getSvlth_ign(),uttagDao.getSvlth_pos());
+			if (uttagRattelseDao != null) {
+				uttagAntal = uttagRattelseDao.getSvlth_rnt(); 
+			} else {
+				uttagAntal = uttagDao.getSvlth_unt(); 
+			}
+			
+			sumUttagAntal = sumUttagAntal + uttagAntal;
+			
+		}
 
 		
-		return inlaggAntal - justeratUttagAntal;
-		
+		return sumUttagAntal;
 	}
+	
+	
 	
 	private Integer getInlaggAntal(String svlth_ign,String svlth_pos) {
 		List<SvlthDao> inlaggList = getAll(EventTypeEnum.INLAGG.getValue(),svlth_ign, svlth_pos);
@@ -173,6 +236,7 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 		
 		List<SvlthDao> rattelseUttagList = getAll(EventTypeEnum.RATTELSE.getValue(), svlth_ign,svlth_pos, EventTypeEnum.UTTAG.getValue());
 		if (rattelseUttagList.isEmpty()) {
+			logger.info("rattelseUttagList.isEmpty()");
 			qId1 = null;
 			qIm1 = null;
 		} else {
@@ -182,7 +246,8 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 			
 			qId1 = lastestRattelseUttagDto.getSvlth_id1();
 			qIm1 = lastestRattelseUttagDto.getSvlth_im1();
-			
+			logger.info("qId1="+qId1+"qIm1="+qIm1);
+			logger.info("lastestRattelseUttagDto.getSvlth_rnt()"+lastestRattelseUttagDto.getSvlth_rnt());			
 		}
 		
 		List<SvlthDao> uttagAfterlastestRattelseList = getAll(EventTypeEnum.UTTAG.getValue(), svlth_ign,svlth_pos, qId1,  qIm1);
@@ -264,6 +329,41 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 		return findAll(params);
 
 	}		
+	
+	private List<SvlthDao> getInlaggRattelse(@NonNull String svlth_ign, @NonNull String svlth_pos) {
+		Map<String, Object> params = new HashMap<String, Object>();
+			params.put("svlth_h", EventTypeEnum.RATTELSE.getValue());
+			params.put("svlth_ign", svlth_ign);
+			params.put("svlth_pos", svlth_pos);
+			params.put("svlth_rty", EventTypeEnum.INLAGG.getValue());
+		
+			return findAll(params);
+
+	}		
+	
+	private SvlthDao getLatestUttagRattelse(@NonNull String svlth_ign, @NonNull String svlth_pos ) {
+		Map<String, Object> params = new HashMap<String, Object>();
+			params.put("svlth_h", EventTypeEnum.RATTELSE.getValue());
+			params.put("svlth_ign", svlth_ign);
+			params.put("svlth_pos", svlth_pos);
+
+			params.put("svlth_rty", EventTypeEnum.UTTAG.getValue());
+		
+			List<SvlthDao> list =  findAll(params);
+			if (list.isEmpty()) {
+				return null;
+			}
+			
+			SvlthDao latestUttagRattelseDao = list.stream()
+	                .max( timestampComparator )
+	                .get();	
+			
+			
+			return latestUttagRattelseDao;
+
+	}		
+
+	
 	
 	@Override
 	public SvlthDao update(SvlthDao t) {

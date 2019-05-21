@@ -115,7 +115,7 @@ public class TestJSvlthDaoService {
 	@Test
 	public final void testGetAllAndCalcSaldo() {
 		String godsLokalkod = "BJO";
-		String godsNummer = "BJO18-323"; //BJO18-323, BJO19-389
+		String godsNummer = "BJO19-003"; //BJO18-323, BJO19-389
 		String position = "1";
 
 		Integer id2F = 20190502;
@@ -143,8 +143,8 @@ public class TestJSvlthDaoService {
 	
 	@Test
 	public final void testValidUttagQuanty() {
-		Integer uttagAntal = 1;
-		String godsNummer = "BJO19-389"; //BJO18-323
+		Integer uttagAntal = 5;
+		String godsNummer = "BJO19-003"; //BJO18-323
 		String position = "1";
 
 		boolean valid = svlthDaoService.validUttagQuantity(uttagAntal,  godsNummer, position );
