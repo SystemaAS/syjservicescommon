@@ -144,7 +144,7 @@ public class TestJSvlthDaoService {
 	@Test
 	public final void testValidUttagQuanty() {
 		Integer uttagAntal = 5;
-		String godsNummer = "BJO19-003"; //BJO18-323
+		String godsNummer = "BJO19-004"; //BJO18-323
 		String position = "1";
 
 		boolean valid = svlthDaoService.validUttagQuantity(uttagAntal,  godsNummer, position );

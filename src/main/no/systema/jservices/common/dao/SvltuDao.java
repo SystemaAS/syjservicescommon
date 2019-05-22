@@ -1,6 +1,5 @@
 package no.systema.jservices.common.dao;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import lombok.Data;
@@ -19,14 +18,10 @@ public class SvltuDao implements IDao {
 	private String svltu_pos;	
 	private String svltu_uha;	
 	
-	Map<String, Object> keys = new HashMap<String, Object>();	
-	
+	private Map<String, Object> keys = null;
 	
 	@Override
 	public Map<String, Object> getKeys() {
-		keys.put("svltu_igl", svltu_igl);
-		keys.put("svltu_ign", svltu_ign);
-		keys.put("svltu_pos", svltu_pos);
 		return keys;
 	}
 

@@ -170,7 +170,7 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 		
 		List<SvlthDao> inlaggRattelseList = getInlaggRattelse(inlagg.getSvlth_ign(),inlagg.getSvlth_pos());
 		if (inlaggRattelseList.isEmpty()) {
-			return 0;
+			return inlagg.getSvlth_int();
 		}
 		
 		SvlthDao latestInlaggDto = inlaggRattelseList.stream()

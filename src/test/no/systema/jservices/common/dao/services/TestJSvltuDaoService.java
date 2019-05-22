@@ -46,6 +46,14 @@ public class TestJSvltuDaoService {
 		SvltuDao resultDao = svltuDaoService.find(dao);
 		assertNotNull(resultDao);
 	}
+
+	@Test
+	public final void testFindUtgaendaHandling() {
+		List<SvltuDao> list = svltuDaoService.findAll("BJO", "BJO19-003", "1");
+		assertNotNull(list);
+	}	
+	
+	
 	
 	
 	private SvltuDao getSvltuDao() {

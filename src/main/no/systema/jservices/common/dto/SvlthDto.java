@@ -1,12 +1,16 @@
 package no.systema.jservices.common.dto;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.modelmapper.ModelMapper;
 
 import lombok.Data;
 import no.systema.jservices.common.dao.SvlthDao;
+import no.systema.jservices.common.dao.SvltuDao;
 import no.systema.jservices.common.util.DateTimeManager;
+import no.systema.jservices.common.util.StringUtils;
 
 /**
  * This is the query Data Transfer Object between service and UI for Tillfällig lagring.
@@ -109,6 +113,62 @@ public class SvlthDto  {
 		return dao;
 		
 	}		
+
+	/**
+	 * 
+	 * Convenience method for transforming values in SvlthDto to SvltuDao.
+	 * 
+	 * @param dto
+	 * @return SvltuDao
+	 */
+	static public List<SvltuDao> transform(SvlthDto dto) {
+		List<SvltuDao> list = new ArrayList<SvltuDao>();
+		
+		if (StringUtils.hasValue(dto.getSvlth_uex2())) {
+			list.add(add(dto,dto.getSvlth_uex2() ));
+		}
+		if (StringUtils.hasValue(dto.getSvlth_uex3())) {
+			list.add(add(dto,dto.getSvlth_uex3()));
+		}
+		if (StringUtils.hasValue(dto.getSvlth_uex4())) {
+			list.add(add(dto,dto.getSvlth_uex4()));
+		}
+		if (StringUtils.hasValue(dto.getSvlth_uex5())) {
+			list.add(add(dto,dto.getSvlth_uex5()));
+		}
+		if (StringUtils.hasValue(dto.getSvlth_uex6())) {
+			list.add(add(dto,dto.getSvlth_uex6()));
+		}
+		if (StringUtils.hasValue(dto.getSvlth_uex7())) {
+			list.add(add(dto,dto.getSvlth_uex7()));
+		}
+		if (StringUtils.hasValue(dto.getSvlth_uex8())) {
+			list.add(add(dto,dto.getSvlth_uex8()));
+		}
+		if (StringUtils.hasValue(dto.getSvlth_uex9())) {
+			list.add(add(dto,dto.getSvlth_uex9()));
+		}
+		if (StringUtils.hasValue(dto.getSvlth_uex10())) {
+			list.add(add(dto,dto.getSvlth_uex10()));
+		}		
+		if (StringUtils.hasValue(dto.getSvlth_uex11())) {
+			list.add(add(dto,dto.getSvlth_uex11()));
+		}			
+		
+		return list;
+		
+	}		
 	
+	private static SvltuDao add( SvlthDto dto, String uha) {
+		SvltuDao dao = new SvltuDao();
+		dao.setSvltu_igl(dto.getSvlth_igl());
+		dao.setSvltu_ign(dto.getSvlth_ign());
+		dao.setSvltu_pos(dto.getSvlth_pos());
+		dao.setSvltu_uha(uha);
+
+		
+		return dao;
+		
+	}
 
 }
