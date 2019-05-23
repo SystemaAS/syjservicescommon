@@ -7,15 +7,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import lombok.NonNull;
+import no.systema.jservices.common.dao.SvltfDao;
 import no.systema.jservices.common.dao.SvlthDao;
 import no.systema.jservices.common.dto.SvlthDto;
+import no.systema.jservices.common.util.StringUtils;
 import no.systema.jservices.common.values.EventTypeEnum;
 
 public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> implements SvlthDaoService{
 
-	Comparator<SvlthDao> timestampComparator = Comparator.comparing(SvlthDao::getSvlth_id1 )
+	private Comparator<SvlthDao> timestampComparator = Comparator.comparing(SvlthDao::getSvlth_id1 )
 														 .thenComparing(SvlthDao::getSvlth_im1); 
+	
+	private static String DEFAULT_POSITION = "1";
+	private static String SEPARATOR = "-";
+	
+	
+	@Autowired
+	SvltfDaoService svltfDaoService; 
 	
 	@Override
 	public boolean exist(EventTypeEnum typeEnum, String godsnummer, String position) {
@@ -126,6 +137,29 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 		return uttagAntal <= calculateSaldo(svlth_ign, svlth_pos);
 		
 	}	
+	
+	@Override
+	public SvlthDao create(SvlthDao dao) {
+		if (dao.getSvlth_h().equals(EventTypeEnum.INLAGG.getValue())) {
+			String godsLokalkod = dao.getSvlth_igl();
+			StringBuffer buffer = new StringBuffer(godsLokalkod);
+
+			if (!StringUtils.hasValue(dao.getSvlth_ign()) && !StringUtils.hasValue(dao.getSvlth_pos())) {
+				SvltfDao resultDao = svltfDaoService.getExistingSvltf_numAndIncrement(godsLokalkod);
+				buffer.append(resultDao.getSvltf_aar()).append(SEPARATOR).append(resultDao.getSvltf_num());
+				dao.setSvlth_ign(buffer.toString());
+				dao.setSvlth_pos(DEFAULT_POSITION);
+			} else {
+				buffer.append(dao.getSvlth_ign());
+				dao.setSvlth_ign(buffer.toString());
+			}
+			
+		}
+		
+		return super.create(dao);
+
+	}
+	
 	
 //	private Integer calculateSaldo(String svlth_ign, String svlth_pos) {
 //		Integer inlaggAntal = getLatestRattelseInlaggAntal(svlth_ign,svlth_pos);

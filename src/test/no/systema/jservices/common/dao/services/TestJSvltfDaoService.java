@@ -31,10 +31,6 @@ public class TestJSvltfDaoService {
 		SvltfDao qDao = new SvltfDao();
 		qDao.setSvltf_igl("BJO");
 		
-//		//create
-//		SvltfDao dao = getSvltfDao();
-//		SvltfDao returnDao  = svltfDaoService.create(dao);
-		
 		//exist
 		boolean exist =  svltfDaoService.exist(qDao);
 		assertTrue(qDao.getSvltf_igl() +" should exist",exist);
@@ -53,41 +49,46 @@ public class TestJSvltfDaoService {
 	
 	
 	
-//	@Test
-//	public final void testExistingKtnrAndIncrement() {
-//		KosttDao qDao = new KosttDao();
-//		qDao.setKttyp(KosttTyper.Ø.toString());
-//		KosttDao resultDao =  svltfDaoService.find(qDao);
-//		
-//		Integer ktnr = svltfDaoService.getExistingKtnrAndIncrement(KosttTyper.Ø.toString());
-//		System.out.println("ktnr existing="+ktnr);
-//		assertEquals("Should be the same", ktnr, resultDao.getKtnr());
-//
-//		resultDao =  svltfDaoService.find(qDao);
-//		System.out.println("ktnr incremented="+resultDao.getKtnr());
-//		Integer incrementedKtnr  = ktnr + 1;
-//		assertEquals("Should have been incremented with 1", incrementedKtnr, resultDao.getKtnr());
-//		
-//		//Clean db
-//		svltfDaoService.substractKtnr(KosttTyper.Ø.toString());
-//		resultDao =  svltfDaoService.find(qDao);
-//		System.out.println("ktnr substracted="+resultDao.getKtnr());
-//		
-//		Integer substractedKtnr = ktnr;
-//		assertEquals("Should have been substracted with 1", substractedKtnr, resultDao.getKtnr());
-//		
-//	}
+	@Test
+	public final void testExistingGodsnummerAndIncrement() {
+		SvltfDao qDao = new SvltfDao();
+		qDao.setSvltf_igl("BJO");
+		SvltfDao resultDao =  svltfDaoService.find(qDao);
+		
+		SvltfDao resultDao2 = svltfDaoService.getExistingSvltf_numAndIncrement(resultDao.getSvltf_igl());
+		System.out.println("godsnummer existing="+resultDao.getSvltf_num());
+		assertEquals("Should be the same", resultDao2.getSvltf_num(), resultDao.getSvltf_num());
 
-//	@Test
-//	public final void testFindByLike() {
-//		String ktna = "REserVERT";
-//		List<KosttDao> resultList =  svltfDaoService.findByLike(ktna);	
-//		
-////		resultList.forEach(dao -> {
-////			System.out.println(ReflectionToStringBuilder.toString(dao));
-////		});
-//		
-//	}
+		resultDao =  svltfDaoService.find(qDao);
+		System.out.println("godsnummer incremented="+resultDao.getSvltf_num());
+		Integer incrementedgodsnummer  = resultDao2.getSvltf_num() + 1;
+		assertEquals("Should have been incremented with 1", incrementedgodsnummer, resultDao.getSvltf_num());
+		
+		//Clean db
+		resultDao.setSvltf_num(resultDao2.getSvltf_num());
+		svltfDaoService.update(resultDao);
+		resultDao =  svltfDaoService.find(qDao);
+		System.out.println("godsnummer substracted="+resultDao.getSvltf_num());
+		
+		Integer substractedGodsnummer = resultDao2.getSvltf_num();
+		assertEquals("Should have been substracted with 1", substractedGodsnummer, resultDao.getSvltf_num());
+		
+	}
+	
+	
+	@Test
+	public final void justAdjustGodsnummer() {
+		SvltfDao qDao = new SvltfDao();
+		qDao.setSvltf_igl("BJO");
+		SvltfDao resultDao =  svltfDaoService.find(qDao);
+		
+		resultDao.setSvltf_num(1);
+		svltfDaoService.update(resultDao);
+		resultDao =  svltfDaoService.find(qDao);
+		System.out.println("godsnummer adjusted="+resultDao.getSvltf_num());
+		
+		
+	}
 	
 
 	
