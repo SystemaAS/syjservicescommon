@@ -10,7 +10,6 @@ import java.util.function.Function;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import lombok.NonNull;
-import no.systema.jservices.common.dao.SvltfDao;
 import no.systema.jservices.common.dao.SvlthDao;
 import no.systema.jservices.common.dto.SvlthDto;
 import no.systema.jservices.common.util.StringUtils;
@@ -22,7 +21,6 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 														 .thenComparing(SvlthDao::getSvlth_im1); 
 	
 	private static String DEFAULT_POSITION = "1";
-	private static String SEPARATOR = "-";
 	
 	
 	@Autowired
@@ -145,9 +143,8 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 			StringBuffer buffer = new StringBuffer(godsLokalkod);
 
 			if (!StringUtils.hasValue(dao.getSvlth_ign()) && !StringUtils.hasValue(dao.getSvlth_pos())) {
-				SvltfDao resultDao = svltfDaoService.getExistingSvltf_numAndIncrement(godsLokalkod);
-				buffer.append(resultDao.getSvltf_aar()).append(SEPARATOR).append(resultDao.getSvltf_num());
-				dao.setSvlth_ign(buffer.toString());
+				String godsNummer = svltfDaoService.getGenerateGodsnummer(godsLokalkod);
+				dao.setSvlth_ign(godsNummer);
 				dao.setSvlth_pos(DEFAULT_POSITION);
 			} else {
 				buffer.append(dao.getSvlth_ign());

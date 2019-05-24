@@ -50,29 +50,14 @@ public class TestJSvltfDaoService {
 	
 	
 	@Test
-	public final void testExistingGodsnummerAndIncrement() {
+	public final void testGenerateGodsnummer() {
 		SvltfDao qDao = new SvltfDao();
 		qDao.setSvltf_igl("BJO");
 		SvltfDao resultDao =  svltfDaoService.find(qDao);
 		
-		SvltfDao resultDao2 = svltfDaoService.getExistingSvltf_numAndIncrement(resultDao.getSvltf_igl());
-		System.out.println("godsnummer existing="+resultDao.getSvltf_num());
-		assertEquals("Should be the same", resultDao2.getSvltf_num(), resultDao.getSvltf_num());
+		String genNumber = svltfDaoService.getGenerateGodsnummer(resultDao.getSvltf_igl());
+		System.out.println("godsnummer existing="+genNumber);
 
-		resultDao =  svltfDaoService.find(qDao);
-		System.out.println("godsnummer incremented="+resultDao.getSvltf_num());
-		Integer incrementedgodsnummer  = resultDao2.getSvltf_num() + 1;
-		assertEquals("Should have been incremented with 1", incrementedgodsnummer, resultDao.getSvltf_num());
-		
-		//Clean db
-		resultDao.setSvltf_num(resultDao2.getSvltf_num());
-		svltfDaoService.update(resultDao);
-		resultDao =  svltfDaoService.find(qDao);
-		System.out.println("godsnummer substracted="+resultDao.getSvltf_num());
-		
-		Integer substractedGodsnummer = resultDao2.getSvltf_num();
-		assertEquals("Should have been substracted with 1", substractedGodsnummer, resultDao.getSvltf_num());
-		
 	}
 	
 	
