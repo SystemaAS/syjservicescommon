@@ -138,20 +138,24 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 	
 	@Override
 	public SvlthDao create(SvlthDao dao) {
-		if (dao.getSvlth_h().equals(EventTypeEnum.INLAGG.getValue())) {
-			String godsLokalkod = dao.getSvlth_igl();
-			StringBuffer buffer = new StringBuffer(godsLokalkod);
-
-			if (!StringUtils.hasValue(dao.getSvlth_ign()) && !StringUtils.hasValue(dao.getSvlth_pos())) {
-				String godsNummer = svltfDaoService.getGenerateGodsnummer(godsLokalkod);
-				dao.setSvlth_ign(godsNummer);
-				dao.setSvlth_pos(DEFAULT_POSITION);
-			} else {
-				buffer.append(dao.getSvlth_ign());
-				dao.setSvlth_ign(buffer.toString());
-			}
-			
-		}
+//		if (dao.getSvlth_h().equals(EventTypeEnum.INLAGG.getValue())) {
+//			String godsLokalkod = dao.getSvlth_igl();
+//			StringBuffer buffer = new StringBuffer(godsLokalkod);
+//
+//			if (!StringUtils.hasValue(dao.getSvlth_ign()) && !StringUtils.hasValue(dao.getSvlth_pos())) {
+//				String godsNummer = svltfDaoService.getGenerateGodsnummer(godsLokalkod);
+//				buffer.append(godsNummer);
+//				dao.setSvlth_ign(buffer.toString());
+//				dao.setSvlth_pos(DEFAULT_POSITION);
+//			} else {
+//				buffer.append(dao.getSvlth_ign());
+//				dao.setSvlth_ign(buffer.toString());
+//				if (!StringUtils.hasValue(dao.getSvlth_pos())) {
+//					dao.setSvlth_pos(DEFAULT_POSITION);
+//				}
+//			}
+//			
+//		}
 		
 		return super.create(dao);
 
