@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import no.systema.jservices.common.dao.GenericObjectMapper;
 import no.systema.jservices.common.dao.HeadfDao;
 import no.systema.jservices.common.dto.HeadfDto;
+import no.systema.jservices.common.util.StringUtils;
 
 public class HeadfDaoServiceImpl extends GenericDaoServiceImpl<HeadfDao> implements HeadfDaoService {
 	protected static final Logger logger = Logger.getLogger(HeadfDaoServiceImpl.class.getName());
@@ -46,9 +47,12 @@ public class HeadfDaoServiceImpl extends GenericDaoServiceImpl<HeadfDao> impleme
 			//queryString.append(" AND   (:hepos1 IS NULL OR hepos1 like :hepos1 ) ");
 			//queryString.append(" AND   (:hepos2 = 0 OR hepos2 >= :hepos2 )");
 			
-			
-			if(qDto.getHedtop() == 0) {  //Only if date not delivered
-				queryString.append(" AND  hedtop >= "+fromDate);
+			//Only if date not delivered
+			if(qDto.getHedtop() == 0) {
+				//only if is not called from godsreg module
+				if(!StringUtils.hasValue(qDto.getGodsreg()) ){
+					queryString.append(" AND  hedtop >= "+fromDate);
+				}
 			}
 		}
 		
