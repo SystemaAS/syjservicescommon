@@ -24,6 +24,6 @@ public interface HeadfDaoService extends GenericDaoService<HeadfDao> {
 	 * @return a {@link HeadfDto}, i found, else null
 	 */
 	public HeadfDao find(int heavd, int heopd);	
-	
+	public List<HeadfDto> getSpecialGodsreg(HeadfDto qDto);
 	
 }

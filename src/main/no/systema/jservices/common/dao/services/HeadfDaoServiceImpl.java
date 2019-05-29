@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 import no.systema.jservices.common.dao.GenericObjectMapper;
+import no.systema.jservices.common.dao.GodsjfDao;
 import no.systema.jservices.common.dao.HeadfDao;
 import no.systema.jservices.common.dto.HeadfDto;
 import no.systema.jservices.common.util.StringUtils;
@@ -23,6 +24,7 @@ public class HeadfDaoServiceImpl extends GenericDaoServiceImpl<HeadfDao> impleme
 		NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getJdbcTemplate().getDataSource());
 		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(qDto);
 		int fromDate = fromDate(qDto.getHedtop(), qDto.getDftdg());
+		
 		StringBuilder queryString = new StringBuilder();
 		queryString.append(" SELECT heavd, heopd , hedtop ,hedtr, henas , henak, hesg , hent , hevkt , hem3 , helks ,  hepns , helkk , hepnk, ");
 		queryString.append(" heot, heur, hepro, hegn, hest, hepk3, hepk4, hepos1, hepos2, hekna");
@@ -48,12 +50,10 @@ public class HeadfDaoServiceImpl extends GenericDaoServiceImpl<HeadfDao> impleme
 			//queryString.append(" AND   (:hepos2 = 0 OR hepos2 >= :hepos2 )");
 			
 			//Only if date not delivered
+			/*
 			if(qDto.getHedtop() == 0) {
-				//only if is not called from godsreg module
-				if(!StringUtils.hasValue(qDto.getGodsreg()) ){
-					queryString.append(" AND  hedtop >= "+fromDate);
-				}
-			}
+				queryString.append(" AND  hedtop >= "+fromDate);
+			}*/
 		}
 		
 		queryString.append(" ORDER BY hedtop DESC ");		
@@ -64,8 +64,35 @@ public class HeadfDaoServiceImpl extends GenericDaoServiceImpl<HeadfDao> impleme
 
 	}
 
+	@Override
+	public List<HeadfDto> getSpecialGodsreg(HeadfDto qDto) {
+		int fromDate = fromDate(qDto.getHedtop(), qDto.getDftdg());
+		
+		StringBuilder queryString = new StringBuilder();
+		queryString.append(" SELECT heavd, heopd , hedtop ,hedtr, henas , henak, hesg , hent , hevkt , hem3 , helks ,  hepns , helkk , hepnk, ");
+		queryString.append(" heot, heur, hepro, hegn, hest, hepk3, hepk4, hepos1, hepos2, hekna");
+		queryString.append(" FROM headf ");
+		queryString.append(" WHERE hegn =  ?");
+		//Only if date not delivered
+		/*
+		if(qDto.getHedtop() == 0) {
+			queryString.append(" AND  hedtop >= "+fromDate);
+		}*/
+		logger.info("hegn="+ qDto.getHegn());
+		logger.info("queryString="+queryString.toString());
+		
+		//return namedParameterJdbcTemplate.query(queryString.toString(), namedParameters, new GenericObjectMapper(new HeadfDto()));
+		return super.getJdbcTemplate().query( queryString.toString(), new Object[]{ qDto.getHegn() }, new GenericObjectMapper(new HeadfDto()));
+		
+	}
+
 	
-	
+	/**
+	 * 
+	 * @param hedtop
+	 * @param dftdg
+	 * @return
+	 */
 	private int fromDate(int hedtop, int dftdg) {
 		String hedstopAsString = String.valueOf(hedtop);  
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
