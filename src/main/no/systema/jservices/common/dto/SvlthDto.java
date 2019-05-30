@@ -60,6 +60,8 @@ public class SvlthDto  {
 	private String svlth_uex9;
 	private String svlth_uex10;
 	private String svlth_uex11;
+	
+	private String svlth_uex_concat;
 
 	private Integer svlth_um1;
 	private Integer svlth_unt;
