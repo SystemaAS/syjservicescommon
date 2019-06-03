@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.modelmapper.ModelMapper;
 
 import lombok.Data;
@@ -13,15 +14,15 @@ import no.systema.jservices.common.util.DateTimeManager;
 import no.systema.jservices.common.util.StringUtils;
 
 /**
- * This is the query Data Transfer Object between service and UI for Tillfällig lagring.
- * 
+ * This is the query Data Transfer Object between service and UI for Tillfällig lagring. <br>
+ * Hence the minor changes in some get methods.
  * 
  * @author fredrikmoller
  * @date 2019-04-09
  */
 @Data
 public class SvlthDto  {
-
+	
 	private String svlth_h; 
 	private BigDecimal svlth_ibr;
 	private Integer svlth_id1;
@@ -46,6 +47,8 @@ public class SvlthDto  {
 	private String svlth_ivb4;
 	private String svlth_ivb5;
 	private String svlth_rnt;
+	private BigDecimal svlth_rbr;
+	private String svlth_rvb;
 	private String svlth_rtx;
 	private String svlth_rty;
 	private String svlth_ud1;
@@ -62,6 +65,8 @@ public class SvlthDto  {
 	private String svlth_uex11;
 	
 	private String svlth_uex_concat;
+	private String svlth_r_field;
+	private String svlth_r_value;
 
 	private Integer svlth_um1;
 	private Integer svlth_unt;
@@ -75,7 +80,11 @@ public class SvlthDto  {
 	
 	
 	public String getTimestamp(){
-		return DateTimeManager.getDateTime(svlth_id1, svlth_im1);
+		if (svlth_id1 != null) {
+			return DateTimeManager.getDateTime(svlth_id1, svlth_im1);
+		} else {
+			return "";
+		}
 	}
 
 	public String getSvlth_rnt() {
@@ -85,6 +94,14 @@ public class SvlthDto  {
 			return svlth_rnt;
 		}
 	}	
+
+	public BigDecimal getSvlth_rbr() {
+		if (svlth_rbr != null && "0.000".equals(svlth_rbr.toString())) {
+			return null;	
+		} else {
+			return svlth_rbr;
+		}
+	}		
 	
 	/**
 	 * 

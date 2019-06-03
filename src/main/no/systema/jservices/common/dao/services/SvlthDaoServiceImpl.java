@@ -12,16 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import lombok.NonNull;
 import no.systema.jservices.common.dao.SvlthDao;
 import no.systema.jservices.common.dto.SvlthDto;
-import no.systema.jservices.common.util.StringUtils;
 import no.systema.jservices.common.values.EventTypeEnum;
 
 public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> implements SvlthDaoService{
 
 	private Comparator<SvlthDao> timestampComparator = Comparator.comparing(SvlthDao::getSvlth_id1 )
 														 .thenComparing(SvlthDao::getSvlth_im1); 
-	
-	private static String DEFAULT_POSITION = "1";
-	
 	
 	@Autowired
 	SvltfDaoService svltfDaoService; 

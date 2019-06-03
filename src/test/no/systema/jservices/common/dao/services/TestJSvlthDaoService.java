@@ -75,8 +75,22 @@ public class TestJSvlthDaoService {
 		
 	
 	}		
-	
 
+	
+	@Test
+	public final void testGetAll2() {
+		String godsLokalkod = "BJO";
+		Integer id2F = 20190531;
+		List<SvlthDto> list= svlthDaoService.getAll(null,godsLokalkod,null,null,null, id2F,null, null , null, null);
+		
+		list.forEach(dto -> {
+			System.out.println("dto="+dto);
+			
+		});
+		
+	
+	}		
+	
 	@Test(expected=IllegalAccessError.class)
 	public final void testExistOrg() {
 		SvlthDao dao = new SvlthDao();

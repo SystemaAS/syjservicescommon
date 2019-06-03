@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
+import no.systema.jservices.common.util.StringUtils;
 
 /**
  * For Tillfälligt lager.
@@ -47,6 +48,8 @@ public class SvlthDao implements IDao {
 	private String svlth_ivb4;
 	private String svlth_ivb5;
 	private Integer svlth_rnt;
+	@Setter(AccessLevel.NONE) private BigDecimal svlth_rbr;
+	private String svlth_rvb;
 	private String svlth_rtx;
 	private String svlth_rty;
 	private Integer svlth_ud1;
@@ -60,8 +63,17 @@ public class SvlthDao implements IDao {
 	private Map<String, Object> keys = null;
 
 	public void setSvlth_ibr(String svlth_ibr) {
-		this.svlth_ibr = new BigDecimal(svlth_ibr.replace(",", "."));
+		if (StringUtils.hasValue(svlth_ibr)) {
+			this.svlth_ibr = new BigDecimal(svlth_ibr.replace(",", "."));
+		}
 	}
+
+	public void setSvlth_rbr(String svlth_rbr) {
+		if (StringUtils.hasValue(svlth_rbr)) {
+			this.svlth_rbr = new BigDecimal(svlth_rbr.replace(",", "."));
+		}
+	}	
+	
 	
 	@Override
 	@JsonIgnore
