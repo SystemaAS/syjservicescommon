@@ -50,6 +50,7 @@ public class SvlthDao implements IDao {
 	private Integer svlth_rnt;
 	@Setter(AccessLevel.NONE) private BigDecimal svlth_rbr;
 	private String svlth_rvb;
+	private String svlth_rsl;
 	private String svlth_rtx;
 	private String svlth_rty;
 	private Integer svlth_ud1;
