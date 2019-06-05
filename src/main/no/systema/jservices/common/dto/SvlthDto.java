@@ -86,22 +86,6 @@ public class SvlthDto  {
 		}
 	}
 	
-//	public String getSvlth_id2(){
-//		if (svlth_id2 != null) {
-//			return DateTimeManager.getDateSV(svlth_id2);
-//		} else {
-//			return "";
-//		}
-//	}
-//	
-//	public String getSvlth_ud1(){
-//		if (svlth_ud1 != null) {
-//			return DateTimeManager.getDateSV(svlth_ud1);
-//		} else {
-//			return "";
-//		}
-//	}	
-	
 	public String getSvlth_rnt() {
 		if ("0".equals(svlth_rnt)) {
 			return null;	
@@ -117,6 +101,15 @@ public class SvlthDto  {
 			return svlth_rbr;
 		}
 	}		
+
+	public BigDecimal getSvlth_ibr() {
+		if (svlth_ibr != null && "0.000".equals(svlth_ibr.toString())) {
+			return null;	
+		} else {
+			return svlth_ibr;
+		}
+	}	
+	
 	
 	/**
 	 * 
