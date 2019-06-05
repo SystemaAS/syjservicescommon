@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.modelmapper.ModelMapper;
 
 import lombok.Data;
@@ -37,7 +36,7 @@ public class SvlthDto  {
 	private String svlth_ih4;
 	private String svlth_ih5;
 	private Integer svlth_im1;
-	private Integer svlth_int;
+	private String svlth_int;
 	private String svlth_irn;
 	private String svlth_isl;
 	private String svlth_itx;
@@ -51,7 +50,7 @@ public class SvlthDto  {
 	private String svlth_rvb;
 	private String svlth_rtx;
 	private String svlth_rty;
-	private String svlth_ud1;
+	private Integer svlth_ud1;
 	private String svlth_uex;
 	private String svlth_uex2;
 	private String svlth_uex3;
@@ -81,12 +80,28 @@ public class SvlthDto  {
 	
 	public String getTimestamp(){
 		if (svlth_id1 != null) {
-			return DateTimeManager.getDateTime(svlth_id1, svlth_im1);
+			return DateTimeManager.getDateTimeSV(svlth_id1, svlth_im1);
 		} else {
 			return "";
 		}
 	}
-
+	
+//	public String getSvlth_id2(){
+//		if (svlth_id2 != null) {
+//			return DateTimeManager.getDateSV(svlth_id2);
+//		} else {
+//			return "";
+//		}
+//	}
+//	
+//	public String getSvlth_ud1(){
+//		if (svlth_ud1 != null) {
+//			return DateTimeManager.getDateSV(svlth_ud1);
+//		} else {
+//			return "";
+//		}
+//	}	
+	
 	public String getSvlth_rnt() {
 		if ("0".equals(svlth_rnt)) {
 			return null;	

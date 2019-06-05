@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import lombok.NonNull;
@@ -124,57 +126,28 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 
 	@Override
 	public boolean validUttagQuantity(Integer uttagAntal, String svlth_ign, String svlth_pos) {
-
-		logger.info("::validUttagQuantity::uttagAntal="+uttagAntal);
-		logger.info("::validUttagQuantity::svlth_ign="+svlth_ign+", svlth_pos="+svlth_pos);
-		logger.info("::validUttagQuantity::calculateSaldo(svlth_ign, svlth_pos)="+ calculateSaldo(svlth_ign, svlth_pos));
 		return uttagAntal <= calculateSaldo(svlth_ign, svlth_pos);
-		
 	}	
 	
-	
-//	private Integer calculateSaldo(String svlth_ign, String svlth_pos) {
-//		Integer inlaggAntal = getLatestRattelseInlaggAntal(svlth_ign,svlth_pos);
-//		if (inlaggAntal == 0) {
-//			inlaggAntal = getInlaggAntal(svlth_ign,svlth_pos);
-//		}
-//		logger.info("inlaggAntal="+inlaggAntal);
-//		
-//		Integer latestRattelseUttagAntal = getLatestRattelseUttagAntal(svlth_ign,svlth_pos);
-//		logger.info("latestRattelseUttagAntal="+latestRattelseUttagAntal);
-//
-//		Integer uttagAntal = getUttagAntal(svlth_ign,svlth_pos);
-//		logger.info("uttagAntal="+uttagAntal);
-//		
-//		Integer justeratUttagAntal = latestRattelseUttagAntal + uttagAntal;
-//		logger.info("justeratUttagAntal="+justeratUttagAntal);
-//
-//		
-//		return inlaggAntal - justeratUttagAntal;
-//		
-//	}
-	
-
 	private Integer calculateSaldo(String svlth_ign, String svlth_pos) {
-		Integer inlaggAntal = getInlaggAntal2(svlth_ign, svlth_pos);
-		logger.info("inlaggAntal="+inlaggAntal);
+		Integer inlaggAntal = getInlaggAntal(svlth_ign, svlth_pos);
+//		logger.info("inlaggAntal="+inlaggAntal);
 		
-		Integer uttagAntal = getUttagAntal2(svlth_ign, svlth_pos);
-		logger.info("uttagAntal="+uttagAntal);
+		Integer uttagAntal = getUttagAntal(svlth_ign, svlth_pos);
+//		logger.info("uttagAntal="+uttagAntal);
 		
 		return inlaggAntal - uttagAntal;
 		
 	}	
 	
-	
-	private Integer getInlaggAntal2(String svlth_ign,String svlth_pos) {
+	private Integer getInlaggAntal(String svlth_ign,String svlth_pos) {
 		List<SvlthDao> inlaggList = getAll(EventTypeEnum.INLAGG.getValue(),svlth_ign, svlth_pos);
 		if (inlaggList.isEmpty()) {
 			return 0;
 		}
 		SvlthDao inlagg = inlaggList.get(0);
 		
-		List<SvlthDao> inlaggRattelseList = getInlaggRattelse(inlagg.getSvlth_ign(),inlagg.getSvlth_pos());
+		List<SvlthDao> inlaggRattelseList = getInlaggRattelseAntal(inlagg.getSvlth_ign(),inlagg.getSvlth_pos());
 		if (inlaggRattelseList.isEmpty()) {
 			return inlagg.getSvlth_int();
 		}
@@ -183,125 +156,29 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
                 .max( timestampComparator )
                 .get();		
 		
-		
 		return latestInlaggDto.getSvlth_rnt();
+		
 	}	
-	
 
-	private Integer getUttagAntal2(String svlth_ign,String svlth_pos) {	
+	private Integer getUttagAntal(String svlth_ign,String svlth_pos) {	
 		List<SvlthDao> uttagList = getAll(EventTypeEnum.UTTAG.getValue(),svlth_ign, svlth_pos);
 		Integer uttagAntal = 0;
 		Integer sumUttagAntal = 0;
 		
-		logger.info("uttagList.size()="+uttagList.size());
-		
 		for (SvlthDao uttagDao : uttagList) {
-//			logger.info("uttagDao.getSvlth_unt()="+uttagDao.getSvlth_unt());
 			SvlthDao uttagRattelseDao = getLatestUttagRattelse(uttagDao.getSvlth_ign(),uttagDao.getSvlth_pos(), uttagDao.getSvlth_ud1(), uttagDao.getSvlth_um1());
 			if (uttagRattelseDao != null) {
 				uttagAntal = uttagRattelseDao.getSvlth_rnt(); 
-//				logger.info("uttagRattelseDao.getSvlth_rnt()="+uttagAntal);
-
 			} else {
 				uttagAntal = uttagDao.getSvlth_unt(); 
-//				logger.info("uttagDao.getSvlth_unt()="+uttagAntal);				
 			}
 
-			
-//			logger.info("Adding :"+uttagAntal);
-			
 			sumUttagAntal += uttagAntal;
 			
-//			logger.info("Sum :"+sumUttagAntal);
-			
-			
 		}
-
 		
 		return sumUttagAntal;
 	}
-	
-	
-	
-	private Integer getInlaggAntal(String svlth_ign,String svlth_pos) {
-		List<SvlthDao> inlaggList = getAll(EventTypeEnum.INLAGG.getValue(),svlth_ign, svlth_pos);
-		SvlthDao latestInlaggDto = inlaggList.stream()
-                .max( timestampComparator )
-                .get();			
-		
-		List<SvlthDao> rattelseInlaggList = getAll(EventTypeEnum.RATTELSE.getValue(), svlth_ign,svlth_pos, EventTypeEnum.INLAGG.getValue());
-		if (rattelseInlaggList.isEmpty()) {
-			return latestInlaggDto.getSvlth_int();
-		}
-
-		SvlthDao latestRattelseInlaggDto = rattelseInlaggList.stream()
-                .max( timestampComparator )
-                .get();		
-		
-		if (latestRattelseInlaggDto.getSvlth_id1() > latestInlaggDto.getSvlth_id1()) {
-			return latestRattelseInlaggDto.getSvlth_rnt();
-		} else {
-			return latestInlaggDto.getSvlth_int();
-		}
-		
-	}
-	
-	private Integer getUttagAntal(String svlth_ign,String svlth_pos) {
-		Integer qId1;
-		Integer qIm1;
-		
-		List<SvlthDao> rattelseUttagList = getAll(EventTypeEnum.RATTELSE.getValue(), svlth_ign,svlth_pos, EventTypeEnum.UTTAG.getValue());
-		if (rattelseUttagList.isEmpty()) {
-			logger.info("rattelseUttagList.isEmpty()");
-			qId1 = null;
-			qIm1 = null;
-		} else {
-			SvlthDao lastestRattelseUttagDto = rattelseUttagList.stream()
-	                .max( timestampComparator )
-	                .get();		
-			
-			qId1 = lastestRattelseUttagDto.getSvlth_id1();
-			qIm1 = lastestRattelseUttagDto.getSvlth_im1();
-			logger.info("qId1="+qId1+"qIm1="+qIm1);
-			logger.info("lastestRattelseUttagDto.getSvlth_rnt()"+lastestRattelseUttagDto.getSvlth_rnt());			
-		}
-		
-		List<SvlthDao> uttagAfterlastestRattelseList = getAll(EventTypeEnum.UTTAG.getValue(), svlth_ign,svlth_pos, qId1,  qIm1);
-		Function<SvlthDao, Integer> totalMapper = uttag -> uttag.getSvlth_unt();
-		Integer uttagAntal = uttagAfterlastestRattelseList.stream()
-		        .map(totalMapper)
-		        .reduce(0, Integer::sum);	
-		
-		return uttagAntal;
-		
-	}	
-	
-	private Integer getLatestRattelseInlaggAntal(String svlth_ign, String svlth_pos) {
-		List<SvlthDao> inlaggList = getAll(EventTypeEnum.RATTELSE.getValue(), svlth_ign,svlth_pos, EventTypeEnum.INLAGG.getValue());
-		if (inlaggList.isEmpty()) {
-			return 0;
-		}
-		
-		SvlthDao maxRattelseUttagDto = inlaggList.stream()
-                .max( timestampComparator )
-                .get();	
-
-		return maxRattelseUttagDto.getSvlth_rnt();
-	}
-	
-	private Integer getLatestRattelseUttagAntal(String svlth_ign, String svlth_pos) {
-		List<SvlthDao> uttagList = getAll(EventTypeEnum.RATTELSE.getValue(), svlth_ign,svlth_pos, EventTypeEnum.UTTAG.getValue());
-		if (uttagList.isEmpty()) {
-			return 0;
-		}
-		
-		SvlthDao maxRattelseUttagDao = uttagList.stream()
-                .max( timestampComparator )
-                .get();	
-		
-		return maxRattelseUttagDao.getSvlth_rnt();
-		
-	}	
 	
 	private List<SvlthDao> getAll(@NonNull String svlth_h, @NonNull String svlth_ign,  @NonNull String svlth_pos) {
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -313,75 +190,37 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 
 	}	
 	
-	private List<SvlthDao> getAll(@NonNull String svlth_h, @NonNull String svlth_ign,@NonNull String svlth_pos, Integer svlth_id1, Integer svlth_im1) {
+	private List<SvlthDao> getInlaggRattelseAntal(@NonNull String svlth_ign, @NonNull String svlth_pos) {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("svlth_h", svlth_h);
+		params.put("svlth_h", EventTypeEnum.RATTELSE.getValue());
 		params.put("svlth_ign", svlth_ign);
 		params.put("svlth_pos", svlth_pos);
-		if (svlth_id1 != null) {
-			params.put("svlth_id1" + GREATER_THEN, svlth_id1);
-			params.put("svlth_im1" + GREATER_THEN, svlth_im1);			
-		}
-
-		return findAll(params);
-
-	}	
-	
-	private List<SvlthDao> getAll(@NonNull String svlth_h,  @NonNull String svlth_ign, @NonNull String svlth_pos, @NonNull String svlth_rty) {
-		Map<String, Object> params = new HashMap<String, Object>();
-		if (svlth_h != null) {
-			params.put("svlth_h", svlth_h);
-		}
-		if (svlth_ign != null) {
-			params.put("svlth_ign", svlth_ign);
-		}
-		if (svlth_pos != null) {
-			params.put("svlth_pos", svlth_pos);
-		}
-		if (svlth_rty != null) {
-			params.put("svlth_rty", svlth_rty);
-		}		
+		params.put("svlth_rty", EventTypeEnum.INLAGG.getValue());
+		params.put("svlth_rnt" + GREATER_THEN, 0);			
 		
 		return findAll(params);
 
 	}		
 	
-	private List<SvlthDao> getInlaggRattelse(@NonNull String svlth_ign, @NonNull String svlth_pos) {
+	private SvlthDao getLatestUttagRattelse(@NonNull String svlth_ign, @NonNull String svlth_pos, @NonNull Integer svlth_ud1, @NonNull Integer svlth_um1) {
 		Map<String, Object> params = new HashMap<String, Object>();
-			params.put("svlth_h", EventTypeEnum.RATTELSE.getValue());
-			params.put("svlth_ign", svlth_ign);
-			params.put("svlth_pos", svlth_pos);
-			params.put("svlth_rty", EventTypeEnum.INLAGG.getValue());
-		
-			return findAll(params);
+		params.put("svlth_h", EventTypeEnum.RATTELSE.getValue());
+		params.put("svlth_ign", svlth_ign);
+		params.put("svlth_pos", svlth_pos);
+		params.put("svlth_ud1", svlth_ud1);
+		params.put("svlth_um1", svlth_um1);
+		params.put("svlth_rty", EventTypeEnum.UTTAG.getValue());
 
-	}		
-	
-	private SvlthDao getLatestUttagRattelse(@NonNull String svlth_ign, @NonNull String svlth_pos, @NonNull Integer svlth_ud1, @NonNull Integer svlth_um1 ) {
-		Map<String, Object> params = new HashMap<String, Object>();
-			params.put("svlth_h", EventTypeEnum.RATTELSE.getValue());
-			params.put("svlth_ign", svlth_ign);
-			params.put("svlth_pos", svlth_pos);
-			params.put("svlth_ud1", svlth_ud1);
-			params.put("svlth_um1", svlth_um1);
+		List<SvlthDao> list = findAll(params);
+		if (list.isEmpty()) {
+			return null;
+		}
 
-			params.put("svlth_rty", EventTypeEnum.UTTAG.getValue());
-		
-			List<SvlthDao> list =  findAll(params);
-			if (list.isEmpty()) {
-				return null;
-			}
-			
-			SvlthDao latestUttagRattelseDao = list.stream()
-	                .max( timestampComparator )
-	                .get();	
-			
-			
-			return latestUttagRattelseDao;
+		SvlthDao latestUttagRattelseDao = list.stream().max(timestampComparator).get();
 
-	}		
+		return latestUttagRattelseDao;
 
-	
+	}
 	
 	@Override
 	public SvlthDao update(SvlthDao t) {

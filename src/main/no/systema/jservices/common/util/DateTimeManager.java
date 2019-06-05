@@ -553,7 +553,34 @@ public class DateTimeManager {
 	}
 	
 	/**
-	 * Transform SYSPED date and time
+	 * Transform SYSPED date, i.e. YYYY-MM-DD into Swedish format.
+	 * 
+	 * @param date, 20181212
+	 * @return 12.12.18 , if invalid date, return null.
+	 */
+	public static String getDateSV(int date) {
+		DateTimeFormatter dateFormatterNO = DateTimeFormatter.ofPattern("yyyyMMdd"); 
+		DateTimeFormatter dateFormatterSVOutput = DateTimeFormatter.ofPattern("yy-MM-dd"); 
+		if (date == 0) {
+			return null;
+		}
+		String stringDate = String.valueOf(date);
+		String returnDate;
+		try {
+			LocalDate parsedDate = LocalDate.parse(stringDate, dateFormatterNO);
+			returnDate = parsedDate.format(dateFormatterSVOutput);
+		} catch (Exception e) {
+			returnDate = null;
+		}
+		
+		return returnDate;
+		
+	}	
+	
+	
+	
+	/**
+	 * Transform SYSPED date and time into Norwegian format
 	 * 
 	 * @param date, e.g 20181212
 	 * @param, time, e.g 91713
@@ -593,6 +620,47 @@ public class DateTimeManager {
 		
 	}	
 	
+	/**
+	 * Transform SYSPED date and time into Swedish format
+	 * 
+	 * @param date, e.g 20181212
+	 * @param, time, e.g 91713
+	 * @return 18-06-06 09:17:13, if invalid date or time, return null.
+	 */
+	public static String getDateTimeSV(int date, int time) {
+		DateTimeFormatter dateFormatterNO = DateTimeFormatter.ofPattern("yyyyMMdd"); 
+		DateTimeFormatter dateFormatterSVOutput = DateTimeFormatter.ofPattern("yy-MM-dd"); 
+	
+		DateTimeFormatter dateTimeFormatterNO = DateTimeFormatter.ofPattern("HHmmss"); 
+		DateTimeFormatter dateTimeFormatterSVOutput = DateTimeFormatter.ofPattern("HH:mm:ss"); 
+
+		if (date == 0 || time == 0) {
+			return null;
+		}
+
+		String stringDate = String.valueOf(date);
+		String stringTime = StringUtils.leftPad(String.valueOf(time), 6, '0');
+		
+		String returnDate, returnTime;
+		StringBuilder returnDateTime = new StringBuilder();
+		try {
+
+			LocalDate parsedDate = LocalDate.parse(stringDate, dateFormatterNO);
+			returnDate = parsedDate.format(dateFormatterSVOutput);
+
+			LocalTime parsedTime = LocalTime.parse(stringTime, dateTimeFormatterNO);
+			returnTime = parsedTime.format(dateTimeFormatterSVOutput);
+			
+		
+		} catch (Exception e) {
+			returnDate = null;
+			returnTime = null;
+		}
+		
+		return returnDateTime.append(returnDate).append(" ").append(returnTime).toString();
+		
+	}	
+
 	/**
 	 * Creates date bases on {@linkplain LocalDateTime}.now() <br>
 	 * and puts date in int[0] and time in int[1] <br><br>
