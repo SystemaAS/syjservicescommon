@@ -46,11 +46,29 @@ public class SvlthDto  {
 	private String svlth_ivb4;
 	private String svlth_ivb5;
 	private String svlth_rnt;
+	private String svlth_rntU;
 	private BigDecimal svlth_rbr;
 	private String svlth_rvb;
+	private String svlth_rvb2;
+	private String svlth_rvb3;
+	private String svlth_rvb4;
+	private String svlth_rvb5;
 	private String svlth_rsl;
 	private String svlth_rtx;
+	private String svlth_rtxU;
 	private String svlth_rty;
+	private String svlth_rd2;
+	private String svlth_rex;	
+	private String svlth_rexU;	
+	private String svlth_rh1;	
+	private String svlth_rh2;	
+	private String svlth_rh3;
+	private String svlth_rh4;	
+	private String svlth_rh5;
+	private String svlth_rud1;
+	private String svlth_rum1;	
+	private String svlth_ruti;
+	private String svlth_rrn;
 	private Integer svlth_ud1;
 	private String svlth_uex;
 	private String svlth_uex2;
@@ -65,8 +83,6 @@ public class SvlthDto  {
 	private String svlth_uex11;
 	
 	private String svlth_uex_concat;
-	private String svlth_r_field;
-	private String svlth_r_value;
 
 	private Integer svlth_um1;
 	private Integer svlth_unt;
@@ -95,6 +111,12 @@ public class SvlthDto  {
 		}
 	}	
 
+	public void setSvlth_rbr(String svlth_rbr) {
+		if (StringUtils.hasValue(svlth_rbr)) {
+			this.svlth_rbr = new BigDecimal(svlth_rbr.replace(",", "."));
+		}
+	}	
+	
 	public BigDecimal getSvlth_rbr() {
 		if (svlth_rbr != null && "0.000".equals(svlth_rbr.toString())) {
 			return null;	
