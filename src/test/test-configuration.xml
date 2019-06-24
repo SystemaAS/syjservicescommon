@@ -5,5 +5,8 @@
 
 	<bean id="entryRequest" class="no.systema.jservices.common.elma.proxy.EntryRequest"/>
 
+	<bean id="authorization" class="no.systema.jservices.common.jwt.nimbus.Authorization"/>
+	<bean id="certificateManager" class="no.systema.jservices.common.jwt.nimbus.CertificateManager"/>
+
     
 </beans>
