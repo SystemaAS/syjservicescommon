@@ -1,5 +1,6 @@
 package no.systema.jservices.common.dao.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -39,9 +40,13 @@ public class GodsjfDaoServiceImpl extends GenericDaoServiceImpl<GodsjfDao> imple
 	}
 	
 	@Override
-	public List<GodsjfDao> findDefault(String currentYear, String fromDay, GodsjfDao dao) {
+	public List<GodsjfDao> findDefault(String currentYear, String fromDay, String toDay, GodsjfDao dao) {
 		StringBuilder queryString = new StringBuilder("SELECT * from godsjf ");
 		queryString.append(" where substr(GOGN,1,4) = ? and substr(GOGN,10,3) >= ? ");
+		if(StringUtils.hasValue(toDay)){
+			queryString.append(" and substr(GOGN,10,3) <= ? ");
+		}
+		
 		
 		if(dao.getGotrnr()!=null){ //we must allow 'blank'
 			queryString.append(" and gotrnr =  '" + dao.getGotrnr() + "'" );
@@ -56,8 +61,15 @@ public class GodsjfDaoServiceImpl extends GenericDaoServiceImpl<GodsjfDao> imple
 		queryString.append(" order by GOGN desc ");
 		logger.info(queryString.toString());
 		logger.info("PARAMS currentYear:" + currentYear + " fromDay:" + fromDay);
+		logger.info("PARAMS currentYear:" + currentYear + " toDay:" + toDay);
 		
-		return super.getJdbcTemplate().query( queryString.toString(), new Object[] { currentYear, fromDay  }, new GenericObjectMapper(new GodsjfDao()));
+		List outputList = new ArrayList();
+		if(StringUtils.hasValue(toDay)){
+			outputList = super.getJdbcTemplate().query( queryString.toString(), new Object[] { currentYear, fromDay, toDay  }, new GenericObjectMapper(new GodsjfDao()));
+		}else{
+			outputList = super.getJdbcTemplate().query( queryString.toString(), new Object[] { currentYear, fromDay  }, new GenericObjectMapper(new GodsjfDao()));
+		}
+		return outputList;
 		
 	}
 	/**
