@@ -11,21 +11,25 @@ import org.springframework.stereotype.Service;
 import lombok.NonNull;
 
 @Service
-public class Authorization {
-	private static Logger logger = Logger.getLogger(Authorization.class.getName());
+public class Auth {
+	private static Logger logger = Logger.getLogger(Auth.class.getName());
 	
 	@Autowired
 	private CertificateManager certificateManager;
 
-    public InputStream TheCertThingy(@NonNull InputStream certFile) throws IOException {
-//    	InputStream is = certificateManager.loadCertificate(certFile);
+    public InputStream TheCertThingy() throws IOException {
+////    	InputStream is = certificateManager.loadCertificate(certFile);
+//    	
+//    	certificateManager.parse(certFile);
     	
-    	certificateManager.parse(certFile);
+    	InputStream certFile = certificateManager.loadCertificate();
     	
     	
     	return certFile;
     	
     }
+    
+  
     
     
 }
