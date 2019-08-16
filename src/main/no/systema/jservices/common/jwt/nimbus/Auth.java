@@ -15,7 +15,7 @@ public class Auth {
 	private static Logger logger = Logger.getLogger(Auth.class.getName());
 	
 	@Autowired
-	private CertificateManager certificateManager;
+	private CertManager certificateManager;
 
     public InputStream TheCertThingy() throws IOException {
 ////    	InputStream is = certificateManager.loadCertificate(certFile);

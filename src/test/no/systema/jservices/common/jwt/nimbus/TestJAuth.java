@@ -21,7 +21,7 @@ import com.nimbusds.jose.util.X509CertUtils;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration("classpath:test-configuration.xml")
-public class TestJAuthorization {
+public class TestJAuth {
 
 	@Autowired
 	Auth authorization;

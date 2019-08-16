@@ -22,8 +22,8 @@ import com.nimbusds.jose.util.X509CertUtils;
 import lombok.NonNull;
 
 @Service
-public class CertificateManager {
-	private static Logger logger = Logger.getLogger(CertificateManager.class.getName());
+public class CertManager {
+	private static Logger logger = Logger.getLogger(CertManager.class.getName());
 	private static String CATALINA_HOME = System.getProperty("catalina.home");
 	private static String PREFIX_NAME = "Buypass ID-SYSTEMA";
 
