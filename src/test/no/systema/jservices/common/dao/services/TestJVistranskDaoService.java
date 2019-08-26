@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
@@ -138,6 +140,11 @@ public class TestJVistranskDaoService {
 	public final void testCreateAndDeleteBig() {
 		VistranskDao dao = getBigDao();
 		VistranskDao resultDao = vistranskDaoService.create(dao);
+
+		
+		System.out.println("resultDao="+ReflectionToStringBuilder.toString(resultDao));
+		
+		
 		assertNotNull("Should exist", resultDao);
 
 		//Cleanup
@@ -185,7 +192,8 @@ public class TestJVistranskDaoService {
 		dao.setPosnr(1); 
 		dao.setAktkod("A");  
 		dao.setValkod("vkd"); 
-		dao.setSyncda(20180522);
+		dao.setSyncda(20190919);
+		dao.setNbelpo(new BigDecimal(-14000));
 		
 		return dao;
 		
