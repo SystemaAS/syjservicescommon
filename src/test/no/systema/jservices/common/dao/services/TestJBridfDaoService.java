@@ -34,7 +34,7 @@ public class TestJBridfDaoService {
 	@Test
 	public final void testFind() {
 		BridfDao dao = new BridfDao();
-		dao.setBibrid("FREDRIK");
+		dao.setBibrid("SYSTEMA");
 		BridfDao resultDao = bridfDaoService.find(dao);
 		assertNotNull(resultDao);
 	}
@@ -46,5 +46,10 @@ public class TestJBridfDaoService {
 		assertSame("Should be same", username, name);
 	}
 		
-	
+	@Test
+	public final void testUserNameExist() {
+		String name = "SYSTEMA";
+		boolean exist = bridfDaoService.userNameExist(name);
+		assertTrue("Should exist", exist);
+	}	
 }

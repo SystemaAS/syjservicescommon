@@ -1,5 +1,7 @@
 package no.systema.jservices.common.dao.services;
 
+import java.util.List;
+
 import no.systema.jservices.common.dao.BridfDao;
 
 public class BridfDaoServiceImpl extends GenericDaoServiceImpl<BridfDao> implements BridfDaoService{
@@ -16,6 +18,18 @@ public class BridfDaoServiceImpl extends GenericDaoServiceImpl<BridfDao> impleme
 			return null;
 		}
 		
+	}
+
+	@Override
+	public boolean userNameExist(String name) {
+		params.put("bibrid", name);
+		List<BridfDao> resultList = findAll(params);
+	
+		if (resultList.isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 }
