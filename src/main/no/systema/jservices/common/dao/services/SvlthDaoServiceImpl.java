@@ -131,10 +131,10 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 	
 	private Integer calculateSaldo(String svlth_ign, String svlth_pos) {
 		Integer inlaggAntal = getInlaggAntal(svlth_ign, svlth_pos);
-//		logger.info("inlaggAntal="+inlaggAntal);
+		logger.info("inlaggAntal="+inlaggAntal);
 		
 		Integer uttagAntal = getUttagAntal(svlth_ign, svlth_pos);
-//		logger.info("uttagAntal="+uttagAntal);
+		logger.info("uttagAntal="+uttagAntal);
 		
 		return inlaggAntal - uttagAntal;
 		
@@ -168,11 +168,16 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 		for (SvlthDao uttagDao : uttagList) {
 			SvlthDao uttagRattelseDao = getLatestUttagRattelse(uttagDao.getSvlth_ign(),uttagDao.getSvlth_pos(), uttagDao.getSvlth_ud1(), uttagDao.getSvlth_um1());
 			if (uttagRattelseDao != null) {
-				uttagAntal = uttagRattelseDao.getSvlth_rnt(); 
+				//logger.info("uttagRattelseDao=" + uttagAntal);
+				if(uttagRattelseDao.getSvlth_rnt()!=0){
+					uttagAntal = uttagRattelseDao.getSvlth_rnt();
+				}else{
+					uttagAntal = uttagDao.getSvlth_unt();
+				}
 			} else {
 				uttagAntal = uttagDao.getSvlth_unt(); 
 			}
-
+			
 			sumUttagAntal += uttagAntal;
 			
 		}
@@ -217,7 +222,7 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 		}
 
 		SvlthDao latestUttagRattelseDao = list.stream().max(timestampComparator).get();
-
+		//logger.info(latestUttagRattelseDao.toString());
 		return latestUttagRattelseDao;
 
 	}
