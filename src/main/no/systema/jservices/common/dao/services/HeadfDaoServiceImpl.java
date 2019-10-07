@@ -23,7 +23,7 @@ public class HeadfDaoServiceImpl extends GenericDaoServiceImpl<HeadfDao> impleme
 	public List<HeadfDto> get(HeadfDto qDto) {
 		NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getJdbcTemplate().getDataSource());
 		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(qDto);
-		int fromDate = fromDate(qDto.getHedtop(), qDto.getDftdg());
+		//int fromDate = fromDate(qDto.getHedtop(), qDto.getDftdg());
 		
 		StringBuilder queryString = new StringBuilder();
 		queryString.append(" SELECT heavd, heopd , hedtop ,hedtr, henas , henak, hesg , hent , hevkt , hem3 , helks ,  hepns , helkk , hepnk, ");
@@ -66,7 +66,7 @@ public class HeadfDaoServiceImpl extends GenericDaoServiceImpl<HeadfDao> impleme
 
 	@Override
 	public List<HeadfDto> getSpecialGodsreg(HeadfDto qDto) {
-		int fromDate = fromDate(qDto.getHedtop(), qDto.getDftdg());
+		//int fromDate = fromDate(qDto.getHedtop(), qDto.getDftdg());
 		
 		StringBuilder queryString = new StringBuilder();
 		queryString.append(" SELECT heavd, heopd , hedtop ,hedtr, henas , henak, hesg , hent , hevkt , hem3 , helks ,  hepns , helkk , hepnk, ");
@@ -94,17 +94,18 @@ public class HeadfDaoServiceImpl extends GenericDaoServiceImpl<HeadfDao> impleme
 	 * @return
 	 */
 	private int fromDate(int hedtop, int dftdg) {
-		String hedstopAsString = String.valueOf(hedtop);  
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		Calendar c = Calendar.getInstance();
-		try {
-			c.setTime(sdf.parse(hedstopAsString));
-		} catch (ParseException e) {
-			e.printStackTrace();
+		String hedstopAsString = String.valueOf(hedtop); 
+		if(hedstopAsString!="0"){
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			Calendar c = Calendar.getInstance();
+			try {
+				c.setTime(sdf.parse(hedstopAsString));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			c.add(Calendar.DATE, -dftdg);  // number of days withdraw
+			hedstopAsString = sdf.format(c.getTime()); 
 		}
-		c.add(Calendar.DATE, -dftdg);  // number of days withdraw
-		hedstopAsString = sdf.format(c.getTime()); 
-		
 		return Integer.valueOf(hedstopAsString.toString());
 		
 	}
