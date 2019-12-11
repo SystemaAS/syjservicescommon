@@ -4,6 +4,7 @@
 package no.systema.jservices.common.util;
 
 
+import java.lang.reflect.Array;
 import java.security.Key;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -12,6 +13,8 @@ import org.apache.log4j.Logger;
 
 
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -65,6 +68,31 @@ public class AesEncryptionDecryptionManager {
     		logger.info("ERROR decryption" + e.toString());
     	}
         return new String(decValue);
+    }
+    
+    public Map<String, String> decryptBearer(String encryptedData) {
+    	String FIELD_SEPARATOR = "&";
+    	byte[] decValue = null;
+    	Map<String,String> map = new HashMap<String,String>();
+    	String [] fields;
+    	try{
+	        Key key = generateKey();
+	        Cipher c = Cipher.getInstance(ALGO);
+	        c.init(Cipher.DECRYPT_MODE, key);
+	        byte[] decordedValue = Base64.getDecoder().decode(encryptedData);
+	        decValue = c.doFinal(decordedValue);
+	        String value = new String(decValue);
+	        fields = value.split(FIELD_SEPARATOR, 2);
+	        
+	        if(fields.length > 1){
+	        	map.put("session", fields[0]);
+	        	map.put("user", fields[1]);
+	        }
+	        
+    	}catch(Exception e){
+    		logger.info("ERROR decryption" + e.toString());
+    	}
+        return map;
     }
 
     /**
