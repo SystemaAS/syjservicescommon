@@ -63,7 +63,10 @@ public class CommonClientHttpRequestInterceptor implements ClientHttpRequestInte
             builder.setLength(builder.length() - 1); // Get rid of trailing comma
             builder.append("],");
         }
-        builder.setLength(builder.length() - 1); // Get rid of trailing comma
+        
+        if(builder!=null && builder.length() > 0){
+        	builder.setLength(builder.length() - 1); // Get rid of trailing comma
+        }
         return builder.toString();
     }
     
