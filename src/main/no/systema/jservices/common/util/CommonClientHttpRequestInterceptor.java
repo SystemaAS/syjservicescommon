@@ -3,8 +3,12 @@
  */
 package no.systema.jservices.common.util;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map.Entry;
@@ -16,6 +20,7 @@ import org.springframework.http.client.ClientHttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.util.StreamUtils;
 
 /**
  * Intercepts client-side HTTP requests. This class is {@linkplain
@@ -50,7 +55,9 @@ public class CommonClientHttpRequestInterceptor implements ClientHttpRequestInte
     	logger.info("HTTP Status Code: " + response.getRawStatusCode());
     	logger.info("Status Text: " + response.getStatusText());
     	logger.info("HTTP Headers: " + headersToString(response.getHeaders()));
-    	//    	logger.info("Response Body: " + bodyToString(response.getBody())); InputStream closed here.
+    	logger.info("HTTP Response body: {} " + response.getBody().toString());
+    	
+    	
     }
 
     private String headersToString(HttpHeaders headers) {
@@ -70,17 +77,17 @@ public class CommonClientHttpRequestInterceptor implements ClientHttpRequestInte
         return builder.toString();
     }
     
-//    private String bodyToString(InputStream body) throws IOException {
-//        StringBuilder builder = new StringBuilder();
-//        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(body, StandardCharsets.UTF_8));
-//        String line = bufferedReader.readLine();
-//        while (line != null) {
-//            builder.append(line).append(System.lineSeparator());
-//            line = bufferedReader.readLine();
-//        }
-//        bufferedReader.close();
-//        return builder.toString();
-//    }
+   /*private String bodyToString(InputStream body) throws IOException {
+        StringBuilder builder = new StringBuilder();
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(body, StandardCharsets.UTF_8));
+        String line = bufferedReader.readLine();
+        while (line != null) {
+            builder.append(line).append(System.lineSeparator());
+            line = bufferedReader.readLine();
+        }
+        bufferedReader.close();
+        return builder.toString();
+    }*/
 	
 
 }
