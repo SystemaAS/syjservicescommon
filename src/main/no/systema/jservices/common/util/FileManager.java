@@ -72,4 +72,14 @@ public class FileManager {
 			Path temp = Files.copy( Paths.get(fileAbsolutePath), Paths.get(targetDirectory + Paths.get(fileAbsolutePath).getFileName().toString()));
 		}
 	}
+	
+	public void moveCopyFiles(String fileAbsolutePath, String targetDirectory, boolean move, String newFileName) throws Exception{
+		if(move){
+			System.out.println(Paths.get(fileAbsolutePath) + " " + Paths.get(targetDirectory + Paths.get(fileAbsolutePath).getFileName().toString()));
+			Path temp = Files.move( Paths.get(fileAbsolutePath), Paths.get(targetDirectory + Paths.get(newFileName)));
+		}else{
+			System.out.println(Paths.get(fileAbsolutePath) + " " + Paths.get(targetDirectory + Paths.get(fileAbsolutePath).getFileName().toString()));
+			Path temp = Files.copy( Paths.get(fileAbsolutePath), Paths.get(targetDirectory + Paths.get(newFileName)));
+		}
+	}
 }
