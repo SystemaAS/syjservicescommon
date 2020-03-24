@@ -45,13 +45,15 @@ public class FileManager {
 	 * @param pathString
 	 * @return
 	 */
-	public List<File> getValidFilesInDirectory(String pathString, String excludeDir01, String excludeDir02) {
+	public List<File> getValidFilesInDirectory(String pathString) {
 			List<File> retval = new ArrayList<File>();
+			//System.out.println(pathString);
 			// A local class (a class defined inside a block, here a method).
 			class MyFilter implements FileFilter {
 				@Override
 				public boolean accept(File file) {
-				return !file.isHidden() && !file.getName().contains(excludeDir01) && !file.getName().contains(excludeDir02);
+					//only valid files in root directory (no subdirectories )	
+					return !file.isHidden() && file.isFile();
 				}
 			}
 			File directory = new File(pathString);
@@ -59,10 +61,11 @@ public class FileManager {
 			if(files!=null && files.length > 0){
 				retval = Arrays.asList(files);
 			}
-			/*DEBUG
+			/*DEBUG 
 		  	for (File fileLoop : files) {
 		    	System.out.println(fileLoop.getAbsolutePath());
-		  	}*/
+		  	}
+		  	*/
 			return retval;
 	}
 	/**
