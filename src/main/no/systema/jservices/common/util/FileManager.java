@@ -25,7 +25,7 @@ public class FileManager {
 	public static final boolean TIME_STAMP_SUFFIX_FLAG = true;
 	
 	
-	DateFormat dateFormat = new SimpleDateFormat("_yyyymmdd_HHmmss_");
+	DateFormat dateFormat = new SimpleDateFormat("_yyyyMMdd_HHmmSSSS");
 	
 	/**
 	 * Creates path if it does not exist
@@ -82,7 +82,7 @@ public class FileManager {
 		//add time-stamp to target file name if applicable
 		String targetFile = Paths.get(fileAbsolutePath).getFileName().toString();
 		if(timeStampSuffixFlag){ 
-			targetFile = targetFile + timeStampSuffixStr + timeStamp.getTime(); 
+			targetFile = targetFile + timeStampSuffixStr; 
 		}
 		
 		if(move){
@@ -107,7 +107,7 @@ public class FileManager {
 		Date timeStamp = new Date(now);
 		String timeStampSuffixStr = this.dateFormat.format(timeStamp);
 		//add time-stamp to target file name if applicable
-		if(timeStampSuffixFlag){ newFileName = newFileName + timeStampSuffixStr + timeStamp.getTime(); }
+		if(timeStampSuffixFlag){ newFileName = newFileName + timeStampSuffixStr; }
 		
 		if(move){
 			System.out.println(Paths.get(fileAbsolutePath) + " " + Paths.get(targetDirectory + Paths.get(newFileName)));
