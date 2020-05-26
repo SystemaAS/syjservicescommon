@@ -108,7 +108,7 @@ public class CommonResponseErrorHandler implements ResponseErrorHandler {
 			return FileCopyUtils.copyToByteArray(response.getBody());
 		}
 		catch (IOException ex) {
-			logger.info("::getResponseBody, ignoring IOException...::");
+			logger.info("::getResponseBody, ignoring IOException...::" + ex);
 			// ignore
 		}
 		return new byte[0];
