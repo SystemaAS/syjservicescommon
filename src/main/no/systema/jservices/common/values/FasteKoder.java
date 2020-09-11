@@ -35,5 +35,6 @@ public enum FasteKoder implements Serializable {
 	FRBREVPRO,
 	TRACKT,
 	SADEFBKODE,
-	SADEFETYPE
+	SADEFETYPE,
+	SADEFPR
 }
