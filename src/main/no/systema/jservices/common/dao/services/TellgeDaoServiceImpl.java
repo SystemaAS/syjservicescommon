@@ -14,8 +14,20 @@ public class TellgeDaoServiceImpl extends GenericDaoServiceImpl<TellgeDao> imple
 		dao.setGeno(String.valueOf(++existingGeno));
 		TellgeDao resultDao = update(dao);
 		incrementedGeno = Integer.parseInt(resultDao.getGeno());
-		
 		return incrementedGeno;
+	}
+	
+	@Override
+	public int getGenoAndIncrementAfterFetch(String geco) {
+		int existingGeno, incrementedGeno;
+		TellgeDao qDao = new TellgeDao();
+		qDao.setGeco(geco);
+		TellgeDao dao = find(qDao);
+		existingGeno = Integer.parseInt(dao.getGeno());
+		dao.setGeno(String.valueOf(existingGeno + 1));
+		TellgeDao resultDao = update(dao);
+		//incrementedGeno = Integer.parseInt(resultDao.getGeno());
+		return existingGeno;
 	}
 
 	@Override

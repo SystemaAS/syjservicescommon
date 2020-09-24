@@ -13,6 +13,13 @@ public interface TellgeDaoService extends GenericDaoService<TellgeDao> {
 	public int getGenoAndIncrement(String geco);
 	
 	/**
+	 * Get geno as is and then increment it in db after fetch
+	 * @param geco
+	 * @return
+	 */
+	public int getGenoAndIncrementAfterFetch(String geco);
+	
+	/**
 	 * Substract geno with 1.
 	 * 
 	 * @param geco, actual code.
