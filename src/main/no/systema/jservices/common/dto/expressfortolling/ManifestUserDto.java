@@ -1,9 +1,9 @@
-package no.systema.jservices.common.dto;
+package no.systema.jservices.common.dto.expressfortolling;
 
 import lombok.Data;
 
 @Data
-public class UserDto {
+public class ManifestUserDto {
 	private String userId;
 	private String username;
 	private String name;

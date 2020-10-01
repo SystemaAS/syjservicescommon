@@ -1,4 +1,6 @@
-package no.systema.jservices.common.dto;
+package no.systema.jservices.common.dto.expressfortolling;
+
+import java.util.List;
 
 import lombok.Data;
 
@@ -15,7 +17,11 @@ public class ManifestDto {
 	private String lastChanged;
 	private String status;
 	private String transportStatus;
-
 	
+	private ManifestTransportationCompanyDto transportationCompany;
+	private ManifestActiveMeansOfTransportDto activeMeansOfTransport;
+	private ManifestModeOfTransportDto modeOfTransport;
+	private ManifestPlaceOfEntryDto placeOfEntry;
 	
+	private List<ManifestCargoLinesDto> cargoLines;
 }
