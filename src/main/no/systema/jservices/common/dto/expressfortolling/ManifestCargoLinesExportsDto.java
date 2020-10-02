@@ -8,4 +8,5 @@ public class ManifestCargoLinesExportsDto {
 	String exportId;
 	String exportCertificate;
 	
+	
 }

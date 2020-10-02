@@ -1,6 +1,7 @@
 package no.systema.jservices.common.dto.expressfortolling;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
 import lombok.Data;
 
@@ -15,6 +16,6 @@ public class ManifestCargoLinesDto {
 	String placeOfUnloading;
 	ManifestCargoLinesImportProcedureDto importProcedure;
 	
-	ManifestEmbeddedChildCargoLinesDto _embedded;
+	ManifestChildCargoLinesEmbeddedDto _embedded;
 	
 }
