@@ -8,5 +8,9 @@ import lombok.Data;
 public class ManifestStatusDto {
 	private String manifestId;
 	private String status;
+	private String timeOfDeparture;
+	private String timeOfRelease;
+	private String lastChanged;
+	
 	
 }

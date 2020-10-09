@@ -9,6 +9,8 @@ public class ManifestDto {
 	private String manifestId;
 	private String transportationCompanyId;
 	private String timeOfRegistration;
+	private String timeOfDeparture;
+	private String timeOfRelease;
 	private String timeOfSubmission;
 	
 	private String placeOfEntryCode;
