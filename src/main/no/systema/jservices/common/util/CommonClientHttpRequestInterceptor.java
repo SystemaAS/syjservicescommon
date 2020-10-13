@@ -16,6 +16,7 @@ import java.util.Map.Entry;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpRequest;
+import org.springframework.http.MediaType;
 import org.springframework.http.client.ClientHttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
@@ -38,7 +39,7 @@ public class CommonClientHttpRequestInterceptor implements ClientHttpRequestInte
 	
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
-        logRequest(request, body);
+    	logRequest(request, body);
         ClientHttpResponse response = execution.execute(request, body);
         logResponse(response);
         return response;
@@ -48,7 +49,10 @@ public class CommonClientHttpRequestInterceptor implements ClientHttpRequestInte
     	logger.info("URI: " + request.getURI());
     	logger.info("HTTP Method: " + request.getMethod());
     	logger.info("HTTP Headers: " + headersToString(request.getHeaders()));
-    	logger.info("Request Body: " + new String(body, StandardCharsets.UTF_8));
+    	//only present the body of a json payload. When binary (PDF or other) this should not be presented
+    	if(MediaType.APPLICATION_JSON_UTF8.equals(request.getHeaders().getContentType())){
+    		logger.info("Request Body: " + new String(body, StandardCharsets.UTF_8));
+    	}
     }
 
     private void logResponse(ClientHttpResponse response) throws IOException {
