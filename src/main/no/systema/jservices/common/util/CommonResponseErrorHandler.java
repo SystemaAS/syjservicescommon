@@ -81,8 +81,9 @@ public class CommonResponseErrorHandler implements ResponseErrorHandler {
 			case CLIENT_ERROR:
 				responseBody =  new String(getResponseBody(response), getCharset(response));
 				logger.error("CLIENT_ERROR: response body="+responseBody);
-				throw new HttpClientErrorException(statusCode, response.getStatusText(),
+				throw new HttpClientErrorException(statusCode, response.getStatusText() + responseBody,
 						response.getHeaders(), getResponseBody(response), getCharset(response));
+				
 			case SERVER_ERROR:
 				logger.error("SERVER_ERROR: response.getStatusText() ="+response.getStatusText());
 				responseBody =  new String(getResponseBody(response), getCharset(response));
