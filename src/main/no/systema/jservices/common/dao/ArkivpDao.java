@@ -23,6 +23,8 @@ public class ArkivpDao implements IDao  {
 	String arfri = "";  //TEGN 15 Fri
 	String arbhis = ""; //TEGN 30 Bane historikk
 	
+	String own_ardateTo="0";
+	
 	Map<String, Object> keys = new HashMap<String, Object>();
 
 	                                                                                    
