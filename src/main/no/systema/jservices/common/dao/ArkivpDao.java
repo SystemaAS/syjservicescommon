@@ -24,6 +24,7 @@ public class ArkivpDao implements IDao  {
 	String arbhis = ""; //TEGN 30 Bane historikk
 	
 	String own_ardateTo="0";
+	String own_url = "";
 	
 	Map<String, Object> keys = new HashMap<String, Object>();
 
