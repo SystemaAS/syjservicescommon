@@ -282,6 +282,10 @@
 	<bean id="trackfDaoService" class="no.systema.jservices.common.dao.services.TrackfDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>	
+	
+	<bean id="svuhDaoService" class="no.systema.jservices.common.dao.services.SvuhDaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>	
 
 	<bean id="sadhDaoService" class="no.systema.jservices.common.dao.services.SadhDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
