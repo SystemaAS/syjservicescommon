@@ -9,6 +9,7 @@ import lombok.Data;
 public class SvuhDao implements IDao {
 
 			private String svuh_st   = ""; //   = ""; //tegn            1       1         1        begge    status p=utskriven
+			private String mrn   = ""; //   = ""; //tegn           35       35                 begge    Mrn-nummer (TESS)
 			private String  doc_1001     = ""; //   = ""; //tegn            3       3         2    begge    dokumentnamn      
 			private String loc_3225a     = ""; //   = ""; //tegn            3       3         5    begge    godslokalkod      
 			private String loc_3225c     = ""; //   = ""; //tegn           25      25         8    begge    lager, id 
