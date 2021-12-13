@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.dao.DuplicateKeyException;
@@ -33,7 +33,7 @@ import no.systema.jservices.common.dao.IDao;
  * @param <T>, A dao implementing {@link IDao}
  */
 public abstract class GenericDaoServiceImpl<T> implements GenericDaoService<T>{
-	protected static final Logger logger = Logger.getLogger(GenericDaoServiceImpl.class.getName());
+	protected static final Logger logger = LogManager.getLogger(GenericDaoServiceImpl.class.getName());
 	private Class<T> type;
 	private String tableName;
 	private String tableAlias;

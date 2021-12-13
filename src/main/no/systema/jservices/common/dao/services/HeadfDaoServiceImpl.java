@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -17,7 +17,7 @@ import no.systema.jservices.common.dto.HeadfDto;
 import no.systema.jservices.common.util.StringUtils;
 
 public class HeadfDaoServiceImpl extends GenericDaoServiceImpl<HeadfDao> implements HeadfDaoService {
-	protected static final Logger logger = Logger.getLogger(HeadfDaoServiceImpl.class.getName());
+	protected static final Logger logger = LogManager.getLogger(HeadfDaoServiceImpl.class.getName());
 
 	@Override
 	public List<HeadfDto> get(HeadfDto qDto) {

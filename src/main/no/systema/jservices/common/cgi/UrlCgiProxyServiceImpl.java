@@ -10,14 +10,14 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 /**
  * 
  * @author oscardelatorre
  *
  */
 public class UrlCgiProxyServiceImpl implements UrlCgiProxyService{
-	private static Logger logger = Logger.getLogger(UrlCgiProxyServiceImpl.class.getName());
+	private static Logger logger = LogManager.getLogger(UrlCgiProxyServiceImpl.class.getName());
 	private static final String ENCODING_JSON_UTF8 = "UTF8";
 	private static final String ENCODING_STREAMS_UTF8 = "UTF-8";
 

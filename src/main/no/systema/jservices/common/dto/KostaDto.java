@@ -2,7 +2,7 @@ package no.systema.jservices.common.dto;
 
 import java.math.BigDecimal;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.modelmapper.ModelMapper;
 
 import lombok.Data;
@@ -19,7 +19,7 @@ import no.systema.jservices.common.util.DateTimeManager;
 @Data
 public class KostaDto  {
 	
-	private static Logger logger = Logger.getLogger(KostaDto.class.getName());
+	private static Logger logger = LogManager.getLogger(KostaDto.class.getName());
 	
 	private String kabb;
 	private String kabdt;

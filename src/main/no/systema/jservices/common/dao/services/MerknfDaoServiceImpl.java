@@ -3,12 +3,12 @@ package no.systema.jservices.common.dao.services;
 
 import java.io.Writer;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import no.systema.jservices.common.dao.MerknfDao;
 
 public class MerknfDaoServiceImpl extends GenericDaoServiceImpl<MerknfDao> implements MerknfDaoService{
-	private static final Logger logger = Logger.getLogger(GodsjfDaoServiceImpl.class.getName());
+	private static final Logger logger = LogManager.getLogger(GodsjfDaoServiceImpl.class.getName());
 	
 	@Override
 	public int findById (String gogn, String gotrnr){

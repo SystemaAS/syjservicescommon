@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -53,7 +53,7 @@ public class TestJVistranskDaoService {
 	public final void testFindAll() {
 		List<VistranskDao> list =  vistranskDaoService.findAll(null);
 		
-		list.forEach(vt -> Logger.getRootLogger().info("vt resnr"+vt.getResnr()));
+		list.forEach(vt -> LogManager.getRootLogger().info("vt resnr"+vt.getResnr()));
 		
 		assertNotNull(list);
 	}		

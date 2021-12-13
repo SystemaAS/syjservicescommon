@@ -2,14 +2,14 @@ package no.systema.jservices.common.dao.services;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import no.systema.jservices.common.dao.GodshfDao;
 import no.systema.jservices.common.dao.GenericObjectMapper;
 import no.systema.jservices.common.util.StringUtils;
 
 public class GodshfDaoServiceImpl extends GenericDaoServiceImpl<GodshfDao> implements GodshfDaoService{
-	private static final Logger logger = Logger.getLogger(GodshfDaoServiceImpl.class.getName());
+	private static final Logger logger = LogManager.getLogger(GodshfDaoServiceImpl.class.getName());
 	
 	@Override
 	public List<GodshfDao> findDefault(String currentYear, String fromDay, GodshfDao dao) {

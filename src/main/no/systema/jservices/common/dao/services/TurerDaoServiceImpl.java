@@ -2,7 +2,7 @@ package no.systema.jservices.common.dao.services;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import no.systema.jservices.common.dao.TurerDao;
 

@@ -13,7 +13,7 @@ import java.util.Map;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 /**
  * This class takes a csv-file and parse lines into record
@@ -24,7 +24,7 @@ import org.apache.log4j.Logger;
  * @param <T> Output Object
  */
 public class CSVReader<T> {
-	private static final Logger logger = Logger.getLogger(CSVReader.class.getName());
+	private static final Logger logger = LogManager.getLogger(CSVReader.class.getName());
 	
 	private Map<String, String> mappedNames;
 	private CSVFormat format;

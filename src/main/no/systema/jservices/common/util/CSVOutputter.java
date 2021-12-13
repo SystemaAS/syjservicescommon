@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import no.systema.jservices.common.dao.IDao;
 
@@ -21,7 +21,7 @@ import no.systema.jservices.common.dao.IDao;
  * @date May, 12, 2017
  */
 public class CSVOutputter<T> {
-	private static final Logger logger = Logger.getLogger(CSVOutputter.class.getName());
+	private static final Logger logger = LogManager.getLogger(CSVOutputter.class.getName());
 
 	/**
 	 * Read all objects and create a String in csv format.
