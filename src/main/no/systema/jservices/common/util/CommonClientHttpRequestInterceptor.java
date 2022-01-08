@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map.Entry;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.MediaType;
@@ -35,7 +35,7 @@ import org.springframework.util.StreamUtils;
  *
  */
 public class CommonClientHttpRequestInterceptor implements ClientHttpRequestInterceptor {
-	private static Logger logger = LogManager.getLogger(CommonClientHttpRequestInterceptor.class);
+	private static Logger logger = LoggerFactory.getLogger(CommonClientHttpRequestInterceptor.class);
 	
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {

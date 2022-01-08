@@ -9,7 +9,7 @@ import java.security.Key;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 
 import java.util.Base64;
@@ -25,7 +25,7 @@ import java.util.Map;
  * 
  */
 public class AesEncryptionDecryptionManager {
-	private static final Logger logger = LogManager.getLogger(AesEncryptionDecryptionManager.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(AesEncryptionDecryptionManager.class.getName());
 	private static final String ALGO = "AES";
 	private static final byte[] keyValue =
 	            //new byte[]{'T', 'h', 'e', 'B', 'e', 's', 't', 'S', 'e', 'c', 'r', 'e', 't', 'K', 'e', 'y'};
@@ -38,6 +38,7 @@ public class AesEncryptionDecryptionManager {
      * @return the encrypted string
      */
     public String encrypt(String data) {
+    	logger.warn("inside AesEncryptionDecryptionManager.encrypt()" );
     	byte[] encVal = null;
     	try{
 	        Key key = generateKey();

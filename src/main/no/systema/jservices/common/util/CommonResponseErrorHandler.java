@@ -3,7 +3,7 @@ package no.systema.jservices.common.util;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,7 +24,7 @@ import org.springframework.web.client.UnknownHttpStatusCodeException;
  *
  */
 public class CommonResponseErrorHandler implements ResponseErrorHandler {
-	private static Logger logger = LogManager.getLogger(CommonResponseErrorHandler.class);
+	private static Logger logger = LoggerFactory.getLogger(CommonResponseErrorHandler.class);
 	
 	
 	/**

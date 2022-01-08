@@ -3,14 +3,14 @@ package no.systema.jservices.common.dao.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import no.systema.jservices.common.dao.GodsjfDao;
 import no.systema.jservices.common.dao.GenericObjectMapper;
 import no.systema.jservices.common.util.StringUtils;
 
 public class GodsjfDaoServiceImpl extends GenericDaoServiceImpl<GodsjfDao> implements GodsjfDaoService{
-	private static final Logger logger = LogManager.getLogger(GodsjfDaoServiceImpl.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(GodsjfDaoServiceImpl.class.getName());
 	
 	@Override
 	public List<GodsjfDao> findGognInterval(String gogn2, GodsjfDao dao) {

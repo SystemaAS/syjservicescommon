@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -52,7 +52,7 @@ public class TestJVistranslDaoService {
 	public final void testFindAll() {
 		List<VistranslDao> list =  vistranslDaoService.findAll(null);
 		
-		list.forEach(vt -> LogManager.getRootLogger().info("vt resnr"+vt.getResnr()));
+		//list.forEach(vt -> LogManager.getRootLogger().info("vt resnr"+vt.getResnr()));
 		
 		assertNotNull(list);
 	}		

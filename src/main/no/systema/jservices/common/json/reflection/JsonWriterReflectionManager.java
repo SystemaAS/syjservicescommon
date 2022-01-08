@@ -4,7 +4,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.reflect.Method;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import no.systema.jservices.common.dao.IDao;
 import no.systema.jservices.common.util.JsonSpecialCharactersManager;
@@ -12,7 +12,7 @@ import no.systema.jservices.common.util.JsonConstants;
 
 public class JsonWriterReflectionManager {
 	private static JsonSpecialCharactersManager jsonFixMgr = new JsonSpecialCharactersManager();
-	private static Logger logger = LogManager.getLogger(JsonWriterReflectionManager.class.getName());
+	private static Logger logger = LoggerFactory.getLogger(JsonWriterReflectionManager.class.getName());
 	
 	/**
 	 * 
@@ -50,7 +50,7 @@ public class JsonWriterReflectionManager {
 		}catch(Exception e){
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
-			logger.info(errors);
+			logger.error(e.toString());
 		}
 		
 		return jsonReflectionOutput.toString();
@@ -152,7 +152,7 @@ public class JsonWriterReflectionManager {
 		}catch(Exception e){
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
-			logger.info(errors);
+			logger.error(errors.toString());
 		}
 
 		return jsonReflectionOutput.toString();

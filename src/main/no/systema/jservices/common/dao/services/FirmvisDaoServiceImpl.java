@@ -15,7 +15,7 @@ public class FirmvisDaoServiceImpl extends GenericDaoServiceImpl<FirmvisDao> imp
 
 		if (list.size() != 1) {
 			String errMsg = "Error in FIRMVIS. Should contain one record.";
-			logger.fatal(errMsg);
+			logger.error(errMsg);
 			throw new RuntimeException(errMsg);
 		}
 		

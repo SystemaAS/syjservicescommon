@@ -2,7 +2,7 @@ package no.systema.jservices.common.json;
 
 import java.util.List;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +23,7 @@ public class JsonResponseWriter {
 	
 	@Autowired
 	private JsonSpecialCharactersManager jsonFixMgr;
-	private static Logger logger = LogManager.getLogger(JsonResponseWriter.class.getName());
+	private static Logger logger = LoggerFactory.getLogger(JsonResponseWriter.class.getName());
 	
 	/**
 	 * 

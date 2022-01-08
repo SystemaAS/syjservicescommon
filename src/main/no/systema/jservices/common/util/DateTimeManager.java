@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 /**
  * Utility class to manage date issues
@@ -24,7 +24,7 @@ import org.apache.logging.log4j.*;
  */
 public class DateTimeManager {
 	
-	private static Logger logger = LogManager.getLogger(DateTimeManager.class.getName());
+	private static Logger logger = LoggerFactory.getLogger(DateTimeManager.class.getName());
 
 	public static final String ISO_FORMAT = "yyyyMMdd";
 	public static final String NO_FORMAT = "ddMMyy";
