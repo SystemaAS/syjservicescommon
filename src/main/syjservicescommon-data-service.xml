@@ -393,7 +393,16 @@
 	<bean id="vistranshDaoService" class="no.systema.jservices.common.dao.services.VistranshDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>	
-
+	
+	<!-- TEST services -->
+	<bean id="vistransl2DaoService" class="no.systema.jservices.common.dao.services.Vistransl2DaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>	
+	<bean id="vistransh2DaoService" class="no.systema.jservices.common.dao.services.Vistransh2DaoServiceImpl">
+		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
+	</bean>	
+	<!-- END TEST services -->
+	
 	<bean id="vistrlogkDaoService" class="no.systema.jservices.common.dao.services.VistrlogkDaoServiceImpl">
 		<property name="jdbcTemplate"> <ref bean="jdbcTemplate" /></property>
 	</bean>
