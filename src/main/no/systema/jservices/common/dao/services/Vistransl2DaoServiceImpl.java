@@ -58,7 +58,7 @@ public class Vistransl2DaoServiceImpl extends GenericDaoServiceImpl<Vistransl2Da
 		int retval = 0;
 		try {
 			StringBuilder updateString = new StringBuilder();
-			updateString.append(" UPDATE vistransl SET syncda = ? , syerro = ?  ");
+			updateString.append(" UPDATE vistransl2 SET syncda = ? , syerro = ?  ");
 			updateString.append(" WHERE firma = ? ");
 			updateString.append(" AND resnr = ? ");
 			updateString.append(" AND bilnr = ? ");
@@ -67,7 +67,7 @@ public class Vistransl2DaoServiceImpl extends GenericDaoServiceImpl<Vistransl2Da
 					new Object[] { dao.getSyncda(), dao.getSyerro(), dao.getFirma(), dao.getResnr(), dao.getBilnr() });
 
 		} catch (DataAccessException e) {
-			logger.error("Error updating VISTRANSL!", e);
+			logger.error("Error updating VISTRANSL2!", e);
 			logger.error("On resnr="+dao.getResnr()+", bilnr="+dao.getBilnr()+", syerro="+dao.getSyerro()+", syncda="+dao.getSyncda());
 			throw e;
 		}
