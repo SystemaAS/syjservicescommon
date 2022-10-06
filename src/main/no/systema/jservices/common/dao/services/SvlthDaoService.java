@@ -57,6 +57,7 @@ public interface SvlthDaoService extends GenericDaoService<SvlthDao> {
 	 * @param svlth_pos
 	 */
 	boolean validUttagQuantity(Integer uttagAntal, String svlth_ign, String svlth_pos);
+	public SvlthDao getNextGodsnr(String godsnrPrefix);
 	
 	
 }

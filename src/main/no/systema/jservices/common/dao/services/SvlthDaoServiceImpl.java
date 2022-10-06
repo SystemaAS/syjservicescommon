@@ -1,5 +1,6 @@
 package no.systema.jservices.common.dao.services;
 
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -10,6 +11,8 @@ import java.util.function.Function;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import lombok.NonNull;
 import no.systema.jservices.common.dao.SvlthDao;
@@ -228,6 +231,27 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 	}
 	
 	@Override
+	public SvlthDao getNextGodsnr(String godsnrPrefix) {
+		SvlthDao dao = null;		
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select max(svlth_ign) svlth_ign from svlth ");
+		sql.append(" where svlth_ign LIKE (?) ");
+		
+		try {
+			logger.warn("XX");
+			dao = (SvlthDao) super.getJdbcTemplate().queryForObject(sql.toString(), new Object[]{godsnrPrefix + "%"}, new BeanPropertyRowMapper<SvlthDao>(SvlthDao.class));
+			logger.warn("YY" + dao.toString());
+		} 
+		catch (Exception e) {
+			//Writer writer = this.dbErrorMessageMgr.getPrintWriter(e);
+			logger.error(e.toString());
+			//errorStackTrace.append(this.dbErrorMessageMgr.getJsonValidDbException(writer));
+		}
+
+		return dao;
+	}	
+	
+	@Override
 	public SvlthDao update(SvlthDao t) {
 		throw new IllegalAccessError("Update is not allowed!");
 	}
@@ -254,5 +278,5 @@ public class SvlthDaoServiceImpl extends GenericDaoServiceImpl<SvlthDao> impleme
 		throw new IllegalAccessError("SVLTH do not have keys, hence exist does not work!");
 	}
 
-	
+	 
 }
