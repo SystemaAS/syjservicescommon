@@ -96,4 +96,35 @@ public class StringUtils {
 		return retval;
 	}
 	
+	/**
+	 * 
+	 * @param value
+	 * @param fieldLimit
+	 * @param fillerChar
+	 * @return
+	 */
+	public String leadingStringWithNumericFiller(String value, int fieldLimit, String fillerChar){
+		String FILLER = fillerChar;
+		int FTX_LIMIT = fieldLimit;
+		StringBuffer str = new StringBuffer();
+		String filler = new String();
+		try{
+			if(value!=null && !"".equals(value)){
+				int len = value.length();
+				for (int x=1;x<=FTX_LIMIT-len;x++){
+					if(x==1){
+						filler = FILLER;
+					}else{
+						filler = filler + FILLER;
+					}
+				}
+				str.append(filler + value);
+			}
+			
+		}catch(Exception e){
+			
+		}
+		return str.toString();
+	}
+	
 }
