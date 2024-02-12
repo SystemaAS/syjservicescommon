@@ -42,7 +42,7 @@ public class GenericObjectMapper implements RowMapper {
 		try {
 			Class<?> clazz = Class.forName(className);
 			dao = (IDao) clazz.newInstance();
-
+			
 			Class cl = Class.forName(dao.getClass().getCanonicalName());
 			Field[] fields = cl.getDeclaredFields();
 			List<Field> list = Arrays.asList(fields);
@@ -105,7 +105,8 @@ public class GenericObjectMapper implements RowMapper {
 			}
 		} catch (Exception e) {
 			e.toString();
-			logger.info(e.getMessage() + e.toString());
+			logger.warning(className);
+			logger.warning(e.getMessage() + e.toString());
 		}
 
 		return dao;
