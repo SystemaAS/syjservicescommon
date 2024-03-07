@@ -44,7 +44,7 @@ public class HeadfDto implements IDao {
 	/* days to view in list */
 	@ExludeMapping
 	private int dftdg;
-	
+	@ExludeMapping
 	private String godsreg;
 
 	
