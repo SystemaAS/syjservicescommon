@@ -84,6 +84,17 @@ public class DateTimeManager {
 		return  retval; 
 	}
 	
+	public String getCurrentTimeHHmmss() {
+		String retval = null;
+		SimpleDateFormat formatter = new SimpleDateFormat("HHmmss");  
+		Date date = new Date(); 
+		String tmpTime = formatter.format(date);
+		String time = StringUtils.leftPad(tmpTime, 6, '0');
+		retval = time;
+		
+		return retval;
+	}
+	
 	public String getCurrentYear(){
 		String retval = null;
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
